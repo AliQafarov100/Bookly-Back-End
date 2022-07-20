@@ -26,6 +26,11 @@ namespace Bookly_Back_End.Controllers
             Offer offer = await _context.Offers.FirstOrDefaultAsync();
             Gift gift = await _context.Gifts.FirstOrDefaultAsync();
             List<Sponsor> sponsors = await _context.Sponsors.ToListAsync();
+            List<Book> books = await _context.Books.Include(i => i.BookImages).Include(f => f.BookFormats).
+                Include(a => a.BookAuthors).Include(l => l.BookLanguages).ToListAsync();
+            List<Author> authors = await _context.Authors.Include(b => b.BookAuthors).ToListAsync();
+            List<Category> categories = await _context.Categories.ToListAsync();
+            List<BookAuthor> bookAuthors = await _context.BookAuthors.ToListAsync();
             HomeVM model = new HomeVM
             {
                 Slayd = slayd,
@@ -33,7 +38,11 @@ namespace Bookly_Back_End.Controllers
                 Festival = festival,
                 Offer = offer,
                 Gift = gift,
-                Sponsors = sponsors
+                Sponsors = sponsors,
+                Books = books,
+                Authors = authors,   
+                Categories = categories,
+                BookAuthors = bookAuthors
             };
             return View(model);
         }

@@ -25,5 +25,18 @@ namespace Bookly_Back_End.DAL
         public DbSet<Gift> Gifts { get; set; }
         public DbSet<Setting> Settings { get; set; }
         public DbSet<Sponsor> Sponsors { get; set; }
+        public DbSet<Author> Authors { get; set; }
+        public DbSet<Book> Books { get; set; }
+        public DbSet<BookAuthor> BookAuthors { get; set; }
+        public DbSet<BookFormat> BookFormats { get; set; }
+        public DbSet<BookImage> BookImages { get; set; }
+        public DbSet<BookLanguage> BookLanguages { get; set; }
+        public DbSet<Category> Categories { get; set; }
+        public DbSet<Format> Formats { get; set; }
+        public DbSet<Language> Languages { get; set; }
+        public DbSet<SocialMedia> SocialMedias { get; set; }
+        public DbSet<AuthorAward> AuthorAwards { get; set; }
+        public DbSet<Award> Awards { get; set; }
+        
     }
 }

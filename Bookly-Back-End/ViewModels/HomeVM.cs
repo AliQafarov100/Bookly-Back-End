@@ -14,5 +14,10 @@ namespace Bookly_Back_End.ViewModels
         public Offer Offer { get; set; }
         public Gift Gift { get; set; }
         public List<Sponsor> Sponsors { get; set; }
+        public List<Author> Authors { get; set; }
+        public List<Book> Books { get; set; }
+        public List<Category> Categories { get; set; }
+        public List<BookAuthor> BookAuthors { get; set; }
+     
     }
 }

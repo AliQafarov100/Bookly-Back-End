@@ -4,14 +4,16 @@ using Bookly_Back_End.DAL;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Bookly_Back_End.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220720143846_updateDataBase")]
+    partial class updateDataBase
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -26,55 +28,12 @@ namespace Bookly_Back_End.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Comments")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("FullName")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("IsBest")
-                        .HasColumnType("bit");
 
                     b.HasKey("Id");
 
                     b.ToTable("Authors");
-                });
-
-            modelBuilder.Entity("Bookly_Back_End.Models.AuthorAward", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("AuthorId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("AwardId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("AuthorId");
-
-                    b.HasIndex("AwardId");
-
-                    b.ToTable("AuthorAwards");
-                });
-
-            modelBuilder.Entity("Bookly_Back_End.Models.Award", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Image")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Awards");
                 });
 
             modelBuilder.Entity("Bookly_Back_End.Models.Book", b =>
@@ -354,29 +313,6 @@ namespace Bookly_Back_End.Migrations
                     b.ToTable("Slayds");
                 });
 
-            modelBuilder.Entity("Bookly_Back_End.Models.SocialMedia", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("AuthorId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Icon")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("AuthorId");
-
-                    b.ToTable("SocialMedias");
-                });
-
             modelBuilder.Entity("Bookly_Back_End.Models.Sponsor", b =>
                 {
                     b.Property<int>("Id")
@@ -411,21 +347,6 @@ namespace Bookly_Back_End.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Supports");
-                });
-
-            modelBuilder.Entity("Bookly_Back_End.Models.AuthorAward", b =>
-                {
-                    b.HasOne("Bookly_Back_End.Models.Author", "Author")
-                        .WithMany("AuthorAwards")
-                        .HasForeignKey("AuthorId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Bookly_Back_End.Models.Award", "Award")
-                        .WithMany()
-                        .HasForeignKey("AwardId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
                 });
 
             modelBuilder.Entity("Bookly_Back_End.Models.Book", b =>
@@ -487,15 +408,6 @@ namespace Bookly_Back_End.Migrations
                     b.HasOne("Bookly_Back_End.Models.Language", "Language")
                         .WithMany("BookLanguages")
                         .HasForeignKey("LanguageId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("Bookly_Back_End.Models.SocialMedia", b =>
-                {
-                    b.HasOne("Bookly_Back_End.Models.Author", "Author")
-                        .WithMany("SocialMedias")
-                        .HasForeignKey("AuthorId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

@@ -8,6 +8,12 @@
   <ItemGroup>
     <Compile Remove="Migrations\20220719200820_createBookAndAuthorTable.cs" />
     <Compile Remove="Migrations\20220719200820_createBookAndAuthorTable.Designer.cs" />
+    <Compile Remove="Migrations\20220720141451_createBestAuthorTable.cs" />
+    <Compile Remove="Migrations\20220720141451_createBestAuthorTable.Designer.cs" />
+    <Compile Remove="Migrations\20220720142814_createBestAuthorTable.cs" />
+    <Compile Remove="Migrations\20220720142814_createBestAuthorTable.Designer.cs" />
+    <Compile Remove="Migrations\20220720184859_editAuthorTable.cs" />
+    <Compile Remove="Migrations\20220720184859_editAuthorTable.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

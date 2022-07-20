@@ -4,14 +4,16 @@ using Bookly_Back_End.DAL;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Bookly_Back_End.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220720120311_updateLanguageTable")]
+    partial class updateLanguageTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -26,14 +28,11 @@ namespace Bookly_Back_End.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Comments")
+                    b.Property<string>("Comment")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("FullName")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("IsBest")
-                        .HasColumnType("bit");
 
                     b.HasKey("Id");
 
@@ -364,9 +363,6 @@ namespace Bookly_Back_End.Migrations
                     b.Property<int>("AuthorId")
                         .HasColumnType("int");
 
-                    b.Property<string>("Icon")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
@@ -422,7 +418,7 @@ namespace Bookly_Back_End.Migrations
                         .IsRequired();
 
                     b.HasOne("Bookly_Back_End.Models.Award", "Award")
-                        .WithMany()
+                        .WithMany("AuthorAwards")
                         .HasForeignKey("AwardId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();

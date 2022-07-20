@@ -10,7 +10,7 @@ namespace Bookly_Back_End.Models
         public int Id { get; set; }
         public int BookId { get; set; }
         public Book Book { get; set; }
-        public int LaguageId { get; set; }
+        public int LanguageId { get; set; }
         public Language Language { get; set; }
     }
 }
