@@ -540,56 +540,45 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-7">
-                    <div class="author-info row d-flex justify-content-between">
-                        <div class="author-image col-lg-6">
-                            <div class="social-medias">
-                                <i class="@service.GetData().Result.FirstOrDefault(i => i.Key == "Google").Value"></i>
-                                <i class="@service.GetData().Result.FirstOrDefault(i => i.Key == "Twitter").Value"></i>
-                                <i class="@service.GetData().Result.FirstOrDefault(i => i.Key == "Facebook").Value"></i>
-                                <i class="@service.GetData().Result.FirstOrDefault(i => i.Key == "Tumbrl").Value"></i>
-                                <i class="@service.GetData().Result.FirstOrDefault(i => i.Key == "Instagram").Value"></i>
-                                <i class="@service.GetData().Result.FirstOrDefault(i => i.Key == "Pinterest").Value"></i>
+                @foreach (Author bestAuthor in Model.Authors.Where(a => a.IsBest == true))
+                {
+                    <div class="col-lg-7">
+                        <div class="author-info row d-flex justify-content-between">
+                            <div class="author-image col-lg-6">
+                                <div class="social-medias">
+                                    @foreach (SocialMedia socialMedia in Model.SocialMedias.Where(s => s.AuthorId == bestAuthor.Id))
+                                    {
+                                        <i class="@socialMedia.Icon"></i>
+                                    }
+                                </div>
+                                <img src="assets/Image/Author Image/@bestAuthor.Image" alt="">
                             </div>
-                            <img src="assets/Image/Author/Файл-1.jpg" alt="">
-                        </div>
-                        <div class="awards col-lg-6">
-                            <div class="name d-flex justify-content-between">
-                                <strong>Jack London</strong>
-                                <p>-author</p>
-                            </div>
-                            <div class="words">
-                                <p>
-                                    "Pellentesque posuere orci lobortis scelerisque blandit. Donec id tellus lacinia
-                                    an, tincidunt risus ac, consequat velit."
-                                </p>
-                            </div>
-                            <div class="myAwards mt-3">
-                                <h5>My Awards</h5>
-                                <div class="award-image row mt-3">
-                                    <div class="col-lg-4 col-md-6 col-sm-6 col-6 award-img">
-                                        <img src="assets/Image/Awards/award-2.webp" alt="">
-                                    </div>
-                                    <div class="col-lg-4 col-md-6 col-sm-6 col-6 award-img">
-                                        <img src="assets/Image/Awards/award-3.webp" alt="">
-                                    </div>
-                                    <div class="col-lg-4 col-md-6 col-sm-6 col-6 award-img">
-                                        <img src="assets/Image/Awards/award-4.webp" alt="">
-                                    </div>
-                                    <div class="col-lg-4 col-md-6 col-sm-6 col-6 award-img">
-                                        <img src="assets/Image/Awards/award-5.webp" alt="">
-                                    </div>
-                                    <div class="col-lg-4 col-md-6 col-sm-6 col-6 award-img">
-                                        <img src="assets/Image/Awards/award-6.webp" alt="">
-                                    </div>
-                                    <div class="col-lg-4 col-md-6 col-sm-6 col-6 award-img">
-                                        <img src="assets/Image/Awards/award-6.webp" alt="">
+                            <div class="awards col-lg-6">
+                                <div class="name d-flex justify-content-between">
+                                    <strong>@bestAuthor.FullName</strong>
+                                    <p>-author</p>
+                                </div>
+                                <div class="words">
+                                    <p>
+                                        "@bestAuthor.Comments"
+                                    </p>
+                                </div>
+                                <div class="myAwards mt-3">
+                                    <h5>My Awards</h5>
+                                    <div class="award-image row mt-3">
+                                        @foreach (AuthorAward authorAward in Model.AuthorAwards.Where(aw => aw.AuthorId == bestAuthor.Id))
+                                        {
+                                            <div class="col-lg-4 col-md-6 col-sm-6 col-6 award-img">
+                                                <img src="assets/Image/Awards/@authorAward.Award.Image" alt="">
+                                            </div>
+                                        }
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
+                }
+
             </div>
         </div>
     </section>

@@ -32,6 +32,9 @@ namespace Bookly_Back_End.Migrations
                     b.Property<string>("FullName")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Image")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<bool>("IsBest")
                         .HasColumnType("bit");
 

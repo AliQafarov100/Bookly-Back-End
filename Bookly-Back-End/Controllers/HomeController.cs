@@ -28,9 +28,13 @@ namespace Bookly_Back_End.Controllers
             List<Sponsor> sponsors = await _context.Sponsors.ToListAsync();
             List<Book> books = await _context.Books.Include(i => i.BookImages).Include(f => f.BookFormats).
                 Include(a => a.BookAuthors).Include(l => l.BookLanguages).ToListAsync();
-            List<Author> authors = await _context.Authors.Include(b => b.BookAuthors).ToListAsync();
+            List<Author> authors = await _context.Authors.Include(b => b.BookAuthors).Include(a => a.AuthorAwards).
+                Include(s => s.SocialMedias).ToListAsync();
             List<Category> categories = await _context.Categories.ToListAsync();
             List<BookAuthor> bookAuthors = await _context.BookAuthors.ToListAsync();
+            List<Award> awards = await _context.Awards.ToListAsync();
+            List<AuthorAward> authorAwards = await _context.AuthorAwards.ToListAsync();
+            List<SocialMedia> socialMedias = await _context.SocialMedias.ToListAsync();
             HomeVM model = new HomeVM
             {
                 Slayd = slayd,
@@ -42,7 +46,10 @@ namespace Bookly_Back_End.Controllers
                 Books = books,
                 Authors = authors,   
                 Categories = categories,
-                BookAuthors = bookAuthors
+                BookAuthors = bookAuthors,
+                Awards = awards,
+                AuthorAwards = authorAwards,
+                SocialMedias = socialMedias
             };
             return View(model);
         }

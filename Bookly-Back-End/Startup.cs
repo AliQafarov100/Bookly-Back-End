@@ -49,6 +49,10 @@ namespace Bookly_Back_End
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
+                   name: "areas",
+                   pattern: "{area:exists}/{controller=dashboard}/{action=Index}/{id?}"
+          );
+                endpoints.MapControllerRoute(
                     name: "Default",
                     pattern: "{controller=home}/{action=Index}/{id?}");
             });

@@ -1,0 +1,63 @@
+﻿@model Book
+@{
+    ViewData["Title"] = "Create";
+}
+
+<div class="alert alert-danger" asp-validation-summary="ModelOnly"></div>
+<form method="post" enctype="multipart/form-data">
+    <div>
+        <label class="mb-3">Book name:</label><br />
+        <input asp-for="Name" class="form-control" /><br />
+        <span class="text-danger" asp-validation-for="Name"></span>
+    </div>
+    <div>
+        <label class="mb-3">Book price:</label><br />
+        <input asp-for="Price" class="form-control" /><br />
+        <span class="text-danger" asp-validation-for="Price"></span>
+    </div>
+    <div>
+        <label class="mb-3">Book Description:</label><br />
+        <input asp-for="Description" class="form-control" /><br />
+        <span class="text-danger" asp-validation-for="Description"></span>
+    </div>
+    <div>
+        <label class="mb-3">Plant old price:</label><br />
+        <input asp-for="OldPrice" class="form-control" /><br />
+        <span class="text-danger" asp-validation-for="OldPrice"></span>
+    </div>
+    <div>
+        <label class="mb-3">Book Format(-s):</label><br />
+        <select class="form-control" asp-for="FormatIds" asp-items="@(new SelectList(ViewBag.Formats,"Id","Name"))"></select>
+        <span class="text-danger" asp-validation-for="FormatIds"></span>
+    </div>
+    <div>
+        <label class="mb-3">Book Language(-s):</label><br />
+        <select class="form-control" asp-for="LanguageIds" asp-items="@(new SelectList(ViewBag.Languages,"Id","Name"))"></select>
+        <span class="text-danger" asp-validation-for="LanguageIds"></span>
+    </div>
+    <div>
+        <label class="mb-3">Book Author(-s):</label><br />
+        <select class="form-control" asp-for="AuthorIds" asp-items="@(new SelectList(ViewBag.Authors,"Id","FullName"))"></select>
+        <span class="text-danger" asp-validation-for="AuthorIds"></span>
+    </div>
+    <div>
+        <label class="mb-3">Book Category(-ies):</label><br />
+        <select class="form-control" asp-for="CategoryId" asp-items="@(new SelectList(ViewBag.Categories,"Id","Name"))"></select>
+        <span class="text-danger" asp-validation-for="CategoryId"></span>
+    </div>
+    <div>
+        <label class="mb-3">Plant main image:</label><br />
+        <input asp-for="MainImage" class="form-control" accept="image/*" /><br />
+        <span class="text-danger" asp-validation-for="MainImage"></span>
+    </div>
+    <div>
+        <label class="mb-3">Plant another images:</label><br />
+        <input asp-for="AnotherImages" class="form-control" accept="image/*" /><br />
+        <span class="text-danger" asp-validation-for="AnotherImages"></span>
+    </div>
+
+    <div class="mt-3">
+        <button type="submit" class="btn btn-primary">Create book</button>
+    </div>
+</form>
+

@@ -1,0 +1,138 @@
+﻿@model Book
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<div class="alert alert-danger" asp-validation-summary="ModelOnly"></div>
+<form method="post" enctype="multipart/form-data">
+    <div>
+        <label class="mb-3">Book name:</label><br />
+        <input asp-for="Name" class="form-control" /><br />
+        <span class="text-danger" asp-validation-for="Name"></span>
+    </div>
+    <div>
+        <label class="mb-3">Book price:</label><br />
+        <input asp-for="Price" class="form-control" /><br />
+        <span class="text-danger" asp-validation-for="Price"></span>
+    </div>
+    <div>
+        <label class="mb-3">Book Description:</label><br />
+        <input asp-for="Description" class="form-control" /><br />
+        <span class="text-danger" asp-validation-for="Description"></span>
+    </div>
+    <div>
+        <label class="mb-3">Plant old price:</label><br />
+        <input asp-for="OldPrice" class="form-control" /><br />
+        <span class="text-danger" asp-validation-for="OldPrice"></span>
+    </div>
+    <div>
+        <label class="mb-3">Book Format(-s):</label><br />
+        <select class="form-control" asp-for="FormatIds">
+            @foreach (Format format in ViewBag.Formats)
+            {
+                if (Model.BookFormats.FirstOrDefault(f => f.FormatId == format.Id) != null)
+                {
+                    <option value="@format.Id" selected>@format.Name</option>
+                }
+                else
+                {
+                    <option value="@format.Id">@format.Name</option>
+                }
+            }
+        </select>
+        <span class="text-danger" asp-validation-for="FormatIds"></span>
+    </div>
+    <div>
+        <label class="mb-3">Book Language(-s):</label><br />
+        <select class="form-control" asp-for="LanguageIds">
+            @foreach (Language language in ViewBag.Languages)
+            {
+                if (Model.BookLanguages.FirstOrDefault(f => f.LanguageId == language.Id) != null)
+                {
+                    <option value="@language.Id" selected>@language.Name</option>
+                }
+                else
+                {
+                    <option value="@language.Id">@language.Name</option>
+                }
+            }
+        </select>
+        <span class="text-danger" asp-validation-for="LanguageIds"></span>
+    </div>
+    <div>
+        <label class="mb-3">Book Author(-s):</label><br />
+        <select class="form-control" asp-for="AuthorIds">
+            @foreach (Author author in ViewBag.Authors)
+            {
+                if (Model.BookAuthors.FirstOrDefault(f => f.AuthorId == author.Id) != null)
+                {
+                    <option value="@author.Id" selected>@author.FullName</option>
+                }
+                else
+                {
+                    <option value="@author.Id">@author.FullName</option>
+                }
+            }
+        </select>
+        <span class="text-danger" asp-validation-for="AuthorIds"></span>
+    </div>
+    <div>
+        <label class="mb-3">Book Category(-ies):</label><br />
+        <select class="form-control" asp-for="CategoryId" asp-items="@(new SelectList(ViewBag.Categories,"Id","Name"))"></select>
+        <span class="text-danger" asp-validation-for="CategoryId"></span>
+    </div>
+    <div>
+        <label class="mb-3">Plant main image:</label><br />
+        <div class="d-flex">
+            <div class="col-lg-2" style="position:relative">
+                <i class="mdi mdi-close closeBtn" style="position:absolute;top:10px;right:5px;color:red;font-size:20px"></i>
+                <img style="width: 100%; height:400px" src="~/assets/Image/Library/@Model.BookImages.FirstOrDefault(i => i.IsMain == true).ImagePath" />
+                <input type="hidden" value="@Model.BookImages.FirstOrDefault(i=>i.IsMain == true)?.Id" name="ImageIds" />
+
+            </div>
+        </div>
+    </div>
+    <div>
+        <label class="mb-3">Plant another images:</label><br />
+        <div class="d-flex justify-content-between">
+            @foreach (var image in Model.BookImages.Where(i => i.IsMain == false))
+            {
+
+                <div class="col-lg-2" style="position:relative">
+                    <i class="mdi mdi-close closeBtn" style="position:absolute;top:10px;right:5px;color:red;font-size:20px"></i>
+                    <img style="width: 100%; height:400px" src="~/assets/Image/Library/@image.ImagePath" />
+                    <input type="hidden" value="@image.Id" name="ImageIds" />
+                </div>
+            }
+        </div>
+
+        <span class="text-danger" asp-validation-for="AnotherImages"></span>
+    </div>
+    <div>
+        <label class="mb-3">Plant main image:</label><br />
+        <input asp-for="MainImage" class="form-control" accept="image/*" /><br />
+        <span class="text-danger" asp-validation-for="MainImage"></span>
+    </div>
+    <div>
+        <label class="mb-3">Plant another images:</label><br />
+        <input asp-for="AnotherImages" class="form-control" accept="image/*" /><br />
+        <span class="text-danger" asp-validation-for="AnotherImages"></span>
+    </div>
+
+    <div class="mt-3">
+        <button type="submit" class="btn btn-primary">Edit book</button>
+    </div>
+</form>
+
+@section Scripts
+{
+    <script>
+        $(".closeBtn").click(function () {
+            this.parentNode.remove();
+        })
+        $(".closeBtn").click(function () {
+            this.parentNode.remove();
+        })
+    </script>
+}
+
