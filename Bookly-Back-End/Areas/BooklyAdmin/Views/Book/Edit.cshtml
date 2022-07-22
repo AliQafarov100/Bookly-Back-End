@@ -83,10 +83,21 @@
     </div>
     <div>
         <label class="mb-3">Plant main image:</label><br />
+        <input asp-for="MainImage" class="form-control" accept="image/*" /><br />
+        <span class="text-danger" asp-validation-for="MainImage"></span>
+    </div>
+    <div>
+        <label class="mb-3">Plant another images:</label><br />
+        <input asp-for="AnotherImages" class="form-control" accept="image/*" /><br />
+        <span class="text-danger" asp-validation-for="AnotherImages"></span>
+    </div>
+    <div>
+
+        <label class="mb-3">Plant main image:</label><br />
         <div class="d-flex">
             <div class="col-lg-2" style="position:relative">
                 <i class="mdi mdi-close closeBtn" style="position:absolute;top:10px;right:5px;color:red;font-size:20px"></i>
-                <img style="width: 100%; height:400px" src="~/assets/Image/Library/@Model.BookImages.FirstOrDefault(i => i.IsMain == true).ImagePath" />
+                <img style="width: 100%; height:400px" src="~/assets/Image/Library/@Model.BookImages.FirstOrDefault(i => i.IsMain == true)?.ImagePath" />
                 <input type="hidden" value="@Model.BookImages.FirstOrDefault(i=>i.IsMain == true)?.Id" name="ImageIds" />
 
             </div>
@@ -108,16 +119,6 @@
 
         <span class="text-danger" asp-validation-for="AnotherImages"></span>
     </div>
-    <div>
-        <label class="mb-3">Plant main image:</label><br />
-        <input asp-for="MainImage" class="form-control" accept="image/*" /><br />
-        <span class="text-danger" asp-validation-for="MainImage"></span>
-    </div>
-    <div>
-        <label class="mb-3">Plant another images:</label><br />
-        <input asp-for="AnotherImages" class="form-control" accept="image/*" /><br />
-        <span class="text-danger" asp-validation-for="AnotherImages"></span>
-    </div>
 
     <div class="mt-3">
         <button type="submit" class="btn btn-primary">Edit book</button>
@@ -127,9 +128,6 @@
 @section Scripts
 {
     <script>
-        $(".closeBtn").click(function () {
-            this.parentNode.remove();
-        })
         $(".closeBtn").click(function () {
             this.parentNode.remove();
         })

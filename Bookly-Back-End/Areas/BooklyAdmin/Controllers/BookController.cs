@@ -152,7 +152,7 @@ namespace Bookly_Back_End.Areas.BooklyAdmin.Controllers
         [HttpPost]
         [AutoValidateAntiforgeryToken]
 
-        public async Task<IActionResult> Edit(Book book,int id)
+        public async Task<IActionResult> Edit(Book book, int id)
         {
             ViewBag.Formats = await _context.Formats.ToListAsync();
             ViewBag.Languages = await _context.Languages.ToListAsync();
@@ -162,23 +162,88 @@ namespace Bookly_Back_End.Areas.BooklyAdmin.Controllers
                 Include(a => a.BookAuthors).Include(l => l.BookLanguages).FirstOrDefaultAsync(b => b.Id == id);
 
             if (exsisted == null) return NotFound();
-
-            if(book.ImageIds == null && book.AnotherImages == null)
+            if (book.MainImage != null)
             {
-                ModelState.AddModelError("", "You can not delete all images without adding another image");
+                BookImage mainImage = new BookImage
+                {
+                    ImagePath = await book.MainImage.FileCreate(_env.WebRootPath, @"assets\Image\Library"),
+                    IsMain = true,
+                    BookId = exsisted.Id
+                };
+                exsisted.BookImages.Add(mainImage);
+
+                BookImage removableImage = exsisted.BookImages.FirstOrDefault(i => i.IsMain == true);
+
+                exsisted.BookImages.Remove(removableImage);
+
+                FileExtesion.FileDelete(_env.WebRootPath, @"assets\Image\Library", removableImage.ImagePath);
+
+            }
+
+            if (book.ImageIds == null && book.AnotherImages == null)
+            {
+                ModelState.AddModelError("", "You can not delete all images without adding another(-s) image");
                 return View(exsisted);
             }
 
-            List<BookImage> removebleImage = exsisted.BookImages.Where(i => i.IsMain == false && !book.ImageIds.Contains(i.Id)).ToList();
+            List<BookImage> removebleImages = exsisted.BookImages.Where(i => i.IsMain == false && !book.ImageIds.Contains(i.Id)).ToList();
+            List<BookFormat> removebleFormats = exsisted.BookFormats.Where(bf => !book.FormatIds.Contains(bf.FormatId)).ToList();
+            List<BookLanguage> removableLanguage = exsisted.BookLanguages.Where(bl => !book.LanguageIds.Contains(bl.LanguageId)).ToList();
+            List<BookAuthor> removableAuthors = exsisted.BookAuthors.Where(ba => !book.AuthorIds.Contains(ba.AuthorId)).ToList();
+            
 
-            exsisted.BookImages.RemoveAll(p => removebleImage.Any(ri => ri.Id == p.Id));
+            exsisted.BookImages.RemoveAll(p => removebleImages.Any(ri => ri.Id == p.Id));
+            exsisted.BookFormats.RemoveAll(b => removebleFormats.Any(rf => rf.Id == b.Id));
+            exsisted.BookLanguages.RemoveAll(b => removableLanguage.Any(bl => bl.Id == b.Id));
+            exsisted.BookAuthors.RemoveAll(b => removableAuthors.Any(ba => ba.Id == b.Id));
+            
 
-            foreach(var image in removebleImage)
+            foreach (var image in removebleImages)
             {
                 FileExtesion.FileDelete(_env.WebRootPath, @"assets\Image\Library", image.ImagePath);
             }
+            foreach (var formatId in book.FormatIds)
+            {
+                BookFormat existedFormat = exsisted.BookFormats.FirstOrDefault(bf => bf.FormatId == formatId);
+                if (existedFormat == null)
+                {
+                    BookFormat bookFormat = new BookFormat
+                    {
+                        BookId = exsisted.Id,
+                        FormatId = formatId
+                    };
+                    exsisted.BookFormats.Add(bookFormat);
+                }
+            }
+            foreach(var languageId in book.LanguageIds)
+            {
+                BookLanguage existedLanguage = exsisted.BookLanguages.FirstOrDefault(bl => bl.LanguageId == languageId);
+                if(existedLanguage == null)
+                {
+                    BookLanguage bookLanguage = new BookLanguage
+                    {
+                        BookId = exsisted.Id,
+                        LanguageId = languageId
+                    };
 
-           if(book.AnotherImages != null)
+                    exsisted.BookLanguages.Add(bookLanguage);
+                }   
+            }
+            foreach(var authorId in book.AuthorIds)
+            {
+                BookAuthor existedAuthor = exsisted.BookAuthors.FirstOrDefault(a => a.AuthorId == authorId);
+                if(existedAuthor == null)
+                {
+                    BookAuthor bookAuthor = new BookAuthor
+                    {
+                        BookId = exsisted.Id,
+                        AuthorId = authorId
+                    };
+                    exsisted.BookAuthors.Add(bookAuthor);
+                }
+            }
+
+            if (book.AnotherImages != null)
             {
                 foreach (var image in book.AnotherImages)
                 {
@@ -193,7 +258,47 @@ namespace Bookly_Back_End.Areas.BooklyAdmin.Controllers
                 }
             }
 
+           
+
             _context.Entry(exsisted).CurrentValues.SetValues(book);
+            await _context.SaveChangesAsync();
+
+            
+
+            return RedirectToAction(nameof(Index));
+        }
+
+        public async Task<IActionResult> Delete(int id)
+        {
+            ViewBag.Formats = await _context.Formats.ToListAsync();
+            ViewBag.Languages = await _context.Languages.ToListAsync();
+            ViewBag.Authors = await _context.Authors.ToListAsync();
+            ViewBag.Categories = await _context.Categories.ToListAsync();
+            Book existedBook = await _context.Books.Include(f => f.BookFormats).Include(i => i.BookImages).
+                Include(a => a.BookAuthors).Include(l => l.BookLanguages).FirstOrDefaultAsync(b => b.Id == id);
+
+
+            if (existedBook == null) return NotFound();
+
+            return View(existedBook);
+        }
+
+        [HttpPost]
+        [AutoValidateAntiforgeryToken]
+        [ActionName("Delete")]
+
+        public async Task<IActionResult> ConfirmDelete(int id)
+        {
+            ViewBag.Formats = await _context.Formats.ToListAsync();
+            ViewBag.Languages = await _context.Languages.ToListAsync();
+            ViewBag.Authors = await _context.Authors.ToListAsync();
+            ViewBag.Categories = await _context.Categories.ToListAsync();
+            Book existedBook = await _context.Books.Include(f => f.BookFormats).Include(i => i.BookImages).
+                Include(a => a.BookAuthors).Include(l => l.BookLanguages).FirstOrDefaultAsync(b => b.Id == id);
+
+            if (existedBook == null) return NotFound();
+
+            _context.Remove(existedBook);
             await _context.SaveChangesAsync();
 
             return RedirectToAction(nameof(Index));

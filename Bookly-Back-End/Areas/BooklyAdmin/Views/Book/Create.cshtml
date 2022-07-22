@@ -27,7 +27,7 @@
     </div>
     <div>
         <label class="mb-3">Book Format(-s):</label><br />
-        <select class="form-control" asp-for="FormatIds" asp-items="@(new SelectList(ViewBag.Formats,"Id","Name"))"></select>
+        <select class="form-control" style="height:25px" asp-for="FormatIds" asp-items="@(new SelectList(ViewBag.Formats,"Id","Name"))"></select>
         <span class="text-danger" asp-validation-for="FormatIds"></span>
     </div>
     <div>

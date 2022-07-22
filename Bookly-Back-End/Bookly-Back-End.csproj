@@ -1265,7 +1265,7 @@
     <None Include="wwwroot\admin\vendors\typicons\typicons.svg" />
     <None Include="wwwroot\admin\vendors\typicons\typicons.woff2" />
     <None Include="wwwroot\admin\vendors\x-editable\bootstrap-editable.min.js" />
-    <None Include="wwwroot\assets\Image\Author Image\author_470x.webp" />
+    <None Include="wwwroot\assets\Image\AuthorImage\author_470x.webp" />
   </ItemGroup>
 
   <ItemGroup>

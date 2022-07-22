@@ -34,6 +34,8 @@ namespace Bookly_Back_End.Models
         [NotMapped]
         public List<int> ImageIds { get; set; }
         [NotMapped]
+        public int MainId { get; set; }
+        [NotMapped]
         public List<int> FormatIds { get; set; }
         [NotMapped]
         public List<int> LanguageIds { get; set; }

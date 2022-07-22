@@ -36,7 +36,7 @@
                         {
                         <tr>
                             <td>
-                                <img src="~/assets/Image/Library/@book.BookImages.FirstOrDefault(i => i.IsMain == true).ImagePath" />
+                                <img src="~/assets/Image/Library/@book.BookImages.FirstOrDefault(i => i.IsMain == true)?.ImagePath" />
                             </td>
                             <td>
                                 @book.Name

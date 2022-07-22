@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 
 namespace Bookly_Back_End.Models
 {
@@ -15,5 +18,11 @@ namespace Bookly_Back_End.Models
         public List<BookAuthor> BookAuthors { get; set; }
         public List<AuthorAward> AuthorAwards { get; set; }
         public List<SocialMedia> SocialMedias { get; set; }
+        [NotMapped]
+        public IFormFile Photo { get; set; }
+        [NotMapped]
+        public List<string> Medias { get; set; }
+        [NotMapped]
+        public List<int> AwardIds { get; set; }
     }
 }
