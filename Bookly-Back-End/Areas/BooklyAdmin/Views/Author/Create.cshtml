@@ -15,14 +15,19 @@
         <span class="text-danger" asp-validation-for="Comments"></span>
     </div>
     <div>
+        <label class="mb-3">Author is Best? </label><br />
+        <input asp-for="Best" class="form-control" /><br />
+        <span class="text-danger" asp-validation-for="Best"></span>
+    </div>
+    <div>
         <label class="mb-3">Author Award(-s):</label><br />
-        <select class="form-control" asp-for="AwardIds" asp-items="@(new SelectList(ViewBag.Awards,"Id","Image"))"></select>
+        <select class="form-control" asp-for="AwardIds" asp-items="@(new SelectList(ViewBag.Awards,"Id","Name"))"></select>
         <span class="text-danger" asp-validation-for="AwardIds"></span>
     </div>
     <div>
         <label class="mb-3">Author SocialMedia(-s):</label><br />
-        <select class="form-control" asp-for="Medias" asp-items="@(new SelectList(ViewBag.SocialMedia,"Id","Name"))"></select>
-        <span class="text-danger" asp-validation-for="Medias"></span>
+        <select class="form-control" asp-for="SocialMediaIds" asp-items="@(new SelectList(ViewBag.SocialMedias,"Id","Name"))"></select>
+        <span class="text-danger" asp-validation-for="SocialMediaIds"></span>
     </div>
     <div>
         <label class="mb-3">Author image:</label><br />

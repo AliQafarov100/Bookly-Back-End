@@ -17,12 +17,14 @@ namespace Bookly_Back_End.Models
         public bool IsBest { get; set; }
         public List<BookAuthor> BookAuthors { get; set; }
         public List<AuthorAward> AuthorAwards { get; set; }
-        public List<SocialMedia> SocialMedias { get; set; }
+        public List<AuthorSocialMedia> AuthorSocialMedias { get; set; }
         [NotMapped]
         public IFormFile Photo { get; set; }
         [NotMapped]
-        public List<string> Medias { get; set; }
-        [NotMapped]
         public List<int> AwardIds { get; set; }
+        [NotMapped]
+        public List<int> SocialMediaIds { get; set; }
+        [NotMapped]
+        public string Best { get; set; }
     }
 }

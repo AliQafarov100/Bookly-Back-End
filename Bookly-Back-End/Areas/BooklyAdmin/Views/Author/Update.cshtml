@@ -1,0 +1,84 @@
+﻿@model Author
+@{
+    ViewData["Title"] = "Update";
+}
+<div class="alert alert-danger" asp-validation-summary="ModelOnly"></div>
+<form method="post" enctype="multipart/form-data">
+    <div>
+        <label class="mb-3">Author name:</label><br />
+        <input asp-for="FullName" class="form-control" /><br />
+        <span class="text-danger" asp-validation-for="FullName"></span>
+    </div>
+    <div>
+        <label class="mb-3">Author Comments: </label><br />
+        <input asp-for="Comments" class="form-control" /><br />
+        <span class="text-danger" asp-validation-for="Comments"></span>
+    </div>
+    <div>
+        <label class="mb-3">Author is Best?: </label><br />
+        <input asp-for="Best" class="form-control" /><br />
+        <span class="text-danger" asp-validation-for="Best"></span>
+    </div>
+    <div>
+        <label class="mb-3">Author Award(-s):</label><br />
+        <select class="form-control" asp-for="AwardIds">
+            @foreach (Award award in ViewBag.Awards)
+            {
+                if (Model.AuthorAwards.FirstOrDefault(a => a.AwardId == award.Id) != null)
+                {
+                    <option value="@award.Id" selected>@award.Name</option>
+                }
+                else
+                {
+                    <option value="@award.Id">@award.Name</option>
+                }
+            }
+        </select>
+        <span class="text-danger" asp-validation-for="AwardIds"></span>
+    </div>
+    <div>
+        <label class="mb-3">Author SocialMedia(-s):</label><br />
+        <select class="form-control" asp-for="SocialMediaIds">
+            @foreach (SocialMedia media in ViewBag.SocialMedias)
+            {
+                if (Model.AuthorSocialMedias.FirstOrDefault(a => a.SocialMediaId == media.Id) != null)
+                {
+                    <option value="@media.Id" selected>@media.Name</option>
+                }
+                else
+                {
+                    <option value="@media.Id">@media.Name</option>
+                }
+            }
+        </select>
+        <span class="text-danger" asp-validation-for="SocialMediaIds"></span>
+    </div>
+    <div>
+
+        <label class="mb-3">Author image:</label><br />
+        <div class="d-flex">
+            <div class="col-lg-2" style="position:relative">
+                <i class="mdi mdi-close deleteBtn" style="position:absolute;top:10px;right:5px;color:red;font-size:20px"></i>
+                <img style="width: 100%; height:400px" src="~/assets/Image/AuthorImage/@Model.Image" />
+            </div>
+        </div>
+    </div>
+    <div>
+        <label class="mb-3">Author image:</label><br />
+        <input asp-for="Photo" class="form-control" accept="image/*" /><br />
+        <span class="text-danger" asp-validation-for="Photo"></span>
+    </div>
+    <div class="mt-3">
+        <button type="submit" class="btn btn-primary">Edit author</button>
+    </div>
+</form>
+
+@section Scripts
+{
+    <script>
+        $(".deleteBtn").click(function () {
+            this.parentNode.remove();
+        })
+    </script>
+}
+

@@ -218,6 +218,10 @@
                     {
                         categoryClass = "w-100 btn btn-light romance-category mb-2";
                     }
+                    else
+                    {
+                        categoryClass = "w-100 btn btn-light mb-2";
+                    }
                     <div class="col-lg-2"><a class="@categoryClass">@category.Name</a></div>
                 }
             }
@@ -546,9 +550,9 @@
                         <div class="author-info row d-flex justify-content-between">
                             <div class="author-image col-lg-6">
                                 <div class="social-medias">
-                                    @foreach (SocialMedia socialMedia in Model.SocialMedias.Where(s => s.AuthorId == bestAuthor.Id))
+                                    @foreach (AuthorSocialMedia socialMedia in Model.AuthorSocialMedias.Where(s => s.AuthorId == bestAuthor.Id))
                                     {
-                                        <i class="@socialMedia.Icon"></i>
+                                        <i class="@socialMedia.SocialMedia.Icon"></i>
                                     }
                                 </div>
                                 <img src="assets/Image/AuthorImage/@bestAuthor.Image" alt="">

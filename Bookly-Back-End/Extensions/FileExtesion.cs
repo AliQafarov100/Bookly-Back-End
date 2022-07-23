@@ -36,9 +36,9 @@ namespace Bookly_Back_End.Utilities
             return file.Length < mb * 1024 * 1024 && file.ContentType.Contains("image/");
         }
 
-        public static void FileDelete(string root,string folder,string image)
+        public static void FileDelete(string root, string folder, string image)
         {
-            string path = Path.Combine(root, folder, image);
+            string path = root + folder + image;
             if (File.Exists(path))
             {
                 File.Delete(path);

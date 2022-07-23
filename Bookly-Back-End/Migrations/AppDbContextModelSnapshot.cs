@@ -65,6 +65,28 @@ namespace Bookly_Back_End.Migrations
                     b.ToTable("AuthorAwards");
                 });
 
+            modelBuilder.Entity("Bookly_Back_End.Models.AuthorSocialMedia", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("AuthorId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("SocialMediaId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AuthorId");
+
+                    b.HasIndex("SocialMediaId");
+
+                    b.ToTable("AuthorSocialMedias");
+                });
+
             modelBuilder.Entity("Bookly_Back_End.Models.Award", b =>
                 {
                     b.Property<int>("Id")
@@ -73,6 +95,9 @@ namespace Bookly_Back_End.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Image")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
@@ -91,9 +116,11 @@ namespace Bookly_Back_End.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Description")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<decimal?>("OldPrice")
@@ -364,9 +391,6 @@ namespace Bookly_Back_End.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("AuthorId")
-                        .HasColumnType("int");
-
                     b.Property<string>("Icon")
                         .HasColumnType("nvarchar(max)");
 
@@ -374,8 +398,6 @@ namespace Bookly_Back_End.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("AuthorId");
 
                     b.ToTable("SocialMedias");
                 });
@@ -427,6 +449,21 @@ namespace Bookly_Back_End.Migrations
                     b.HasOne("Bookly_Back_End.Models.Award", "Award")
                         .WithMany()
                         .HasForeignKey("AwardId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Bookly_Back_End.Models.AuthorSocialMedia", b =>
+                {
+                    b.HasOne("Bookly_Back_End.Models.Author", "Author")
+                        .WithMany("AuthorSocialMedias")
+                        .HasForeignKey("AuthorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Bookly_Back_End.Models.SocialMedia", "SocialMedia")
+                        .WithMany("AuthorSocialMedias")
+                        .HasForeignKey("SocialMediaId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
@@ -490,15 +527,6 @@ namespace Bookly_Back_End.Migrations
                     b.HasOne("Bookly_Back_End.Models.Language", "Language")
                         .WithMany("BookLanguages")
                         .HasForeignKey("LanguageId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("Bookly_Back_End.Models.SocialMedia", b =>
-                {
-                    b.HasOne("Bookly_Back_End.Models.Author", "Author")
-                        .WithMany("SocialMedias")
-                        .HasForeignKey("AuthorId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
