@@ -1,0 +1,36 @@
+﻿@model Author
+@{
+    ViewData["Title"] = "Delete";
+}
+
+
+<div>
+    <div>
+        <h4>Id: </h4>
+        <p>@Model.Id</p>
+    </div>
+    <div>
+        <h4>Title:</h4>
+        <p>@Model.FullName</p>
+    </div>
+    <div>
+        <h4>SubTitle:</h4>
+        <p>@Model.Comments</p>
+    </div>
+    <div>
+        <h4>Discount:</h4>
+        <p>@Model.IsBest</p>
+    </div>
+    <div>
+        <h4>Image:</h4>
+        <img style="width: 300px; height:400px" src="~/assets/Image/AuthorImage/@Model.Image" />
+    </div>
+    
+</div>
+<form method="post" class="mt-5">
+    <button class="btn btn-primary" type="submit">Delete</button>
+    <button class="btn btn-primary" asp-action="Index">Back to List</button>
+</form>
+
+
+

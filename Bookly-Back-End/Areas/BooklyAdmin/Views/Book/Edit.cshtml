@@ -21,9 +21,9 @@
         <span class="text-danger" asp-validation-for="Description"></span>
     </div>
     <div>
-        <label class="mb-3">Plant old price:</label><br />
-        <input asp-for="OldPrice" class="form-control" /><br />
-        <span class="text-danger" asp-validation-for="OldPrice"></span>
+        <label class="mb-3">Book discount:</label><br />
+        <select asp-for="DiscountId" class="form-control" asp-items="@(new SelectList(ViewBag.Discounts,"Id","DiscountPercent"))"></select><br />
+        <span class="text-danger" asp-validation-for="DiscountId"></span>
     </div>
     <div>
         <label class="mb-3">Book Format(-s):</label><br />
@@ -77,7 +77,7 @@
         <span class="text-danger" asp-validation-for="AuthorIds"></span>
     </div>
     <div>
-        <label class="mb-3">Book Category(-ies):</label><br />
+        <label class="mb-3">Book Category:</label><br />
         <select class="form-control" asp-for="CategoryId" asp-items="@(new SelectList(ViewBag.Categories,"Id","Name"))"></select>
         <span class="text-danger" asp-validation-for="CategoryId"></span>
     </div>

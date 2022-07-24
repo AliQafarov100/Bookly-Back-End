@@ -35,6 +35,7 @@ namespace Bookly_Back_End.Controllers
             List<AuthorAward> authorAwards = await _context.AuthorAwards.ToListAsync();
             List<SocialMedia> socialMedias = await _context.SocialMedias.ToListAsync();
             List<AuthorSocialMedia> authorSocialMedias = await _context.AuthorSocialMedias.ToListAsync();
+            List<Discount> discounts = await _context.Discounts.ToListAsync();
             HomeVM model = new HomeVM
             {
                 Slayd = slayd,
@@ -50,7 +51,8 @@ namespace Bookly_Back_End.Controllers
                 Awards = awards,
                 AuthorAwards = authorAwards,
                 SocialMedias = socialMedias,
-                AuthorSocialMedias = authorSocialMedias
+                AuthorSocialMedias = authorSocialMedias,
+                Discounts = discounts
             };
             return View(model);
         }

@@ -38,5 +38,7 @@ namespace Bookly_Back_End.DAL
         public DbSet<AuthorAward> AuthorAwards { get; set; }
         public DbSet<Award> Awards { get; set; }
         public DbSet<AuthorSocialMedia> AuthorSocialMedias { get; set; }
+        public DbSet<Blog> Blogs { get; set; }
+        public DbSet<Discount> Discounts { get; set; }
     }
 }

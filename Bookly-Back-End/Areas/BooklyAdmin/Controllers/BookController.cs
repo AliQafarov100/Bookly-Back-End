@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Bookly_Back_End.DAL;
+using Bookly_Back_End.Extensions;
 using Bookly_Back_End.Models;
 using Bookly_Back_End.Utilities;
 using Microsoft.AspNetCore.Hosting;
@@ -35,6 +36,7 @@ namespace Bookly_Back_End.Areas.BooklyAdmin.Controllers
             ViewBag.Languages = await _context.Languages.ToListAsync();
             ViewBag.Authors = await _context.Authors.ToListAsync();
             ViewBag.Categories = await _context.Categories.ToListAsync();
+            ViewBag.Discounts = await _context.Discounts.ToListAsync();
             return View();
         }
 
@@ -47,7 +49,7 @@ namespace Bookly_Back_End.Areas.BooklyAdmin.Controllers
             ViewBag.Languages = await _context.Languages.ToListAsync();
             ViewBag.Authors = await _context.Authors.ToListAsync();
             ViewBag.Categories = await _context.Categories.ToListAsync();
-
+            ViewBag.Discounts = await _context.Discounts.ToListAsync();
             if (!ModelState.IsValid) return View();
             if (book.MainImage == null || book.AnotherImages == null)
             {
@@ -137,12 +139,29 @@ namespace Bookly_Back_End.Areas.BooklyAdmin.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        public async Task<IActionResult> Read(int id)
+        {
+            ViewBag.Formats = await _context.Formats.ToListAsync();
+            ViewBag.Languages = await _context.Languages.ToListAsync();
+            ViewBag.Authors = await _context.Authors.ToListAsync();
+            ViewBag.Categories = await _context.Categories.ToListAsync();
+            ViewBag.Discounts = await _context.Discounts.ToListAsync();
+
+            Book book = await _context.Books.Include(f => f.BookFormats).Include(i => i.BookImages).
+               Include(a => a.BookAuthors).Include(l => l.BookLanguages).FirstOrDefaultAsync(b => b.Id == id);
+
+            if (book == null) return NotFound();
+
+            return View(book);
+        }
+
         public async Task<IActionResult> Edit(int id)
         {
             ViewBag.Formats = await _context.Formats.ToListAsync();
             ViewBag.Languages = await _context.Languages.ToListAsync();
             ViewBag.Authors = await _context.Authors.ToListAsync();
             ViewBag.Categories = await _context.Categories.ToListAsync();
+            ViewBag.Discounts = await _context.Discounts.ToListAsync();
             Book book = await _context.Books.Include(f => f.BookFormats).Include(i => i.BookImages).
                 Include(a => a.BookAuthors).Include(l => l.BookLanguages).FirstOrDefaultAsync(b => b.Id == id);
             if (book == null) return NotFound();
@@ -158,6 +177,7 @@ namespace Bookly_Back_End.Areas.BooklyAdmin.Controllers
             ViewBag.Languages = await _context.Languages.ToListAsync();
             ViewBag.Authors = await _context.Authors.ToListAsync();
             ViewBag.Categories = await _context.Categories.ToListAsync();
+            ViewBag.Discounts = await _context.Discounts.ToListAsync();
             Book exsisted = await _context.Books.Include(f => f.BookFormats).Include(i => i.BookImages).
                 Include(a => a.BookAuthors).Include(l => l.BookLanguages).FirstOrDefaultAsync(b => b.Id == id);
 
@@ -274,6 +294,7 @@ namespace Bookly_Back_End.Areas.BooklyAdmin.Controllers
             ViewBag.Languages = await _context.Languages.ToListAsync();
             ViewBag.Authors = await _context.Authors.ToListAsync();
             ViewBag.Categories = await _context.Categories.ToListAsync();
+            ViewBag.Discounts = await _context.Discounts.ToListAsync();
             Book existedBook = await _context.Books.Include(f => f.BookFormats).Include(i => i.BookImages).
                 Include(a => a.BookAuthors).Include(l => l.BookLanguages).FirstOrDefaultAsync(b => b.Id == id);
 
@@ -293,6 +314,7 @@ namespace Bookly_Back_End.Areas.BooklyAdmin.Controllers
             ViewBag.Languages = await _context.Languages.ToListAsync();
             ViewBag.Authors = await _context.Authors.ToListAsync();
             ViewBag.Categories = await _context.Categories.ToListAsync();
+            ViewBag.Discounts = await _context.Discounts.ToListAsync();
             Book existedBook = await _context.Books.Include(f => f.BookFormats).Include(i => i.BookImages).
                 Include(a => a.BookAuthors).Include(l => l.BookLanguages).FirstOrDefaultAsync(b => b.Id == id);
 

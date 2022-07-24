@@ -22,5 +22,6 @@ namespace Bookly_Back_End.ViewModels
         public List<SocialMedia> SocialMedias { get; set; }
         public List<AuthorAward> AuthorAwards { get; set; }
         public List<AuthorSocialMedia> AuthorSocialMedias { get; set; }
+        public List<Discount> Discounts { get; set; }
     }
 }

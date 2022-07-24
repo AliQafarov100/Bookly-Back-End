@@ -105,6 +105,30 @@ namespace Bookly_Back_End.Migrations
                     b.ToTable("Awards");
                 });
 
+            modelBuilder.Entity("Bookly_Back_End.Models.Blog", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Date")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Photo")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("SubTitle")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Title")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Blogs");
+                });
+
             modelBuilder.Entity("Bookly_Back_End.Models.Book", b =>
                 {
                     b.Property<int>("Id")
@@ -119,12 +143,12 @@ namespace Bookly_Back_End.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("DiscountId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<decimal?>("OldPrice")
-                        .HasColumnType("decimal(6,2)");
 
                     b.Property<decimal>("Price")
                         .HasColumnType("decimal(6,2)");
@@ -132,6 +156,8 @@ namespace Bookly_Back_End.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("CategoryId");
+
+                    b.HasIndex("DiscountId");
 
                     b.ToTable("Books");
                 });
@@ -238,6 +264,21 @@ namespace Bookly_Back_End.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Categories");
+                });
+
+            modelBuilder.Entity("Bookly_Back_End.Models.Discount", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<byte>("DiscountPercent")
+                        .HasColumnType("tinyint");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Discounts");
                 });
 
             modelBuilder.Entity("Bookly_Back_End.Models.Festival", b =>
@@ -475,6 +516,10 @@ namespace Bookly_Back_End.Migrations
                         .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.HasOne("Bookly_Back_End.Models.Discount", "Discount")
+                        .WithMany("Books")
+                        .HasForeignKey("DiscountId");
                 });
 
             modelBuilder.Entity("Bookly_Back_End.Models.BookAuthor", b =>

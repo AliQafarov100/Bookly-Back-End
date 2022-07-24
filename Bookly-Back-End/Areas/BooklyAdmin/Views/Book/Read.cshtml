@@ -1,0 +1,29 @@
+﻿@model Book
+@{
+    ViewData["Title"] = "Read";
+}
+
+<div>
+    <div>
+        <h4>Id: </h4>
+        <p>@Model.Id</p>
+    </div>
+    <div>
+        <h4>Title:</h4>
+        <p>@Model.Name</p>
+    </div>
+    <div>
+        <h4>SubTitle:</h4>
+        <p>@Model.Price</p>
+    </div>
+    <div>
+        <h4>Description:</h4>
+        <p>@Model.Description</p>
+    </div>
+    <div>
+        <h4>Image:</h4>
+        <img style="width: 150px; height:400px" src="~/assets/Image/Library/@Model.BookImages.FirstOrDefault(i => i.IsMain == true).ImagePath" />
+    </div>
+</div>
+
+

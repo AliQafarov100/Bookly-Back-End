@@ -255,10 +255,14 @@
                                 </p>
                                 <strong>@book.Name</strong>
                                 <p>
-                                    <span>$@book.Price</span>
-                                    @if (book.OldPrice != null)
+                                    @if (book.DiscountId != null)
                                     {
-                                        <span class="ms-2"><del>@book.OldPrice</del></span>
+                                        <span>$@(book.Price - ((book.Price * book.Discount?.DiscountPercent) / 100))</span>
+                                        <span class="ms-2"><del>$@book.Price</del></span>
+                                    }
+                                    else
+                                    {
+                                        <span>$@book.Price</span>
                                     }
 
                                 </p>
@@ -285,7 +289,7 @@
                                         <a href=""><i class="fa-solid fa-magnifying-glass"></i></a>
                                     </div>
                                 </div>
-                                <img src="assets/Image/Library/Cook/@cookBook.BookImages.FirstOrDefault(i => i.IsMain == true).ImagePath" alt="">
+                                <img src="assets/Image/Library/@cookBook.BookImages.FirstOrDefault(i => i.IsMain == true).ImagePath" alt="">
                             </div>
                             <div class="detail mt-3">
                                 <p>
@@ -296,10 +300,14 @@
                                 </p>
                                 <strong>@cookBook.Name</strong>
                                 <p>
-                                    <span>$@cookBook.Price</span>
-                                    @if (cookBook.OldPrice != null)
+                                    @if (cookBook.DiscountId != null)
                                     {
-                                        <span class="ms-2"><del>@cookBook.OldPrice</del></span>
+                                        <span>$@(cookBook.Price - ((cookBook.Price * cookBook.Discount?.DiscountPercent) / 100))</span>
+                                        <span class="ms-2"><del>$@cookBook.Price</del></span>
+                                    }
+                                    else
+                                    {
+                                        <span>$@cookBook.Price</span>
                                     }
 
                                 </p>
@@ -337,10 +345,14 @@
                                 </p>
                                 <strong>@historyBook.Name</strong>
                                 <p>
-                                    <span>$@historyBook.Price</span>
-                                    @if (historyBook.OldPrice != null)
+                                    @if (historyBook.DiscountId != null)
                                     {
-                                        <span class="ms-2"><del>@historyBook.OldPrice</del></span>
+                                        <span>$@(historyBook.Price - ((historyBook.Price * historyBook.Discount?.DiscountPercent) / 100))</span>
+                                        <span class="ms-2"><del>$@historyBook.Price</del></span>
+                                    }
+                                    else
+                                    {
+                                        <span>$@historyBook.Price</span>
                                     }
 
                                 </p>
@@ -367,7 +379,7 @@
                                         <a href=""><i class="fa-solid fa-magnifying-glass"></i></a>
                                     </div>
                                 </div>
-                                <img src="assets/Image/Library/Fantacy/@fantasyBook.BookImages.FirstOrDefault(i => i.IsMain == true).ImagePath" alt="">
+                                <img src="assets/Image/Library/@fantasyBook.BookImages.FirstOrDefault(i => i.IsMain == true).ImagePath" alt="">
                             </div>
                             <div class="detail mt-3">
                                 <p>
@@ -378,10 +390,14 @@
                                 </p>
                                 <strong>@fantasyBook.Name</strong>
                                 <p>
-                                    <span>@fantasyBook.Price</span>
-                                    @if (fantasyBook.OldPrice != null)
+                                    @if (fantasyBook.DiscountId != null)
                                     {
-                                        <span class="ms-2"><del>$@fantasyBook.OldPrice</del></span>
+                                        <span>$@(fantasyBook.Price - ((fantasyBook.Price * fantasyBook.Discount?.DiscountPercent) / 100))</span>
+                                        <span class="ms-2"><del>$@fantasyBook.Price</del></span>
+                                    }
+                                    else
+                                    {
+                                        <span>$@fantasyBook.Price</span>
                                     }
                                 </p>
                             </div>
@@ -418,10 +434,14 @@
                                 </p>
                                 <strong>@romanceBook.Name</strong>
                                 <p>
-                                    <span>@romanceBook.Price</span>
-                                    @if (romanceBook.OldPrice != null)
+                                    @if (romanceBook.DiscountId != null)
                                     {
-                                        <span class="ms-2"><del>$@romanceBook.OldPrice</del></span>
+                                        <span>$@(romanceBook.Price - ((romanceBook.Price * romanceBook.Discount?.DiscountPercent) / 100))</span>
+                                        <span class="ms-2"><del>$@romanceBook.Price</del></span>
+                                    }
+                                    else
+                                    {
+                                        <span>$@romanceBook.Price</span>
                                     }
                                 </p>
                             </div>

@@ -18,8 +18,8 @@ namespace Bookly_Back_End.Models
         [Required]
         [Column(TypeName = "decimal(6,2)")]
         public decimal Price { get; set; }
-        [Column(TypeName = "decimal(6,2)")]
-        public decimal? OldPrice { get; set; }
+        public int? DiscountId { get; set; }
+        public Discount Discount { get; set; }
         public int CategoryId { get; set; }
         public Category Category { get; set; }
         public List<BookAuthor> BookAuthors { get; set; }

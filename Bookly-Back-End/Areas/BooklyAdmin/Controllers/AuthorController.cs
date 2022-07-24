@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Bookly_Back_End.DAL;
+using Bookly_Back_End.Extensions;
 using Bookly_Back_End.Models;
 using Bookly_Back_End.Utilities;
 using Microsoft.AspNetCore.Hosting;
@@ -125,25 +126,42 @@ namespace Bookly_Back_End.Areas.BooklyAdmin.Controllers
             if (existedAuthor == null) return NotFound();
 
 
-            if(author.Photo != null)
+            if(author.Photo == null)
             {
-                if (author.Photo.IsOkay(1))
+                if (author.Best == "yes")
                 {
-                    existedAuthor.Image = await author.Photo.FileCreate(_env.WebRootPath, @"assets\Image\AuthorImage");
-
-
-                    FileExtesion.FileDelete(_env.WebRootPath, @"assets\Image\AuthorImage", existedAuthor.Image);
+                    author.IsBest = true;
                 }
+                else if (author.Best == "no")
+                {
+                    author.IsBest = false;
+                }
+
+                string filename = existedAuthor.Image;
+                _context.Entry(existedAuthor).CurrentValues.SetValues(author);
+                existedAuthor.Image = filename;
+            }
+            else
+            {
+                if (!author.Photo.IsOkay(1))
+                {
+                    ModelState.AddModelError("Photo", "Size of image mustn't more than 1MB!");
+                    return View(existedAuthor);
+                }
+                if (author.Best == "yes")
+                {
+                    author.IsBest = true;
+                }
+                else if (author.Best == "no")
+                {
+                    author.IsBest = false;
+                }
+                FileExtesion.FileDelete(_env.WebRootPath, @"assets\Image\AuthorImage", existedAuthor.Image);
+                _context.Entry(existedAuthor).CurrentValues.SetValues(author);
+                existedAuthor.Image = await author.Photo.FileCreate(_env.WebRootPath, @"assets\Image\AuthorImage");
             }
 
-            if(author.Best == "yes")
-            {
-                author.IsBest = true;
-            }
-            else if(author.Best == "no")
-            {
-                author.IsBest = false;
-            }
+            
             List<AuthorAward> removableAward = existedAuthor.AuthorAwards.Where(a => !author.AwardIds.Contains(a.Id)).ToList();
 
             existedAuthor.AuthorAwards.RemoveAll(aw => removableAward.Any(r => r.Id == aw.Id));
@@ -171,13 +189,37 @@ namespace Bookly_Back_End.Areas.BooklyAdmin.Controllers
                 };
                 existedAuthor.AuthorSocialMedias.Add(socialMedia);
             }
+           
+            await _context.SaveChangesAsync();
 
+            return RedirectToAction(nameof(Index));
+        }
 
+        public async Task<IActionResult> Delete(int id)
+        {
+            
 
-            existedAuthor.FullName = author.FullName;
-            existedAuthor.Comments = author.Comments;
-            existedAuthor.IsBest = author.IsBest;
+            Author author = await _context.Authors.FindAsync(id);
 
+            if (author == null) return NotFound();
+
+            return View(author);
+        }
+
+        [HttpPost]
+        [AutoValidateAntiforgeryToken]
+        [ActionName("Delete")]
+
+        public async Task<IActionResult> DeleteConfirm(int id)
+        {
+            ViewBag.Awards = await _context.Awards.ToListAsync();
+            ViewBag.SocialMedias = await _context.SocialMedias.ToListAsync();
+            Author existedAuthor = await _context.Authors.Include(a => a.AuthorAwards).Include(a => a.AuthorSocialMedias).
+                FirstOrDefaultAsync(a => a.Id == id);
+
+            if (existedAuthor == null) return NotFound();
+
+            _context.Remove(existedAuthor);
             await _context.SaveChangesAsync();
 
             return RedirectToAction(nameof(Index));
