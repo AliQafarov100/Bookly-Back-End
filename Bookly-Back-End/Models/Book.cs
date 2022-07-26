@@ -20,6 +20,8 @@ namespace Bookly_Back_End.Models
         public decimal Price { get; set; }
         public int? DiscountId { get; set; }
         public Discount Discount { get; set; }
+        public bool IsBest { get; set; }
+        public bool IsDailyDeal { get; set; }
         public int CategoryId { get; set; }
         public Category Category { get; set; }
         public List<BookAuthor> BookAuthors { get; set; }

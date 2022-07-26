@@ -344,3 +344,5 @@ C:\Users\M S I\Desktop\Bookly-Back-End\Bookly-Back-End\obj\Debug\netcoreapp3.1\R
 C:\Users\M S I\Desktop\Bookly-Back-End\Bookly-Back-End\obj\Debug\netcoreapp3.1\Razor\Areas\BooklyAdmin\Views\Supports\Details.cshtml.g.cs
 C:\Users\M S I\Desktop\Bookly-Back-End\Bookly-Back-End\obj\Debug\netcoreapp3.1\Razor\Areas\BooklyAdmin\Views\Supports\Edit.cshtml.g.cs
 C:\Users\M S I\Desktop\Bookly-Back-End\Bookly-Back-End\obj\Debug\netcoreapp3.1\Razor\Areas\BooklyAdmin\Views\Supports\Index.cshtml.g.cs
+C:\Users\M S I\Desktop\Bookly-Back-End\Bookly-Back-End\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_ProductPartialView.cshtml.g.cs
+C:\Users\M S I\Desktop\Bookly-Back-End\Bookly-Back-End\obj\Debug\netcoreapp3.1\Razor\Views\Book\Index.cshtml.g.cs

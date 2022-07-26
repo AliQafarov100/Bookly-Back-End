@@ -12,7 +12,7 @@
                         <ul class="d-flex justify-content-around">
                             <li><a href="">Home</a></li>
                             <li class="controll">
-                                <a href="Collections.html" class="category">
+                                <a asp-controller="Book" asp-action="Index" class="category">
                                     <span>Categories</span><span class="ms-3">
                                         <i class="fa-solid fa-sort-down"></i>
                                     </span>
@@ -228,49 +228,7 @@
         </div>
         <div class="container mt-5">
             <div class="row all">
-                @foreach (Book book in Model.Books)
-                {
-                    <div class="col-lg-3 col-md-6 col-sm-6 col-12">
-                        <div class="info-book">
-                            <div class="images">
-                                <div class="more-icon">
-                                    <div class="more">
-                                        <a href=""><i class="fa-solid fa-link"></i></a>
-                                    </div>
-                                    <div class="more">
-                                        <a href=""><i class="fa-solid fa-heart"></i></a>
-                                    </div>
-                                    <div class="more">
-                                        <a href=""><i class="fa-solid fa-magnifying-glass"></i></a>
-                                    </div>
-                                </div>
-                                <a href="Product.html"><img src="assets/Image/Library/@book.BookImages.FirstOrDefault(i => i.IsMain == true)?.ImagePath"></a>
-                            </div>
-                            <div class="detail mt-3">
-                                <p>
-                                    @foreach (BookAuthor author in Model.BookAuthors.Where(a => a.BookId == book.Id))
-                                    {
-                                        @author.Author.FullName.ToString();
-                                    }
-                                </p>
-                                <strong>@book.Name</strong>
-                                <p>
-                                    @if (book.DiscountId != null)
-                                    {
-                                        <span>$@(book.Price - ((book.Price * book.Discount?.DiscountPercent) / 100))</span>
-                                        <span class="ms-2"><del>$@book.Price</del></span>
-                                    }
-                                    else
-                                    {
-                                        <span>$@book.Price</span>
-                                    }
-
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                }
-
+                @await Html.PartialAsync("_ProductPartialView", Model)
             </div>
             <div class="row cook">
                 @foreach (Book cookBook in Model.Books.Where(c => c.CategoryId == 1))
@@ -289,7 +247,7 @@
                                         <a href=""><i class="fa-solid fa-magnifying-glass"></i></a>
                                     </div>
                                 </div>
-                                <img src="assets/Image/Library/@cookBook.BookImages.FirstOrDefault(i => i.IsMain == true).ImagePath" alt="">
+                                <a href="Product.html"><img src="assets/Image/Library/@cookBook.BookImages.FirstOrDefault(i => i.IsMain == true)?.ImagePath"></a>
                             </div>
                             <div class="detail mt-3">
                                 <p>
@@ -320,6 +278,7 @@
 
                 @foreach (Book historyBook in Model.Books.Where(c => c.CategoryId == 2))
                 {
+
                     <div class="col-lg-3 col-md-6 col-sm-6 col-12">
                         <div class="info-book">
                             <div class="images">
@@ -470,98 +429,45 @@
             <div class="row mt-5">
                 <div class="col-lg-5">
                     <div class="owl-one owl-carousel owl-theme">
-                        <div class="col-md-6 col-sm-6 col-12">
-                            <div class="infos-book">
-                                <div class="images">
-                                    <div class="more-icon">
-                                        <div class="more">
-                                            <a href=""><i class="fa-solid fa-link"></i></a>
+                        @foreach (Book bestBook in Model.Books.Where(b => b.IsBest == true))
+                        {
+                            <div class="col-md-6 col-sm-6 col-12">
+                                <div class="infos-book">
+                                    <div class="images">
+                                        <div class="more-icon">
+                                            <div class="more">
+                                                <a href=""><i class="fa-solid fa-link"></i></a>
+                                            </div>
+                                            <div class="more">
+                                                <a href=""><i class="fa-solid fa-heart"></i></a>
+                                            </div>
+                                            <div class="more">
+                                                <a href=""><i class="fa-solid fa-magnifying-glass"></i></a>
+                                            </div>
                                         </div>
-                                        <div class="more">
-                                            <a href=""><i class="fa-solid fa-heart"></i></a>
-                                        </div>
-                                        <div class="more">
-                                            <a href=""><i class="fa-solid fa-magnifying-glass"></i></a>
-                                        </div>
+                                        <img src="assets/Image/Library/@bestBook.BookImages.FirstOrDefault(i => i.IsMain == true).ImagePath" alt="">
                                     </div>
-                                    <img src="assets/Image/Library/Romance/shop-new-63_600x.webp" alt="">
-                                </div>
-                                <div class="detail mt-3">
-                                    <p>Alice James</p>
-                                    <strong>The Gift of Love</strong>
-                                    <p><span>$200</span></p>
+                                    <div class="detail mt-3">
+                                        <p>
+                                            @foreach (BookAuthor author in Model.BookAuthors.Where(b => b.BookId == bestBook.Id))
+                                            {
+                                                @author.Author.FullName.ToString();
+                                            }
+                                        </p>
+                                        <strong>The Gift of Love</strong>
+                                        @if (bestBook.DiscountId != null)
+                                        {
+                                            <span>$@(bestBook.Price - ((bestBook.Price * bestBook.Discount?.DiscountPercent) / 100))</span>
+                                            <span class="ms-2"><del>$@bestBook.Price</del></span>
+                                        }
+                                        else
+                                        {
+                                            <span>$@bestBook.Price</span>
+                                        }
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-md-6 col-sm-6 col-12">
-                            <div class="infos-book">
-                                <div class="images">
-                                    <div class="more-icon">
-                                        <div class="more">
-                                            <a href=""><i class="fa-solid fa-link"></i></a>
-                                        </div>
-                                        <div class="more">
-                                            <a href=""><i class="fa-solid fa-heart"></i></a>
-                                        </div>
-                                        <div class="more">
-                                            <a href=""><i class="fa-solid fa-magnifying-glass"></i></a>
-                                        </div>
-                                    </div>
-                                    <img src="assets/Image/Library/Turks.jpg" alt="">
-                                </div>
-                                <div class="detail mt-3">
-                                    <p>Murad Adji</p>
-                                    <strong>History of Turks</strong>
-                                    <p><span>$1799.00</span></p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6 col-sm-6 col-12">
-                            <div class="infos-book">
-                                <div class="images">
-                                    <div class="more-icon">
-                                        <div class="more">
-                                            <a href=""><i class="fa-solid fa-link"></i></a>
-                                        </div>
-                                        <div class="more">
-                                            <a href=""><i class="fa-solid fa-heart"></i></a>
-                                        </div>
-                                        <div class="more">
-                                            <a href=""><i class="fa-solid fa-magnifying-glass"></i></a>
-                                        </div>
-                                    </div>
-                                    <img src="assets/Image/Library/MartinEden.jpeg" alt="">
-                                </div>
-                                <div class="detail mt-3">
-                                    <p>Jack London</p>
-                                    <strong>Martin Eden</strong>
-                                    <p><span>Priceless thing</span></p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6 col-sm-6 col-12">
-                            <div class="infos-book">
-                                <div class="images">
-                                    <div class="more-icon">
-                                        <div class="more">
-                                            <a href=""><i class="fa-solid fa-link"></i></a>
-                                        </div>
-                                        <div class="more">
-                                            <a href=""><i class="fa-solid fa-heart"></i></a>
-                                        </div>
-                                        <div class="more">
-                                            <a href=""><i class="fa-solid fa-magnifying-glass"></i></a>
-                                        </div>
-                                    </div>
-                                    <img src="assets/Image/Library/Fantacy/f2.jpg" alt="">
-                                </div>
-                                <div class="detail mt-3">
-                                    <p>Kay L. Moody</p>
-                                    <strong>The Elements of the Crown</strong>
-                                    <p><span>$550</span></p>
-                                </div>
-                            </div>
-                        </div>
+                        }
                     </div>
                 </div>
                 @foreach (Author bestAuthor in Model.Authors.Where(a => a.IsBest == true))
@@ -626,98 +532,46 @@
             <h4 class="text-center">@service.GetData().Result.FirstOrDefault(i => i.Key == "Deals").Value</h4>
             <div class="line"></div>
             <div class="row">
-                <div class="col-lg-3 col-md-6 col-sm-6 col-12">
-                    <div class="info-book">
-                        <div class="images">
-                            <div class="more-icon">
-                                <div class="more">
-                                    <a href=""><i class="fa-solid fa-link"></i></a>
+                @foreach (Book dealBook in Model.Books.Where(b => b.IsDailyDeal == true))
+                {
+                    <div class="col-lg-3 col-md-6 col-sm-6 col-12">
+                        <div class="info-book">
+                            <div class="images">
+                                <div class="more-icon">
+                                    <div class="more">
+                                        <a href=""><i class="fa-solid fa-link"></i></a>
+                                    </div>
+                                    <div class="more">
+                                        <a href=""><i class="fa-solid fa-heart"></i></a>
+                                    </div>
+                                    <div class="more">
+                                        <a href=""><i class="fa-solid fa-magnifying-glass"></i></a>
+                                    </div>
                                 </div>
-                                <div class="more">
-                                    <a href=""><i class="fa-solid fa-heart"></i></a>
-                                </div>
-                                <div class="more">
-                                    <a href=""><i class="fa-solid fa-magnifying-glass"></i></a>
-                                </div>
+                                <img src="assets/Image/Library/@dealBook.BookImages.FirstOrDefault(i => i.IsMain == true).ImagePath" alt="">
                             </div>
-                            <img src="assets/Image/Library/shop-new-85_600x.webp" alt="">
-                        </div>
-                        <div class="detail mt-3">
-                            <p>JOHN ERIK</p>
-                            <strong>The Stadium by Night</strong>
-                            <p><span>$320.00</span><span class="ms-2"><del>$700.00</del></span></p>
+                            <div class="detail mt-3">
+                                <p>
+                                    @foreach (BookAuthor author in Model.BookAuthors.Where(b => b.BookId == dealBook.Id))
+                                    {
+                                        @author.Author.FullName.ToString();
+                                    }
+                                </p>
+                                <strong>The Gift of Love</strong>
+                                @if (dealBook.DiscountId != null)
+                                {
+                                    <span>$@(dealBook.Price - ((dealBook.Price * dealBook.Discount?.DiscountPercent) / 100))</span>
+                                    <span class="ms-2"><del>$@dealBook.Price</del></span>
+                                }
+                                else
+                                {
+                                    <span>$@dealBook.Price</span>
+                                }
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-lg-3 col-md-6 col-sm-6 col-12">
-                    <div class="info-book">
-                        <div class="images">
-                            <div class="more-icon">
-                                <div class="more">
-                                    <a href=""><i class="fa-solid fa-link"></i></a>
-                                </div>
-                                <div class="more">
-                                    <a href=""><i class="fa-solid fa-heart"></i></a>
-                                </div>
-                                <div class="more">
-                                    <a href=""><i class="fa-solid fa-magnifying-glass"></i></a>
-                                </div>
-                            </div>
-                            <img src="assets/Image/Library/booknew-4_600x.webp" alt="">
-                        </div>
-                        <div class="detail mt-3">
-                            <p>ALICE JAMES</p>
-                            <strong>When The Stars Align</strong>
-                            <p>$300.00</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 col-sm-6 col-12">
-                    <div class="info-book">
-                        <div class="images">
-                            <div class="more-icon">
-                                <div class="more">
-                                    <a href=""><i class="fa-solid fa-link"></i></a>
-                                </div>
-                                <div class="more">
-                                    <a href=""><i class="fa-solid fa-heart"></i></a>
-                                </div>
-                                <div class="more">
-                                    <a href=""><i class="fa-solid fa-magnifying-glass"></i></a>
-                                </div>
-                            </div>
-                            <img src="assets/Image/Library/shop-new-24_600x.webp" alt="">
-                        </div>
-                        <div class="detail mt-3">
-                            <p>ALICE JAMES</p>
-                            <strong>Girls at the Golden City</strong>
-                            <p>$300.00</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 col-sm-6 col-12">
-                    <div class="info-book">
-                        <div class="images">
-                            <div class="more-icon">
-                                <div class="more">
-                                    <a href=""><i class="fa-solid fa-link"></i></a>
-                                </div>
-                                <div class="more">
-                                    <a href=""><i class="fa-solid fa-heart"></i></a>
-                                </div>
-                                <div class="more">
-                                    <a href=""><i class="fa-solid fa-magnifying-glass"></i></a>
-                                </div>
-                            </div>
-                            <img src="assets/Image/Library/Saga.jpg" alt="">
-                        </div>
-                        <div class="detail mt-3">
-                            <p>Murad Adji</p>
-                            <strong>Saga of Great Steppe</strong>
-                            <p><span>$1999.00</span><span class="ms-2"><del>$2000.00</del></span></p>
-                        </div>
-                    </div>
-                </div>
+                }
+
             </div>
         </div>
     </section>
@@ -1045,4 +899,6 @@
         </div>
     </section>
 </main>
-
+@section Scripts{
+    <script src="~/assets/Js/script.js"></script>
+}
