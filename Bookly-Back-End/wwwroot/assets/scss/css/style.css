@@ -1296,6 +1296,10 @@ nav {
     padding: 20px;
 }
 
+.pagination{
+    background-color: white;
+}
+
 @media screen and (min-width: 1200px) {
     .description {
         width: 50%;

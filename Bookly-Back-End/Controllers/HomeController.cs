@@ -18,15 +18,17 @@ namespace Bookly_Back_End.Controllers
         {
             _context = context;
         }
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int category = 3)
         {
+            var query = _context.Books.AsQueryable();
+            ViewBag.CategoryId = category;
             Slayd slayd = await _context.Slayds.FirstOrDefaultAsync();
             List<Support> supports = await _context.Supports.ToListAsync();
             Festival festival = await _context.Festivals.FirstOrDefaultAsync();
             Offer offer = await _context.Offers.FirstOrDefaultAsync();
             Gift gift = await _context.Gifts.FirstOrDefaultAsync();
             List<Sponsor> sponsors = await _context.Sponsors.ToListAsync();
-            List<Book> books = await _context.Books.Include(i => i.BookImages).Include(f => f.BookFormats).
+            List<Book> books = await query.Include(i => i.BookImages).Include(f => f.BookFormats).
                 Include(a => a.BookAuthors).Include(l => l.BookLanguages).ToListAsync();
             List<Author> authors = await _context.Authors.Include(b => b.BookAuthors).Include(a => a.AuthorAwards).ToListAsync();
             List<Category> categories = await _context.Categories.ToListAsync();
@@ -36,6 +38,7 @@ namespace Bookly_Back_End.Controllers
             List<SocialMedia> socialMedias = await _context.SocialMedias.ToListAsync();
             List<AuthorSocialMedia> authorSocialMedias = await _context.AuthorSocialMedias.ToListAsync();
             List<Discount> discounts = await _context.Discounts.ToListAsync();
+            List<Blog> blogs = await _context.Blogs.ToListAsync();
             HomeVM model = new HomeVM
             {
                 Slayd = slayd,
@@ -52,7 +55,8 @@ namespace Bookly_Back_End.Controllers
                 AuthorAwards = authorAwards,
                 SocialMedias = socialMedias,
                 AuthorSocialMedias = authorSocialMedias,
-                Discounts = discounts
+                Discounts = discounts,
+                Blogs = blogs
             };
             return View(model);
         }
