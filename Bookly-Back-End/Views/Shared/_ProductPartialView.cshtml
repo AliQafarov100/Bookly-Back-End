@@ -1,5 +1,6 @@
 ﻿@model HomeVM
 
+
 @foreach (Book book in Model.Books)
 {
     <div class="col-lg-3 col-md-6 col-sm-6 col-12">
@@ -16,7 +17,7 @@
                         <a href=""><i class="fa-solid fa-magnifying-glass"></i></a>
                     </div>
                 </div>
-                <a href="Product.html"><img src="assets/Image/Library/@book.BookImages.FirstOrDefault(i => i.IsMain == true)?.ImagePath"></a>
+                <a asp-controller="Detail" asp-action="Details" asp-route-id="@book.Id"><img src="assets/Image/Library/@book.BookImages.FirstOrDefault(i => i.IsMain == true)?.ImagePath"></a>
             </div>
             <div class="detail mt-3">
                 <p>

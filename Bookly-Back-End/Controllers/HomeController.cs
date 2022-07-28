@@ -18,17 +18,18 @@ namespace Bookly_Back_End.Controllers
         {
             _context = context;
         }
-        public async Task<IActionResult> Index(int category = 3)
+        public async Task<IActionResult> Index(int category = 1)
         {
-            var query = _context.Books.AsQueryable();
-            ViewBag.CategoryId = category;
+            
+            ViewBag.CategoryId = 3;
+
             Slayd slayd = await _context.Slayds.FirstOrDefaultAsync();
             List<Support> supports = await _context.Supports.ToListAsync();
             Festival festival = await _context.Festivals.FirstOrDefaultAsync();
             Offer offer = await _context.Offers.FirstOrDefaultAsync();
             Gift gift = await _context.Gifts.FirstOrDefaultAsync();
             List<Sponsor> sponsors = await _context.Sponsors.ToListAsync();
-            List<Book> books = await query.Include(i => i.BookImages).Include(f => f.BookFormats).
+            List<Book> books = await _context.Books.Include(i => i.BookImages).Include(f => f.BookFormats).
                 Include(a => a.BookAuthors).Include(l => l.BookLanguages).ToListAsync();
             List<Author> authors = await _context.Authors.Include(b => b.BookAuthors).Include(a => a.AuthorAwards).ToListAsync();
             List<Category> categories = await _context.Categories.ToListAsync();

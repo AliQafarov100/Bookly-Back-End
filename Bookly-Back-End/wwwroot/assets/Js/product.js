@@ -8,6 +8,16 @@ let quantity = document.querySelector(".quantity");
 let counter = 0;
 let arrow = document.querySelector(".circle");
 let image = document.querySelectorAll(".another");
+let formats = document.querySelectorAll(".selectFormat");
+
+
+formats.forEach(format => {
+    format.addEventListener("click", function () {
+        let id = format.getAttribute("id");
+        format.style.border = "1px solid red";
+        format.classList.add("text-danger");
+    })
+})
  
 
 image.forEach(images => {

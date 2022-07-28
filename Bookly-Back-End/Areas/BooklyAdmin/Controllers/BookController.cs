@@ -290,11 +290,7 @@ namespace Bookly_Back_End.Areas.BooklyAdmin.Controllers
 
         public async Task<IActionResult> Delete(int id)
         {
-            ViewBag.Formats = await _context.Formats.ToListAsync();
-            ViewBag.Languages = await _context.Languages.ToListAsync();
-            ViewBag.Authors = await _context.Authors.ToListAsync();
-            ViewBag.Categories = await _context.Categories.ToListAsync();
-            ViewBag.Discounts = await _context.Discounts.ToListAsync();
+           
             Book existedBook = await _context.Books.Include(f => f.BookFormats).Include(i => i.BookImages).
                 Include(a => a.BookAuthors).Include(l => l.BookLanguages).FirstOrDefaultAsync(b => b.Id == id);
 
@@ -310,15 +306,16 @@ namespace Bookly_Back_End.Areas.BooklyAdmin.Controllers
 
         public async Task<IActionResult> ConfirmDelete(int id)
         {
-            ViewBag.Formats = await _context.Formats.ToListAsync();
-            ViewBag.Languages = await _context.Languages.ToListAsync();
-            ViewBag.Authors = await _context.Authors.ToListAsync();
-            ViewBag.Categories = await _context.Categories.ToListAsync();
-            ViewBag.Discounts = await _context.Discounts.ToListAsync();
+           
             Book existedBook = await _context.Books.Include(f => f.BookFormats).Include(i => i.BookImages).
                 Include(a => a.BookAuthors).Include(l => l.BookLanguages).FirstOrDefaultAsync(b => b.Id == id);
 
             if (existedBook == null) return NotFound();
+            FileExtesion.FileDelete(_env.WebRootPath, @"assets\Image\Library", existedBook.BookImages.FirstOrDefault(i => i.IsMain == true).ImagePath);
+            foreach (var image in existedBook.BookImages.Where(b => b.IsMain == false))
+            {
+                FileExtesion.FileDelete(_env.WebRootPath, @"assets\Image\Library", image.ImagePath);
+            }
 
             _context.Remove(existedBook);
             await _context.SaveChangesAsync();

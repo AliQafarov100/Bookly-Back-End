@@ -431,12 +431,12 @@
 
                 <div class="col-lg-9">
                     <div class="container">
-                        <div class="filtered d-flex justify-content-around align-items-center">
-                            <div class="systems d-flex align-items-center">
+                        <div class="filtered row justify-content-between align-items-center">
+                            <div class="systems d-flex align-items-center col-lg-4 mb-3">
                                 <div class="grid system"><i class="fa-solid fa-grip"></i></div>
                                 <div class="list system"><i class="fa-solid fa-list"></i></div>
                             </div>
-                            <div class="">
+                            <div class="col-lg-4 mb-3">
                                 <small>Paginate by</small>
                                 <select name="" id="">
                                     <option value=""><a href="">1</a></option>
@@ -444,7 +444,7 @@
                                     <option value=""><a href="">3</a></option>
                                 </select>
                             </div>
-                            <div class="">
+                            <div class="col-lg-4 mb-3">
                                 <small>Sort by</small>
                                 <select name="" id="">
                                     <option value=""><a href="">Featured</a></option>
@@ -455,7 +455,7 @@
                                 </select>
                             </div>
                         </div>
-                        <div class="row booking mt-5">
+                        <div class="row booking justify-content-between mt-5">
                             @foreach (Book sellBook in Model.Books.Take(9))
                             {
                                 <div class="col-lg-4 col-md-6 col-sm-6 col-12">
