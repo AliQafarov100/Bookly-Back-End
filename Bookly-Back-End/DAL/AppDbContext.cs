@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Bookly_Back_End.Models;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace Bookly_Back_End.DAL
 {
-    public class AppDbContext : DbContext
+    public class AppDbContext : IdentityDbContext<AppUser>
     {
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
         {
@@ -40,5 +41,6 @@ namespace Bookly_Back_End.DAL
         public DbSet<AuthorSocialMedia> AuthorSocialMedias { get; set; }
         public DbSet<Blog> Blogs { get; set; }
         public DbSet<Discount> Discounts { get; set; }
+        public DbSet<BasketItem> BasketItems { get; set; }
     }
 }

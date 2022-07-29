@@ -1,6 +1,27 @@
 let category = document.querySelector(".category");
 let books = document.querySelector(".fluid");
 let arrow = document.querySelector(".circle");
+let plus = document.querySelector(".plus");
+let minus = document.querySelector(".minus");
+let quantity = document.querySelector(".quantity");
+let counter = 0;
+
+
+plus.addEventListener("click", function () {
+    counter++;
+    quantity.innerHTML = counter;
+    console.log(quantity.innerHTML)
+});
+
+minus.addEventListener("click", function () {
+    counter--;
+
+    if (counter <= 0) {
+        counter = 0;
+    }
+
+    quantity.innerHTML = counter;
+})
 
 window.addEventListener("scroll",function(){
     if(window.scrollY == 0){

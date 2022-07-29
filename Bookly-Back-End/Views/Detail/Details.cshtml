@@ -1,7 +1,9 @@
 ﻿@model BookVM
 @{
     ViewData["Title"] = "Details";
+    BasketVM basket = await service.GetBasket();
 }
+
 <main>
     <section id="navbars" class="">
         <nav class="navbar d-flex " style="background-color: transparent;">
@@ -479,9 +481,11 @@
                             </div>
                             <div class="customer-service row mt-4">
                                 <div class="col-lg-5 col-sm-12 mt-2">
-                                    <div class="btn btn-danger customer">
-                                        <small>Add to Cart</small>
-                                    </div>
+                                    <a asp-controller="Book" asp-action="AddBasket" asp-route-id="@Model.Book.Id">
+                                        <div class="btn btn-danger customer">
+                                            <small>Add to Cart</small>
+                                        </div>
+                                    </a>
                                 </div>
                                 <div class="col-lg-5 col-sm-12 mt-2">
                                     <div class="btn btn-danger customer">

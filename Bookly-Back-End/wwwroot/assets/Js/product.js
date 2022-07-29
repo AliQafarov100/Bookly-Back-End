@@ -2,8 +2,8 @@ let bookItem = document.querySelectorAll(".slider");
 let sliders = document.querySelector(".sliders");
 let count = 0;
 let width;
-let plus = document.querySelector(".plus");
-let minus = document.querySelector(".minus");
+let plus = document.querySelectorAll(".plus");
+let minus = document.querySelectorAll(".minus");
 let quantity = document.querySelector(".quantity");
 let counter = 0;
 let arrow = document.querySelector(".circle");
@@ -47,20 +47,24 @@ window.addEventListener("scroll",function(){
     }
 })
 
-plus.addEventListener("click",function(){
-     counter++;
-     quantity.innerHTML = counter;
-     console.log(quantity.innerHTML)
-});
+plus.forEach(pluses => {
+    pluses.addEventListener("click", function () {
+        counter++;
+        quantity.innerHTML = counter;
+        
+    });
+})
 
-minus.addEventListener("click",function(){
-    counter--;
+minus.forEach(minuses => {
+    minuses.addEventListener("click", function () {
+        counter--;
 
-    if(counter <= 0){
-        counter = 0;
-    }
+        if (counter <= 0) {
+            counter = 0;
+        }
 
-    quantity.innerHTML = counter;
+        quantity.innerHTML = counter;
+    })
 })
 
 function init(){

@@ -49,6 +49,10 @@ nav {
                 font-size: 15px;
                 font-weight: bold;
             }
+            nav ul li .basket .book img {
+                width: 30%;
+                height: 100px;
+            }
 
 #navbars {
     width: 100%;
@@ -1299,6 +1303,7 @@ nav {
 .pagination{
     background-color: white;
 }
+
 
 @media screen and (min-width: 1200px) {
     .description {
