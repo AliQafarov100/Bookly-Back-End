@@ -29,6 +29,7 @@ namespace Bookly_Back_End.Controllers
             List<BookFormat> bookFormats = await _context.BookFormats.ToListAsync();
             List<Language> languages = await _context.Languages.Include(l => l.BookLanguages).ToListAsync();
             List<BookLanguage> bookLanguages = await _context.BookLanguages.ToListAsync();
+           
             BookVM model = new BookVM
             {
                 Book = book,
@@ -36,7 +37,8 @@ namespace Bookly_Back_End.Controllers
                 BookAuthors = bookAuthors,
                 Authors = authors,
                 BookFormats = bookFormats,
-                BookLanguages = bookLanguages
+                BookLanguages = bookLanguages,
+               
             };
             return View(model);
         }

@@ -35,7 +35,7 @@ namespace Bookly_Back_End.Service
             if (!string.IsNullOrEmpty(basketStr))
             {
                 List<BasketCookieItemVM> basket = JsonConvert.DeserializeObject<List<BasketCookieItemVM>>(basketStr);
-                var query = _context.Books.Include(i => i.BookImages).AsQueryable();
+                var query = _context.Books.Include(i => i.BookImages).Include(b => b.Discount).AsQueryable();
 
                 foreach(BasketCookieItemVM item in basket)
                 {
@@ -66,6 +66,14 @@ namespace Bookly_Back_End.Service
             {
                 return null;
             }
+        }
+
+        public async Task<List<BasketItem>> UserBasket()
+        {
+            List<BasketItem> baskets = await _context.BasketItems.Include(b => b.Book.BookImages).Include(b => b.Book.Discount).ToListAsync();
+            
+            
+            return baskets;
         }
     }
 }

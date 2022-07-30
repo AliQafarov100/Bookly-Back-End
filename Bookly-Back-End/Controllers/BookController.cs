@@ -124,5 +124,52 @@ namespace Bookly_Back_End.Controllers
 
             return RedirectToAction("Index", "Home");
         }
+
+        public async Task<IActionResult> RemoveBasket(int? id)
+        {
+            if (id is null && id == 0) return NotFound();
+            Book book = await _context.Books.FirstOrDefaultAsync(b => b.Id == id);
+            if (User.Identity.IsAuthenticated)
+            {
+                AppUser existeUser = await _userManager.FindByNameAsync(User.Identity.Name);
+                BasketItem existedItem = await _context.BasketItems.FirstOrDefaultAsync(bi => bi.BookId == id);
+
+                if (existedItem != null && existedItem.Count > 1)
+                {
+                    existedItem.Count--;
+                }
+                else if (existedItem != null && existedItem.Count == 1)
+                {
+                    _context.BasketItems.Remove(existedItem);
+                }
+
+                await _context.SaveChangesAsync();
+            }
+            else
+            {
+                string basketStr = HttpContext.Request.Cookies["Basket"];
+                List<BasketCookieItemVM> basket;
+
+                if (!string.IsNullOrEmpty(basketStr))
+                {
+                    basket = JsonConvert.DeserializeObject<List<BasketCookieItemVM>>(basketStr);
+                    BasketCookieItemVM existed = basket.FirstOrDefault(c => c.Id == book.Id);
+
+                    if (existed != null && existed.Count > 1)
+                    {
+                        existed.Count--;
+                    }
+                    else if (existed != null && existed.Count == 1)
+                    {
+                        basket.Remove(existed);
+                    }
+
+                    basketStr = JsonConvert.SerializeObject(basket);
+                }
+                HttpContext.Response.Cookies.Append("Basket", basketStr);
+            }
+
+            return RedirectToAction("Index", "Home");
+        }
     }
 }
