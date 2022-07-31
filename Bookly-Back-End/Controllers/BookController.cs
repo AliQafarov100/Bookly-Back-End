@@ -22,19 +22,35 @@ namespace Bookly_Back_End.Controllers
             _context = context;
             _userManager = userManager;
         }
-        public async Task<IActionResult> Index(int page = 1)
+        public async Task<IActionResult> Index(int category,int page = 1)
         {
             var query = _context.Books.AsQueryable();
-            ViewBag.TotalPage = Math.Ceiling(((decimal)await query.CountAsync()) / 9);
-            ViewBag.CurrentPage = page;
+
+            List<Category> categories = await _context.Categories.ToListAsync();
+            ViewBag.CategoryId = 2;
+
+            foreach(var categoryId in categories)
+            {
+                if(category == categoryId.Id)
+                {
+                    query = query.Where(b => b.CategoryId == category);
+                }
+                
+            }
+            
+
+
+            //ViewBag.TotalPage = Math.Ceiling(((decimal)await query.CountAsync()) / 9);
+            //ViewBag.CurrentPage = page;
+            List<Book> books = await query.Include(b => b.BookImages)/*.Skip((page - 1) * 9)*/.ToListAsync();
             List<Format> formats = await _context.Formats.ToListAsync();
             List<Language> languages = await _context.Languages.ToListAsync();
-            List<Category> categories = await _context.Categories.ToListAsync();
             List<Author> authors = await _context.Authors.ToListAsync();
-            List<Book> books = await query.Include(b => b.BookImages).Skip((page - 1) * 9).ToListAsync();
+           
             List<BookAuthor> bookAuthors = await _context.BookAuthors.ToListAsync();
             List<Discount> discounts = await _context.Discounts.ToListAsync();
-
+            
+            
             BookVM model = new BookVM
             {
                 Formats = formats,

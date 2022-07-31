@@ -1,6 +1,7 @@
 ﻿@model BookVM
 @{
     ViewData["Title"] = "Index";
+
 }
 
 
@@ -351,7 +352,7 @@
                             {
                                 <div class="author col-lg-5">
                                     <div class="authors  text-center filter">
-                                        <a href=""><small>@author.FullName</small></a>
+                                        <a><small>@author.FullName</small></a>
                                     </div>
                                 </div>
                             }
@@ -364,7 +365,7 @@
                             {
                                 <div class="author col-lg-4">
                                     <div class="authors  text-center filter">
-                                        <a href=""><small>@category.Name</small></a>
+                                        <a asp-controller="Book" asp-action="Index" asp-route-category="@category.Id"><small>@category.Name</small></a>
                                     </div>
                                 </div>
                             }
@@ -455,8 +456,8 @@
                                 </select>
                             </div>
                         </div>
-                        <div class="row booking justify-content-between mt-5">
-                            @foreach (Book sellBook in Model.Books.Take(9))
+                        <div class="row booking mt-5">
+                            @foreach (Book sellBook in Model.Books)
                             {
                                 <div class="col-lg-4 col-md-6 col-sm-6 col-12">
                                     <div class="info-book">

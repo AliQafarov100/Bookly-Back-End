@@ -1,0 +1,206 @@
+﻿
+@{
+    ViewData["Title"] = "Empty";
+}
+<section id="navbars" class="">
+    <nav class="navbar d-flex " style="background-color: transparent;">
+        <div class="container">
+            <div class="row w-100">
+                <div class="pages col-lg-8">
+                    <ul class="d-flex justify-content-around">
+                        <li><a href="Index.html">Home</a></li>
+                        <li class="controll">
+                            <a href="Collections.html" class="category">
+                                <span>Categories</span><span class="ms-3">
+                                    <i class="fa-solid fa-sort-down"></i>
+                                </span>
+
+                            </a>
+
+                            <div class="container fluid">
+                                <div class="row">
+                                    <div class="col-lg-3 col-md-12 col-sm-12 col-12">
+                                        <div class="book">
+                                            <img src="/assets/Image/Category Book/shop-new-100.webp" alt="">
+                                            <div class="book-info">
+                                                <a href="">
+                                                    <span>Endless Summer</span><span class="ms-2">$210</span>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 col-md-12 col-sm-12 col-12">
+                                        <div class="book">
+                                            <img src="/assets/Image/Category Book/shop-new-30.webp" alt="">
+                                            <div class="book-info">
+                                                <a href="">
+                                                    <span>Fresh Healthy Eat</span><span class="ms-2">$110</span>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 col-md-12 col-sm-12 col-12">
+                                        <div class="book">
+                                            <img src="/assets/Image/Category Book/shop-new-4.webp" alt="">
+                                            <div class="book-info">
+                                                <a href="">
+                                                    <span>Book for a Cause</span><span class="ms-2">$110</span>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 col-md-12 col-sm-12 col-12">
+                                        <div class="book">
+                                            <img src="/assets/Image/Category Book/shop-new-95_b0b53360-a171-427b-9dc6-0bf965bcfdae.webp"
+                                                 alt="">
+                                            <div class="book-info">
+                                                <a href="">
+                                                    <span>Adventurous Eating</span><span class="ms-2">$500</span>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li><a href="Brands.html">Brands</a></li>
+                        <li><a href="BestSellers.html">Best Sellers</a></li>
+                        <li class="page-controller">
+                            <a href="">
+                                <span>Pages</span><span class="ms-3">
+                                    <i class="fa-solid fa-sort-down"></i>
+                                </span>
+                            </a>
+                            <div class="site-pages">
+                                <ul>
+                                    <li><a href="About.html">About Us</a></li>
+                                    <li><a href="Blog.html">Blog</a></li>
+                                    <li><a href="FAQ.html">FAQ's</a></li>
+                                    <li><a href="Contact.html">Contact us</a></li>
+                                </ul>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+            <button class="navbar-toggler bars" type="button" data-bs-toggle="offcanvas"
+                    data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
+                <span class="navbar-toggler-icon"></span>
+                <span>Menu</span>
+            </button>
+            <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar"
+                 aria-labelledby="offcanvasNavbarLabel">
+                <div class="offcanvas-header">
+                    <h5 class="offcanvas-title" style="color: black;" id="offcanvasNavbarLabel">Offcanvas</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="offcanvas"
+                            aria-label="Close"></button>
+                </div>
+                <div class="offcanvas-body">
+                    <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="#">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" style="color: black;" href="#">Link</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" style="color: black;" href="#"
+                               id="offcanvasNavbarDropdown" role="button" data-bs-toggle="dropdown"
+                               aria-expanded="false">
+                                Dropdown
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="offcanvasNavbarDropdown">
+                                <li><a class="dropdown-item" style="color: black;" href="#">Action</a></li>
+                                <li>
+                                    <a class="dropdown-item" style="color: black;" href="#">Another action</a>
+                                </li>
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" style="color: black;" href="#">
+                                        Something else
+                                        here
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <form class="d-flex" role="search">
+                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                        <button class="btn btn-outline-success" style="color: black;"
+                                type="submit">
+                            Search
+                        </button>
+                    </form>
+                </div>
+                <div class="container fluid">
+                    <div class="row">
+                        <div class="col-lg-3 col-md-12 col-sm-12 col-12">
+                            <div class="book">
+                                <img src="~/assets/Image/Category Book/shop-new-100.webp" alt="">
+                                <div class="book-info">
+                                    <a href=""><span>Endless Summer</span><span class="ms-2">$210</span></a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-12 col-sm-12 col-12">
+                            <div class="book">
+                                <img src="/assets/Image/Category Book/shop-new-30.webp" alt="">
+                                <div class="book-info">
+                                    <a href=""><span>Fresh Healthy Eat</span><span class="ms-2">$110</span></a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3">
+                            <div class="book">
+                                <img src="/assets/Image/Category Book/shop-new-4.webp" alt="">
+                                <div class="book-info">
+                                    <a href=""><span>Book for a Cause</span><span class="ms-2">$110</span></a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-12 col-sm-12 col-12">
+                            <div class="book">
+                                <img src="/assets/Image/Category Book/shop-new-95_b0b53360-a171-427b-9dc6-0bf965bcfdae.webp"
+                                     alt="">
+                                <div class="book-info">
+                                    <a href=""><span>Adventurous Eating</span><span class="ms-2">$500</span></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+</section>
+<section id="intro">
+    <div class="container">
+        <div class="write  d-flex justify-content-center align-items-center">
+            <div class="texts">
+                <h4 class="text-center">Product</h4>
+                <ul class="d-flex justify-content-around">
+                    <li><a href="Collections.html">All</a></li>
+                    <li><a href="">Product</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+<div class="empty text-center py-5">
+    <div class="mt-3">
+        <img src="~/assets/Image/EmptyBasket/empty-cart.webp" style="height: 100px;">
+    </div>
+    <div class="mt-3">
+        <h4>No Items in cart</h4>
+    </div>
+    <div class="mt-3">
+        <small>Add items you want to shop</small>
+    </div>
+    <div class="mt-3">
+        <a href="" class="btn btn-danger" style="border-radius: 0px;">Start Shoppinf</a>
+    </div>
+</div>
+

@@ -24,7 +24,7 @@
                                     <div class="row">
                                         <div class="col-lg-3 col-md-12 col-sm-12 col-12">
                                             <div class="book">
-                                                <img src="/assets/Image/Category Book/shop-new-100.webp" alt="">
+                                                <img src="~/assets/Image/Category Book/shop-new-100.webp" alt="">
                                                 <div class="book-info">
                                                     <a href="">
                                                         <span>Endless Summer</span><span class="ms-2">$210</span>
@@ -34,7 +34,7 @@
                                         </div>
                                         <div class="col-lg-3 col-md-12 col-sm-12 col-12">
                                             <div class="book">
-                                                <img src="/assets/Image/Category Book/shop-new-30.webp" alt="">
+                                                <img src="~/assets/Image/Category Book/shop-new-30.webp" alt="">
                                                 <div class="book-info">
                                                     <a href="">
                                                         <span>Fresh Healthy Eat</span><span class="ms-2">$110</span>
@@ -44,7 +44,7 @@
                                         </div>
                                         <div class="col-lg-3 col-md-12 col-sm-12 col-12">
                                             <div class="book">
-                                                <img src="/assets/Image/Category Book/shop-new-4.webp" alt="">
+                                                <img src="~/assets/Image/Category Book/shop-new-4.webp" alt="">
                                                 <div class="book-info">
                                                     <a href="">
                                                         <span>Book for a Cause</span><span class="ms-2">$110</span>
@@ -54,7 +54,7 @@
                                         </div>
                                         <div class="col-lg-3 col-md-12 col-sm-12 col-12">
                                             <div class="book">
-                                                <img src="/assets/Image/Category Book/shop-new-95_b0b53360-a171-427b-9dc6-0bf965bcfdae.webp"
+                                                <img src="~/assets/Image/Category Book/shop-new-95_b0b53360-a171-427b-9dc6-0bf965bcfdae.webp"
                                                      alt="">
                                                 <div class="book-info">
                                                     <a href="">
@@ -154,7 +154,7 @@
             </div>
         </nav>
     </section>
-    <section id="main-section" style="background-image: url(assets/Image/Slider/@Model.Slayd.Image);">
+    <section id="main-section" style="background-image: url(/assets/Image/Slider/@Model.Slayd.Image);">
         <div class="container">
             <div class="items d-flex align-items-center">
                 <div class="description">
@@ -176,7 +176,7 @@
                 {
                     <div class="col-lg-3 d-flex cards">
                         <div class="images">
-                            <img src="/assets/Image/Others/@support.Image" alt="">
+                            <img src="~/assets/Image/Others/@support.Image" alt="">
                         </div>
                         <div class="ms-3">
                             <strong>@support.Title</strong> <br>
@@ -230,7 +230,48 @@
         </div>
         <div class="container mt-5">
             <div class="row all">
-                @await Html.PartialAsync("_ProductPartialView", Model)
+                @foreach (Book book in Model.Books)
+                {
+                    <div class="col-lg-3 col-md-6 col-sm-6 col-12">
+                        <div class="info-book">
+                            <div class="images">
+                                <div class="more-icon">
+                                    <div class="more">
+                                        <a href=""><i class="fa-solid fa-link"></i></a>
+                                    </div>
+                                    <div class="more">
+                                        <a href=""><i class="fa-solid fa-heart"></i></a>
+                                    </div>
+                                    <div class="more">
+                                        <a href=""><i class="fa-solid fa-magnifying-glass"></i></a>
+                                    </div>
+                                </div>
+                                <a asp-controller="Detail" asp-action="Details" asp-route-id="@book.Id"><img src="~/assets/Image/Library/@book.BookImages.FirstOrDefault(i => i.IsMain == true)?.ImagePath"></a>
+                            </div>
+                            <div class="detail mt-3">
+                                <p>
+                                    @foreach (BookAuthor author in Model.BookAuthors.Where(a => a.BookId == book.Id))
+                                    {
+                                        @author.Author.FullName.ToString();
+                                    }
+                                </p>
+                                <strong>@book.Name</strong>
+                                <p>
+                                    @if (book.DiscountId != null)
+                                    {
+                                        <span>$@(book.Price - ((book.Price * book.Discount?.DiscountPercent) / 100))</span>
+                                        <span class="ms-2"><del>$@book.Price</del></span>
+                                    }
+                                    else
+                                    {
+                                        <span>$@book.Price</span>
+                                    }
+
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                }
             </div>
             <div class="row cook">
                 @foreach (Book cookBook in Model.Books.Where(c => c.CategoryId == 1))
@@ -249,7 +290,7 @@
                                         <a href=""><i class="fa-solid fa-magnifying-glass"></i></a>
                                     </div>
                                 </div>
-                                <a href="Product.html"><img src="assets/Image/Library/@cookBook.BookImages.FirstOrDefault(i => i.IsMain == true)?.ImagePath"></a>
+                                <a href="Product.html"><img src="~/assets/Image/Library/@cookBook.BookImages.FirstOrDefault(i => i.IsMain == true)?.ImagePath"></a>
                             </div>
                             <div class="detail mt-3">
                                 <p>
@@ -295,7 +336,7 @@
                                         <a href=""><i class="fa-solid fa-magnifying-glass"></i></a>
                                     </div>
                                 </div>
-                                <img src="assets/Image/Library/@historyBook.BookImages.FirstOrDefault(i => i.IsMain == true).ImagePath" alt="">
+                                <img src="~/assets/Image/Library/@historyBook.BookImages.FirstOrDefault(i => i.IsMain == true).ImagePath" alt="">
                             </div>
                             <div class="detail mt-3">
                                 <p>
@@ -340,7 +381,7 @@
                                         <a href=""><i class="fa-solid fa-magnifying-glass"></i></a>
                                     </div>
                                 </div>
-                                <img src="assets/Image/Library/@fantasyBook.BookImages.FirstOrDefault(i => i.IsMain == true).ImagePath" alt="">
+                                <img src="~/assets/Image/Library/@fantasyBook.BookImages.FirstOrDefault(i => i.IsMain == true).ImagePath" alt="">
                             </div>
                             <div class="detail mt-3">
                                 <p>
@@ -384,7 +425,7 @@
                                         <a href=""><i class="fa-solid fa-magnifying-glass"></i></a>
                                     </div>
                                 </div>
-                                <img src="assets/Image/Library/@romanceBook.BookImages.FirstOrDefault(i => i.IsMain == true)?.ImagePath" alt="">
+                                <img src="~/assets/Image/Library/@romanceBook.BookImages.FirstOrDefault(i => i.IsMain == true)?.ImagePath" alt="">
                             </div>
                             <div class="detail mt-3">
                                 <p>
@@ -412,7 +453,7 @@
             </div>
         </div>
     </section>
-    <section id="read-section" style="background-image: url(assets/Image/Grandmother/@Model.Festival.Image);">
+    <section id="read-section" style="background-image: url(/assets/Image/Grandmother/@Model.Festival.Image);">
         <div class="container">
             <div class="read d-flex align-items-center justify-content-center">
                 <div class="read-info text-center">
@@ -447,7 +488,7 @@
                                                 <a href=""><i class="fa-solid fa-magnifying-glass"></i></a>
                                             </div>
                                         </div>
-                                        <img src="assets/Image/Library/@bestBook.BookImages.FirstOrDefault(i => i.IsMain == true).ImagePath" alt="">
+                                        <img src="~/assets/Image/Library/@bestBook.BookImages.FirstOrDefault(i => i.IsMain == true).ImagePath" alt="">
                                     </div>
                                     <div class="detail mt-3">
                                         <p>
@@ -483,7 +524,7 @@
                                         <i class="@socialMedia.SocialMedia.Icon"></i>
                                     }
                                 </div>
-                                <img src="assets/Image/AuthorImage/@bestAuthor.Image" alt="">
+                                <img src="~/assets/Image/AuthorImage/@bestAuthor.Image" alt="">
                             </div>
                             <div class="awards col-lg-6">
                                 <div class="name d-flex justify-content-between">
@@ -501,7 +542,7 @@
                                         @foreach (AuthorAward authorAward in Model.AuthorAwards.Where(aw => aw.AuthorId == bestAuthor.Id))
                                         {
                                             <div class="col-lg-4 col-md-6 col-sm-6 col-6 award-img">
-                                                <img src="assets/Image/Awards/@authorAward.Award.Image" alt="">
+                                                <img src="~/assets/Image/Awards/@authorAward.Award.Image" alt="">
                                             </div>
                                         }
                                     </div>
@@ -515,7 +556,7 @@
         </div>
     </section>
     <section id="offer-section"
-             style="background-image: url(assets/Image/Offer/@Model.Offer.Image);">
+             style="background-image: url(/assets/Image/Offer/@Model.Offer.Image);">
         <div class="container">
             <div class="offer">
                 <div class="offer-description">
@@ -550,7 +591,7 @@
                                         <a href=""><i class="fa-solid fa-magnifying-glass"></i></a>
                                     </div>
                                 </div>
-                                <img src="assets/Image/Library/@dealBook.BookImages.FirstOrDefault(i => i.IsMain == true).ImagePath" alt="">
+                                <img src="~/assets/Image/Library/@dealBook.BookImages.FirstOrDefault(i => i.IsMain == true).ImagePath" alt="">
                             </div>
                             <div class="detail mt-3">
                                 <p>
@@ -577,7 +618,7 @@
             </div>
         </div>
     </section>
-    <section id="gift-section" style="background-image: url(assets/Image/Offer/@Model.Gift.Image);">
+    <section id="gift-section" style="background-image: url(/assets/Image/Offer/@Model.Gift.Image);">
         <div class="container">
             <div class="gift d-flex justify-content-center align-items-center  ">
                 <div class="gift-info text-center">
@@ -599,7 +640,7 @@
                     <div class="col-lg-4 mb-3">
                         <div class="news-info">
                             <div class="news-photo">
-                                <img src="assets/Image/Blog/@blog.Photo" alt="">
+                                <img src="~/assets/Image/Blog/@blog.Photo" alt="">
                                 <div class="hover d-flex justify-content-center align-items-center text-light">
                                     <i class="fa-solid fa-magnifying-glass"></i>
                                 </div>
@@ -692,7 +733,7 @@
                     @foreach (Sponsor sponsor in Model.Sponsors)
                     {
                         <div class="item col-md-6">
-                            <img src="/assets/Image/Sponsors/@sponsor.Image" alt="">
+                            <img src="~/assets/Image/Sponsors/@sponsor.Image" alt="">
                         </div>
                     }
                 </div>

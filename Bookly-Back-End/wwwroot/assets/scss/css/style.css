@@ -484,6 +484,7 @@ nav {
 
 #footer-section {
     width: 100%;
+    background-image: url("/assets/Image/Others/footer.webp");
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center top;
@@ -1304,6 +1305,21 @@ nav {
     background-color: white;
 }
 
+#basket-section .basket-products .basket-product {
+    border: 1px solid #e9e9e9;
+}
+
+#basket-section .order-summary .text-message {
+    display: none;
+}
+
+#basket-section .order-summary p {
+    font-size: 14px;
+}
+
+#basket-section .order-summary .location-order {
+    display: none;
+}
 
 @media screen and (min-width: 1200px) {
     .description {
@@ -1351,6 +1367,22 @@ nav {
         display: flex;
         justify-content: center;
     }
+    #basket-section .basket-product img {
+        width: 100%;
+        height: 600px;
+    }
+
+    #basket-section .basket-product .product-info {
+        margin-bottom: 50px;
+    }
+    #basket-section .basket-product img {
+        width: 100%;
+        height: 600px;
+    }
+
+    #basket-section .basket-product .product-info {
+        margin-bottom: 50px;
+    }
 }
 
 @media screen and (min-width: 992px) {
@@ -1370,6 +1402,23 @@ nav {
     .subscribes {
         display: flex;
         justify-content: flex-end;
+    }
+    .basket-product img {
+        width: 100%;
+        height: 300px;
+    }
+    .order-summary a:hover{
+        transition: 1s;
+        background-color: black;
+        color: white;
+    }
+    .cart{
+        border-radius: 0px;
+    }
+    .cart:hover{
+        transition: 1s;
+        background-color: black;
+        color: white;
     }
 }
 
