@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Bookly_Back_End.DAL;
+using Bookly_Back_End.Interfaces;
 using Bookly_Back_End.Models;
 using Bookly_Back_End.Service;
 using Microsoft.AspNetCore.Builder;
@@ -30,6 +31,7 @@ namespace Bookly_Back_End
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddTransient<LayoutService>();
+            services.AddScoped<IBookRepository, BookRepository>();
             services.AddControllersWithViews();
             services.AddDbContext<AppDbContext>(opt =>
             {

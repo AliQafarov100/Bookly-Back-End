@@ -352,6 +352,5 @@ C:\Users\M S I\Desktop\Bookly-Back-End\Bookly-Back-End\bin\Debug\netcoreapp3.1\M
 C:\Users\M S I\Desktop\Bookly-Back-End\Bookly-Back-End\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Identity.Core.dll
 C:\Users\M S I\Desktop\Bookly-Back-End\Bookly-Back-End\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Identity.Stores.dll
 C:\Users\M S I\Desktop\Bookly-Back-End\Bookly-Back-End\obj\Debug\netcoreapp3.1\Razor\Views\Account\Login.cshtml.g.cs
-C:\Users\M S I\Desktop\Bookly-Back-End\Bookly-Back-End\obj\Debug\netcoreapp3.1\Bookly-Back-End.csproj.AssemblyReference.cache
 C:\Users\M S I\Desktop\Bookly-Back-End\Bookly-Back-End\obj\Debug\netcoreapp3.1\Razor\Views\Basket\Cart.cshtml.g.cs
 C:\Users\M S I\Desktop\Bookly-Back-End\Bookly-Back-End\obj\Debug\netcoreapp3.1\Razor\Views\EmptyBasket\Empty.cshtml.g.cs

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Bookly_Back_End.DAL;
+using Bookly_Back_End.Interfaces;
 using Bookly_Back_End.Models;
 using Bookly_Back_End.ViewModels;
 using Microsoft.AspNetCore.Mvc;
@@ -13,26 +14,28 @@ namespace Bookly_Back_End.Controllers
     public class HomeController : Controller
     {
         private readonly AppDbContext _context;
+        private readonly IBookRepository _repository;
 
-        public HomeController(AppDbContext context)
+        public HomeController(AppDbContext context,IBookRepository repository)
         {
             _context = context;
+            _repository = repository;
         }
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int? category,int? author)
         {
-            var query = _context.Books.AsQueryable();
-           
-
+            var query = _repository.GetBookByCategory(category,author);
             Slayd slayd = await _context.Slayds.FirstOrDefaultAsync();
             List<Support> supports = await _context.Supports.ToListAsync();
             Festival festival = await _context.Festivals.FirstOrDefaultAsync();
             Offer offer = await _context.Offers.FirstOrDefaultAsync();
             Gift gift = await _context.Gifts.FirstOrDefaultAsync();
             List<Sponsor> sponsors = await _context.Sponsors.ToListAsync();
-            List<Book> books = await query.Include(i => i.BookImages).Include(f => f.BookFormats).
+            List<Book> AllBooks = await query.Include(i => i.BookImages).Include(f => f.BookFormats).
                 Include(a => a.BookAuthors).Include(l => l.BookLanguages).ToListAsync();
-            List<Author> authors = await _context.Authors.Include(b => b.BookAuthors).Include(a => a.AuthorAwards).ToListAsync();
+            List<Book> anotherBooks = await _context.Books.Include(i => i.BookImages).Include(f => f.BookFormats).
+                Include(a => a.BookAuthors).Include(l => l.BookLanguages).ToListAsync();
             List<Category> categories = await _context.Categories.ToListAsync();
+            List<Author> authors = await _context.Authors.Include(b => b.BookAuthors).Include(a => a.AuthorAwards).ToListAsync();
             List<BookAuthor> bookAuthors = await _context.BookAuthors.ToListAsync();
             List<Award> awards = await _context.Awards.ToListAsync();
             List<AuthorAward> authorAwards = await _context.AuthorAwards.ToListAsync();
@@ -48,7 +51,8 @@ namespace Bookly_Back_End.Controllers
                 Offer = offer,
                 Gift = gift,
                 Sponsors = sponsors,
-                Books = books,
+                AllBooks = AllBooks,
+                AnotherBooks = anotherBooks,
                 Authors = authors,   
                 Categories = categories,
                 BookAuthors = bookAuthors,

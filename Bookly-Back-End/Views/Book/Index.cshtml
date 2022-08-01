@@ -194,9 +194,11 @@
         </div>
     </section>
     <section id="collection-section" class="py-5">
+        
         <div class="container">
             <div class="row justify-content-between">
                 <div class="col-lg-3">
+                    <a asp-controller="Book" asp-action="Index" class="d-flex justify-content-end clear">Clear All</a>
                     <div class="category">
                         <h4>Category</h4>
                         <ul class="mt-4">
@@ -292,7 +294,7 @@
                         <div class="row">
                             <div class="price col-lg-4">
                                 <div class="prices text-center filter">
-                                    <a href=""><small>$100-$200</small></a>
+                                    <a href=""><small>$100</small>-<small>$200</small></a>
                                 </div>
                             </div>
                             <div class="price col-lg-4">
@@ -352,7 +354,7 @@
                             {
                                 <div class="author col-lg-5">
                                     <div class="authors  text-center filter">
-                                        <a><small>@author.FullName</small></a>
+                                        <a asp-controller="Book" asp-action="Index" asp-route-author="@author.Id"><small>@author.FullName</small></a>
                                     </div>
                                 </div>
                             }
@@ -375,7 +377,7 @@
                     <div class="bookSlider mt-5 col-lg-12">
                         <div class="sliderItem">
                             <div class="sliders d-flex">
-                                @foreach (Book book in Model.Books.OrderByDescending(b => b.Id).Where(b => b.IsBest == true))
+                                @foreach (Book book in Model.AnotherBooks.OrderByDescending(b => b.Id).Where(b => b.IsBest == true))
                                 {
                                     <div class="slider">
                                         <div class="slider-book">
@@ -457,7 +459,7 @@
                             </div>
                         </div>
                         <div class="row booking mt-5">
-                            @foreach (Book sellBook in Model.Books)
+                            @foreach (Book sellBook in Model.AllBooks.Take(9))
                             {
                                 <div class="col-lg-4 col-md-6 col-sm-6 col-12">
                                     <div class="info-book">
