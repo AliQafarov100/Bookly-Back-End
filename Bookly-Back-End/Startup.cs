@@ -31,7 +31,7 @@ namespace Bookly_Back_End
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddTransient<LayoutService>();
-            services.AddScoped<IBookRepository, BookRepository>();
+            services.AddScoped<IBookOperation, BookOperation>();
             services.AddControllersWithViews();
             services.AddDbContext<AppDbContext>(opt =>
             {

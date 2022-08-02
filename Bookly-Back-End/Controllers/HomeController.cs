@@ -14,16 +14,16 @@ namespace Bookly_Back_End.Controllers
     public class HomeController : Controller
     {
         private readonly AppDbContext _context;
-        private readonly IBookRepository _repository;
+        private readonly IBookOperation _repository;
 
-        public HomeController(AppDbContext context,IBookRepository repository)
+        public HomeController(AppDbContext context,IBookOperation repository)
         {
             _context = context;
             _repository = repository;
         }
-        public async Task<IActionResult> Index(int? category,int? author)
+        public async Task<IActionResult> Index(int? category,int? author,string highToLow)
         {
-            var query = _repository.GetBookByCategory(category,author);
+            var query = _repository.GetBookByCategory(category,author,highToLow);
             Slayd slayd = await _context.Slayds.FirstOrDefaultAsync();
             List<Support> supports = await _context.Supports.ToListAsync();
             Festival festival = await _context.Festivals.FirstOrDefaultAsync();

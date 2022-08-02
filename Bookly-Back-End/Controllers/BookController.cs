@@ -17,18 +17,18 @@ namespace Bookly_Back_End.Controllers
     {
         private readonly AppDbContext _context;
         private readonly UserManager<AppUser> _userManager;
-        private readonly IBookRepository _repository;
+        private readonly IBookOperation _repository;
 
-        public BookController(AppDbContext context,UserManager<AppUser> userManager,IBookRepository repository)
+        public BookController(AppDbContext context,UserManager<AppUser> userManager,IBookOperation repository)
         {
             _context = context;
             _userManager = userManager;
             _repository = repository;
         }
-        public async Task<IActionResult> Index(int? category, int? author, int page = 1)
+        public async Task<IActionResult> Index(int? category, int? author,string highToLow, int page = 1)
         {
             ViewBag.Author = author;
-            var query = _repository.GetBookByCategory(category,author);
+            var query = _repository.GetBookByCategory(category,author,highToLow);
 
             ViewBag.TotalPage = Math.Ceiling(((decimal)await query.CountAsync()) / 9);
             ViewBag.CurrentPage = page;

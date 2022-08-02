@@ -194,7 +194,7 @@
         </div>
     </section>
     <section id="collection-section" class="py-5">
-        
+
         <div class="container">
             <div class="row justify-content-between">
                 <div class="col-lg-3">
@@ -454,7 +454,9 @@
                                     <option value=""><a href="">Best selling</a></option>
                                     <option value=""><a href="">Alphabetcally,A-Z</a></option>
                                     <option value=""><a href="">Alphabetcally,Z-A</a></option>
-                                    <option value=""><a href="">Price,high to low</a></option>
+                                    <a asp-controller="Book" asp-action="Index" asp-route-highToLow="high">
+                                      <option>Price,high to low</option>
+                                    </a>
                                 </select>
                             </div>
                         </div>

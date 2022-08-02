@@ -6,10 +6,10 @@ using Bookly_Back_End.Models;
 
 namespace Bookly_Back_End.Interfaces
 {
-    public interface IBookRepository
+    public interface IBookOperation
     {
         IQueryable<Book> Books { get; }
 
-        IQueryable<Book> GetBookByCategory(int? category,int? author);
+        IQueryable<Book> GetBookByCategory(int? category,int? author,string highTolow);
     }
 }
