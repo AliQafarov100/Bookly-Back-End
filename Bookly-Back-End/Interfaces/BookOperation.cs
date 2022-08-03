@@ -22,7 +22,7 @@ namespace Bookly_Back_End.Interfaces
         {
             var books = _context.Books.AsQueryable();
             var bookAuthors = _context.BookAuthors.AsQueryable();
-
+            
             if (category != null)
             {
                 books = books.Where(b => b.CategoryId == category);
@@ -41,6 +41,18 @@ namespace Bookly_Back_End.Interfaces
                     break;
             }
             return books;
+        }
+
+        public IQueryable<Book> GetBookBySearch(string searching)
+        {
+            var searchBooks = _context.Books.AsQueryable();
+
+            if(searchBooks != null)
+            {
+                searchBooks = searchBooks.Where(sb => sb.Name.Contains(searching));
+            }
+
+            return searchBooks;
         }
     }
 }

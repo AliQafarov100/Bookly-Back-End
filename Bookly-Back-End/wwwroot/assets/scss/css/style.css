@@ -49,6 +49,7 @@ nav {
                 font-size: 15px;
                 font-weight: bold;
             }
+
             nav ul li .basket .book img {
                 width: 30%;
                 height: 100px;
@@ -342,9 +343,9 @@ nav {
     margin-bottom: 25px;
 }
 
-#author-section .award-img img {
-   width: 100px;
-}
+    #author-section .award-img img {
+        width: 100px;
+    }
 
 #offer-section {
     height: 500px;
@@ -767,6 +768,7 @@ nav {
 #collection-section .format .formats a {
     font-size: 15px;
 }
+
 #collection-section .clear {
     font-family: "Josefin Sans", sans-serif;
     font-size: 16px;
@@ -1317,7 +1319,7 @@ nav {
     padding: 20px;
 }
 
-.pagination{
+.pagination {
     background-color: white;
 }
 
@@ -1337,6 +1339,130 @@ nav {
     display: none;
 }
 
+.search-section {
+    display: flex;
+    justify-content: space-around;
+}
+
+    .search-section .search-input {
+        width: 90%;
+    }
+
+        .search-section .search-input input {
+            display: inline-block;
+            width: 90%;
+            height: 40px;
+        }
+
+        .search-section .search-input .search-icon {
+            width: 30px;
+            height: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #d14031;
+        }
+
+            .search-section .search-input .search-icon a {
+                text-decoration: none;
+                color: white;
+            }
+
+            .search-section .search-input .search-icon button {
+                border: none;
+                background-color: transparent;
+                color: white;
+            }
+
+    .search-section .xmark i {
+        font-size: 20px;
+    }
+
+#result-section .info-book {
+    position: relative;
+}
+
+    #result-section .info-book .more-icon {
+        top: 175px;
+        position: absolute;
+        z-index: 9;
+        right: 10px;
+    }
+
+        #result-section .info-book .more-icon .more {
+            width: 35px;
+            height: 35px;
+            background-color: red;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            margin-bottom: 5px;
+            z-index: 999;
+            opacity: 0;
+            transition: .8s;
+        }
+
+            #result-section .info-book .more-icon .more a {
+                color: white;
+                text-decoration: none;
+            }
+
+    #result-section .info-book img {
+        height: 450px;
+        transition: .8s;
+    }
+
+    #result-section .info-book:hover img {
+        opacity: 0.6;
+    }
+
+    #result-section .info-book:hover .more {
+        opacity: 1;
+    }
+
+#results-search .search-section {
+    width: 50%;
+    margin: 0px auto;
+}
+
+#results-search .search-sections {
+    width: 50%;
+    margin: 0px auto;
+    display: flex;
+    justify-content: space-around;
+}
+
+    #results-search .search-sections .search-input {
+        width: 90%;
+    }
+
+        #results-search .search-sections .search-input input {
+            display: inline-block;
+            width: 90%;
+            height: 40px;
+        }
+
+        #results-search .search-sections .search-input .search-icon {
+            width: 30px;
+            height: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #d14031;
+        }
+
+            #results-search .search-sections .search-input .search-icon a {
+                text-decoration: none;
+                color: white;
+            }
+
+#results-search .search-input .search-icon button {
+    border: none;
+    background-color: transparent;
+    color: white;
+}
 @media screen and (min-width: 1200px) {
     .description {
         width: 50%;
@@ -1383,6 +1509,7 @@ nav {
         display: flex;
         justify-content: center;
     }
+
     #basket-section .basket-product img {
         width: 100%;
         height: 600px;
@@ -1391,6 +1518,7 @@ nav {
     #basket-section .basket-product .product-info {
         margin-bottom: 50px;
     }
+
     #basket-section .basket-product img {
         width: 100%;
         height: 600px;
@@ -1419,23 +1547,27 @@ nav {
         display: flex;
         justify-content: flex-end;
     }
+
     .basket-product img {
         width: 100%;
         height: 300px;
     }
-    .order-summary a:hover{
+
+    .order-summary a:hover {
         transition: 1s;
         background-color: black;
         color: white;
     }
-    .cart{
+
+    .cart {
         border-radius: 0px;
     }
-    .cart:hover{
-        transition: 1s;
-        background-color: black;
-        color: white;
-    }
+
+        .cart:hover {
+            transition: 1s;
+            background-color: black;
+            color: white;
+        }
 }
 
 @media screen and (min-width: 768px) {

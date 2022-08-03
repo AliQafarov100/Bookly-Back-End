@@ -41,6 +41,19 @@
 </head>
 <body>
     <header>
+        <div class="search-section py-3">
+            <div class="search-input">
+                <form method="get" class="d-flex justify-content-center">
+                    <input type="search" placeholder="Search our Store" value="@ViewBag.Search" name="searching">
+                    <div class="search-icon">
+                        <button type="submit" asp-controller="Search" asp-action="Search"><i class="fa-solid fa-magnifying-glass"></i></button>    
+                    </div>
+                </form>
+            </div>
+            <div class="xmark-remove">
+                <i class="fa-solid fa-xmark remove"></i>
+            </div>
+        </div>
         <nav class="d-flex align-items-center">
             <div class="container">
                 <div class="row align-items-center">
@@ -203,116 +216,116 @@
 
                                                 }
                                             }
-                                            </div>
                                         </div>
                                     </div>
-                                </li>
-                                <li><a href=""><i class="fa-solid fa-heart"></i></a></li>
-                                <li><a href=""><i class="fa-solid fa-clone"></i></a></li>
-                            </ul>
-                        </div>
-                        <div class="logo col-lg-4 col-md-4 col-sm-4">
-                            <img src="/assets/Image/Logo/@service.GetData().Result.FirstOrDefault(l => l.Key == "HeaderLogo").Value" alt="">
-                        </div>
-                        <div class="service col-lg-4 col-md-4 col-sm-4">
-                            <ul class="d-flex">
-                                <li>
-                                    <select name="" id="">
-                                        <option value="">Usd</option>
-                                    </select>
-                                </li>
-                                @if (User.Identity.IsAuthenticated)
-                                {
-                                    <li><a asp-controller="Account" asp-action="Login">@User.Identity.Name</a></li>
-                                }
-                                else
-                                {
-                                    <li><a asp-controller="Account" asp-action="Login"><i class="fa-solid fa-id-badge"></i></a></li>
-                                }
-                                <li><a href=""><i class="fa-solid fa-magnifying-glass"></i></a></li>
-                            </ul>
-                        </div>
+                                </div>
+                            </li>
+                            <li><a href=""><i class="fa-solid fa-heart"></i></a></li>
+                            <li><a href=""><i class="fa-solid fa-clone"></i></a></li>
+                        </ul>
+                    </div>
+                    <div class="logo col-lg-4 col-md-4 col-sm-4">
+                        <img src="/assets/Image/Logo/@service.GetData().Result.FirstOrDefault(l => l.Key == "HeaderLogo").Value" alt="">
+                    </div>
+                    <div class="service col-lg-4 col-md-4 col-sm-4">
+                        <ul class="d-flex">
+                            <li>
+                                <select name="" id="">
+                                    <option value="">Usd</option>
+                                </select>
+                            </li>
+                            @if (User.Identity.IsAuthenticated)
+                            {
+                                <li><a asp-controller="Account" asp-action="Login">@User.Identity.Name</a></li>
+                            }
+                            else
+                            {
+                                <li><a asp-controller="Account" asp-action="Login"><i class="fa-solid fa-id-badge"></i></a></li>
+                            }
+                            <li><i class="fa-solid fa-magnifying-glass show"></i></li>
+                        </ul>
                     </div>
                 </div>
-            </nav>
-        </header>
-        <div>
-            @RenderBody()
-        </div>
-        <footer>
-            <section id="footer-section" class="py-3">
-                <div class="container">
-                    <div class="row text-light mt-5">
-                        <div class="col-lg-3 col-md-6 col-sm-6 col-12">
-                            <h2>@service.GetData().Result.FirstOrDefault(l => l.Key == "FooterLogo").Value</h2>
-                            <p>
-                                @service.GetData().Result.FirstOrDefault(a => a.Key == "Address").Value
-                                @service.GetData().Result.FirstOrDefault(p => p.Key == "Number").Value
-                                @service.GetData().Result.FirstOrDefault(e => e.Key == "Email").Value
-                            </p>
-                        </div>
-                        <div class="col-lg-3 col-md-6 col-sm-6 col-12">
-                            <h3>Help</h3>
-                            <ul>
-                                <li><a href="">Search</a></li>
-                                <li><a href="">Help</a></li>
-                                <li><a href="">Information</a></li>
-                                <li><a href="">Privacy Policy</a></li>
-                                <li><a href="">Shipping Information</a></li>
-                            </ul>
-                        </div>
-                        <div class="col-lg-3 col-md-6 col-sm-6 col-12">
-                            <h3>Support</h3>
-                            <ul>
-                                <li><a href="">Search Teams</a></li>
-                                <li><a href="">Advanced Search</a></li>
-                                <li><a href="">Help and FAQs</a></li>
-                                <li><a href="">Store Location</a></li>
-                                <li><a href="">Order & Retutns</a></li>
-                            </ul>
-                        </div>
-                        <div class="col-lg-3 col-md-6 col-sm-6 col-12">
-                            <h3>Information</h3>
-                            <ul>
-                                <li><a href="">Contact</a></li>
-                                <li><a href="">About</a></li>
-                                <li><a href="">Carrers</a></li>
-                                <li><a href="">Refund & Returns</a></li>
-                                <li><a href="">Deliveries</a></li>
-                            </ul>
-                        </div>
+            </div>
+        </nav>
+    </header>
+    <div>
+        @RenderBody()
+    </div>
+    <footer>
+        <section id="footer-section" class="py-3">
+            <div class="container">
+                <div class="row text-light mt-5">
+                    <div class="col-lg-3 col-md-6 col-sm-6 col-12">
+                        <h2>@service.GetData().Result.FirstOrDefault(l => l.Key == "FooterLogo").Value</h2>
+                        <p>
+                            @service.GetData().Result.FirstOrDefault(a => a.Key == "Address").Value
+                            @service.GetData().Result.FirstOrDefault(p => p.Key == "Number").Value
+                            @service.GetData().Result.FirstOrDefault(e => e.Key == "Email").Value
+                        </p>
                     </div>
-                    <div class="social text-light col-lg-12 d-flex">
-                        <div class="social-icons">
-                            <i class="@service.GetData().Result.FirstOrDefault(i => i.Key == "Google").Value"></i>
-                            <i class="@service.GetData().Result.FirstOrDefault(i => i.Key == "Twitter").Value"></i>
-                            <i class="@service.GetData().Result.FirstOrDefault(i => i.Key == "Facebook").Value"></i>
-                            <i class="@service.GetData().Result.FirstOrDefault(i => i.Key == "Tumbrl").Value"></i>
-                            <i class="@service.GetData().Result.FirstOrDefault(i => i.Key == "Instagram").Value"></i>
-                            <i class="@service.GetData().Result.FirstOrDefault(i => i.Key == "Pinterest").Value"></i>
-                        </div>
+                    <div class="col-lg-3 col-md-6 col-sm-6 col-12">
+                        <h3>Help</h3>
+                        <ul>
+                            <li><a href="">Search</a></li>
+                            <li><a href="">Help</a></li>
+                            <li><a href="">Information</a></li>
+                            <li><a href="">Privacy Policy</a></li>
+                            <li><a href="">Shipping Information</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-lg-3 col-md-6 col-sm-6 col-12">
+                        <h3>Support</h3>
+                        <ul>
+                            <li><a href="">Search Teams</a></li>
+                            <li><a href="">Advanced Search</a></li>
+                            <li><a href="">Help and FAQs</a></li>
+                            <li><a href="">Store Location</a></li>
+                            <li><a href="">Order & Retutns</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-lg-3 col-md-6 col-sm-6 col-12">
+                        <h3>Information</h3>
+                        <ul>
+                            <li><a href="">Contact</a></li>
+                            <li><a href="">About</a></li>
+                            <li><a href="">Carrers</a></li>
+                            <li><a href="">Refund & Returns</a></li>
+                            <li><a href="">Deliveries</a></li>
+                        </ul>
                     </div>
                 </div>
-                <div class="endl text-light text-center">
-                    <div class="licence d-flex align-items-center justify-content-center" ">
-                        <p>© 2022 Bookly-theme | <a href="" style=" text-decoration: none; color: white;">Design Themes</a></p>
+                <div class="social text-light col-lg-12 d-flex">
+                    <div class="social-icons">
+                        <i class="@service.GetData().Result.FirstOrDefault(i => i.Key == "Google").Value"></i>
+                        <i class="@service.GetData().Result.FirstOrDefault(i => i.Key == "Twitter").Value"></i>
+                        <i class="@service.GetData().Result.FirstOrDefault(i => i.Key == "Facebook").Value"></i>
+                        <i class="@service.GetData().Result.FirstOrDefault(i => i.Key == "Tumbrl").Value"></i>
+                        <i class="@service.GetData().Result.FirstOrDefault(i => i.Key == "Instagram").Value"></i>
+                        <i class="@service.GetData().Result.FirstOrDefault(i => i.Key == "Pinterest").Value"></i>
                     </div>
                 </div>
-            </section>
-        </footer>
-        <div class="circle">
-            <i class="fa-solid fa-up-long"></i>
-        </div>
-        <script src="https://code.jquery.com/jquery-3.6.0.min.js"
-                integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
-                integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
-                crossorigin="anonymous"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"
-                integrity="sha512-bPs7Ae6pVvhOSiIcyUClR7/q2OAsRiovw4vAkX+zJbw3ShAeeqezq50RIIcIURq7Oa20rW2n2q+fyXBNcU9lrw=="
-                crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+            </div>
+            <div class="endl text-light text-center">
+                <div class="licence d-flex align-items-center justify-content-center" ">
+                    <p>© 2022 Bookly-theme | <a href="" style=" text-decoration: none; color: white;">Design Themes</a></p>
+                </div>
+            </div>
+        </section>
+    </footer>
+    <div class="circle">
+        <i class="fa-solid fa-up-long"></i>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+            integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"
+            integrity="sha512-bPs7Ae6pVvhOSiIcyUClR7/q2OAsRiovw4vAkX+zJbw3ShAeeqezq50RIIcIURq7Oa20rW2n2q+fyXBNcU9lrw=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
 
-        @RenderSection("Scripts", required: false)
-    </body>
+    @RenderSection("Scripts", required: false)
+</body>
 </html>
