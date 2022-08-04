@@ -25,7 +25,7 @@ namespace Bookly_Back_End.Controllers
             _userManager = userManager;
             _repository = repository;
         }
-        public async Task<IActionResult> Index(int? category, int? author,string highToLow, int page = 1)
+        public async Task<IActionResult> Index(string category,string highToLow,int? author,int page = 1)
         {
             ViewBag.Author = author;
             var query = _repository.GetBookByCategory(category,author,highToLow);

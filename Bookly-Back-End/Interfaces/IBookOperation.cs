@@ -10,7 +10,7 @@ namespace Bookly_Back_End.Interfaces
     {
         IQueryable<Book> Books { get; }
 
-        IQueryable<Book> GetBookByCategory(int? category,int? author,string highTolow);
+        IQueryable<Book> GetBookByCategory(string category,int? author,string highTolow);
         IQueryable<Book> GetBookBySearch(string searching);
     }
 }

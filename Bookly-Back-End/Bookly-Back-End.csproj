@@ -14,6 +14,10 @@
     <Compile Remove="Migrations\20220720142814_createBestAuthorTable.Designer.cs" />
     <Compile Remove="Migrations\20220720184859_editAuthorTable.cs" />
     <Compile Remove="Migrations\20220720184859_editAuthorTable.Designer.cs" />
+    <Compile Remove="Migrations\20220804155638_createOrderAndCityCountryAndDelivery.cs" />
+    <Compile Remove="Migrations\20220804155638_createOrderAndCityCountryAndDelivery.Designer.cs" />
+    <Compile Remove="Migrations\20220804162928_createOrderAndCityCountryAndDelivery.cs" />
+    <Compile Remove="Migrations\20220804162928_createOrderAndCityCountryAndDelivery.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

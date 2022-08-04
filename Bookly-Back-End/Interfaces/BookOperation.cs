@@ -18,14 +18,14 @@ namespace Bookly_Back_End.Interfaces
         }
         public IQueryable<Book> Books => _context.Books;
 
-        public IQueryable<Book> GetBookByCategory(int? category, int? author,string highToLow)
+        public IQueryable<Book> GetBookByCategory(string category, int? author,string highToLow)
         {
             var books = _context.Books.AsQueryable();
             var bookAuthors = _context.BookAuthors.AsQueryable();
             
             if (category != null)
             {
-                books = books.Where(b => b.CategoryId == category);
+                books = books.Where(b => b.Category.Name.Contains(category));
             }
             if (author != null)
             {

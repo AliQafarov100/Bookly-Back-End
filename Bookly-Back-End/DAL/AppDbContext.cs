@@ -42,5 +42,9 @@ namespace Bookly_Back_End.DAL
         public DbSet<Blog> Blogs { get; set; }
         public DbSet<Discount> Discounts { get; set; }
         public DbSet<BasketItem> BasketItems { get; set; }
+        public DbSet<Country> Countries { get; set; }
+        public DbSet<Delivery> Deliveries { get; set; }
+        public DbSet<Order> Orders { get; set; }
+        public DbSet<City> Cities { get; set; }
     }
 }

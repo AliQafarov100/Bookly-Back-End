@@ -1,3 +1,8 @@
+$(document).ready(function () {
+    $(".search-section").hide();
+
+})
+
 $(".product-datas").hide();
 $(".hide").hide();
 

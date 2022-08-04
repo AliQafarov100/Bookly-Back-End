@@ -21,7 +21,7 @@ namespace Bookly_Back_End.Controllers
             _context = context;
             _repository = repository;
         }
-        public async Task<IActionResult> Index(int? category,int? author,string highToLow)
+        public async Task<IActionResult> Index(string category,int? author,string highToLow)
         {
             var query = _repository.GetBookByCategory(category,author,highToLow);
             Slayd slayd = await _context.Slayds.FirstOrDefaultAsync();
