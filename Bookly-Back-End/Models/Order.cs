@@ -10,7 +10,7 @@ namespace Bookly_Back_End.Models
     public class Order
     {
         public int Id { get; set; }
-        [Column(TypeName = "decimal(6,2)")]
+        [Column(TypeName = "decimal(8,2)")]
         public decimal TotalPrice { get; set; }
         public DateTime OrderDate { get; set; }
         public bool? Status { get; set; }

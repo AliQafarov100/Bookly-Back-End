@@ -15,5 +15,6 @@ namespace Bookly_Back_End.ViewModels
         public List<BasketItem> BasketItems { get; set; }
         public List<Book> Books { get; set; }
         public List<Discount> Discounts { get; set; }
+        public List<BookImage> Images { get; set; }
     }
 }

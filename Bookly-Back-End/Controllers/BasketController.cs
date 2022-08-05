@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Bookly_Back_End.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Bookly_Back_End.Controllers
@@ -10,7 +11,8 @@ namespace Bookly_Back_End.Controllers
     {
         public IActionResult Cart()
         {
-            return View();
+            OrderVM model = new OrderVM();
+            return View(model);
         }
     }
 }

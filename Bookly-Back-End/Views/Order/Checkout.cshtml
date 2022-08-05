@@ -1,7 +1,21 @@
 ﻿@model OrderVM
 @{
     ViewData["Title"] = "Checkout";
+    Layout = "_Layout-Checkout";
+    decimal total = default;
+    @foreach (BasketItem userBasket in Model.BasketItems)
+    {
+        if (userBasket.Book.DiscountId != null)
+        {
+            (total += (userBasket.Price - ((userBasket.Price * userBasket.Book.Discount.DiscountPercent) / 100)) * userBasket.Count).ToString();
+        }
+        else
+        {
+            (total += userBasket.Price * userBasket.Count).ToString();
+        }
 
+    }
+    decimal totalView = total;
 }
 
 <main>
@@ -68,35 +82,29 @@
                     <div class="shiping-address mt-5">
                         <p>Shipping address</p>
 
-                        <form class="row g-3">
+                        <form class="row g-3" method="post">
                             <select size="1" autocomplete="shipping country" data-backup="country"
-                                    class="field__input field__input--select mb-4" aria-required="true"
-                                    name="checkout[shipping_address][country]" id="checkout_shipping_address_country"
+                                    class="field__input field__input--select mb-4" aria-required="true" asp-for="Country"
+                                    name="checkout[shipping_address][country]"
                                     placeholder="Country/region">
                                 <option data-code="AZ" selected="selected" value="@Model.Country.Name">@Model.Country.Name</option>
                             </select>
                             <div class="col-12">
-                                <label for="inputAddress" class="form-label">Address</label>
-                                <input type="text" class="form-control" id="inputAddress" placeholder="Address">
+                                <label class="form-label">Address</label>
+                                <input type="text" class="form-control" asp-for="Order.Address" placeholder="Address">
                             </div>
-                            <select size="1" autocomplete="shipping country" data-backup="country"
-                                    class="field__input field__input--select mb-4" aria-required="true"
-                                    name="checkout[shipping_address][country]" id="checkout_shipping_address_country"
-                                    placeholder="Country/region">
-                                @foreach (City city in Model.Cities)
-                                {
-                                    <option data-code="AZ" selected="selected">@city.Name</option>
-                                }
-                            </select>
+                            <select size="1" asp-for="Order.CityId" asp-items="@(new SelectList(ViewBag.Cities,"Id","Name"))"></select>
 
                             <div class="col-12">
 
                                 @foreach (Delivery delivery in Model.Deliveries)
                                 {
                                     <div class="d-flex justify-content-between">
-                                        <input type="checkbox">
-                                        <h6 class="mt-3">@delivery.Name</h6>
-                                        <h5 class="mt-3" for="horns">+@delivery.Price $</h5>
+                                        <div class="d-flex">
+                                            <input type="checkbox" style="width: 20px; height: 20px; border-radius: 50%;">
+                                            <h6 class="ms-2">@delivery.Name</h6>
+                                        </div>
+                                        <h5 class="">+@delivery.Price $</h5>
                                     </div>
                                 }
                             </div>
@@ -121,14 +129,14 @@
 
                 </div>
                 <div class="col-lg-6 bg-light product-transaction" style="height: 90vh;">
-                    @foreach (BasketItem basketItem in Model.BasketItems)
-                    {
-                        <div class="payments-large row bg-light">
+                    <div class="payments-large row bg-light">
+                        @foreach (BasketItem basketItem in Model.BasketItems)
+                        {
                             <div class="product-datas-large mt-2">
                                 <div class="book-infos d-flex justify-content-between">
                                     <div class="book-image">
-                                        <sup class="sup">0</sup>
-                                        <img src="assets/Image/Library/@basketItem.Book.BookImages.FirstOrDefault(b => b.IsMain == true)?.ImagePath" alt="">
+                                        <sup class="sup">@basketItem.Count</sup>
+                                        <img src="~/assets/Image/Library/@basketItem.Book.BookImages.FirstOrDefault(b => b.IsMain == true)?.ImagePath" alt="">
                                     </div>
                                     <div class="book-name d-flex align-items-center justify-content-end">
                                         <p>@basketItem.Book.Name</p>
@@ -137,29 +145,32 @@
                                         <p>$@basketItem.Book.Price</p>
                                     </div>
                                 </div>
-                                <div class="product-price">
-                                    <div class="subtotal d-flex justify-content-between">
-                                        <small>Subtotal</small>
-                                        <p>$420.00</p>
-                                    </div>
-                                    <div class="shipping d-flex justify-content-between">
-                                        <small>Shipping</small>
-                                        <p>$18.78</p>
-                                    </div>
-                                </div>
-                                <div class="total-price d-flex justify-content-between">
-                                    <p>Total</p>
-                                    <span><small>USD</small> $438.78</span>
-                                </div>
+                            </div>
+                        }
+                        <div class="product-price">
+                            <div class="subtotal d-flex justify-content-between">
+                                <small>Subtotal</small>
+                                <p>$@totalView</p>
+                            </div>
+                            <div class="shipping d-flex justify-content-between">
+                                <small>Shipping</small>
+                                <p>
+                                    $
+                                    
+                                </p>
                             </div>
                         </div>
-                    }
+                        <div class="total-price d-flex justify-content-between">
+                            <p>Total</p>
+                            <span><small>USD</small> $@totalView</span>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 </main>
-@section Scripts{
+@section Checkout{
     <script src="~/assets/Js/transaction.js"></script>
 }
 
