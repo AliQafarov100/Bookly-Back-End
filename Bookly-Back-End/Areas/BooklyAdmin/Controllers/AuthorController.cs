@@ -60,14 +60,11 @@ namespace Bookly_Back_End.Areas.BooklyAdmin.Controllers
                 return View();
             }
 
-            if (author.Best == "yes")
-            {
-                author.IsBest = true;
-            }
-            else if (author.Best == "no")
+            if (!author.IsBest)
             {
                 author.IsBest = false;
             }
+            
             author.AuthorAwards = new List<AuthorAward>();
 
             foreach(var awardId in author.AwardIds)
@@ -128,11 +125,7 @@ namespace Bookly_Back_End.Areas.BooklyAdmin.Controllers
 
             if(author.Photo == null)
             {
-                if (author.Best == "yes")
-                {
-                    author.IsBest = true;
-                }
-                else if (author.Best == "no")
+                if (!author.IsBest)
                 {
                     author.IsBest = false;
                 }
@@ -148,11 +141,7 @@ namespace Bookly_Back_End.Areas.BooklyAdmin.Controllers
                     ModelState.AddModelError("Photo", "Size of image mustn't more than 1MB!");
                     return View(existedAuthor);
                 }
-                if (author.Best == "yes")
-                {
-                    author.IsBest = true;
-                }
-                else if (author.Best == "no")
+                if (!author.IsBest)
                 {
                     author.IsBest = false;
                 }

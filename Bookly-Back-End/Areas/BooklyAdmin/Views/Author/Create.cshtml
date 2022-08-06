@@ -14,10 +14,11 @@
         <input asp-for="Comments" class="form-control" /><br />
         <span class="text-danger" asp-validation-for="Comments"></span>
     </div>
-    <div>
-        <label class="mb-3">Author is Best? </label><br />
-        <input asp-for="Best" class="form-control" /><br />
-        <span class="text-danger" asp-validation-for="Best"></span>
+    <div class="form-check mb-4">
+        <input class="form-check-input" type="checkbox" asp-for="IsBest" />
+        <span class="form-check-label" asp-validation-for="IsBest">
+            Best
+        </span>
     </div>
     <div>
         <label class="mb-3">Author Award(-s):</label><br />

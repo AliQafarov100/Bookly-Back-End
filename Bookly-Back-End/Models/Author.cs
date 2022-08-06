@@ -24,7 +24,5 @@ namespace Bookly_Back_End.Models
         public List<int> AwardIds { get; set; }
         [NotMapped]
         public List<int> SocialMediaIds { get; set; }
-        [NotMapped]
-        public string Best { get; set; }
     }
 }

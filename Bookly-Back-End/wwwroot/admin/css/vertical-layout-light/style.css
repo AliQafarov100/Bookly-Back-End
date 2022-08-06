@@ -22916,7 +22916,9 @@ code {
 .card.card-light-danger:hover {
   background: #f59095;
 }
-
+.form-check .form-check-input {
+    margin-left: 0px;
+}
 @media (min-width: 576px) {
   .card-columns {
     column-count: 3;

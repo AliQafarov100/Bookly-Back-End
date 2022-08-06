@@ -229,7 +229,7 @@
                                 </p>
                                 <strong>@book.Name</strong>
                                 <p>
-                                    @if (book.DiscountId != null)
+                                    @if (book.DiscountId != null && book.DiscountId != 4)
                                     {
                                         <span>$@(book.Price - ((book.Price * book.Discount?.DiscountPercent) / 100))</span>
                                         <span class="ms-2"><del>$@book.Price</del></span>
@@ -291,8 +291,8 @@
                                                 @author.Author.FullName.ToString();
                                             }
                                         </p>
-                                        <strong>The Gift of Love</strong>
-                                        @if (bestBook.DiscountId != null)
+                                        <strong>@bestBook.Name</strong>
+                                        @if (bestBook.DiscountId != null && bestBook.DiscountId != 4)
                                         {
                                             <span>$@(bestBook.Price - ((bestBook.Price * bestBook.Discount?.DiscountPercent) / 100))</span>
                                             <span class="ms-2"><del>$@bestBook.Price</del></span>
@@ -394,8 +394,8 @@
                                         @author.Author.FullName.ToString();
                                     }
                                 </p>
-                                <strong>The Gift of Love</strong>
-                                @if (dealBook.DiscountId != null)
+                                <strong>@dealBook.Name</strong> <br />
+                                @if (dealBook.DiscountId != null && dealBook.DiscountId != 4)
                                 {
                                     <span>$@(dealBook.Price - ((dealBook.Price * dealBook.Discount?.DiscountPercent) / 100))</span>
                                     <span class="ms-2"><del>$@dealBook.Price</del></span>

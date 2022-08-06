@@ -131,6 +131,14 @@ namespace Bookly_Back_End.Areas.BooklyAdmin.Controllers
 
                 book.BookLanguages.Add(language);
             }
+            if (!book.IsBest)
+            {
+                book.IsBest = false;
+            }
+            if (!book.IsDailyDeal)
+            {
+                book.IsDailyDeal = false;
+            }
 
             await _context.Books.AddAsync(book);
             await _context.SaveChangesAsync();
@@ -277,8 +285,15 @@ namespace Bookly_Back_End.Areas.BooklyAdmin.Controllers
                     exsisted.BookImages.Add(anotherImage);
                 }
             }
+            if (!book.IsBest)
+            {
+                book.IsBest = false;
+            }
+            if (!book.IsDailyDeal)
+            {
+                book.IsDailyDeal = false;
+            }
 
-           
 
             _context.Entry(exsisted).CurrentValues.SetValues(book);
             await _context.SaveChangesAsync();

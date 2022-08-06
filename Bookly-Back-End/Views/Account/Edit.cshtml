@@ -1,0 +1,89 @@
+﻿@model EditUserVM
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<!-- Section: Design Block -->
+<section id="intro">
+    <div class="container">
+        <div class="write  d-flex justify-content-center align-items-center">
+            <div class="texts">
+                <h4 class="text-center">Account</h4>
+                <ul class="d-flex justify-content-around">
+                    <li><a href="Collections.html">All</a></li>
+                    <li><a href="">Product</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="">
+    <!-- Jumbotron -->
+    <div class="px-4 py-5 px-md-5 text-center text-lg-start" style="background-color: white;">
+        <div class="container">
+            <div class="row gx-lg-5 align-items-center justify-content-center">
+              <div class="alert alert-danger" asp-validation-summary="ModelOnly"></div>
+                <div class="col-lg-6 mb-5 mb-lg-0" style="background-color: whitesmoke;">
+                    <div class="card" style="border: none">
+                        <div class="card-body py-5 px-md-5" style="background-color: whitesmoke;">
+                            <form method="post">
+                                <!-- 2 column grid layout with text inputs for the first and last names -->
+                                <div class="row">
+                                    <div class="col-md-6 mb-4">
+                                        <div class="form-outline">
+                                            <input asp-for="Firstname" id="form3Example1" class="form-control" />
+                                            <span class="form-label" asp-validation-for="Firstname">First name</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 mb-4">
+                                        <div class="form-outline">
+                                            <input asp-for="Lastname" id="form3Example2" class="form-control" />
+                                            <span class="form-label" asp-validation-for="Lastname">Last name</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Email input -->
+                                <div class="form-outline mb-4">
+                                    <input asp-for="Username" id="form3Example3" class="form-control" />
+                                    <span class="form-label" asp-validation-for="Username">Username</span>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Email Address*</label>
+                                    <input asp-for="Email" placeholder="Email Address" readonly /><br />
+                                    <span asp-validation-for="Email" class="text-danger"></span>
+                                </div>
+
+                                <!-- Password input -->
+                                <div class="form-outline mb-4">
+                                    <input asp-for="CurrentPassword" id="form3Example4" class="form-control" />
+                                    <span class="form-label" asp-validation-for="CurrentPassword">Current Password</span>
+                                </div>
+                                <div class="form-outline mb-4">
+                                    <input asp-for="Password" id="form3Example4" class="form-control" />
+                                    <span class="form-label" asp-validation-for="Password">Password</span>
+                                </div>
+                                <div class="form-outline mb-4">
+                                    <input asp-for="ConfirmPassword" id="form3Example4" class="form-control" />
+                                    <span class="form-label" asp-validation-for="ConfirmPassword">Confirm Password</span>
+                                </div>
+
+                                <!-- Checkbox -->
+                                
+                                <!-- Submit button -->
+                                <button type="submit" class="btn btn-primary btn-block mb-4">
+                                    Change
+                                </button>
+
+                                <!-- Register buttons -->
+
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Jumbotron -->
+</section>
+<!-- Section: Design Block -->
