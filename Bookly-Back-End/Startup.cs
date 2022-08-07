@@ -45,8 +45,8 @@ namespace Bookly_Back_End
                 opt.Password.RequireUppercase = false;
                 opt.Password.RequiredLength = 8;
 
-                opt.Lockout.MaxFailedAccessAttempts = 3;
                 opt.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(5);
+                opt.Lockout.MaxFailedAccessAttempts = 3;
 
                 opt.User.AllowedUserNameCharacters = "qwertyuiopasdfghjklzxcvbnm_1234567890";
                 opt.SignIn.RequireConfirmedEmail = false;

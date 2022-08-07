@@ -1,0 +1,33 @@
+﻿@model AppUser
+@{
+    ViewData["Title"] = "Lockout";
+}
+
+<h3>Lockout user</h3>
+<div>
+    <div>
+        <p>First Name: </p>
+        <h4>@Model.FirstName</h4>
+    </div>
+    <div>
+        <p>Last Name:</p>
+        <h4>@Model.LastName</h4>
+    </div>
+    <div>
+        <p>Email:</p>
+        <h4>@Model.Email</h4>
+    </div>
+    <div>
+        <p>Username:</p>
+        <h4>@Model.UserName</h4>
+    </div>
+
+    <form asp-action="Lockout">
+        <div class="mt-3">
+            <button type="submit" class="btn btn-primary">Lockout</button>
+        </div>
+        <div class="mt-3">
+            <button type="submit" asp-action="Users" class="btn btn-primary">Back To List</button>
+        </div>
+    </form>
+</div>

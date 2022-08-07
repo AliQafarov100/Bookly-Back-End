@@ -81,12 +81,15 @@ namespace Bookly_Back_End.Controllers
                 {
                     if (signInResult.IsLockedOut)
                     {
-                        ModelState.AddModelError("", "Count of wrong enter is 3!You are blocked on 5 minutes!");
+                        ModelState.AddModelError("", "This user is blocked!");
                         return View();
                     }
+                   
                     ModelState.AddModelError("", "Username or email incorrect!");
                     return View();
                 }
+                
+
             }
             else
             {
@@ -100,9 +103,12 @@ namespace Bookly_Back_End.Controllers
                         return View();
                     }
                 }
+                
+               
                 ModelState.AddModelError("", "Username or email incorrect!");
                 return View();
             }
+            
 
             return RedirectToAction("Index", "Home");
         }

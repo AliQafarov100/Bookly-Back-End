@@ -10,7 +10,9 @@ namespace Bookly_Back_End.Models
     {
         public string FirstName { get; set; }
         public string LastName { get; set; }
-
+        public bool IsMember { get; set; }
+        public bool IsAdmin { get; set; }
+        public bool IsSuperAdmin { get; set; }
         public List<BasketItem> BasketItems { get; set; }
     }
 }
