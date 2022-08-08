@@ -21,22 +21,22 @@ namespace Bookly_Back_End.Controllers
             _context = context;
             _repository = repository;
         }
-        public async Task<IActionResult> Index(string category,int? author,string highToLow)
+        public async Task<IActionResult> Index(string category)
         {
-            var query = _repository.GetBookByCategory(category,author,highToLow);
+            var query = _repository.GetBookByCategory(category);
             Slayd slayd = await _context.Slayds.FirstOrDefaultAsync();
             List<Support> supports = await _context.Supports.ToListAsync();
             Festival festival = await _context.Festivals.FirstOrDefaultAsync();
             Offer offer = await _context.Offers.FirstOrDefaultAsync();
             Gift gift = await _context.Gifts.FirstOrDefaultAsync();
             List<Sponsor> sponsors = await _context.Sponsors.ToListAsync();
-            List<Book> AllBooks = await query.Include(i => i.BookImages).Include(f => f.BookFormats).
-                Include(a => a.BookAuthors).Include(l => l.BookLanguages).ToListAsync();
-            List<Book> anotherBooks = await _context.Books.Include(i => i.BookImages).Include(f => f.BookFormats).
-                Include(a => a.BookAuthors).Include(l => l.BookLanguages).ToListAsync();
+            List<Book> AllBooks = await _context.Books.Include(i => i.BookImages).
+                Include(a => a.BookAuthors).ToListAsync();
+            List<Book> anotherBooks = await _context.Books.Include(i => i.BookImages).
+                Include(a => a.BookAuthors).ToListAsync();
             List<Category> categories = await _context.Categories.ToListAsync();
             List<Author> authors = await _context.Authors.Include(b => b.BookAuthors).Include(a => a.AuthorAwards).ToListAsync();
-            List<BookAuthor> bookAuthors = await _context.BookAuthors.ToListAsync();
+            List<BookAuthor> bookAuthors = await query.Include(a => a.Author).ToListAsync();
             List<Award> awards = await _context.Awards.ToListAsync();
             List<AuthorAward> authorAwards = await _context.AuthorAwards.ToListAsync();
             List<SocialMedia> socialMedias = await _context.SocialMedias.ToListAsync();

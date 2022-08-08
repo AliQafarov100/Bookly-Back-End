@@ -16,40 +16,63 @@ namespace Bookly_Back_End.Interfaces
         {
             _context = context;
         }
-        public IQueryable<Book> Books => _context.Books;
+        public IQueryable<BookAuthor> BookAuthors => _context.BookAuthors;
 
-        public IQueryable<Book> GetBookByCategory(string category, int? author,string highToLow)
+        public IQueryable<BookAuthor> GetBookByFilter(string category, string author, string highToLow,
+            int? minPrice, int? maxPrice,string language,string format)
         {
-            var books = _context.Books.AsQueryable();
             var bookAuthors = _context.BookAuthors.AsQueryable();
-            
             if (category != null)
             {
-                books = books.Where(b => b.Category.Name.Contains(category));
+                bookAuthors = bookAuthors.Where(b => b.Book.Category.Name.Contains(category));
             }
             if (author != null)
             {
-                books = books.Where(b => b.BookAuthors.Contains(bookAuthors.FirstOrDefault(a => a.AuthorId == author)));
+                bookAuthors = bookAuthors.Where(b => b.Author.FullName.Contains(author));
+            }
+            if(language != null)
+            {
+                bookAuthors = bookAuthors.Where(b => b.Book.Language.Name.Contains(language));
+            }
+            if(format != null)
+            {
+                bookAuthors = bookAuthors.Where(b => b.Book.Format.Name.Contains(format));
+            }
+
+            if (minPrice != null && maxPrice != null)
+            {
+                bookAuthors = bookAuthors.Where(b => b.Book.Price >= minPrice && b.Book.Price <= maxPrice);
             }
             switch (highToLow)
             {
                 case "high":
-                    books = books.OrderByDescending(b => b.Price);
+                    bookAuthors = bookAuthors.OrderByDescending(b => b.Book.Price);
                     break;
                 default:
-                    books = books.AsQueryable();
+                    bookAuthors = bookAuthors.AsQueryable();
                     break;
+            }
+            return (bookAuthors);
+        }
+
+        public IQueryable<BookAuthor> GetBookByCategory(string category)
+        {
+            var books = _context.BookAuthors.AsQueryable();
+
+            if(category != null)
+            {
+                books = books.Where(b => b.Book.Category.Name.Contains(category));
             }
             return books;
         }
 
-        public IQueryable<Book> GetBookBySearch(string searching)
+        public IQueryable<BookAuthor> GetBookBySearch(string searching)
         {
-            var searchBooks = _context.Books.AsQueryable();
+            var searchBooks = _context.BookAuthors.AsQueryable();
 
-            if(searchBooks != null)
+            if (searchBooks != null)
             {
-                searchBooks = searchBooks.Where(sb => sb.Name.Contains(searching));
+                searchBooks = searchBooks.Where(sb => sb.Book.Name.Contains(searching) || sb.Author.FullName.Contains(searching));
             }
 
             return searchBooks;

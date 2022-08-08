@@ -5,10 +5,10 @@ using System.Threading.Tasks;
 
 namespace Bookly_Back_End.Models
 {
-    public class Language
+    public class FilteringPrice
     {
         public int Id { get; set; }
-        public string Name { get; set; }
-        public List<Book> Books { get; set; }
+        public int MinimumPrice { get; set; }
+        public int MaximumPrice { get; set; }
     }
 }

@@ -423,14 +423,7 @@
                                         @*<a style="border: 1px solid red;" class="text-danger">Print</a>
                                             <a style="border: 1px solid #e9e9e9;">Audio</a>
                                             <a style="border: 1px solid #e9e9e9;">Paperback</a>*@
-                                        @{
-
-                                            foreach (var format in Model.BookFormats.Where(f => f.BookId == Model.Book.Id))
-                                            {
-
-                                                <a style="border: 1px solid #e9e9e9;" class="selectFormat" id="">@format.Format?.Name</a>
-                                            }
-                                        }
+                                        <a style="border: 1px solid #e9e9e9;">@Model.Book.Format.Name</a>
                                     </div>
                                 </div>
                             </div>
@@ -443,12 +436,7 @@
                                         @*<a style="border: 1px solid red;" class="text-danger">Russian</a>
                                             <a style="border: 1px solid #e9e9e9;">Korean</a>
                                             <a style="border: 1px solid #e9e9e9;">English</a>*@
-                                        @{
-                                            foreach (var language in Model.BookLanguages.Where(l => l.BookId == Model.Book.Id))
-                                            {
-                                                <a style="border: 1px solid #e9e9e9;">@language.Language?.Name</a>
-                                            }
-                                        }
+                                         <a style="border: 1px solid #e9e9e9;">@Model.Book.Language.Name</a>
                                     </div>
                                 </div>
                             </div>

@@ -25,8 +25,7 @@ namespace Bookly_Back_End.Areas.BooklyAdmin.Controllers
         }
         public async Task<IActionResult> Index()
         {
-            List<Book> books = await _context.Books.Include(a => a.BookAuthors).Include(f => f.BookFormats).
-                Include(l => l.BookLanguages).Include(i => i.BookImages).ToListAsync();
+            List<Book> books = await _context.Books.Include(a => a.BookAuthors).Include(i => i.BookImages).ToListAsync();
             return View(books);
         }
 
@@ -93,18 +92,7 @@ namespace Bookly_Back_End.Areas.BooklyAdmin.Controllers
                 book.BookImages.Add(anotherImage);
             }
 
-            book.BookFormats = new List<BookFormat>();
-
-            foreach (var id in book.FormatIds)
-            {
-                BookFormat format = new BookFormat
-                {
-                    Book = book,
-                    FormatId = id
-                };
-
-                book.BookFormats.Add(format);
-            }
+            
 
             book.BookAuthors = new List<BookAuthor>();
 
@@ -119,18 +107,7 @@ namespace Bookly_Back_End.Areas.BooklyAdmin.Controllers
                 book.BookAuthors.Add(author);
             }
 
-            book.BookLanguages = new List<BookLanguage>();
-
-            foreach (var id in book.LanguageIds)
-            {
-                BookLanguage language = new BookLanguage
-                {
-                    Book = book,
-                    LanguageId = id
-                };
-
-                book.BookLanguages.Add(language);
-            }
+            
             if (!book.IsBest)
             {
                 book.IsBest = false;
@@ -155,8 +132,8 @@ namespace Bookly_Back_End.Areas.BooklyAdmin.Controllers
             ViewBag.Categories = await _context.Categories.ToListAsync();
             ViewBag.Discounts = await _context.Discounts.ToListAsync();
 
-            Book book = await _context.Books.Include(f => f.BookFormats).Include(i => i.BookImages).
-               Include(a => a.BookAuthors).Include(l => l.BookLanguages).FirstOrDefaultAsync(b => b.Id == id);
+            Book book = await _context.Books.Include(i => i.BookImages).
+               Include(a => a.BookAuthors).FirstOrDefaultAsync(b => b.Id == id);
 
             if (book == null) return NotFound();
 
@@ -170,8 +147,8 @@ namespace Bookly_Back_End.Areas.BooklyAdmin.Controllers
             ViewBag.Authors = await _context.Authors.ToListAsync();
             ViewBag.Categories = await _context.Categories.ToListAsync();
             ViewBag.Discounts = await _context.Discounts.ToListAsync();
-            Book book = await _context.Books.Include(f => f.BookFormats).Include(i => i.BookImages).
-                Include(a => a.BookAuthors).Include(l => l.BookLanguages).FirstOrDefaultAsync(b => b.Id == id);
+            Book book = await _context.Books.Include(i => i.BookImages).
+                Include(a => a.BookAuthors).FirstOrDefaultAsync(b => b.Id == id);
             if (book == null) return NotFound();
             return View(book);
         }
@@ -186,8 +163,8 @@ namespace Bookly_Back_End.Areas.BooklyAdmin.Controllers
             ViewBag.Authors = await _context.Authors.ToListAsync();
             ViewBag.Categories = await _context.Categories.ToListAsync();
             ViewBag.Discounts = await _context.Discounts.ToListAsync();
-            Book exsisted = await _context.Books.Include(f => f.BookFormats).Include(i => i.BookImages).
-                Include(a => a.BookAuthors).Include(l => l.BookLanguages).FirstOrDefaultAsync(b => b.Id == id);
+            Book exsisted = await _context.Books.Include(i => i.BookImages).
+                Include(a => a.BookAuthors).FirstOrDefaultAsync(b => b.Id == id);
 
             if (exsisted == null) return NotFound();
             if (book.MainImage != null)
@@ -215,14 +192,10 @@ namespace Bookly_Back_End.Areas.BooklyAdmin.Controllers
             }
 
             List<BookImage> removebleImages = exsisted.BookImages.Where(i => i.IsMain == false && !book.ImageIds.Contains(i.Id)).ToList();
-            List<BookFormat> removebleFormats = exsisted.BookFormats.Where(bf => !book.FormatIds.Contains(bf.FormatId)).ToList();
-            List<BookLanguage> removableLanguage = exsisted.BookLanguages.Where(bl => !book.LanguageIds.Contains(bl.LanguageId)).ToList();
             List<BookAuthor> removableAuthors = exsisted.BookAuthors.Where(ba => !book.AuthorIds.Contains(ba.AuthorId)).ToList();
             
 
             exsisted.BookImages.RemoveAll(p => removebleImages.Any(ri => ri.Id == p.Id));
-            exsisted.BookFormats.RemoveAll(b => removebleFormats.Any(rf => rf.Id == b.Id));
-            exsisted.BookLanguages.RemoveAll(b => removableLanguage.Any(bl => bl.Id == b.Id));
             exsisted.BookAuthors.RemoveAll(b => removableAuthors.Any(ba => ba.Id == b.Id));
             
 
@@ -230,33 +203,7 @@ namespace Bookly_Back_End.Areas.BooklyAdmin.Controllers
             {
                 FileExtesion.FileDelete(_env.WebRootPath, @"assets\Image\Library", image.ImagePath);
             }
-            foreach (var formatId in book.FormatIds)
-            {
-                BookFormat existedFormat = exsisted.BookFormats.FirstOrDefault(bf => bf.FormatId == formatId);
-                if (existedFormat == null)
-                {
-                    BookFormat bookFormat = new BookFormat
-                    {
-                        BookId = exsisted.Id,
-                        FormatId = formatId
-                    };
-                    exsisted.BookFormats.Add(bookFormat);
-                }
-            }
-            foreach(var languageId in book.LanguageIds)
-            {
-                BookLanguage existedLanguage = exsisted.BookLanguages.FirstOrDefault(bl => bl.LanguageId == languageId);
-                if(existedLanguage == null)
-                {
-                    BookLanguage bookLanguage = new BookLanguage
-                    {
-                        BookId = exsisted.Id,
-                        LanguageId = languageId
-                    };
 
-                    exsisted.BookLanguages.Add(bookLanguage);
-                }   
-            }
             foreach(var authorId in book.AuthorIds)
             {
                 BookAuthor existedAuthor = exsisted.BookAuthors.FirstOrDefault(a => a.AuthorId == authorId);
@@ -306,8 +253,8 @@ namespace Bookly_Back_End.Areas.BooklyAdmin.Controllers
         public async Task<IActionResult> Delete(int id)
         {
            
-            Book existedBook = await _context.Books.Include(f => f.BookFormats).Include(i => i.BookImages).
-                Include(a => a.BookAuthors).Include(l => l.BookLanguages).FirstOrDefaultAsync(b => b.Id == id);
+            Book existedBook = await _context.Books.Include(i => i.BookImages).
+                Include(a => a.BookAuthors).FirstOrDefaultAsync(b => b.Id == id);
 
 
             if (existedBook == null) return NotFound();
@@ -322,8 +269,8 @@ namespace Bookly_Back_End.Areas.BooklyAdmin.Controllers
         public async Task<IActionResult> ConfirmDelete(int id)
         {
            
-            Book existedBook = await _context.Books.Include(f => f.BookFormats).Include(i => i.BookImages).
-                Include(a => a.BookAuthors).Include(l => l.BookLanguages).FirstOrDefaultAsync(b => b.Id == id);
+            Book existedBook = await _context.Books.Include(i => i.BookImages).
+                Include(a => a.BookAuthors).FirstOrDefaultAsync(b => b.Id == id);
 
             if (existedBook == null) return NotFound();
             FileExtesion.FileDelete(_env.WebRootPath, @"assets\Image\Library", existedBook.BookImages.FirstOrDefault(i => i.IsMain == true).ImagePath);

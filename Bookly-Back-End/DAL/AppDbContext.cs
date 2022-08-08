@@ -17,6 +17,7 @@ namespace Bookly_Back_End.DAL
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+           
         }
 
         public DbSet<Slayd> Slayds { get; set; }
@@ -29,9 +30,7 @@ namespace Bookly_Back_End.DAL
         public DbSet<Author> Authors { get; set; }
         public DbSet<Book> Books { get; set; }
         public DbSet<BookAuthor> BookAuthors { get; set; }
-        public DbSet<BookFormat> BookFormats { get; set; }
         public DbSet<BookImage> BookImages { get; set; }
-        public DbSet<BookLanguage> BookLanguages { get; set; }
         public DbSet<Category> Categories { get; set; }
         public DbSet<Format> Formats { get; set; }
         public DbSet<Language> Languages { get; set; }
@@ -46,5 +45,6 @@ namespace Bookly_Back_End.DAL
         public DbSet<Delivery> Deliveries { get; set; }
         public DbSet<Order> Orders { get; set; }
         public DbSet<City> Cities { get; set; }
+        public DbSet<FilteringPrice> FilteringPrices { get; set; }
     }
 }

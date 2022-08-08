@@ -18,6 +18,22 @@
     <Compile Remove="Migrations\20220804155638_createOrderAndCityCountryAndDelivery.Designer.cs" />
     <Compile Remove="Migrations\20220804162928_createOrderAndCityCountryAndDelivery.cs" />
     <Compile Remove="Migrations\20220804162928_createOrderAndCityCountryAndDelivery.Designer.cs" />
+    <Compile Remove="Migrations\20220808180756_updateBookTableAndRelations.cs" />
+    <Compile Remove="Migrations\20220808180756_updateBookTableAndRelations.Designer.cs" />
+    <Compile Remove="Migrations\20220808181302_updateBookTableAndRelations.cs" />
+    <Compile Remove="Migrations\20220808181302_updateBookTableAndRelations.Designer.cs" />
+    <Compile Remove="Migrations\20220808182836_updateBookTableAndRelations.cs" />
+    <Compile Remove="Migrations\20220808182836_updateBookTableAndRelations.Designer.cs" />
+    <Compile Remove="Migrations\20220808183141_updateBookTableAndRelations.cs" />
+    <Compile Remove="Migrations\20220808183141_updateBookTableAndRelations.Designer.cs" />
+    <Compile Remove="Migrations\20220808183501_updateBookTableAndRelations.cs" />
+    <Compile Remove="Migrations\20220808183501_updateBookTableAndRelations.Designer.cs" />
+    <Compile Remove="Migrations\20220808183837_updateBookTableAndRelations.cs" />
+    <Compile Remove="Migrations\20220808183837_updateBookTableAndRelations.Designer.cs" />
+    <Compile Remove="Migrations\20220808185503_updateBookTableAndRelations.cs" />
+    <Compile Remove="Migrations\20220808185503_updateBookTableAndRelations.Designer.cs" />
+    <Compile Remove="Migrations\20220808185919_updateBookTableAndRelations.cs" />
+    <Compile Remove="Migrations\20220808185919_updateBookTableAndRelations.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>
@@ -1283,6 +1299,7 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.5" />
+    <PackageReference Include="System.Linq.Expressions" Version="4.3.0" />
   </ItemGroup>
 
   <ItemGroup>

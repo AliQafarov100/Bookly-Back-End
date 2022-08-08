@@ -66,7 +66,7 @@
                                     </div>
                                 </div>
                             </li>
-                            <li><a href="Brands.html">Brands</a></li>
+                            <li><a asp-controller="Brand" asp-action="Brands">Brands</a></li>
                             <li><a href="BestSellers.html">Best Sellers</a></li>
                             <li class="page-controller">
                                 <a href="">
@@ -202,7 +202,7 @@
         </div>
         <div class="container mt-5">
             <div class="row all">
-                @foreach (Book book in Model.AllBooks)
+                @foreach (BookAuthor book in Model.BookAuthors)
                 {
                     <div class="col-lg-3 col-md-6 col-sm-6 col-12">
                         <div class="info-book">
@@ -218,25 +218,22 @@
                                         <a href=""><i class="fa-solid fa-magnifying-glass"></i></a>
                                     </div>
                                 </div>
-                                <a asp-controller="Detail" asp-action="Details" asp-route-id="@book.Id"><img src="~/assets/Image/Library/@book.BookImages.FirstOrDefault(i => i.IsMain == true)?.ImagePath"></a>
+                                <a asp-controller="Detail" asp-action="Details" asp-route-id="@book.Book.Id"><img src="~/assets/Image/Library/@book.Book.BookImages.FirstOrDefault(i => i.IsMain == true)?.ImagePath"></a>
                             </div>
                             <div class="detail mt-3">
                                 <p>
-                                    @foreach (BookAuthor author in Model.BookAuthors.Where(a => a.BookId == book.Id))
-                                    {
-                                        @author.Author.FullName.ToString();
-                                    }
+                                    @book.Author.FullName.ToString()
                                 </p>
-                                <strong>@book.Name</strong>
+                                <strong>@book.Book.Name.ToString()</strong>
                                 <p>
-                                    @if (book.DiscountId != null && book.DiscountId != 4)
+                                    @if (book.Book.DiscountId != null && book.Book.DiscountId != 4)
                                     {
-                                        <span>$@(book.Price - ((book.Price * book.Discount?.DiscountPercent) / 100))</span>
-                                        <span class="ms-2"><del>$@book.Price</del></span>
+                                        <span>$@(book.Book.Price - ((book.Book.Price * book.Book.Discount?.DiscountPercent) / 100))</span>
+                                        <span class="ms-2"><del>$@book.Book.Price</del></span>
                                     }
                                     else
                                     {
-                                        <span>$@book.Price</span>
+                                        <span>$@book.Book.Price</span>
                                     }
 
                                 </p>
@@ -288,7 +285,7 @@
                                         <p>
                                             @foreach (BookAuthor author in Model.BookAuthors.Where(b => b.BookId == bestBook.Id))
                                             {
-                                                @author.Author.FullName.ToString();
+                                               
                                             }
                                         </p>
                                         <strong>@bestBook.Name</strong>

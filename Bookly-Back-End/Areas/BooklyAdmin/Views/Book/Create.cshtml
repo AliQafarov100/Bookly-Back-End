@@ -38,14 +38,14 @@
         </span>
     </div>
     <div>
-        <label class="mb-3">Book Format(-s):</label><br />
-        <select class="form-control" style="height:25px" asp-for="FormatIds" asp-items="@(new SelectList(ViewBag.Formats,"Id","Name"))"></select>
-        <span class="text-danger" asp-validation-for="FormatIds"></span>
+        <label class="mb-3">Book Language:</label><br />
+        <select class="form-control" asp-for="LanguageId" asp-items="@(new SelectList(ViewBag.Languages,"Id","Name"))"></select>
+        <span class="text-danger" asp-validation-for="LanguageId"></span>
     </div>
     <div>
-        <label class="mb-3">Book Language(-s):</label><br />
-        <select class="form-control" asp-for="LanguageIds" asp-items="@(new SelectList(ViewBag.Languages,"Id","Name"))"></select>
-        <span class="text-danger" asp-validation-for="LanguageIds"></span>
+        <label class="mb-3">Book Format:</label><br />
+        <select class="form-control" asp-for="FormatId" asp-items="@(new SelectList(ViewBag.Formats,"Id","Name"))"></select>
+        <span class="text-danger" asp-validation-for="FormatId"></span>
     </div>
     <div>
         <label class="mb-3">Book Author(-s):</label><br />

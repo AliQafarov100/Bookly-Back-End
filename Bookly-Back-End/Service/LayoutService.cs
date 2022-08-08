@@ -71,8 +71,6 @@ namespace Bookly_Back_End.Service
         public async Task<List<BasketItem>> UserBasket()
         {
             List<BasketItem> baskets = await _context.BasketItems.Include(b => b.Book.BookImages).Include(b => b.Book.Discount).ToListAsync();
-            
-            
             return baskets;
         }
     }

@@ -9,6 +9,6 @@ namespace Bookly_Back_End.Models
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public List<BookFormat> BookFormats { get; set; }
+        public List<Book> Books { get; set; }
     }
 }

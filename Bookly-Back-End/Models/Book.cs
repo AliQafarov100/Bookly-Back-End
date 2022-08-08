@@ -24,23 +24,20 @@ namespace Bookly_Back_End.Models
         public bool IsDailyDeal { get; set; }
         public int CategoryId { get; set; }
         public Category Category { get; set; }
+        public int? LanguageId { get; set; }
+        public Language Language { get; set; }
+        public int? FormatId { get; set; }
+        public Format Format { get; set; }
         public List<BookAuthor> BookAuthors { get; set; }
-        public List<BookFormat> BookFormats { get; set; }
-        public List<BookLanguage> BookLanguages { get; set; }
         public List<BookImage> BookImages { get; set; }
         [NotMapped]
         public IFormFile MainImage { get; set; }
         [NotMapped]
-
         public List<IFormFile> AnotherImages { get; set; }
         [NotMapped]
         public List<int> ImageIds { get; set; }
         [NotMapped]
         public int MainId { get; set; }
-        [NotMapped]
-        public List<int> FormatIds { get; set; }
-        [NotMapped]
-        public List<int> LanguageIds { get; set; }
         [NotMapped]
         public List<int> AuthorIds { get; set; }
     }

@@ -1,6 +1,6 @@
 ﻿@model BookVM
 @{
-    ViewData["Title"] = "Search";
+    ViewData["Title"] = "Brands";
 }
 
 <main>
@@ -10,9 +10,9 @@
                 <div class="row w-100">
                     <div class="pages col-lg-8">
                         <ul class="d-flex justify-content-around">
-                            <li><a asp-controller="Home" asp-action="Index">Home</a></li>
+                            <li><a href="Index.html">Home</a></li>
                             <li class="controll">
-                                <a asp-controller="Book" asp-action="Index" class="category">
+                                <a href="Collections.html" class="category">
                                     <span>Categories</span><span class="ms-3">
                                         <i class="fa-solid fa-sort-down"></i>
                                     </span>
@@ -23,7 +23,7 @@
                                     <div class="row">
                                         <div class="col-lg-3 col-md-12 col-sm-12 col-12">
                                             <div class="book">
-                                                <img src="/assets/Image/Category Book/shop-new-100.webp" alt="">
+                                                <img src="//assets/Image/Category Book/shop-new-100.webp" alt="">
                                                 <div class="book-info">
                                                     <a href="">
                                                         <span>Endless Summer</span><span class="ms-2">$210</span>
@@ -33,7 +33,7 @@
                                         </div>
                                         <div class="col-lg-3 col-md-12 col-sm-12 col-12">
                                             <div class="book">
-                                                <img src="/assets/Image/Category Book/shop-new-30.webp" alt="">
+                                                <img src="//assets/Image/Category Book/shop-new-30.webp" alt="">
                                                 <div class="book-info">
                                                     <a href="">
                                                         <span>Fresh Healthy Eat</span><span class="ms-2">$110</span>
@@ -43,7 +43,7 @@
                                         </div>
                                         <div class="col-lg-3 col-md-12 col-sm-12 col-12">
                                             <div class="book">
-                                                <img src="/assets/Image/Category Book/shop-new-4.webp" alt="">
+                                                <img src="//assets/Image/Category Book/shop-new-4.webp" alt="">
                                                 <div class="book-info">
                                                     <a href="">
                                                         <span>Book for a Cause</span><span class="ms-2">$110</span>
@@ -53,7 +53,7 @@
                                         </div>
                                         <div class="col-lg-3 col-md-12 col-sm-12 col-12">
                                             <div class="book">
-                                                <img src="/assets/Image/Category Book/shop-new-95_b0b53360-a171-427b-9dc6-0bf965bcfdae.webp"
+                                                <img src="//assets/Image/Category Book/shop-new-95_b0b53360-a171-427b-9dc6-0bf965bcfdae.webp"
                                                      alt="">
                                                 <div class="book-info">
                                                     <a href="">
@@ -68,11 +68,7 @@
                             <li><a href="Brands.html">Brands</a></li>
                             <li><a href="BestSellers.html">Best Sellers</a></li>
                             <li class="page-controller">
-                                <a href="">
-                                    <span>Pages</span><span class="ms-3">
-                                        <i class="fa-solid fa-sort-down"></i>
-                                    </span>
-                                </a>
+                                <a href=""><span>Pages</span><span class="ms-3"><i class="fa-solid fa-sort-down"></i></span></a>
                                 <div class="site-pages">
                                     <ul>
                                         <li><a href="About.html">About Us</a></li>
@@ -141,7 +137,7 @@
                         <div class="row">
                             <div class="col-lg-3 col-md-12 col-sm-12 col-12">
                                 <div class="book">
-                                    <img src="/assets/Image/Category Book/shop-new-100.webp" alt="">
+                                    <img src="//assets/Image/Category Book/shop-new-100.webp" alt="">
                                     <div class="book-info">
                                         <a href=""><span>Endless Summer</span><span class="ms-2">$210</span></a>
                                     </div>
@@ -149,7 +145,7 @@
                             </div>
                             <div class="col-lg-3 col-md-12 col-sm-12 col-12">
                                 <div class="book">
-                                    <img src="/assets/Image/Category Book/shop-new-30.webp" alt="">
+                                    <img src="//assets/Image/Category Book/shop-new-30.webp" alt="">
                                     <div class="book-info">
                                         <a href=""><span>Fresh Healthy Eat</span><span class="ms-2">$110</span></a>
                                     </div>
@@ -157,7 +153,7 @@
                             </div>
                             <div class="col-lg-3">
                                 <div class="book">
-                                    <img src="/assets/Image/Category Book/shop-new-4.webp" alt="">
+                                    <img src="//assets/Image/Category Book/shop-new-4.webp" alt="">
                                     <div class="book-info">
                                         <a href=""><span>Book for a Cause</span><span class="ms-2">$110</span></a>
                                     </div>
@@ -165,7 +161,7 @@
                             </div>
                             <div class="col-lg-3 col-md-12 col-sm-12 col-12">
                                 <div class="book">
-                                    <img src="/assets/Image/Category Book/shop-new-95_b0b53360-a171-427b-9dc6-0bf965bcfdae.webp"
+                                    <img src="//assets/Image/Category Book/shop-new-95_b0b53360-a171-427b-9dc6-0bf965bcfdae.webp"
                                          alt="">
                                     <div class="book-info">
                                         <a href=""><span>Adventurous Eating</span><span class="ms-2">$500</span></a>
@@ -182,66 +178,25 @@
         <div class="container">
             <div class="write  d-flex justify-content-center align-items-center">
                 <div class="texts">
-                    <h4 class="text-center">Search: @Model.BookAuthors.Count results for "@ViewBag.Search"</h4>
-                    <ul class="d-flex justify-content-around">
-                        <li><a asp-controller="Home" asp-action="Index">Home</a> / <span>Search: @Model.BookAuthors.Count results for "@ViewBag.Search"</span></li>
-                        
-                    </ul>
+                    <h4 class="text-center">All Collections</h4>
                 </div>
             </div>
         </div>
     </section>
-    <section id="results-search" class="py-5">
-        <h3 class="text-center">Your search for "@ViewBag.Search" revealed the following:</h3>
-        <div class="search-sections py-3">
-            <div class="search-input">
-                <form method="get" class="d-flex justify-content-center">
-                    <input type="search" placeholder="Search our Store" value="@ViewBag.Search" name="searching">
-                    <div class="search-icon">
-                        <button type="submit" asp-controller="Search" asp-action="Search"><i class="fa-solid fa-magnifying-glass"></i></button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </section>
-    <section id="result-section" class="py-5">
+    <section id="collection-section" class="py-5">
         <div class="container">
             <div class="row">
-                @foreach (BookAuthor book in Model.BookAuthors)
+                @foreach (Category category in Model.Categories)
                 {
-                    <div class="col-lg-3 col-md-6 col-sm-6 col-12">
+                    <div class="col-lg-4 col-md-6 col-sm-6 col-12 mb-5">
                         <div class="info-book">
                             <div class="images">
-                                <div class="more-icon">
-                                    <div class="more">
-                                        <a href=""><i class="fa-solid fa-link"></i></a>
-                                    </div>
-                                    <div class="more">
-                                        <a href=""><i class="fa-solid fa-heart"></i></a>
-                                    </div>
-                                    <div class="more">
-                                        <a href=""><i class="fa-solid fa-magnifying-glass"></i></a>
-                                    </div>
-                                </div>
-                                <a asp-controller="Detail" asp-action="Details" asp-route-id="@book.Book.Id"><img src="~/assets/Image/Library/@book.Book.BookImages.FirstOrDefault(i => i.IsMain == true)?.ImagePath"></a>
+                                <a href="Product.html"><img src="/assets/Image/Category Book/@category.Image" style="height: 600px;"></a>
                             </div>
-                            <div class="detail mt-3">
-                                <p>
-                                    @book.Author?.FullName.ToString()
-                                </p>
-                                <strong>@book.Book.Name</strong>
-                                <p>
-                                    @if (book.Book.DiscountId != null)
-                                    {
-                                        <span>$@(book.Book.Price - ((book.Book.Price * book.Book.Discount?.DiscountPercent) / 100))</span>
-                                        <span class="ms-2"><del>$@book.Book.Price</del></span>
-                                    }
-                                    else
-                                    {
-                                        <span>$@book.Book.Price</span>
-                                    }
-
-                                </p>
+                            <div class="detail mt-3 text-center">
+                                <a href="Collections.html"><strong>@category.Name</strong></a> <br>
+                                <p><small>@category.Books.Count</small></p>
+                                <a href="Collections.html" class="btn btn-danger but text-light">Shop Now</a>
                             </div>
                         </div>
                     </div>
@@ -250,8 +205,3 @@
         </div>
     </section>
 </main>
-@section Scripts{
-    <script src="~/assets/Js/search.js"></script>
-}
-
-

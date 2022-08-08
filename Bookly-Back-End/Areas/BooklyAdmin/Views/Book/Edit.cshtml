@@ -38,38 +38,14 @@
         </span>
     </div>
     <div>
-        <label class="mb-3">Book Format(-s):</label><br />
-        <select class="form-control" asp-for="FormatIds">
-            @foreach (Format format in ViewBag.Formats)
-            {
-                if (Model.BookFormats.FirstOrDefault(f => f.FormatId == format.Id) != null)
-                {
-                    <option value="@format.Id" selected>@format.Name</option>
-                }
-                else
-                {
-                    <option value="@format.Id">@format.Name</option>
-                }
-            }
-        </select>
-        <span class="text-danger" asp-validation-for="FormatIds"></span>
+        <label class="mb-3">Book Language:</label><br />
+        <select class="form-control" asp-for="LanguageId" asp-items="@(new SelectList(ViewBag.Languages,"Id","Name"))"></select>
+        <span class="text-danger" asp-validation-for="LanguageId"></span>
     </div>
     <div>
-        <label class="mb-3">Book Language(-s):</label><br />
-        <select class="form-control" asp-for="LanguageIds">
-            @foreach (Language language in ViewBag.Languages)
-            {
-                if (Model.BookLanguages.FirstOrDefault(f => f.LanguageId == language.Id) != null)
-                {
-                    <option value="@language.Id" selected>@language.Name</option>
-                }
-                else
-                {
-                    <option value="@language.Id">@language.Name</option>
-                }
-            }
-        </select>
-        <span class="text-danger" asp-validation-for="LanguageIds"></span>
+        <label class="mb-3">Book Format:</label><br />
+        <select class="form-control" asp-for="FormatId" asp-items="@(new SelectList(ViewBag.Formats,"Id","Name"))"></select>
+        <span class="text-danger" asp-validation-for="FormatId"></span>
     </div>
     <div>
         <label class="mb-3">Book Author(-s):</label><br />

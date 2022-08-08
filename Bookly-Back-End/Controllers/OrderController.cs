@@ -27,8 +27,8 @@ namespace Bookly_Back_End.Controllers
             AppUser user = await _manager.FindByNameAsync(User.Identity.Name);
             List<BasketItem> items = await _context.BasketItems.Include(b => b.AppUser)
                 .Include(b => b.Book).Include(b => b.Book.Discount).Where(b => b.AppUserId == user.Id).ToListAsync();
-            List<Book> books = await _context.Books.Include(i => i.BookImages).Include(f => f.BookFormats).
-               Include(a => a.BookAuthors).Include(l => l.BookLanguages).ToListAsync();
+            List<Book> books = await _context.Books.Include(i => i.BookImages).
+               Include(a => a.BookAuthors).ToListAsync();
             List<City> cities = await _context.Cities.ToListAsync();
             List<Delivery> deliveries = await _context.Deliveries.ToListAsync();
             Country country = await _context.Countries.FirstOrDefaultAsync();

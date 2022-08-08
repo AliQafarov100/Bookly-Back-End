@@ -25,23 +25,31 @@ namespace Bookly_Back_End.Controllers
             _userManager = userManager;
             _repository = repository;
         }
-        public async Task<IActionResult> Index(string category,string highToLow,int? author,int page = 1)
+        public async Task<IActionResult> Index(string category,string highToLow,
+            string author,int? minimum,int? maximum, string language,string format,int page = 1)
         {
             ViewBag.Author = author;
-            var query = _repository.GetBookByCategory(category,author,highToLow);
+            var query = _repository.GetBookByFilter(category,author,highToLow,minimum,
+                maximum,language,format);
 
-            ViewBag.TotalPage = Math.Ceiling(((decimal)await query.CountAsync()) / 9);
+            ViewBag.CurrentMaximum = maximum;
+            ViewBag.CurentMinimum = minimum;
+            ViewBag.CurentCategory = category;
+            ViewBag.CurentLanguage = language;
+            ViewBag.CurentFormat = format;
+            ViewBag.TotalPage = Math.Ceiling(((decimal)await query.CountAsync()) / 12);
             ViewBag.CurrentPage = page;
             List<Category> categories = await _context.Categories.ToListAsync();
-            List<Book> books = await query.Include(i => i.BookImages).Include(f => f.BookFormats)
-                .Include(a => a.BookAuthors).Include(l => l.BookLanguages).Skip((page - 1) * 9).ToListAsync();
+            List<Book> books = await _context.Books.Include(i => i.BookImages)
+                .Include(a => a.BookAuthors).ToListAsync();
             List<Format> formats = await _context.Formats.ToListAsync();
             List<Language> languages = await _context.Languages.ToListAsync();
             List<Author> authors = await _context.Authors.Include(a => a.BookAuthors).ToListAsync();
-            List<Book> anotherBooks = await _context.Books.Include(i => i.BookImages).Include(f => f.BookFormats).
-                Include(a => a.BookAuthors).Include(l => l.BookLanguages).ToListAsync();
-            List<BookAuthor> bookAuthors = await _context.BookAuthors.ToListAsync();
+            List<Book> anotherBooks = await _context.Books.Include(i => i.BookImages).
+                Include(a => a.BookAuthors).ToListAsync();
+            List<BookAuthor> bookAuthors = await query.Skip((page - 1) * 12).ToListAsync();
             List<Discount> discounts = await _context.Discounts.ToListAsync();
+            List<FilteringPrice> filteringPrices = await _context.FilteringPrices.ToListAsync();
             
             
             BookVM model = new BookVM
@@ -53,7 +61,8 @@ namespace Bookly_Back_End.Controllers
                 BookAuthors = bookAuthors,
                 AllBooks = books,
                 AnotherBooks = anotherBooks,
-                Discounts = discounts
+                Discounts = discounts,
+                FilteringPrices = filteringPrices
             };
             return View(model);
         }

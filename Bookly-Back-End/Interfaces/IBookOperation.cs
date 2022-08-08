@@ -8,9 +8,11 @@ namespace Bookly_Back_End.Interfaces
 {
     public interface IBookOperation
     {
-        IQueryable<Book> Books { get; }
+        IQueryable<BookAuthor> BookAuthors { get; }
 
-        IQueryable<Book> GetBookByCategory(string category,int? author,string highTolow);
-        IQueryable<Book> GetBookBySearch(string searching);
+        IQueryable<BookAuthor> GetBookByFilter(string category,string author,string highTolow,
+            int? minPrice,int? maxPrice,string language,string format);
+        IQueryable<BookAuthor> GetBookByCategory(string category);
+        IQueryable<BookAuthor> GetBookBySearch(string searching);
     }
 }

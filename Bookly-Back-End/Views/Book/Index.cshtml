@@ -292,31 +292,16 @@
                     <div class="byPrice mt-5">
                         <h4>Shop By Price</h4>
                         <div class="row">
-                            <div class="price col-lg-4">
-                                <div class="prices text-center filter">
-                                    <a href=""><small>$100</small>-<small>$200</small></a>
+                            @foreach (FilteringPrice price in Model.FilteringPrices)
+                            {
+                                <div class="price col-lg-4" style="padding: 0px;">
+                                    <div class="prices text-center filter" style="width: 90%;">
+                                        <a asp-controller="Book" 
+                                           asp-route-page="@ViewBag.CurrentPage"
+                                           asp-action="Index" asp-route-minimum="@price.MinimumPrice" asp-route-maximum="@price.MaximumPrice"><small>$@price.MinimumPrice</small>-<small>$@price.MaximumPrice</small></a>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="price col-lg-4">
-                                <div class="prices text-center filter">
-                                    <a href=""><small>$200-$300</small></a>
-                                </div>
-                            </div>
-                            <div class="price col-lg-4">
-                                <div class="prices text-center filter">
-                                    <a href=""><small>$300-$400</small></a>
-                                </div>
-                            </div>
-                            <div class="price col-lg-4">
-                                <div class="prices text-center filter">
-                                    <a href=""><small>$400-$500</small></a>
-                                </div>
-                            </div>
-                            <div class="price col-lg-4">
-                                <div class="prices text-center filter">
-                                    <a href=""><small>$500-$700</small></a>
-                                </div>
-                            </div>
+                            }
                         </div>
                     </div>
                     <div class="byFormat mt-5">
@@ -326,7 +311,7 @@
                             {
                                 <div class="format col-lg-4">
                                     <div class="formats text-center filter">
-                                        <a href=""><small>@format.Name</small></a>
+                                        <a asp-route-format="@format.Name"><small>@format.Name</small></a>
                                     </div>
                                 </div>
                             }
@@ -340,7 +325,7 @@
                             {
                                 <div class="language col-lg-4">
                                     <div class="languages text-center filter">
-                                        <a href=""><small>@language.Name</small></a>
+                                        <a asp-controller="Book" asp-action="Index" asp-route-language="@language.Name"><small>@language.Name</small></a>
                                     </div>
                                 </div>
                             }
@@ -354,7 +339,7 @@
                             {
                                 <div class="author col-lg-5">
                                     <div class="authors  text-center filter">
-                                        <a asp-controller="Book" asp-action="Index" asp-route-author="@author.Id"><small>@author.FullName</small></a>
+                                        <a asp-controller="Book" asp-action="Index" asp-route-author="@author.FullName"><small>@author.FullName</small></a>
                                     </div>
                                 </div>
                             }
@@ -455,13 +440,13 @@
                                     <option value=""><a href="">Alphabetcally,A-Z</a></option>
                                     <option value=""><a href="">Alphabetcally,Z-A</a></option>
                                     <a asp-controller="Book" asp-action="Index" asp-route-highToLow="high">
-                                      <option>Price,high to low</option>
+                                    <option>Price,high to low</option>
                                     </a>
                                 </select>
                             </div>
                         </div>
                         <div class="row booking mt-5">
-                            @foreach (Book sellBook in Model.AllBooks.Take(9))
+                            @foreach (BookAuthor sellBook in Model.BookAuthors.Take(12))
                             {
                                 <div class="col-lg-4 col-md-6 col-sm-6 col-12">
                                     <div class="info-book">
@@ -477,24 +462,21 @@
                                                     <a href=""><i class="fa-solid fa-magnifying-glass"></i></a>
                                                 </div>
                                             </div>
-                                            <img src="assets/Image/Library/@sellBook.BookImages.FirstOrDefault(i => i.IsMain == true).ImagePath" alt="">
+                                            <img src="assets/Image/Library/@sellBook.Book.BookImages.FirstOrDefault(i => i.IsMain == true).ImagePath" alt="">
                                         </div>
                                         <div class="detail mt-3">
                                             <p>
-                                                @foreach (BookAuthor author in Model.BookAuthors.Where(a => a.BookId == sellBook.Id))
-                                                {
-                                                    @author.Author.FullName.ToUpper().ToString();
-                                                }
+                                                @sellBook.Author.FullName.ToUpper().ToString()
                                             </p>
-                                            <strong>@sellBook.Name</strong><br />
-                                            @if (sellBook.DiscountId != null)
+                                            <strong>@sellBook.Book.Name</strong><br />
+                                            @if (sellBook.Book.DiscountId != null)
                                             {
-                                                <span>$@(sellBook.Price - ((sellBook.Price * sellBook.Discount.DiscountPercent) / 100))</span>
-                                                <span><del>$@sellBook.Price</del></span>
+                                                <span>$@(sellBook.Book.Price - ((sellBook.Book.Price * sellBook.Book.Discount.DiscountPercent) / 100))</span>
+                                                <span><del>$@sellBook.Book.Price</del></span>
                                             }
                                             else
                                             {
-                                                <span>@sellBook.Price</span>
+                                                <span>@sellBook.Book.Price</span>
                                             }
                                         </div>
                                     </div>
@@ -511,7 +493,14 @@
 
                                     @for (int i = 1; i <= ViewBag.TotalPage; i++)
                                     {
-                                        <li class="page-item"><a class="page-link counter text-light" asp-controller="Book" asp-action="Index" asp-route-page="@i">@i</a></li>
+                                        <li class="page-item"><a class="page-link counter text-light" 
+                                                                 asp-controller="Book" asp-action="Index"
+                                                                 asp-route-minimum="@ViewBag.CurentMinimum"
+                                                                 asp-route-maximum="@ViewBag.CurrentMaximum"
+                                                                 asp-route-category="@ViewBag.CurentCategory"
+                                                                 asp-route-language="@ViewBag.CurentLanguage"
+                                                                 asp-route-format="@ViewBag.CurentFormat"
+                                                                 asp-route-page="@i">@i</a></li>
                                     }
                                     <li class="page-item">
                                         <a class="page-link text-light" href="#" aria-label="Next">

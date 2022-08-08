@@ -4,14 +4,16 @@ using Bookly_Back_End.DAL;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Bookly_Back_End.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220808120236_updateCategoryImage")]
+    partial class updateCategoryImage
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -259,17 +261,11 @@ namespace Bookly_Back_End.Migrations
                     b.Property<int?>("DiscountId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("FormatId")
-                        .HasColumnType("int");
-
                     b.Property<bool>("IsBest")
                         .HasColumnType("bit");
 
                     b.Property<bool>("IsDailyDeal")
                         .HasColumnType("bit");
-
-                    b.Property<int?>("LanguageId")
-                        .HasColumnType("int");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -283,10 +279,6 @@ namespace Bookly_Back_End.Migrations
                     b.HasIndex("CategoryId");
 
                     b.HasIndex("DiscountId");
-
-                    b.HasIndex("FormatId");
-
-                    b.HasIndex("LanguageId");
 
                     b.ToTable("Books");
                 });
@@ -313,6 +305,28 @@ namespace Bookly_Back_End.Migrations
                     b.ToTable("BookAuthors");
                 });
 
+            modelBuilder.Entity("Bookly_Back_End.Models.BookFormat", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("BookId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("FormatId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("BookId");
+
+                    b.HasIndex("FormatId");
+
+                    b.ToTable("BookFormats");
+                });
+
             modelBuilder.Entity("Bookly_Back_End.Models.BookImage", b =>
                 {
                     b.Property<int>("Id")
@@ -334,6 +348,28 @@ namespace Bookly_Back_End.Migrations
                     b.HasIndex("BookId");
 
                     b.ToTable("BookImages");
+                });
+
+            modelBuilder.Entity("Bookly_Back_End.Models.BookLanguage", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("BookId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("LanguageId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("BookId");
+
+                    b.HasIndex("LanguageId");
+
+                    b.ToTable("BookLanguages");
                 });
 
             modelBuilder.Entity("Bookly_Back_End.Models.Category", b =>
@@ -869,14 +905,6 @@ namespace Bookly_Back_End.Migrations
                     b.HasOne("Bookly_Back_End.Models.Discount", "Discount")
                         .WithMany("Books")
                         .HasForeignKey("DiscountId");
-
-                    b.HasOne("Bookly_Back_End.Models.Format", "Format")
-                        .WithMany("Books")
-                        .HasForeignKey("FormatId");
-
-                    b.HasOne("Bookly_Back_End.Models.Language", "Language")
-                        .WithMany("Books")
-                        .HasForeignKey("LanguageId");
                 });
 
             modelBuilder.Entity("Bookly_Back_End.Models.BookAuthor", b =>
@@ -894,11 +922,41 @@ namespace Bookly_Back_End.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("Bookly_Back_End.Models.BookFormat", b =>
+                {
+                    b.HasOne("Bookly_Back_End.Models.Book", "Book")
+                        .WithMany("BookFormats")
+                        .HasForeignKey("BookId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Bookly_Back_End.Models.Format", "Format")
+                        .WithMany("BookFormats")
+                        .HasForeignKey("FormatId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("Bookly_Back_End.Models.BookImage", b =>
                 {
                     b.HasOne("Bookly_Back_End.Models.Book", "Book")
                         .WithMany("BookImages")
                         .HasForeignKey("BookId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Bookly_Back_End.Models.BookLanguage", b =>
+                {
+                    b.HasOne("Bookly_Back_End.Models.Book", "Book")
+                        .WithMany("BookLanguages")
+                        .HasForeignKey("BookId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Bookly_Back_End.Models.Language", "Language")
+                        .WithMany("BookLanguages")
+                        .HasForeignKey("LanguageId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
