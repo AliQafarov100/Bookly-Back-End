@@ -10,7 +10,7 @@
                     <ul class="d-flex justify-content-around">
                         <li><a href="Index.html">Home</a></li>
                         <li class="controll">
-                            <a href="Collections.html" class="category">
+                            <a asp-controller="Home" asp-action="Index" class="category">
                                 <span>Categories</span><span class="ms-3">
                                     <i class="fa-solid fa-sort-down"></i>
                                 </span>
@@ -63,8 +63,8 @@
                                 </div>
                             </div>
                         </li>
-                        <li><a href="Brands.html">Brands</a></li>
-                        <li><a href="BestSellers.html">Best Sellers</a></li>
+                        <li><a asp-controller="Brand" asp-action="Brands">Brands</a></li>
+                        <li><a asp-controller="Best" asp-action="Best">Best Sellers</a></li>
                         <li class="page-controller">
                             <a href="">
                                 <span>Pages</span><span class="ms-3">
@@ -134,43 +134,6 @@
                             Search
                         </button>
                     </form>
-                </div>
-                <div class="container fluid">
-                    <div class="row">
-                        <div class="col-lg-3 col-md-12 col-sm-12 col-12">
-                            <div class="book">
-                                <img src="~/assets/Image/Category Book/shop-new-100.webp" alt="">
-                                <div class="book-info">
-                                    <a href=""><span>Endless Summer</span><span class="ms-2">$210</span></a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-3 col-md-12 col-sm-12 col-12">
-                            <div class="book">
-                                <img src="/assets/Image/Category Book/shop-new-30.webp" alt="">
-                                <div class="book-info">
-                                    <a href=""><span>Fresh Healthy Eat</span><span class="ms-2">$110</span></a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-3">
-                            <div class="book">
-                                <img src="/assets/Image/Category Book/shop-new-4.webp" alt="">
-                                <div class="book-info">
-                                    <a href=""><span>Book for a Cause</span><span class="ms-2">$110</span></a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-3 col-md-12 col-sm-12 col-12">
-                            <div class="book">
-                                <img src="/assets/Image/Category Book/shop-new-95_b0b53360-a171-427b-9dc6-0bf965bcfdae.webp"
-                                     alt="">
-                                <div class="book-info">
-                                    <a href=""><span>Adventurous Eating</span><span class="ms-2">$500</span></a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>

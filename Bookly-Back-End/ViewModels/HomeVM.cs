@@ -27,5 +27,7 @@ namespace Bookly_Back_End.ViewModels
         public List<Blog> Blogs { get; set; }
         public List<Format> Formats { get; set; }
         public Book Book { get; set; }
+        public AppUser AppUser { get; set; }
+        public List<BasketItem> BasketItems { get; set; }
     }
 }

@@ -1,6 +1,6 @@
 ﻿@model BookVM
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Best Seller";
 
 }
 
@@ -179,9 +179,9 @@
                             {
                                 <div class="price col-lg-4" style="padding: 0px;">
                                     <div class="prices text-center filter" style="width: 90%;">
-                                        <a asp-controller="Book"
+                                        <a asp-controller="Best"
                                            asp-route-page="@ViewBag.CurrentPage"
-                                           asp-action="Index" asp-route-minimum="@price.MinimumPrice" asp-route-maximum="@price.MaximumPrice"><small>$@price.MinimumPrice</small>-<small>$@price.MaximumPrice</small></a>
+                                           asp-action="Best" asp-route-minimum="@price.MinimumPrice" asp-route-maximum="@price.MaximumPrice"><small>$@price.MinimumPrice</small>-<small>$@price.MaximumPrice</small></a>
                                     </div>
                                 </div>
                             }
@@ -208,7 +208,7 @@
                             {
                                 <div class="language col-lg-4">
                                     <div class="languages text-center filter">
-                                        <a asp-controller="Book" asp-action="Index" asp-route-language="@language.Name"><small>@language.Name</small></a>
+                                        <a asp-controller="Best" asp-action="Best" asp-route-language="@language.Name"><small>@language.Name</small></a>
                                     </div>
                                 </div>
                             }
@@ -222,7 +222,7 @@
                             {
                                 <div class="author col-lg-5">
                                     <div class="authors  text-center filter">
-                                        <a asp-controller="Book" asp-action="Index" asp-route-author="@author.FullName"><small>@author.FullName</small></a>
+                                        <a asp-controller="Best" asp-action="Best" asp-route-author="@author.FullName"><small>@author.FullName</small></a>
                                     </div>
                                 </div>
                             }
@@ -235,7 +235,7 @@
                             {
                                 <div class="author col-lg-4">
                                     <div class="authors  text-center filter">
-                                        <a asp-controller="Book" asp-action="Index" asp-route-category="@category.Name"><small>@category.Name</small></a>
+                                        <a asp-controller="Best" asp-action="Best" asp-route-category="@category.Name"><small>@category.Name</small></a>
                                     </div>
                                 </div>
                             }
@@ -326,11 +326,11 @@
                                         <option value="@ViewBag.High">Price,high to low</option>
                                     </select>
                                 </form>
-                                
+
                             </div>
                         </div>
                         <div class="row booking mt-5">
-                            @foreach (BookAuthor sellBook in Model.BookAuthors.Take(12))
+                            @foreach (BookAuthor sellBook in Model.BookAuthors.Take(6).Where(b => b.Book.IsBest == true))
                             {
                                 <div class="col-lg-4 col-md-6 col-sm-6 col-12">
                                     <div class="info-book">
@@ -382,7 +382,7 @@
                                     {
                                         <li class="page-item ">
                                             <a class="page-link counter text-light @( page == i ? "bg-dark" : "")"
-                                               asp-controller="Book" asp-action="Index"
+                                               asp-controller="Best" asp-action="Best"
                                                asp-route-minimum="@ViewBag.CurentMinimum"
                                                asp-route-maximum="@ViewBag.CurrentMaximum"
                                                asp-route-category="@ViewBag.CurentCategory"

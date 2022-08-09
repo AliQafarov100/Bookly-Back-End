@@ -6,6 +6,7 @@ using Bookly_Back_End.DAL;
 using Bookly_Back_End.Interfaces;
 using Bookly_Back_End.Models;
 using Bookly_Back_End.ViewModels;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -15,13 +16,15 @@ namespace Bookly_Back_End.Controllers
     {
         private readonly AppDbContext _context;
         private readonly IBookOperation _repository;
+        private readonly UserManager<AppUser> _userManager;
 
-        public HomeController(AppDbContext context,IBookOperation repository)
+        public HomeController(AppDbContext context,IBookOperation repository,UserManager<AppUser> userManager)
         {
             _context = context;
             _repository = repository;
+            _userManager = userManager;
         }
-        public async Task<IActionResult> Index(string category)
+        public async Task<IActionResult> Index(string category,AppUser user)
         {
             var query = _repository.GetBookByCategory(category);
             Slayd slayd = await _context.Slayds.FirstOrDefaultAsync();
@@ -43,6 +46,8 @@ namespace Bookly_Back_End.Controllers
             List<AuthorSocialMedia> authorSocialMedias = await _context.AuthorSocialMedias.ToListAsync();
             List<Discount> discounts = await _context.Discounts.ToListAsync();
             List<Blog> blogs = await _context.Blogs.ToListAsync();
+            //AppUser appUser = await _userManager.Users.FirstOrDefaultAsync(u => u.Id == user.Id);
+            List<BasketItem> basketItems = await _context.BasketItems.Where(b => b.AppUserId == user.Id).ToListAsync();
             HomeVM model = new HomeVM
             {
                 Slayd = slayd,
@@ -61,7 +66,8 @@ namespace Bookly_Back_End.Controllers
                 SocialMedias = socialMedias,
                 AuthorSocialMedias = authorSocialMedias,
                 Discounts = discounts,
-                Blogs = blogs
+                Blogs = blogs,
+                BasketItems = basketItems
             };
             return View(model);
         }

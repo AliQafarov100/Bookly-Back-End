@@ -6,6 +6,7 @@ using Bookly_Back_End.DAL;
 using Bookly_Back_End.Models;
 using Bookly_Back_End.ViewModels;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 
@@ -15,11 +16,13 @@ namespace Bookly_Back_End.Service
     {
         private readonly AppDbContext _context;
         private readonly IHttpContextAccessor _httpContext;
+        private readonly UserManager<AppUser> _userManager;
 
-        public LayoutService(AppDbContext context,IHttpContextAccessor httpContext)
+        public LayoutService(AppDbContext context,IHttpContextAccessor httpContext,UserManager<AppUser> userManager)
         {
             _context = context;
             _httpContext = httpContext;
+            _userManager = userManager;
         }
 
         public async Task<List<Setting>> GetData()
@@ -70,8 +73,11 @@ namespace Bookly_Back_End.Service
 
         public async Task<List<BasketItem>> UserBasket()
         {
-            List<BasketItem> baskets = await _context.BasketItems.Include(b => b.Book.BookImages).Include(b => b.Book.Discount).ToListAsync();
+            List<BasketItem> baskets = await _context.BasketItems.Include(b => b.Book.BookImages)
+                .Include(b => b.Book.Discount).ToListAsync();
             return baskets;
+            //AppUser appUser = await _userManager.Users.Include(b => b.BasketItems).FirstOrDefaultAsync();
+            //return appUser;
         }
     }
 }

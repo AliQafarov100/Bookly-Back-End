@@ -148,6 +148,7 @@ namespace Bookly_Back_End.Areas.BooklyAdmin.Controllers
                 FileExtesion.FileDelete(_env.WebRootPath, @"assets\Image\AuthorImage", existedAuthor.Image);
                 _context.Entry(existedAuthor).CurrentValues.SetValues(author);
                 existedAuthor.Image = await author.Photo.FileCreate(_env.WebRootPath, @"assets\Image\AuthorImage");
+                
             }
 
             
@@ -207,7 +208,7 @@ namespace Bookly_Back_End.Areas.BooklyAdmin.Controllers
                 FirstOrDefaultAsync(a => a.Id == id);
 
             if (existedAuthor == null) return NotFound();
-
+            FileExtesion.FileDelete(_env.WebRootPath, @"assets\Image\Category Book", existedAuthor.Image);
             _context.Remove(existedAuthor);
             await _context.SaveChangesAsync();
 

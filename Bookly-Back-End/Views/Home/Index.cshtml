@@ -22,52 +22,25 @@
 
                                 <div class="container fluid">
                                     <div class="row">
-                                        <div class="col-lg-3 col-md-12 col-sm-12 col-12">
-                                            <div class="book">
-                                                <img src="~/assets/Image/Category Book/shop-new-100.webp" alt="">
-                                                <div class="book-info">
-                                                    <a href="">
-                                                        <span>Endless Summer</span><span class="ms-2">$210</span>
-                                                    </a>
+                                        @foreach (Book book in Model.AllBooks.Take(4))
+                                        {
+                                            <div class="col-lg-3 col-md-12 col-sm-12 col-12">
+                                                <div class="book">
+                                                    <img src="/assets/Image/Library/@book.BookImages.FirstOrDefault(i => i.IsMain == true).ImagePath" alt="">
+                                                    <div class="book-info">
+                                                        <a href="">
+                                                            <span>@book.Name</span><span class="ms-2">$@book.Price</span>
+                                                        </a>
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div class="col-lg-3 col-md-12 col-sm-12 col-12">
-                                            <div class="book">
-                                                <img src="~/assets/Image/Category Book/shop-new-30.webp" alt="">
-                                                <div class="book-info">
-                                                    <a href="">
-                                                        <span>Fresh Healthy Eat</span><span class="ms-2">$110</span>
-                                                    </a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-3 col-md-12 col-sm-12 col-12">
-                                            <div class="book">
-                                                <img src="~/assets/Image/Category Book/shop-new-4.webp" alt="">
-                                                <div class="book-info">
-                                                    <a href="">
-                                                        <span>Book for a Cause</span><span class="ms-2">$110</span>
-                                                    </a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-3 col-md-12 col-sm-12 col-12">
-                                            <div class="book">
-                                                <img src="~/assets/Image/Category Book/shop-new-95_b0b53360-a171-427b-9dc6-0bf965bcfdae.webp"
-                                                     alt="">
-                                                <div class="book-info">
-                                                    <a href="">
-                                                        <span>Adventurous Eating</span><span class="ms-2">$500</span>
-                                                    </a>
-                                                </div>
-                                            </div>
-                                        </div>
+                                        }
+                                        
                                     </div>
                                 </div>
                             </li>
                             <li><a asp-controller="Brand" asp-action="Brands">Brands</a></li>
-                            <li><a href="BestSellers.html">Best Sellers</a></li>
+                            <li><a asp-controller="Best" asp-action="Best">Best Sellers</a></li>
                             <li class="page-controller">
                                 <a href="">
                                     <span>Pages</span><span class="ms-3">
@@ -193,7 +166,7 @@
         <div class="book-categories row w-50">
             <div class="col-lg-2"><a class="w-100 btn btn-light" asp-controller="Home" asp-action="Index">All</a></div>
             @{
-                
+
                 foreach (Category category in Model.Categories)
                 {
                     <div class="col-lg-2"><a class="w-100 btn btn-light" asp-controller="Home" asp-action="Index" asp-route-category="@category.Name">@category.Name</a></div>
@@ -285,7 +258,7 @@
                                         <p>
                                             @foreach (BookAuthor author in Model.BookAuthors.Where(b => b.BookId == bestBook.Id))
                                             {
-                                               
+
                                             }
                                         </p>
                                         <strong>@bestBook.Name</strong>
@@ -510,7 +483,7 @@
                                 <strong style="font-size: 25px; font-weight: bolder;">@blog.Title</strong>
                                 <br>
                                 <small style="font-weight: normal; color:#676767;">
-                                   @blog.SubTitle
+                                    @blog.SubTitle
                                 </small> <br>
                                 <a href="" class="btn btn-danger mt-4">Read More</a>
                             </div>

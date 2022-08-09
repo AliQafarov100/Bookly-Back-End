@@ -83,11 +83,12 @@
 
         <label class="mb-3">Plant main image:</label><br />
         <div class="d-flex">
-            <div class="col-lg-2" style="position:relative">
-                <i class="mdi mdi-close closeBtn" style="position:absolute;top:10px;right:5px;color:red;font-size:20px"></i>
-                <img style="width: 100%; height:400px" src="~/assets/Image/Library/@Model.BookImages.FirstOrDefault(i => i.IsMain == true)?.ImagePath" />
-                <input type="hidden" value="@Model.BookImages.FirstOrDefault(i=>i.IsMain == true)?.Id" name="ImageIds" />
-
+            <div class="col-lg-2">
+                <div class="for-image">
+                    <strong style="position: relative; top: 15px; left: 140px;" class="removeable">Remove</strong>
+                    <img style="width: 200px; height:300px" src="~/assets/Image/Library/@Model.BookImages.FirstOrDefault(i => i.IsMain == true)?.ImagePath" />
+                    <input type="hidden" value="@Model.BookImages.FirstOrDefault(i=>i.IsMain == true)?.Id" name="ImageIds" />
+                </div>
             </div>
         </div>
     </div>
@@ -96,11 +97,12 @@
         <div class="d-flex justify-content-between">
             @foreach (var image in Model.BookImages.Where(i => i.IsMain == false))
             {
-
-                <div class="col-lg-2" style="position:relative">
-                    <i class="mdi mdi-close closeBtn" style="position:absolute;top:10px;right:5px;color:red;font-size:20px"></i>
-                    <img style="width: 100%; height:400px" src="~/assets/Image/Library/@image.ImagePath" />
-                    <input type="hidden" value="@image.Id" name="ImageIds" />
+                <div class="col-lg-2">
+                    <div class="for-image">
+                        <strong style="position: relative; top: 15px; left: 140px;" class="removeable">Remove</strong>
+                        <img style="width: 200px; height:300px" src="~/assets/Image/Library/@image.ImagePath" class="image-remove" />
+                        <input type="hidden" value="@image.Id" name="ImageIds" />
+                    </div>
                 </div>
             }
         </div>
@@ -113,10 +115,36 @@
     </div>
 </form>
 
+@section Css
+{
+    <style>
+        .for-image:hover img {
+            transition: 0.7s;
+            opacity: 0.6;
+        }
+
+        .for-image img {
+            width: 200px;
+            height: 300px;
+        }
+
+        .for-image:hover .removeable {
+            transition: 0.7s;
+            opacity: 1;
+        }
+
+        .removeable {
+            z-index: 5;
+            color: black;
+            cursor: pointer;
+            opacity: 0;
+        }
+    </style>
+}
 @section Scripts
 {
     <script>
-        $(".closeBtn").click(function () {
+        $(".removeable").click(function () {
             this.parentNode.remove();
         })
     </script>

@@ -372,3 +372,5 @@ C:\Users\M S I\Desktop\Bookly-Back-End\Bookly-Back-End\obj\Debug\netcoreapp3.1\R
 C:\Users\M S I\Desktop\Bookly-Back-End\Bookly-Back-End\obj\Debug\netcoreapp3.1\Razor\Areas\BooklyAdmin\Views\User\UnLocked.cshtml.g.cs
 C:\Users\M S I\Desktop\Bookly-Back-End\Bookly-Back-End\obj\Debug\netcoreapp3.1\Razor\Views\Brand\Brands.cshtml.g.cs
 C:\Users\M S I\Desktop\Bookly-Back-End\Bookly-Back-End\obj\Debug\netcoreapp3.1\Bookly-Back-End.csproj.AssemblyReference.cache
+C:\Users\M S I\Desktop\Bookly-Back-End\Bookly-Back-End\obj\Debug\netcoreapp3.1\Razor\Areas\BooklyAdmin\Views\History\History.cshtml.g.cs
+C:\Users\M S I\Desktop\Bookly-Back-End\Bookly-Back-End\obj\Debug\netcoreapp3.1\Razor\Views\Best\Best.cshtml.g.cs

@@ -39,6 +39,7 @@ namespace Bookly_Back_End.Controllers
             ViewBag.CurentFormat = format;
             ViewBag.TotalPage = Math.Ceiling(((decimal)await query.CountAsync()) / 12);
             ViewBag.CurrentPage = page;
+            ViewBag.High = highToLow;
             List<Category> categories = await _context.Categories.ToListAsync();
             List<Book> books = await _context.Books.Include(i => i.BookImages)
                 .Include(a => a.BookAuthors).ToListAsync();
@@ -67,6 +68,7 @@ namespace Bookly_Back_End.Controllers
             return View(model);
         }
 
+
         public async Task<IActionResult> AddBasket(int? id)
         {
             if (id is null && id == 0)
@@ -74,6 +76,7 @@ namespace Bookly_Back_End.Controllers
                 return NotFound();
             }
             Book book = await _context.Books.FirstOrDefaultAsync(b => b.Id == id);
+
             if (book == null) return NotFound();
             if (User.Identity.IsAuthenticated)
             {
@@ -139,8 +142,9 @@ namespace Bookly_Back_End.Controllers
                 basketStr = JsonConvert.SerializeObject(basket);
 
                 HttpContext.Response.Cookies.Append("Basket", basketStr);
-            }
 
+            }
+           
             return RedirectToAction("Index", "Home");
         }
 

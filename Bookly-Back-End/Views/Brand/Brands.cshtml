@@ -10,9 +10,9 @@
                 <div class="row w-100">
                     <div class="pages col-lg-8">
                         <ul class="d-flex justify-content-around">
-                            <li><a href="Index.html">Home</a></li>
+                            <li><a asp-controller="Home" asp-action="Index">Home</a></li>
                             <li class="controll">
-                                <a href="Collections.html" class="category">
+                                <a asp-controller="Book" asp-action="Index" class="category">
                                     <span>Categories</span><span class="ms-3">
                                         <i class="fa-solid fa-sort-down"></i>
                                     </span>
@@ -23,7 +23,7 @@
                                     <div class="row">
                                         <div class="col-lg-3 col-md-12 col-sm-12 col-12">
                                             <div class="book">
-                                                <img src="//assets/Image/Category Book/shop-new-100.webp" alt="">
+                                                <img src="/assets/Image/Category Book/shop-new-100.webp" alt="">
                                                 <div class="book-info">
                                                     <a href="">
                                                         <span>Endless Summer</span><span class="ms-2">$210</span>
@@ -33,7 +33,7 @@
                                         </div>
                                         <div class="col-lg-3 col-md-12 col-sm-12 col-12">
                                             <div class="book">
-                                                <img src="//assets/Image/Category Book/shop-new-30.webp" alt="">
+                                                <img src="/assets/Image/Category Book/shop-new-30.webp" alt="">
                                                 <div class="book-info">
                                                     <a href="">
                                                         <span>Fresh Healthy Eat</span><span class="ms-2">$110</span>
@@ -43,7 +43,7 @@
                                         </div>
                                         <div class="col-lg-3 col-md-12 col-sm-12 col-12">
                                             <div class="book">
-                                                <img src="//assets/Image/Category Book/shop-new-4.webp" alt="">
+                                                <img src="/assets/Image/Category Book/shop-new-4.webp" alt="">
                                                 <div class="book-info">
                                                     <a href="">
                                                         <span>Book for a Cause</span><span class="ms-2">$110</span>
@@ -53,7 +53,7 @@
                                         </div>
                                         <div class="col-lg-3 col-md-12 col-sm-12 col-12">
                                             <div class="book">
-                                                <img src="//assets/Image/Category Book/shop-new-95_b0b53360-a171-427b-9dc6-0bf965bcfdae.webp"
+                                                <img src="/assets/Image/Category Book/shop-new-95_b0b53360-a171-427b-9dc6-0bf965bcfdae.webp"
                                                      alt="">
                                                 <div class="book-info">
                                                     <a href="">
@@ -65,8 +65,8 @@
                                     </div>
                                 </div>
                             </li>
-                            <li><a href="Brands.html">Brands</a></li>
-                            <li><a href="BestSellers.html">Best Sellers</a></li>
+                            <li><a asp-controller="Brand" asp-action="Brands">Brands</a></li>
+                            <li><a asp-controller="Best" asp-action="Best">Best Sellers</a></li>
                             <li class="page-controller">
                                 <a href=""><span>Pages</span><span class="ms-3"><i class="fa-solid fa-sort-down"></i></span></a>
                                 <div class="site-pages">
@@ -137,7 +137,7 @@
                         <div class="row">
                             <div class="col-lg-3 col-md-12 col-sm-12 col-12">
                                 <div class="book">
-                                    <img src="//assets/Image/Category Book/shop-new-100.webp" alt="">
+                                    <img src="/assets/Image/Category Book/shop-new-100.webp" alt="">
                                     <div class="book-info">
                                         <a href=""><span>Endless Summer</span><span class="ms-2">$210</span></a>
                                     </div>
@@ -145,7 +145,7 @@
                             </div>
                             <div class="col-lg-3 col-md-12 col-sm-12 col-12">
                                 <div class="book">
-                                    <img src="//assets/Image/Category Book/shop-new-30.webp" alt="">
+                                    <img src="/assets/Image/Category Book/shop-new-30.webp" alt="">
                                     <div class="book-info">
                                         <a href=""><span>Fresh Healthy Eat</span><span class="ms-2">$110</span></a>
                                     </div>
@@ -153,7 +153,7 @@
                             </div>
                             <div class="col-lg-3">
                                 <div class="book">
-                                    <img src="//assets/Image/Category Book/shop-new-4.webp" alt="">
+                                    <img src="/assets/Image/Category Book/shop-new-4.webp" alt="">
                                     <div class="book-info">
                                         <a href=""><span>Book for a Cause</span><span class="ms-2">$110</span></a>
                                     </div>
@@ -161,7 +161,7 @@
                             </div>
                             <div class="col-lg-3 col-md-12 col-sm-12 col-12">
                                 <div class="book">
-                                    <img src="//assets/Image/Category Book/shop-new-95_b0b53360-a171-427b-9dc6-0bf965bcfdae.webp"
+                                    <img src="/assets/Image/Category Book/shop-new-95_b0b53360-a171-427b-9dc6-0bf965bcfdae.webp"
                                          alt="">
                                     <div class="book-info">
                                         <a href=""><span>Adventurous Eating</span><span class="ms-2">$500</span></a>
@@ -191,12 +191,25 @@
                     <div class="col-lg-4 col-md-6 col-sm-6 col-12 mb-5">
                         <div class="info-book">
                             <div class="images">
-                                <a href="Product.html"><img src="/assets/Image/Category Book/@category.Image" style="height: 600px;"></a>
+                                <img src="/assets/Image/Category Book/@category.Image" style="height: 600px;">
                             </div>
                             <div class="detail mt-3 text-center">
-                                <a href="Collections.html"><strong>@category.Name</strong></a> <br>
-                                <p><small>@category.Books.Count</small></p>
-                                <a href="Collections.html" class="btn btn-danger but text-light">Shop Now</a>
+                                <a asp-controller="Book" asp-action="Index" asp-route-category="@category.Name"><strong>@category.Name</strong></a> <br>
+                                <p>
+                                    @if (category.Books != null)
+                                    {
+                                        <small>
+                                            @category.Books.Count items
+                                        </small>
+                                    }
+                                    else
+                                    {
+                                        <small>
+                                            0 items
+                                        </small>
+                                    }
+                                </p>
+                                <a asp-controller="Book" asp-action="Index" asp-route-category="@category.Name" class="btn btn-danger but text-light">Shop Now</a>
                             </div>
                         </div>
                     </div>
@@ -205,3 +218,6 @@
         </div>
     </section>
 </main>
+@section Scripts{
+    <script src="~/assets/Js/search.js"></script>
+}

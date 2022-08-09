@@ -10,13 +10,26 @@
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Edit">
+        <form asp-action="Edit" method="post" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Id" />
             <div class="form-group">
                 <label asp-for="Name" class="control-label"></label>
                 <input asp-for="Name" class="form-control" />
                 <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Image" class="control-label"></label> <br />
+                <div class="for-image">
+                    <strong style="position: relative; top: 15px; left: 140px;" class="removeable">Remove</strong>
+                    <img src="~/assets/Image/Category Book/@Model.Image" class="image-remove" />
+                </div>
+                <span asp-validation-for="Image" class="text-danger"></span>
+            </div>
+            <div>
+                <label class="mb-3">Category image:</label><br />
+                <input asp-for="Photo" class="form-control" accept="image/*" /><br />
+                <span class="text-danger" asp-validation-for="Photo"></span>
             </div>
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />
@@ -28,4 +41,39 @@
 <div>
     <a asp-action="Index" class="btn btn-primary">Back to List</a>
 </div>
+
+@section Css
+{
+    <style>
+        .for-image:hover img {
+            transition: 0.7s;
+            opacity: 0.7;
+        }
+
+        .for-image img {
+            width: 200px;
+            height: 300px;
+        }
+
+        .for-image:hover .removeable {
+            transition: 0.7s;
+            opacity: 1;
+        }
+
+        .removeable {
+            z-index: 5;
+            color: black;
+            cursor: pointer;
+            opacity: 0;
+        }
+    </style>
+}
+@section Scripts
+{
+    <script>
+        $(".removeable").click(function () {
+            this.parentNode.remove();
+        })
+    </script>
+}
 

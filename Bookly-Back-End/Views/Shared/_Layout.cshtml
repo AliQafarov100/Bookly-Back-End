@@ -66,7 +66,7 @@
                                     <sup>
                                         @if (User.Identity.IsAuthenticated)
                                         {
-                                            @userBaskets?.Count
+                                            @userBaskets.Count
                                         }
                                         else
                                         {
@@ -329,5 +329,6 @@
 
 
     @RenderSection("Scripts", required: false)
+
 </body>
 </html>
