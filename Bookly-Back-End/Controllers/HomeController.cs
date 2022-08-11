@@ -24,7 +24,7 @@ namespace Bookly_Back_End.Controllers
             _repository = repository;
             _userManager = userManager;
         }
-        public async Task<IActionResult> Index(string category,AppUser user)
+        public async Task<IActionResult> Index(string category)
         {
             var query = _repository.GetBookByCategory(category);
             Slayd slayd = await _context.Slayds.FirstOrDefaultAsync();
@@ -46,8 +46,7 @@ namespace Bookly_Back_End.Controllers
             List<AuthorSocialMedia> authorSocialMedias = await _context.AuthorSocialMedias.ToListAsync();
             List<Discount> discounts = await _context.Discounts.ToListAsync();
             List<Blog> blogs = await _context.Blogs.ToListAsync();
-            //AppUser appUser = await _userManager.Users.FirstOrDefaultAsync(u => u.Id == user.Id);
-            List<BasketItem> basketItems = await _context.BasketItems.Where(b => b.AppUserId == user.Id).ToListAsync();
+          
             HomeVM model = new HomeVM
             {
                 Slayd = slayd,
@@ -66,8 +65,7 @@ namespace Bookly_Back_End.Controllers
                 SocialMedias = socialMedias,
                 AuthorSocialMedias = authorSocialMedias,
                 Discounts = discounts,
-                Blogs = blogs,
-                BasketItems = basketItems
+                Blogs = blogs
             };
             return View(model);
         }

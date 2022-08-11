@@ -1,7 +1,7 @@
 ﻿@{
     ViewData["Title"] = "Cart";
     BasketVM basket = await service.GetBasket();
-    List<BasketItem> userBaskets = await service.UserBasket();
+    List<BasketItem> userBaskets = await service.UserBasket(User.Identity.Name);
     decimal total = default;
     @foreach (BasketItem userBasket in userBaskets)
     {

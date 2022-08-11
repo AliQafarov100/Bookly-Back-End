@@ -76,7 +76,7 @@ namespace Bookly_Back_End.Controllers
                 return NotFound();
             }
             Book book = await _context.Books.FirstOrDefaultAsync(b => b.Id == id);
-
+           
             if (book == null) return NotFound();
             if (User.Identity.IsAuthenticated)
             {
@@ -99,7 +99,7 @@ namespace Bookly_Back_End.Controllers
                 {
                     existed.Count++;
                 }
-
+                
                 await _context.SaveChangesAsync();
             }
             else
@@ -137,7 +137,6 @@ namespace Bookly_Back_End.Controllers
                     {
                         existedCookie.Count++;
                     }
-                    
                 }
                 basketStr = JsonConvert.SerializeObject(basket);
 

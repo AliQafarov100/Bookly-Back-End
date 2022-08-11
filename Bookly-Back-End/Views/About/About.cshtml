@@ -1,0 +1,241 @@
+﻿@model AboutVM
+@{
+    ViewData["Title"] = "About";
+}
+
+<main>
+    <section id="navbars" class="">
+        <nav class="navbar d-flex " style="background-color: transparent;">
+            <div class="container">
+                <div class="row w-100">
+                    <div class="pages col-lg-8">
+                        <ul class="d-flex justify-content-around">
+                            <li><a asp-controller="Home" asp-action="Index">Home</a></li>
+                            <li class="controll">
+                                <a asp-controller="Book" asp-action="Index" class="category">
+                                    <span>Categories</span><span class="ms-3">
+                                        <i class="fa-solid fa-sort-down"></i>
+                                    </span>
+
+                                </a>
+
+                                <div class="container fluid">
+                                    <div class="row">
+                                        <div class="col-lg-3 col-md-12 col-sm-12 col-12">
+                                            <div class="book">
+                                                <img src="/assets/Image/Category Book/shop-new-100.webp" alt="">
+                                                <div class="book-info">
+                                                    <a href="">
+                                                        <span>Endless Summer</span><span class="ms-2">$210</span>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-3 col-md-12 col-sm-12 col-12">
+                                            <div class="book">
+                                                <img src="/assets/Image/Category Book/shop-new-30.webp" alt="">
+                                                <div class="book-info">
+                                                    <a href="">
+                                                        <span>Fresh Healthy Eat</span><span class="ms-2">$110</span>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-3 col-md-12 col-sm-12 col-12">
+                                            <div class="book">
+                                                <img src="/assets/Image/Category Book/shop-new-4.webp" alt="">
+                                                <div class="book-info">
+                                                    <a href="">
+                                                        <span>Book for a Cause</span><span class="ms-2">$110</span>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-3 col-md-12 col-sm-12 col-12">
+                                            <div class="book">
+                                                <img src="/assets/Image/Category Book/shop-new-95_b0b53360-a171-427b-9dc6-0bf965bcfdae.webp"
+                                                     alt="">
+                                                <div class="book-info">
+                                                    <a href="">
+                                                        <span>Adventurous Eating</span><span class="ms-2">$500</span>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li><a asp-controller="Brand" asp-action="Brands">Brands</a></li>
+                            <li><a asp-controller="Best" asp-action="Best">Best Sellers</a></li>
+                            <li class="page-controller">
+                                <a href="">
+                                    <span>Pages</span><span class="ms-3">
+                                        <i class="fa-solid fa-sort-down"></i>
+                                    </span>
+                                </a>
+                                <div class="site-pages">
+                                    <ul>
+                                        <li><a asp-controller="About" asp-action="About">About Us</a></li>
+                                        <li><a href="Blog.html">Blog</a></li>
+                                        <li><a href="FAQ.html">FAQ's</a></li>
+                                        <li><a href="Contact.html">Contact us</a></li>
+                                    </ul>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <button class="navbar-toggler bars" type="button" data-bs-toggle="offcanvas"
+                        data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
+                    <span class="navbar-toggler-icon"></span>
+                    <span>Menu</span>
+                </button>
+                <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar"
+                     aria-labelledby="offcanvasNavbarLabel">
+                    <div class="offcanvas-header">
+                        <h5 class="offcanvas-title" style="color: black;" id="offcanvasNavbarLabel">Offcanvas</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="offcanvas"
+                                aria-label="Close"></button>
+                    </div>
+                    <div class="offcanvas-body">
+                        <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+                            <li><a href="">Home</a></li>
+                            <li class="fluid-controll">
+                                <a href="Collections.html" class="category"
+                                   style="color: black;">
+                                    <span>Categories</span><span class="ms-3">
+                                        <i class="fa-solid fa-sort-down"></i>
+                                    </span>
+
+                                </a>
+                            </li>
+                            <li><a href="" style="color: black;">Brands</a></li>
+                            <li><a href="" style="color: black;">Best Sellers</a></li>
+                            <li>
+                                <a href="" style="color: black;">
+                                    <span>Pages</span><span class="ms-3">
+                                        <i class="fa-solid fa-sort-down"></i>
+                                    </span>
+                                </a>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" style="color: black;" href="#"
+                                   id="offcanvasNavbarDropdown" role="button" data-bs-toggle="dropdown"
+                                   aria-expanded="false">
+                                    Dropdown
+                                </a>
+                                <ul class="dropdown-menu" aria-labelledby="offcanvasNavbarDropdown">
+                                    <li><a class="dropdown-item" style="color: black;" href="#">Action</a></li>
+                                    <li>
+                                        <a class="dropdown-item" style="color: black;" href="#">Another action</a>
+                                    </li>
+                                    <li>
+                                        <hr class="dropdown-divider">
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" style="color: black;" href="#">
+                                            Something else
+                                            here
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                        <form class="d-flex" role="search">
+                            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                            <button class="btn btn-outline-success" style="color: black;"
+                                    type="submit">
+                                Search
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </section>
+    <section id="intro">
+        <div class="container">
+            <div class="write  d-flex justify-content-center align-items-center">
+                <div class="texts">
+                    <h4 class="text-center">Product</h4>
+                    <ul class="d-flex justify-content-around">
+                        <li><a href="Index.html">Home</a></li>
+                        <li><a href="">About us</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="about-section" class="py-5">
+        <div class="container">
+            <div class="row justify-content-between">
+                @{
+                    int reverse = 0;
+                    foreach (About about in Model.Abouts)
+                    {
+                        reverse++;
+                        string reverseClass;
+                        reverseClass = reverse % 2 == 0 ? "row reverse justify-content-between col-lg-12" : "row justify-content-between col-lg-12";
+                        <div class="@reverseClass">
+                            <div class="col-lg-5 mb-5">
+                                <div class="backgraund">
+                                    <img src="/assets/Image/About/@about.Photo" alt="">
+                                </div>
+                            </div>
+                            <div class="col-lg-6 d-flex align-items-center">
+                                <div class="desc">
+                                    <div class="drople mb-4">
+                                        <i class="@about.Icon"></i>
+                                    </div>
+                                    <div>
+                                        <h2>@about.Title</h2>
+                                    </div>
+                                    <div>
+                                        <p>
+                                            @about.SubTitle
+                                        </p> <br>
+                                        <p>
+                                            @about.SecondSubTitle
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                }
+            </div>
+        </div>
+    </section>
+    <section id="team-section" class="py-5">
+        <div class="container">
+            <h4 class="text-center">About our Team</h4>
+            <div class="line"></div>
+            <div class="row">
+                @foreach (Team team in Model.Teams)
+                {
+                    <div class="col-lg-3">
+                        <div class="team-image">
+                            <div class="team-media d-flex">
+                                @foreach (TeamSocialMedia socialMedia in Model.TeamSocialMedias?.Where(t => t.TeamId == team.Id))
+                                {
+                                    <div class="brand">
+                                        <i class="@socialMedia.SocialMedia?.Icon"></i>
+                                    </div>
+                                }
+                            </div>
+                            <img src="/assets/Image/Team/@team.Image" alt="">
+                        </div>
+                        <div class="data text-center mt-5">
+                            <h5>@team.FullName</h5>
+                            <small>@team.Profession.Name</small>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </section>
+</main>
+@section Scripts{
+    <script src="~/assets/Js/search.js"></script>
+}
+

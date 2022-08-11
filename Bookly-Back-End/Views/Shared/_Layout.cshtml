@@ -1,6 +1,6 @@
 ﻿@{
     BasketVM basket = await service.GetBasket();
-    List<BasketItem> userBaskets = await service.UserBasket();
+    List<BasketItem> userBaskets = await service.UserBasket(User.Identity.Name);
     decimal total = default;
     @foreach (BasketItem userBasket in userBaskets)
     {
@@ -35,6 +35,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.css"
           integrity="sha512-OTcub78R3msOCtY3Tc6FzeDJ8N9qvQn1Ph49ou13xgA9VsH9+LRxoFU6EqLhW4+PKRfU+/HReXmSZXHEkpYoOA=="
           crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <link rel="stylesheet" href="~/assets/scss/css/owl.carousel.css">
     <link rel="stylesheet" href="~/assets/scss/css/style.css">
     <title>@ViewBag.Title</title>
@@ -46,7 +47,7 @@
                 <form method="get" class="d-flex justify-content-center">
                     <input type="search" placeholder="Search our Store" value="@ViewBag.Search" name="searching">
                     <div class="search-icon">
-                        <button type="submit" asp-controller="Search" asp-action="Search"><i class="fa-solid fa-magnifying-glass"></i></button>    
+                        <button type="submit" asp-controller="Search" asp-action="Search"><i class="fa-solid fa-magnifying-glass"></i></button>
                     </div>
                 </form>
             </div>
@@ -63,6 +64,7 @@
                                 <a href="" class="navbar-toggler bar" data-bs-toggle="offcanvas"
                                    data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">
                                     <i class="fa-solid fa-cart-shopping"></i>
+                                    
                                     <sup>
                                         @if (User.Identity.IsAuthenticated)
                                         {
@@ -326,8 +328,10 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"
             integrity="sha512-bPs7Ae6pVvhOSiIcyUClR7/q2OAsRiovw4vAkX+zJbw3ShAeeqezq50RIIcIURq7Oa20rW2n2q+fyXBNcU9lrw=="
             crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-
-
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init();
+    </script>
     @RenderSection("Scripts", required: false)
 
 </body>

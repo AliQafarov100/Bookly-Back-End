@@ -71,10 +71,10 @@ namespace Bookly_Back_End.Service
             }
         }
 
-        public async Task<List<BasketItem>> UserBasket()
+        public async Task<List<BasketItem>> UserBasket(string username)
         {
-            List<BasketItem> baskets = await _context.BasketItems.Include(b => b.Book.BookImages)
-                .Include(b => b.Book.Discount).ToListAsync();
+            List<BasketItem> baskets = await _context.BasketItems.Include(b => b.Book.BookImages).Include(b => b.AppUser)
+                .Include(b => b.Book.Discount).Where(b => b.AppUser.UserName == username).ToListAsync();
             return baskets;
             //AppUser appUser = await _userManager.Users.Include(b => b.BasketItems).FirstOrDefaultAsync();
             //return appUser;

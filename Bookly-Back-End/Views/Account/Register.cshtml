@@ -30,41 +30,47 @@
                                 <div class="row">
                                     <div class="col-md-6 mb-4">
                                         <div class="form-outline">
-                                            <input asp-for="FirstName" id="form3Example1" class="form-control" />
-                                            <span class="form-label" asp-validation-for="FirstName">First name</span>
+                                            <label>First Name</label>
+                                            <input asp-for="FirstName" placeholder="First Name" class="form-control" /><br />
+                                            <span class="text text-danger" asp-validation-for="FirstName"></span>
                                         </div>
                                     </div>
                                     <div class="col-md-6 mb-4">
                                         <div class="form-outline">
-                                            <input asp-for="LastName" id="form3Example2" class="form-control" />
-                                            <span class="form-label" asp-validation-for="LastName">Last name</span>
+                                            <label>Last Name</label>
+                                            <input asp-for="LastName" placeholder="Last Name" class="form-control" /><br />
+                                            <span class="text text-danger" asp-validation-for="LastName"></span>
                                         </div>
                                     </div>
                                 </div>
 
                                 <!-- Email input -->
                                 <div class="form-outline mb-4">
-                                    <input asp-for="Username" id="form3Example3" class="form-control" />
-                                    <span class="form-label" asp-validation-for="Username">Username</span>
+                                    <label>Username</label>
+                                    <input asp-for="Username" placeholder="Username" class="form-control" /><br />
+                                    <span class="text text-danger" asp-validation-for="Username"></span>
                                 </div>
                                 <div class="form-outline mb-4">
-                                    <input asp-for="Email" id="form3Example3" class="form-control" />
-                                    <span class="form-label" asp-validation-for="Email">Email address</span>
+                                    <label>Email</label>
+                                    <input asp-for="Email" placeholder="Email" class="form-control" /><br />
+                                    <span class="text text-danger" asp-validation-for="Email"></span>
                                 </div>
 
                                 <!-- Password input -->
                                 <div class="form-outline mb-4">
-                                    <input asp-for="Password" id="form3Example4" class="form-control" />
-                                    <span class="form-label" asp-validation-for="Password">Password</span>
+                                    <label>Password</label>
+                                    <input asp-for="Password" placeholder="Password" class="form-control" /><br />
+                                    <span class="text text-danger" asp-validation-for="Password"></span>
                                 </div>
                                 <div class="form-outline mb-4">
-                                    <input asp-for="ConfirmPassword" id="form3Example4" class="form-control" />
-                                    <span class="form-label" asp-validation-for="ConfirmPassword">Confirm Password</span>
+                                    <label>Confirm Password</label>
+                                    <input asp-for="ConfirmPassword" placeholder="ConfirmPassword" class="form-control" /><br />
+                                    <span class="text text-danger" asp-validation-for="ConfirmPassword"></span>
                                 </div>
 
                                 <!-- Checkbox -->
                                 <div class="form-check d-flex justify-content-center mb-4">
-                                    <input class="form-check-input me-2" type="checkbox" value="" id="form2Example33" checked />
+                                    <input class="form-check-input me-2" type="checkbox" value="" id="form2Example33" />
                                     <label class="form-check-label" for="form2Example33">
                                         Subscribe to our newsletter
                                     </label>

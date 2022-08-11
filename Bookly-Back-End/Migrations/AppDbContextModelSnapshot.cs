@@ -19,6 +19,33 @@ namespace Bookly_Back_End.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+            modelBuilder.Entity("Bookly_Back_End.Models.About", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Icon")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Photo")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("SecondSubTitle")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("SubTitle")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Title")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Abouts");
+                });
+
             modelBuilder.Entity("Bookly_Back_End.Models.AppUser", b =>
                 {
                     b.Property<string>("Id")
@@ -581,6 +608,21 @@ namespace Bookly_Back_End.Migrations
                     b.ToTable("Orders");
                 });
 
+            modelBuilder.Entity("Bookly_Back_End.Models.Profession", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Professions");
+                });
+
             modelBuilder.Entity("Bookly_Back_End.Models.Setting", b =>
                 {
                     b.Property<int>("Id")
@@ -678,6 +720,51 @@ namespace Bookly_Back_End.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Supports");
+                });
+
+            modelBuilder.Entity("Bookly_Back_End.Models.Team", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("FullName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Image")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("ProfessionId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ProfessionId");
+
+                    b.ToTable("Teams");
+                });
+
+            modelBuilder.Entity("Bookly_Back_End.Models.TeamSocialMedia", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("SocialMediaId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TeamId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("SocialMediaId");
+
+                    b.HasIndex("TeamId");
+
+                    b.ToTable("TeamSocialMedias");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -927,6 +1014,30 @@ namespace Bookly_Back_End.Migrations
                     b.HasOne("Bookly_Back_End.Models.City", "City")
                         .WithMany("Orders")
                         .HasForeignKey("CityId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Bookly_Back_End.Models.Team", b =>
+                {
+                    b.HasOne("Bookly_Back_End.Models.Profession", "Profession")
+                        .WithMany("Teams")
+                        .HasForeignKey("ProfessionId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Bookly_Back_End.Models.TeamSocialMedia", b =>
+                {
+                    b.HasOne("Bookly_Back_End.Models.SocialMedia", "SocialMedia")
+                        .WithMany("TeamSocialMedias")
+                        .HasForeignKey("SocialMediaId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Bookly_Back_End.Models.Team", "Team")
+                        .WithMany("TeamSocialMedias")
+                        .HasForeignKey("TeamId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

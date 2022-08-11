@@ -49,7 +49,7 @@
                                 </a>
                                 <div class="site-pages">
                                     <ul>
-                                        <li><a href="About.html">About Us</a></li>
+                                        <li><a asp-controller="About" asp-action="About">About Us</a></li>
                                         <li><a href="Blog.html">Blog</a></li>
                                         <li><a href="FAQ.html">FAQ's</a></li>
                                         <li><a href="Contact.html">Contact us</a></li>
@@ -177,7 +177,7 @@
             <div class="row all">
                 @foreach (BookAuthor book in Model.BookAuthors)
                 {
-                    <div class="col-lg-3 col-md-6 col-sm-6 col-12">
+                    <div class="col-lg-3 col-md-6 col-sm-6 col-12" data-aos="flip-down">
                         <div class="info-book">
                             <div class="images">
                                 <div class="more-icon">
@@ -341,7 +341,7 @@
             <div class="row">
                 @foreach (Book dealBook in Model.AnotherBooks.Where(b => b.IsDailyDeal == true))
                 {
-                    <div class="col-lg-3 col-md-6 col-sm-6 col-12">
+                    <div class="col-lg-3 col-md-6 col-sm-6 col-12" data-aos="flip-down">
                         <div class="info-book">
                             <div class="images">
                                 <div class="more-icon">

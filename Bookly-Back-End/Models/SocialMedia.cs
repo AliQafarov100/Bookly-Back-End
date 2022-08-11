@@ -11,5 +11,6 @@ namespace Bookly_Back_End.Models
         public string Name { get; set; }
         public string Icon { get; set; }
         public List<AuthorSocialMedia> AuthorSocialMedias { get; set; }
+        public List<TeamSocialMedia> TeamSocialMedias { get; set; }
     }
 }

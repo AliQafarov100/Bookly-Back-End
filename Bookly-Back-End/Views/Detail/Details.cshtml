@@ -76,7 +76,7 @@
                                 </a>
                                 <div class="site-pages">
                                     <ul>
-                                        <li><a href="About.html">About Us</a></li>
+                                        <li><a asp-controller="About" asp-action="About">About Us</a></li>
                                         <li><a href="Blog.html">Blog</a></li>
                                         <li><a href="FAQ.html">FAQ's</a></li>
                                         <li><a href="Contact.html">Contact us</a></li>
@@ -347,18 +347,11 @@
                                     <strong>Quantity:</strong>
                                 </div>
                                 <form method="post" class="col-lg-6">
-                                    <div class="container d-flex col-lg-12 quantity-content">
-                                        <div style="border: 1px solid #e9e9e9;"
-                                             class="col-lg-2 count-manage minus d-flex align-items-center justify-content-center">
-                                            <span>-</span>
-                                        </div>
-                                        <div style="border: 1px solid #e9e9e9;"
-                                             class="col-lg-3 d-flex align-items-center justify-content-center">
-                                            <span class="quantity" asp-validation-for="@basket.Count">0</span>
-                                        </div>
-                                        <div style="border: 1px solid #e9e9e9;"
-                                             class="col-lg-2 count-manage plus d-flex align-items-center justify-content-center">
-                                            <span>+</span>
+                                    <div class="container d-flex col-lg-6 quantity-content">           
+                                        <div style="border: 1px solid #e9e9e9;">
+                                             @*class="col-lg-3 d-flex align-items-center justify-content-center">
+                                            <span class="quantity" asp-validation-for="@basket.Count">0</span>*@
+                                            <input min="1" type="number" value="" class="quantity"/>
                                         </div>
                                     </div>
                                 </form>

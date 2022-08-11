@@ -374,3 +374,11 @@ C:\Users\M S I\Desktop\Bookly-Back-End\Bookly-Back-End\obj\Debug\netcoreapp3.1\R
 C:\Users\M S I\Desktop\Bookly-Back-End\Bookly-Back-End\obj\Debug\netcoreapp3.1\Bookly-Back-End.csproj.AssemblyReference.cache
 C:\Users\M S I\Desktop\Bookly-Back-End\Bookly-Back-End\obj\Debug\netcoreapp3.1\Razor\Areas\BooklyAdmin\Views\History\History.cshtml.g.cs
 C:\Users\M S I\Desktop\Bookly-Back-End\Bookly-Back-End\obj\Debug\netcoreapp3.1\Razor\Views\Best\Best.cshtml.g.cs
+C:\Users\M S I\Desktop\Bookly-Back-End\Bookly-Back-End\obj\Debug\netcoreapp3.1\Razor\Views\About\About.cshtml.g.cs
+C:\Users\M S I\Desktop\Bookly-Back-End\Bookly-Back-End\obj\Debug\netcoreapp3.1\Razor\Views\Account\ForgotPassword.cshtml.g.cs
+C:\Users\M S I\Desktop\Bookly-Back-End\Bookly-Back-End\obj\Debug\netcoreapp3.1\Razor\Views\Account\ResetPassword.cshtml.g.cs
+C:\Users\M S I\Desktop\Bookly-Back-End\Bookly-Back-End\obj\Debug\netcoreapp3.1\Razor\Areas\BooklyAdmin\Views\Abouts\Create.cshtml.g.cs
+C:\Users\M S I\Desktop\Bookly-Back-End\Bookly-Back-End\obj\Debug\netcoreapp3.1\Razor\Areas\BooklyAdmin\Views\Abouts\Delete.cshtml.g.cs
+C:\Users\M S I\Desktop\Bookly-Back-End\Bookly-Back-End\obj\Debug\netcoreapp3.1\Razor\Areas\BooklyAdmin\Views\Abouts\Details.cshtml.g.cs
+C:\Users\M S I\Desktop\Bookly-Back-End\Bookly-Back-End\obj\Debug\netcoreapp3.1\Razor\Areas\BooklyAdmin\Views\Abouts\Edit.cshtml.g.cs
+C:\Users\M S I\Desktop\Bookly-Back-End\Bookly-Back-End\obj\Debug\netcoreapp3.1\Razor\Areas\BooklyAdmin\Views\Abouts\Index.cshtml.g.cs

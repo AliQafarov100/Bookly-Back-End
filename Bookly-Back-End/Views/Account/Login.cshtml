@@ -36,8 +36,9 @@
                                     <input asp-for="Password" id="form3Example4" class="form-control" />
                                     <span class="form-label" asp-validation-for="Password">Password</span>
                                 </div>
-                                <div class="">
+                                <div class="d-flex justify-content-between">
                                     <a asp-controller="Account" asp-action="Register" style="text-decoration: none;" class="text-dark">Create account</a>
+                                    <a asp-controller="Account" asp-action="ForgotPassword" style="text-decoration: none;" class="text-dark">Forgot Password?</a>
                                 </div>
                                 <div class="form-check d-flex justify-content-center mb-4">
                                     <input class="form-check-input me-2" asp-for="RememberMe" id="form2Example33" checked />

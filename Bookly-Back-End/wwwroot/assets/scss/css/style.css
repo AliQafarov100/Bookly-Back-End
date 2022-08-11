@@ -1092,6 +1092,9 @@ nav {
     text-align: right;
 }
 
+#about-section .reverse{
+    flex-direction: row-reverse;
+}
 #team-section img {
     width: 100%;
 }
