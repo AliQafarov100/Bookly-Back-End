@@ -1,0 +1,69 @@
+﻿@model List<Team>
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="col-lg-12 grid-margin stretch-card">
+    <div class="card">
+        <div class="card-body">
+            <div>
+                <a class="btn btn-success" asp-controller="Teams" asp-action="Create">Create</a>
+            </div>
+            <div class="table-responsive pt-3">
+                <table class="table table-dark">
+                    <thead>
+                        <tr>
+                            <th>
+                                Id
+                            </th>
+                            <th>
+                                Image
+                            </th>
+                            <th>
+                                Full Name
+                            </th>
+                            <th>
+                                Profession
+                            </th>
+                            <th>
+                                Settings
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (Team team in Model)
+                        {
+                        <tr>
+                            <td>
+                                @team.Id
+                            </td>
+                            <td>
+                                <img src="~/assets/Image/Team/@team.Image" />
+                            </td>
+                            <td>
+                                @team.FullName
+                            </td>
+                            <td>
+                                @team.Profession.Name
+                            </td>
+                            <td class="d-flex">
+                                <div>
+                                    <a class="btn btn-success" asp-controller="Teams" asp-action="Read" asp-route-id="@team.Id"><i class="mdi mdi-details"></i></a>
+                                </div>
+                                <div>
+                                    <a class="btn btn-warning" asp-controller="Teams" asp-action="Update" asp-route-id="@team.Id"><i class="mdi mdi-database-edit"></i></a>
+                                </div>
+                                <div>
+                                    <a class="btn btn-danger" asp-controller="Teams" asp-action="Delete" asp-route-id="@team.Id"><i class="mdi mdi-delete"></i></a>
+                                </div>
+                            </td>
+                        </tr>
+                        }
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+

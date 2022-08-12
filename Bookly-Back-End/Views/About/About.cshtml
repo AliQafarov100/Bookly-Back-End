@@ -214,8 +214,8 @@
                 @foreach (Team team in Model.Teams)
                 {
                     <div class="col-lg-3">
-                        <div class="team-image">
-                            <div class="team-media d-flex">
+                        <div class="team-image" style="margin: 0px auto;">
+                            <div class="team-media d-flex justify-content-center w-75">
                                 @foreach (TeamSocialMedia socialMedia in Model.TeamSocialMedias?.Where(t => t.TeamId == team.Id))
                                 {
                                     <div class="brand">
@@ -223,7 +223,7 @@
                                     </div>
                                 }
                             </div>
-                            <img src="/assets/Image/Team/@team.Image" alt="">
+                            <img src="/assets/Image/Team/@team.Image" alt="" style="height: 450px;">
                         </div>
                         <div class="data text-center mt-5">
                             <h5>@team.FullName</h5>

@@ -14,7 +14,7 @@ namespace Bookly_Back_End.ViewModels
         public string LastName { get; set; }
         [Required, StringLength(25)]
         public string Email { get; set; }
-        [Required, StringLength(25)]
+        [Required, StringLength(40)]
         public string Username { get; set; }
         [Required, DataType(DataType.Password)]
         public string Password { get; set; }

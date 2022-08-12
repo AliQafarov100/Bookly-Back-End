@@ -1,0 +1,26 @@
+﻿@model Team
+@{
+    ViewData["Title"] = "Read";
+}
+<div>
+    <div>
+        <h4>Id: </h4>
+        <p>@Model.Id</p>
+    </div>
+    <div>
+        <h4>Full Name:</h4>
+        <p>@Model.FullName</p>
+    </div>
+    <div>
+        <h4>Proffesion:</h4>
+        <p>@Model.Profession.Name</p>
+    </div>
+    <div>
+        <h4>Image:</h4>
+        <img style="width: 300px; height:400px" src="~/assets/Image/Team/@Model.Image" />
+    </div>
+</div>
+<form method="post" class="mt-5">
+    <button class="btn btn-primary" asp-action="Index">Back to List</button>
+</form>
+

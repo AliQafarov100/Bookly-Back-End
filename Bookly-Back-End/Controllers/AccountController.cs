@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Mail;
@@ -52,13 +53,37 @@ namespace Bookly_Back_End.Controllers
                 }
                 return View();
             }
+            string token = await _userManager.GenerateEmailConfirmationTokenAsync(appUser);
+            string link = Url.Action(nameof(Index), "Account", new { email = appUser.Email, token }, Request.Scheme,
+                Request.Host.ToString());
+            MailMessage mail = new MailMessage();
+            mail.From = new MailAddress("tu8cvbxnx@code.edu.az");
+            mail.To.Add(new MailAddress(appUser.Email, "Bookly Company"));
+            mail.Subject = "Verify Email";
 
+            string body = string.Empty;
+
+            using (StreamReader reader = new StreamReader(@"wwwroot/assets/template/verifyemail.html"))
+            {
+                body = reader.ReadToEnd();
+            }
+            mail.Body = body.Replace("{{link}}", link);
+            mail.IsBodyHtml = true;
+
+            SmtpClient smtp = new SmtpClient();
+            smtp.Host = "smtp.gmail.com";
+            smtp.Port = 587;
+            smtp.EnableSsl = true;
+
+            smtp.Credentials = new NetworkCredential("tu8cvbxnx@code.edu.az", "zkgawykhucvuahin");
+            smtp.Send(mail);
+            TempData["Verify"] = true;
             await _userManager.AddToRoleAsync(appUser, Roles.Member.ToString());
             await _signIn.SignInAsync(appUser, false);
 
             return RedirectToAction("Index", "Home");
-
         }
+
 
         public IActionResult Login()
         {

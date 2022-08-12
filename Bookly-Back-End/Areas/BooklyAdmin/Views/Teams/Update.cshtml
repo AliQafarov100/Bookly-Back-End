@@ -1,0 +1,78 @@
+﻿@model Team
+@{
+    ViewData["Title"] = "Update";
+}
+
+<div class="alert alert-danger" asp-validation-summary="ModelOnly"></div>
+<form method="post" enctype="multipart/form-data">
+    <div>
+        <label class="mb-3">Employee name:</label><br />
+        <input asp-for="FullName" class="form-control" /><br />
+        <span class="text-danger" asp-validation-for="FullName"></span>
+    </div>
+    <div>
+        <label class="mb-3">Employee profession: </label><br />
+        <select class="form-control" asp-for="ProfessionId" asp-items="@(new SelectList(ViewBag.Profession,"Id","Name"))"></select><br />
+        <span class="text-danger" asp-validation-for="Profession"></span>
+    </div>
+    <div>
+        <label class="mb-3">Employee SocialMedia(-s):</label><br />
+        <select class="form-control" asp-for="SocialMediaIds" asp-items="@(new SelectList(ViewBag.SocialMedias,"Id","Name"))"></select>
+        <span class="text-danger" asp-validation-for="SocialMediaIds"></span>
+    </div>
+    <div>
+
+        <label class="mb-3">Employee image:</label><br />
+        <div class="d-flex">
+            <div class="col-lg-2">
+                <div class="for-image">
+                    <strong style="position: relative; top: 50px; left: 140px;" class="removeable">Remove</strong>
+                    <img style="width: 100%; height:400px" src="~/assets/Image/Team/@Model.Image" />
+                </div>
+            </div>
+        </div>
+    </div>
+    <div>
+        <label class="mb-3">Employee image:</label><br />
+        <input asp-for="Photo" class="form-control" accept="image/*" /><br />
+        <span class="text-danger" asp-validation-for="Photo"></span>
+    </div>
+    <div class="mt-3">
+        <button type="submit" class="btn btn-primary">Save</button>
+    </div>
+</form>
+
+@section Css
+{
+    <style>
+        .for-image:hover img {
+            transition: 0.7s;
+            opacity: 0.6;
+        }
+
+        .for-image img {
+            width: 200px;
+            height: 300px;
+        }
+
+        .for-image:hover .removeable {
+            transition: 0.7s;
+            opacity: 1;
+        }
+
+        .removeable {
+            z-index: 5;
+            color: black;
+            cursor: pointer;
+            opacity: 0;
+        }
+    </style>
+}
+@section Scripts
+{
+    <script>
+        $(".removeable").click(function () {
+            this.parentNode.remove();
+        })
+    </script>
+}
