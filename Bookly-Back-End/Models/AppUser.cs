@@ -14,5 +14,7 @@ namespace Bookly_Back_End.Models
         public bool IsAdmin { get; set; }
         public bool IsSuperAdmin { get; set; }
         public List<BasketItem> BasketItems { get; set; }
+        public List<OrderProduct> OrderProducts { get; set; }
+        public List<Order> Orders { get; set; }
     }
 }

@@ -16,65 +16,84 @@ namespace Bookly_Back_End.Controllers
         private readonly AppDbContext _context;
         private readonly UserManager<AppUser> _manager;
 
-        public OrderController(AppDbContext context,UserManager<AppUser> manager)
+        public OrderController(AppDbContext context, UserManager<AppUser> manager)
         {
             _context = context;
             _manager = manager;
         }
+
         public async Task<IActionResult> Checkout()
         {
             ViewBag.Cities = await _context.Cities.ToListAsync();
+            Country country = await _context.Countries.Include(c => c.Cities).FirstOrDefaultAsync();
             AppUser user = await _manager.FindByNameAsync(User.Identity.Name);
-            List<BasketItem> items = await _context.BasketItems.Include(b => b.AppUser)
-                .Include(b => b.Book).Include(b => b.Book.Discount).Where(b => b.AppUserId == user.Id).ToListAsync();
-            List<Book> books = await _context.Books.Include(i => i.BookImages).
-               Include(a => a.BookAuthors).ToListAsync();
-            List<City> cities = await _context.Cities.ToListAsync();
-            List<Delivery> deliveries = await _context.Deliveries.ToListAsync();
-            Country country = await _context.Countries.FirstOrDefaultAsync();
- 
             OrderVM model = new OrderVM
             {
-                Cities = cities,
-                Deliveries = deliveries,
+                FirstName = user.FirstName,
+                LastName = user.LastName,
+                UserName = user.UserName,
+                Email = user.Email,
+                BasketItems = _context.BasketItems.Include(b => b.Book).ThenInclude(b => b.BookImages).Include(b => b.Book.Discount)
+                .Where(b => b.AppUserId == user.Id).ToList(),
                 Country = country,
-                BasketItems = items,
-                Books = books
+               
             };
-
             return View(model);
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Checkout(Order order)
+        public async Task<IActionResult> Checkout(OrderVM orderVM)
         {
-            if (!ModelState.IsValid) return View();
-            AppUser user = await _manager.FindByNameAsync(User.Identity.Name);
-
-            List<BasketItem> items = await _context.BasketItems.Include(b => b.AppUser)
-                .Include(b => b.Book).Include(b => b.Book.Discount).Where(b => b.AppUserId == user.Id).ToListAsync();
-            
+        
             ViewBag.Cities = await _context.Cities.ToListAsync();
-
-            order.Status = null;
-            order.TotalPrice = default;
-            order.BasketItems = items;
-            order.AppUser = user;
-            order.OrderDate = DateTime.Now;
-            foreach (var item in items)
+            AppUser user = await _manager.FindByNameAsync(User.Identity.Name);
+            Country country = await _context.Countries.Include(c => c.Cities).FirstOrDefaultAsync();
+            OrderVM model = new OrderVM
             {
-                if(item.Book.DiscountId != null)
+                FirstName = orderVM.FirstName,
+                LastName = orderVM.LastName,
+                UserName = orderVM.UserName,
+                Email = orderVM.Email,
+                BasketItems = _context.BasketItems.Include(b => b.Book).ThenInclude(b => b.BookImages).Include(b => b.Book.Discount)
+                .Where(b => b.AppUserId == user.Id).ToList(),
+                Country = country,
+                
+            };
+            if (!ModelState.IsValid) return View(model);
+
+            TempData["Success"] = false;
+            
+            if (model.BasketItems.Count == 0) return RedirectToAction("Index", "Home");
+
+            Order order = new Order
+            {
+                Address = orderVM.Address,
+                TotalPrice = 0,
+                CityId = orderVM.Country.CityId,
+                AppUserId = user.Id,
+                OrderDate = DateTime.Now,
+                Message = orderVM.Message,
+                Status = true
+            };
+           
+            foreach (BasketItem item in model.BasketItems)
+            {
+                order.TotalPrice += item.Book.DiscountId == null ? item.Count * item.Book.Price : item.Book.Price - ((item.Book.Price * item.Book.Discount.DiscountPercent) / 100);
+                OrderProduct product = new OrderProduct
                 {
-                    order.TotalPrice += (item.Price - ((item.Price * item.Book.Discount.DiscountPercent) / 100)) * item.Count;
-                }
-                else
-                {
-                    order.TotalPrice += item.Price * item.Count;
-                }
+                    Name = item.Book.Name,
+                    Price = item.Book.DiscountId == null ? item.Count * item.Book.Price : item.Book.Price - ((item.Book.Price * item.Book.Discount.DiscountPercent) / 100),
+                    AppUserId = user.Id,
+                    BookId = item.Book.Id,
+                    Order = order
+                };
+                _context.OrderProducts.Add(product);
             }
 
+            _context.BasketItems.RemoveRange(model.BasketItems);
             await _context.Orders.AddAsync(order);
             await _context.SaveChangesAsync();
+            TempData["Success"] = true;
 
             return RedirectToAction("Index", "Home");
         }

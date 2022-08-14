@@ -40,6 +40,9 @@ namespace Bookly_Back_End
             });
             services.AddIdentity<AppUser, IdentityRole>(opt =>
             {
+                
+                opt.User.RequireUniqueEmail = true;
+
                 opt.Password.RequireDigit = true;
                 opt.Password.RequireLowercase = true;
                 opt.Password.RequireNonAlphanumeric = false;

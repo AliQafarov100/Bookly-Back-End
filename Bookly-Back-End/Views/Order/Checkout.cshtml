@@ -16,9 +16,16 @@
 
     }
     decimal totalView = total;
+    int id = default;
+    foreach (var city in Model.Country.Cities)
+    {
+        id = city.Id;
+    }
+    ViewBag.CityId = id;
 }
 
 <main>
+    @ViewBag.CityId
     <section id="data-payment" class="py-5">
         <div class="container">
             <div class="row">
@@ -83,31 +90,57 @@
                         <p>Shipping address</p>
 
                         <form class="row g-3" method="post">
-                            <select size="1" autocomplete="shipping country" data-backup="country"
-                                    class="field__input field__input--select mb-4" aria-required="true" asp-for="Country"
-                                    name="checkout[shipping_address][country]"
-                                    placeholder="Country/region">
-                                <option data-code="AZ" selected="selected" value="@Model.Country.Name">@Model.Country.Name</option>
-                            </select>
+                            <div class="col-12">
+                                <select size="1" autocomplete="shipping country" data-backup="country"
+                                        class=" field__input field__input--select mb-4" aria-required="true" asp-for="Country"
+                                        name="checkout[shipping_address][country]"
+                                        placeholder="Country/region">
+                                    <option data-code="AZ" selected="selected" value="@Model.Country">@Model.Country.Name</option>
+                                </select>
+                            </div>
+                            <div class="col-12">
+                                <label asp-for="FirstName">FirstName</label>
+                                <input asp-for="FirstName" class="form-control" placeholder=""><br />
+                                <span asp-validation-for="FirstName" class="text text-danger"></span>
+                            </div>
+                            <div class="col-12">
+                                <label asp-for="LastName">LastName</label>
+                                <input asp-for="LastName" class="form-control" placeholder=""><br />
+                                <span asp-validation-for="LastName" class="text text-danger"></span>
+                            </div>
+                            <div class="col-md-12">
+                                <label asp-for="Email">Email</label>
+                                <input asp-for="Email" class="form-control" id="inputEmail4" placeholder="Email">
+                                <span asp-validation-for="LastName" class="text text-danger"></span>
+                            </div>
+                            <div class="col-md-12">
+                                <label asp-for="UserName">Username</label>
+                                <input asp-for="UserName" class="form-control" id="inputEmail4" placeholder="Username">
+                            </div>
                             <div class="col-12">
                                 <label class="form-label">Address</label>
-                                <input type="text" class="form-control" asp-for="Order.Address" placeholder="Address">
+                                <input type="text" class="form-control" asp-for="Address" placeholder="Address">
                             </div>
-                            <select size="1" asp-for="Order.CityId" asp-items="@(new SelectList(ViewBag.Cities,"Id","Name"))"></select>
-
                             <div class="col-12">
-
-                                @foreach (Delivery delivery in Model.Deliveries)
-                                {
-                                    <div class="d-flex justify-content-between">
-                                        <div class="d-flex">
-                                            <input type="checkbox" style="width: 20px; height: 20px; border-radius: 50%;">
-                                            <h6 class="ms-2">@delivery.Name</h6>
-                                        </div>
-                                        <h5 class="">+@delivery.Price $</h5>
-                                    </div>
-                                }
+                                <select style="height: 50px;" class="col-12" size="1" asp-for="@Model.Country.CityId" asp-items="@(new SelectList(ViewBag.Cities,"Id","Name"))"></select>
                             </div>
+                            <div class="col-12 mt-3">
+                                <span>Special instructions for seller</span>
+                                <textarea asp-for="Message" type="text" cols="83" rows="7" class="mt-2" autofocus></textarea>
+                            </div>
+                            @*<div class="col-12">
+
+                                    @foreach (Delivery delivery in Model.Deliveries)
+                                    {
+                                        <div class="d-flex justify-content-between">
+                                            <div class="d-flex">
+                                                <input type="checkbox" style="width: 20px; height: 20px; border-radius: 50%;">
+                                                <h6 class="ms-2">@delivery.Name</h6>
+                                            </div>
+                                            <h5 class="">+@delivery.Price $</h5>
+                                        </div>
+                                    }
+                                </div>*@
 
                             <div class="col-12 row mt-4">
                                 <div class="col-lg-6 col-md-12  d-flex align-items-center">
@@ -156,7 +189,7 @@
                                 <small>Shipping</small>
                                 <p>
                                     $
-                                    
+
                                 </p>
                             </div>
                         </div>

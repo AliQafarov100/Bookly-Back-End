@@ -19,26 +19,26 @@ namespace Bookly_Back_End.Areas.BooklyAdmin.Controllers
         {
             _context = context;
         }
-        public async Task<IActionResult> Orders()
-        { 
-            List<Order> orders = await _context.Orders.Include(o => o.City).Include(o => o.AppUser).ToListAsync();
-            return View(orders);
-        }
-        public async Task<IActionResult> OrdersDetail(int? id)
-        {
-            if (id is null && id == 0) return NotFound();
-            Order order = await _context.Orders.Include(o => o.City).Include(o => o.AppUser).Include(b => b.BasketItems)
-                .FirstOrDefaultAsync(o => o.Id == id);
-            List<BasketItem> items = await _context.BasketItems.Include(b => b.Book).Include(b => b.Book.BookImages)
-                .Include(b => b.Book.Discount).ToListAsync();
-            if (order == null) return NotFound();
+        //public async Task<IActionResult> Orders()
+        //{ 
+        //    List<Order> orders = await _context.Orders.Include(o => o.City).Include(o => o.AppUser).ToListAsync();
+        //    return View(orders);
+        //}
+        //public async Task<IActionResult> OrdersDetail(int? id)
+        //{
+        //    if (id is null && id == 0) return NotFound();
+        //    Order order = await _context.Orders.Include(o => o.City).Include(o => o.AppUser).Include(b => b.BasketItems)
+        //        .FirstOrDefaultAsync(o => o.Id == id);
+        //    List<BasketItem> items = await _context.BasketItems.Include(b => b.Book).Include(b => b.Book.BookImages)
+        //        .Include(b => b.Book.Discount).ToListAsync();
+        //    if (order == null) return NotFound();
 
-            OrderVM model = new OrderVM
-            {
-                Order = order,
-                BasketItems = items
-            };
-            return View(model);
-        }
+        //    OrderVM model = new OrderVM
+        //    {
+        //        Order = order,
+        //        BasketItems = items
+        //    };
+        //    return View(model);
+        //}
     }
 }

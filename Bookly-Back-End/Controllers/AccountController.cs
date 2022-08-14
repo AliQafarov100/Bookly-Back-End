@@ -54,11 +54,11 @@ namespace Bookly_Back_End.Controllers
                 return View();
             }
             string token = await _userManager.GenerateEmailConfirmationTokenAsync(appUser);
-            string link = Url.Action(nameof(Index), "Account", new { email = appUser.Email, token }, Request.Scheme,
+            string link = Url.Action(nameof(VerifyEmail), "Account", new { email = appUser.Email, token }, Request.Scheme,
                 Request.Host.ToString());
             MailMessage mail = new MailMessage();
-            mail.From = new MailAddress("tu8cvbxnx@code.edu.az");
-            mail.To.Add(new MailAddress(appUser.Email, "Bookly Company"));
+            mail.From = new MailAddress("tu8cvbxnx@code.edu.az", "Bookly Company");
+            mail.To.Add(new MailAddress(appUser.Email));
             mail.Subject = "Verify Email";
 
             string body = string.Empty;
@@ -84,6 +84,15 @@ namespace Bookly_Back_End.Controllers
             return RedirectToAction("Index", "Home");
         }
 
+        public async Task<IActionResult> VerifyEmail(string email, string token)
+        {
+            AppUser user = await _userManager.FindByEmailAsync(email);
+            if (user == null) return BadRequest();
+
+            await _signIn.SignInAsync(user, true);
+            TempData["Verified"] = true;
+            return RedirectToAction("Index", "Home");
+        }
 
         public IActionResult Login()
         {

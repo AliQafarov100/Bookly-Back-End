@@ -5,9 +5,38 @@
 
 
 <main>
+    @if (TempData["Success"] != null)
+    {
+        <div style="z-index: 1000; position: absolute; top: 25px;" class="toast align-items-center text-bg-success border-0" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="d-flex justify-content-end">
+                <div class="toast-body">
+                    Your order is success!
+                </div>
+                <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+        </div>
+    }
+    @if (TempData["Verified"] != null)
+    {
+        <div style="z-index: 1000; position: absolute; top: 25px;" class="toast align-items-center text-bg-success border-0" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="d-flex justify-content-end">
+                <div class="toast-body">
+                    Your email has been verified
+                </div>
+                <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+        </div>
+    }
     @if (TempData["Verify"] != null)
     {
-      <input type="hidden" id="verifyJS" data-succeed="@TempData["Verify"]" />
+        <div style="z-index: 1000; position: absolute; top: 25px;" class="toast align-items-center text-bg-success border-0" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="d-flex justify-content-end">
+                <div class="toast-body">
+                    Please verify your email
+                </div>
+                <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+        </div>
     }
     <section id="navbars" class="">
         <nav class="navbar d-flex " style="background-color: transparent;">
@@ -530,5 +559,9 @@
 </main>
 @section Scripts{
     <script src="~/assets/Js/script.js"></script>
-   
+    <script>
+        $(document).ready(function () {
+            $(".toast").toast('show');
+        });
+    </script>
 }
