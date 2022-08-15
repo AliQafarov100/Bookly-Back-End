@@ -51,5 +51,6 @@ namespace Bookly_Back_End.DAL
         public DbSet<Profession> Professions { get; set; }
         public DbSet<TeamSocialMedia> TeamSocialMedias { get; set; }
         public DbSet<OrderProduct> OrderProducts { get; set; }
+        public DbSet<WishListItem> WishListItems { get; set; }
     }
 }

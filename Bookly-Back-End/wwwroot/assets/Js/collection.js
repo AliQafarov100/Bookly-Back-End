@@ -16,6 +16,7 @@ grid.addEventListener("click",function(){
     book.classList.add("row");
 });
 
+
 window.addEventListener("scroll",function(){
     if(window.scrollY == 0){
         arrow.style.opacity = "0";

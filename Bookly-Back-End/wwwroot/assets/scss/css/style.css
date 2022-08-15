@@ -1324,9 +1324,7 @@ nav {
     padding: 20px;
 }
 
-.pagination {
-    background-color: white;
-}
+
 
 #basket-section .basket-products .basket-product {
     border: 1px solid #e9e9e9;
@@ -1533,6 +1531,9 @@ nav {
     #basket-section .basket-product .product-info {
         margin-bottom: 50px;
     }
+    .tr{
+        display: none;
+    }
 }
 
 @media screen and (min-width: 992px) {
@@ -1735,7 +1736,7 @@ body {
         display: flex;
         justify-content: center;
         align-items: center;
-        background-color: #e12503;
+        background-color: transparent;
         border-radius: 50%;
         color: white;
         position: absolute;

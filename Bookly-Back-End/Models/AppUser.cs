@@ -16,5 +16,6 @@ namespace Bookly_Back_End.Models
         public List<BasketItem> BasketItems { get; set; }
         public List<OrderProduct> OrderProducts { get; set; }
         public List<Order> Orders { get; set; }
+        public List<WishListItem> WishListItems { get; set; }
     }
 }

@@ -302,31 +302,31 @@
 
                 <div class="col-lg-9">
                     <div class="container">
-                        <div class="filtered row justify-content-between align-items-center">
+                        <div class="filtered row justify-content-around align-items-center">
                             <div class="systems d-flex align-items-center col-lg-4 mb-3">
                                 <div class="grid system"><i class="fa-solid fa-grip"></i></div>
                                 <div class="list system"><i class="fa-solid fa-list"></i></div>
                             </div>
                             <div class="col-lg-4 mb-3">
-                                <small>Paginate by</small>
-                                <select name="" id="">
-                                    <option value=""><a href="">1</a></option>
-                                    <option value=""><a href="">2</a></option>
-                                    <option value=""><a href="">3</a></option>
-                                </select>
-                            </div>
-                            <div class="col-lg-4 mb-3">
                                 <small>Sort by</small>
-                                <form action="/Book/Index" method="post">
-                                    <select id="">
-                                        <option value="">Featured</option>
-                                        <option value="">Best selling</option>
-                                        <option value="">Alphabetcally,A-Z</option>
-                                        <option value="">Alphabetcally,Z-A</option>
-                                        <option value="@ViewBag.High">Price,high to low</option>
+                                <form action="/Book" class="form" method="post">
+                                    @*<select onchange="this.form.submit()">
+                                            <option value="">Featured</option>
+                                            <option value="">Best selling</option>
+                                            <option value="">Alphabetcally,A-Z</option>
+                                            <option value="">Alphabetcally,Z-A</option>
+                                            <a asp-controller="Book" asp-action="Index" asp-route-highToLow="@ViewBag.High">
+                                               <option value="" class="decrease">Price,high to low</option>
+                                            </a>
+                                        </select>*@
+                                    <select onchange="this.form.submit()" aria-label="Default select example">
+                                        <option >Open this select menu</option>
+                                        <option value="1">One</option>
+                                        <option value="2">Two</option>
+                                        <option value="3">Three</option>
                                     </select>
                                 </form>
-                                
+
                             </div>
                         </div>
                         <div class="row booking mt-5">
@@ -408,5 +408,6 @@
 
 @section Scripts{
     <script src="~/assets/Js/collection.js"></script>
+
 }
 

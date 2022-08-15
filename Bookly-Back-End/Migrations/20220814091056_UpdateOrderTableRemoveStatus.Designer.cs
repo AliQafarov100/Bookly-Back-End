@@ -4,14 +4,16 @@ using Bookly_Back_End.DAL;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Bookly_Back_End.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220814091056_UpdateOrderTableRemoveStatus")]
+    partial class UpdateOrderTableRemoveStatus
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -229,7 +231,7 @@ namespace Bookly_Back_End.Migrations
                         .HasColumnType("int");
 
                     b.Property<decimal>("Price")
-                        .HasColumnType("decimal(8,2)");
+                        .HasColumnType("decimal(6,2)");
 
                     b.HasKey("Id");
 
@@ -577,9 +579,6 @@ namespace Bookly_Back_End.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("AdminMessage")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("AppUserId")
                         .HasColumnType("nvarchar(450)");
 
@@ -591,9 +590,6 @@ namespace Bookly_Back_End.Migrations
 
                     b.Property<DateTime>("OrderDate")
                         .HasColumnType("datetime2");
-
-                    b.Property<bool?>("Status")
-                        .HasColumnType("bit");
 
                     b.Property<decimal>("TotalPrice")
                         .HasColumnType("decimal(8,2)");
@@ -797,34 +793,6 @@ namespace Bookly_Back_End.Migrations
                     b.HasIndex("TeamId");
 
                     b.ToTable("TeamSocialMedias");
-                });
-
-            modelBuilder.Entity("Bookly_Back_End.Models.WishListItem", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("AppUserId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<int>("BookId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Count")
-                        .HasColumnType("int");
-
-                    b.Property<decimal>("Price")
-                        .HasColumnType("decimal(8,2)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("AppUserId");
-
-                    b.HasIndex("BookId");
-
-                    b.ToTable("WishListItems");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -1109,19 +1077,6 @@ namespace Bookly_Back_End.Migrations
                     b.HasOne("Bookly_Back_End.Models.Team", "Team")
                         .WithMany("TeamSocialMedias")
                         .HasForeignKey("TeamId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("Bookly_Back_End.Models.WishListItem", b =>
-                {
-                    b.HasOne("Bookly_Back_End.Models.AppUser", "AppUser")
-                        .WithMany("WishListItems")
-                        .HasForeignKey("AppUserId");
-
-                    b.HasOne("Bookly_Back_End.Models.Book", "Book")
-                        .WithMany("WishListItems")
-                        .HasForeignKey("BookId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

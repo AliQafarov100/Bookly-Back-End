@@ -31,6 +31,7 @@ namespace Bookly_Back_End.Models
         public List<BookAuthor> BookAuthors { get; set; }
         public List<BasketItem> BasketItems { get; set; }
         public List<OrderProduct> OrderProducts { get; set; }
+        public List<WishListItem> WishListItems { get; set; }
         public List<BookImage> BookImages { get; set; }
         [NotMapped]
         public IFormFile MainImage { get; set; }

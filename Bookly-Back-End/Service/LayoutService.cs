@@ -79,5 +79,13 @@ namespace Bookly_Back_End.Service
             //AppUser appUser = await _userManager.Users.Include(b => b.BasketItems).FirstOrDefaultAsync();
             //return appUser;
         }
+        public async Task<List<WishListItem>> UserWishList(string username)
+        {
+            List<WishListItem> wishLists = await _context.WishListItems.Include(b => b.Book)
+                .ThenInclude(b => b.Discount).Include(b => b.Book.BookImages)
+                .Include(b => b.AppUser).Where(b => b.AppUser.UserName == username).ToListAsync();
+
+            return wishLists;
+        }
     }
 }

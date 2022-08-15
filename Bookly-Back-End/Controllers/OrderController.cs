@@ -72,13 +72,13 @@ namespace Bookly_Back_End.Controllers
                 CityId = orderVM.Country.CityId,
                 AppUserId = user.Id,
                 OrderDate = DateTime.Now,
-                Message = orderVM.Message,
-                Status = true
+                Message = orderVM.Message
             };
-           
+
+            int counter = default;
             foreach (BasketItem item in model.BasketItems)
             {
-                order.TotalPrice += item.Book.DiscountId == null ? item.Count * item.Book.Price : item.Book.Price - ((item.Book.Price * item.Book.Discount.DiscountPercent) / 100);
+                order.TotalPrice += item.Book.DiscountId == null ? item.Count * item.Book.Price : (item.Book.Price - ((item.Book.Price * item.Book.Discount.DiscountPercent) / 100)) * item.Count;
                 OrderProduct product = new OrderProduct
                 {
                     Name = item.Book.Name,
@@ -87,9 +87,10 @@ namespace Bookly_Back_End.Controllers
                     BookId = item.Book.Id,
                     Order = order
                 };
+                counter += item.Count;
                 _context.OrderProducts.Add(product);
             }
-
+            ViewBag.bookCount = counter;
             _context.BasketItems.RemoveRange(model.BasketItems);
             await _context.Orders.AddAsync(order);
             await _context.SaveChangesAsync();

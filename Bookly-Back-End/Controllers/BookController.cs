@@ -193,5 +193,60 @@ namespace Bookly_Back_End.Controllers
 
             return RedirectToAction("Index", "Home");
         }
+
+        public async Task<IActionResult> AddToWishList(int? id)
+        {
+            if (id is null && id == 0) return BadRequest();
+            Book book = await _context.Books.FirstOrDefaultAsync(b => b.Id == id);
+
+            if (book == null) return NotFound();
+
+            if (User.Identity.IsAuthenticated)
+            {
+                AppUser existedUser = await _userManager.FindByNameAsync(User.Identity.Name);
+                WishListItem existed = await _context.WishListItems
+                    .FirstOrDefaultAsync(w => w.BookId == book.Id && w.AppUserId == existedUser.Id);
+                if(existed == null)
+                {
+                    WishListItem item = new WishListItem
+                    {
+                        AppUser = existedUser,
+                        Price = book.Price,
+                        Book = book,
+                        Count = 1
+                    };
+                    _context.WishListItems.Add(item);
+                }
+                else
+                {
+                    
+                }
+
+                await _context.SaveChangesAsync();     
+            }
+            return RedirectToAction("Index", "Home");
+        }
+
+        public async Task<IActionResult> RemoveWishList(int? id)
+        {
+            if (id is null && id == 0) return BadRequest();
+
+            Book book = await _context.Books.FirstOrDefaultAsync(b => b.Id == id);
+            if (book == null) return NotFound();
+            if (User.Identity.IsAuthenticated)
+            {
+                AppUser existedUser = await _userManager.FindByNameAsync(User.Identity.Name);
+                WishListItem existedWishList = await _context.WishListItems
+                    .FirstOrDefaultAsync(w => w.AppUserId == existedUser.Id && w.BookId == book.Id);
+                if(existedWishList != null)
+                {
+                    _context.WishListItems.Remove(existedWishList);
+                }
+
+                await _context.SaveChangesAsync();
+            }
+
+            return RedirectToAction("Index","Home");
+        }
     }
 }
