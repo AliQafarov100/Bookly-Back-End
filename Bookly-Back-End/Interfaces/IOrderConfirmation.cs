@@ -8,5 +8,6 @@ namespace Bookly_Back_End.Interfaces
     public interface IOrderConfirmation
     {
         public void Send(int id, string Message);
+        
     }
 }

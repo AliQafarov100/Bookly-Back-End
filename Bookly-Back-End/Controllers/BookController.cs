@@ -144,7 +144,7 @@ namespace Bookly_Back_End.Controllers
 
             }
            
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Index","Home");
         }
 
         public async Task<IActionResult> RemoveBasket(int? id)

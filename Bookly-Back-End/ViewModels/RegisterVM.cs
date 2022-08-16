@@ -12,7 +12,7 @@ namespace Bookly_Back_End.ViewModels
         public string FirstName{ get; set; }
         [Required, StringLength(25)]
         public string LastName { get; set; }
-        [Required, StringLength(25)]
+        [Required, DataType(DataType.EmailAddress)]
         public string Email { get; set; }
         [Required, StringLength(40)]
         public string Username { get; set; }

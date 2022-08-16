@@ -55,14 +55,14 @@
 
                                 <div class="container fluid">
                                     <div class="row">
-                                        @foreach (Book book in Model.AllBooks.Take(4))
+                                        @foreach (BookAuthor book in Model.BookAuthors.Take(4))
                                         {
                                             <div class="col-lg-3 col-md-12 col-sm-12 col-12">
                                                 <div class="book">
-                                                    <img src="/assets/Image/Library/@book.BookImages.FirstOrDefault(i => i.IsMain == true).ImagePath" alt="">
+                                                    <img src="/assets/Image/Library/@book.Book.BookImages.FirstOrDefault(i => i.IsMain == true).ImagePath" alt="">
                                                     <div class="book-info">
                                                         <a href="">
-                                                            <span>@book.Name</span><span class="ms-2">$@book.Price</span>
+                                                            <span>@book.Book.Name</span><span class="ms-2">$@book.Book.Price</span>
                                                         </a>
                                                     </div>
                                                 </div>
@@ -108,7 +108,7 @@
                         <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
                             <li><a href="">Home</a></li>
                             <li class="fluid-controll">
-                                <a href="Collections.html" class="category"
+                                <a asp-controller="Book" asp-action="Index" class="category"
                                    style="color: black;">
                                     <span>Genres</span><span class="ms-3">
                                         <i class="fa-solid fa-sort-down"></i>
@@ -269,7 +269,7 @@
             <div class="row mt-5">
                 <div class="col-lg-5">
                     <div class="owl-one owl-carousel owl-theme">
-                        @foreach (Book bestBook in Model.AnotherBooks.Where(b => b.IsBest == true))
+                        @foreach (BookAuthor bestBook in Model.BookAuthors.Where(b => b.Book.IsBest == true))
                         {
                             <div class="col-md-6 col-sm-6 col-12">
                                 <div class="infos-book">
@@ -285,7 +285,7 @@
                                                 <a href=""><i class="fa-solid fa-magnifying-glass"></i></a>
                                             </div>
                                         </div>
-                                        <img src="~/assets/Image/Library/@bestBook.BookImages.FirstOrDefault(i => i.IsMain == true).ImagePath" alt="">
+                                        <img src="~/assets/Image/Library/@bestBook.Book.BookImages.FirstOrDefault(i => i.IsMain == true).ImagePath" alt="">
                                     </div>
                                     <div class="detail mt-3">
                                         <p>
@@ -294,15 +294,15 @@
 
                                             }
                                         </p>
-                                        <strong>@bestBook.Name</strong>
-                                        @if (bestBook.DiscountId != null && bestBook.DiscountId != 4)
+                                        <strong>@bestBook.Book.Name</strong>
+                                        @if (bestBook.Book.DiscountId != null && bestBook.Book.DiscountId != 4)
                                         {
-                                            <span>$@(bestBook.Price - ((bestBook.Price * bestBook.Discount?.DiscountPercent) / 100))</span>
-                                            <span class="ms-2"><del>$@bestBook.Price</del></span>
+                                            <span>$@(bestBook.Book.Price - ((bestBook.Book.Price * bestBook.Book.Discount?.DiscountPercent) / 100))</span>
+                                            <span class="ms-2"><del>$@bestBook.Book.Price</del></span>
                                         }
                                         else
                                         {
-                                            <span>$@bestBook.Price</span>
+                                            <span>$@bestBook.Book.Price</span>
                                         }
                                     </div>
                                 </div>
@@ -310,45 +310,41 @@
                         }
                     </div>
                 </div>
-                @foreach (Author bestAuthor in Model.Authors.Where(a => a.IsBest == true))
-                {
-                    <div class="col-lg-7">
-                        <div class="author-info row d-flex justify-content-between">
-                            <div class="author-image col-lg-6">
-                                <div class="social-medias">
-                                    @foreach (AuthorSocialMedia socialMedia in Model.AuthorSocialMedias.Where(s => s.AuthorId == bestAuthor.Id))
-                                    {
-                                        <i class="@socialMedia.SocialMedia.Icon"></i>
-                                    }
-                                </div>
-                                <img src="~/assets/Image/AuthorImage/@bestAuthor.Image" alt="">
+                <div class="col-lg-7">
+                    <div class="author-info row d-flex justify-content-between">
+                        <div class="author-image col-lg-6">
+                            <div class="social-medias">
+                                @foreach (AuthorSocialMedia socialMedia in Model.Author.AuthorSocialMedias.Where(s => s.AuthorId == Model.Author.Id))
+                                {
+                                    <i class="@socialMedia.SocialMedia?.Icon"></i>
+                                }
                             </div>
-                            <div class="awards col-lg-6">
-                                <div class="name d-flex justify-content-between">
-                                    <strong>@bestAuthor.FullName</strong>
-                                    <p>-author</p>
-                                </div>
-                                <div class="words">
-                                    <p>
-                                        "@bestAuthor.Comments"
-                                    </p>
-                                </div>
-                                <div class="myAwards mt-3">
-                                    <h5>My Awards</h5>
-                                    <div class="award-image row mt-3">
-                                        @foreach (AuthorAward authorAward in Model.AuthorAwards.Where(aw => aw.AuthorId == bestAuthor.Id))
-                                        {
-                                            <div class="col-lg-4 col-md-6 col-sm-6 col-6 award-img">
-                                                <img src="~/assets/Image/Awards/@authorAward.Award.Image" alt="">
-                                            </div>
-                                        }
-                                    </div>
+                            <img src="~/assets/Image/AuthorImage/@Model.Author.Image" alt="">
+                        </div>
+                        <div class="awards col-lg-6">
+                            <div class="name d-flex justify-content-between">
+                                <strong>@Model.Author.FullName</strong>
+                                <p>-author</p>
+                            </div>
+                            <div class="words">
+                                <p>
+                                    "@Model.Author.Comments"
+                                </p>
+                            </div>
+                            <div class="myAwards mt-3">
+                                <h5>My Awards</h5>
+                                <div class="award-image row mt-3">
+                                    @foreach (AuthorAward authorAward in Model.Author.AuthorAwards.Where(aw => aw.AuthorId == Model.Author.Id))
+                                    {
+                                        <div class="col-lg-4 col-md-6 col-sm-6 col-6 award-img">
+                                            <img src="~/assets/Image/Awards/@authorAward.Award?.Image" alt="">
+                                        </div>
+                                    }
                                 </div>
                             </div>
                         </div>
                     </div>
-                }
-
+                </div>
             </div>
         </div>
     </section>
@@ -372,7 +368,7 @@
             <h4 class="text-center">@service.GetData().Result.FirstOrDefault(i => i.Key == "Deals").Value</h4>
             <div class="line"></div>
             <div class="row">
-                @foreach (Book dealBook in Model.AnotherBooks.Where(b => b.IsDailyDeal == true))
+                @foreach (BookAuthor dealBook in Model.BookAuthors.Where(b => b.Book.IsDailyDeal == true))
                 {
                     <div class="col-lg-3 col-md-6 col-sm-6 col-12" data-aos="flip-down">
                         <div class="info-book">
@@ -388,7 +384,7 @@
                                         <a href=""><i class="fa-solid fa-magnifying-glass"></i></a>
                                     </div>
                                 </div>
-                                <img src="~/assets/Image/Library/@dealBook.BookImages.FirstOrDefault(i => i.IsMain == true).ImagePath" alt="">
+                                <img src="~/assets/Image/Library/@dealBook.Book.BookImages.FirstOrDefault(i => i.IsMain == true).ImagePath" alt="">
                             </div>
                             <div class="detail mt-3">
                                 <p>
@@ -397,15 +393,15 @@
                                         @author.Author.FullName.ToString();
                                     }
                                 </p>
-                                <strong>@dealBook.Name</strong> <br />
-                                @if (dealBook.DiscountId != null && dealBook.DiscountId != 4)
+                                <strong>@dealBook.Book.Name</strong> <br />
+                                @if (dealBook.Book.DiscountId != null && dealBook.Book.DiscountId != 4)
                                 {
-                                    <span>$@(dealBook.Price - ((dealBook.Price * dealBook.Discount?.DiscountPercent) / 100))</span>
-                                    <span class="ms-2"><del>$@dealBook.Price</del></span>
+                                    <span>$@(dealBook.Book.Price - ((dealBook.Book.Price * dealBook.Book.Discount?.DiscountPercent) / 100))</span>
+                                    <span class="ms-2"><del>$@dealBook.Book.Price</del></span>
                                 }
                                 else
                                 {
-                                    <span>$@dealBook.Price</span>
+                                    <span>$@dealBook.Book.Price</span>
                                 }
                             </div>
                         </div>

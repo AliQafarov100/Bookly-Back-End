@@ -34,6 +34,7 @@ namespace Bookly_Back_End
             services.AddScoped<IBookOperation, BookOperation>();
             services.AddScoped<ICrudOperation, CrudOperation>();
             services.AddScoped<IOrderConfirmation, OrderConfirmation>();
+            services.AddScoped<IQuery, Query>();
             services.AddControllersWithViews();
             services.AddDbContext<AppDbContext>(opt =>
             {
@@ -41,7 +42,7 @@ namespace Bookly_Back_End
             });
             services.AddIdentity<AppUser, IdentityRole>(opt =>
             {
-                
+
                 opt.User.RequireUniqueEmail = true;
 
                 opt.Password.RequireDigit = true;
@@ -52,9 +53,9 @@ namespace Bookly_Back_End
 
                 opt.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(5);
                 opt.Lockout.MaxFailedAccessAttempts = 3;
-
+                opt.SignIn.RequireConfirmedEmail = true;
                 opt.User.AllowedUserNameCharacters = "qwertyuiopasdfghjklzxcvbnm_1234567890";
-                opt.SignIn.RequireConfirmedEmail = false;
+                
             }).AddDefaultTokenProviders().AddEntityFrameworkStores<AppDbContext>();
             services.AddHttpContextAccessor();
         }

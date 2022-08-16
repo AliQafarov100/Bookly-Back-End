@@ -79,8 +79,8 @@ namespace Bookly_Back_End.Controllers
             smtp.Send(mail);
             TempData["Verify"] = true;
             await _userManager.AddToRoleAsync(appUser, Roles.Member.ToString());
-            await _signIn.SignInAsync(appUser, false);
 
+            await _signIn.SignInAsync(appUser, true);
             return RedirectToAction("Index", "Home");
         }
 
@@ -88,6 +88,7 @@ namespace Bookly_Back_End.Controllers
         {
             AppUser user = await _userManager.FindByEmailAsync(email);
             if (user == null) return BadRequest();
+            await _userManager.ConfirmEmailAsync(user, token);
 
             await _signIn.SignInAsync(user, true);
             TempData["Verified"] = true;

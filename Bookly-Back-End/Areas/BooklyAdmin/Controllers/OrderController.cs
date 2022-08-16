@@ -5,6 +5,7 @@ using System.Net;
 using System.Net.Mail;
 using System.Threading.Tasks;
 using Bookly_Back_End.DAL;
+using Bookly_Back_End.Extensions;
 using Bookly_Back_End.Interfaces;
 using Bookly_Back_End.Models;
 using Bookly_Back_End.ViewModels;
@@ -48,11 +49,12 @@ namespace Bookly_Back_End.Areas.BooklyAdmin.Controllers
             if (order == null) return NotFound();
             order.Status = true;
             order.AdminMessage = message;
+            
             _context.SaveChanges();
 
             _confirmation.Send(id, message);
 
-            return Json(new { status = 200 });
+            return Json(new { status = 200});
         }
         public async Task<IActionResult> Reject(string message,int id)
         {

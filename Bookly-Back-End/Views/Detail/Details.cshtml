@@ -352,21 +352,21 @@
                                     <div class="container col-lg-12 quantity-content">
                                         <div style="border: 1px solid #e9e9e9;" class="d-flex justify-content-start">
                                             @*class="col-lg-3 d-flex align-items-center justify-content-center">
-                                                <span class="quantity" asp-validation-for="@basket.Count">0</span>*@
+        <span class="quantity" asp-validation-for="@basket.Count">0</span>*@
                                             @{
                                                 int totalCounter = default;
-                                                for (totalCounter = default; totalCounter <= 3; totalCounter++)
-                                                {
 
-                                                }
-                                                <input min="1" type="number" asp-for="@totalCounter" value="@totalCounter" style="border: none;" />
                                                 BasketVM basket = await service.GetBasket();
+
                                                 if (basket != null)
                                                 {
+
                                                     foreach (BasketItemVM cookieItemVM in basket.BasketItemVMs)
                                                     {
-                                                        cookieItemVM.Count = totalCounter;
+                                                        basket.Count = cookieItemVM.Count;
                                                     }
+                                                    <input min="1" type="number" class="input" asp-for="@basket.BasketItemVMs.Count" style="border: none;" />
+                                                    <h1>@basket.Count</h1>
                                                 }
                                             }
 
@@ -548,6 +548,17 @@
 @section Scripts{
 
     <script src="~/assets/Js/product.js"></script>
+    @*<script>
+        $(document).ready(function () {
+            var input = $(".input").val();
+            var link = $(".customer").attr("href") + "?/value=" + input
+            fetch(link).then(resp => resp.json()).then(data => {
+                if (data.status == 200) {
+                    location.href = "loca"
+                }
+            })
+        })
+    </script>*@
 }
 
 

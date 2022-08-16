@@ -16,8 +16,8 @@ namespace Bookly_Back_End.Interfaces
         {
             _context = context;
         }
+        
         public IQueryable<BookAuthor> BookAuthors => _context.BookAuthors;
-
         public IQueryable<BookAuthor> GetBookByFilter(string category, string author, string highToLow,
             int? minPrice, int? maxPrice,string language,string format)
         {
@@ -77,5 +77,6 @@ namespace Bookly_Back_End.Interfaces
 
             return searchBooks;
         }
+       
     }
 }
