@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Bookly_Back_End.DAL;
+using Bookly_Back_End.Helpers;
 using Bookly_Back_End.Models;
 using Microsoft.EntityFrameworkCore;
 
@@ -18,7 +19,7 @@ namespace Bookly_Back_End.Interfaces
         }
         
         public IQueryable<BookAuthor> BookAuthors => _context.BookAuthors;
-        public IQueryable<BookAuthor> GetBookByFilter(string category, string author, string highToLow,
+        public IQueryable<BookAuthor> GetBookByFilter(string category, string author, string sortBy,
             int? minPrice, int? maxPrice,string language,string format)
         {
             var bookAuthors = _context.BookAuthors.AsQueryable();
@@ -43,10 +44,22 @@ namespace Bookly_Back_End.Interfaces
             {
                 bookAuthors = bookAuthors.Where(b => b.Book.Price >= minPrice && b.Book.Price <= maxPrice);
             }
-            switch (highToLow)
+            switch (sortBy)
             {
-                case "high":
+                case "highTolow":
                     bookAuthors = bookAuthors.OrderByDescending(b => b.Book.Price);
+                    break;
+                case "lowTohigh":
+                    bookAuthors = bookAuthors.OrderBy(b => b.Book.Price);
+                    break;
+                case "AtoZ":
+                    bookAuthors = bookAuthors.OrderBy(b => b.Book.Name);
+                    break;
+                case "ZtoA":
+                    bookAuthors = bookAuthors.OrderByDescending(b => b.Book.Name);
+                    break;
+                case "BestSelling":
+                    bookAuthors = bookAuthors.Where(b => b.Book.IsBest == true);
                     break;
                 default:
                     bookAuthors = bookAuthors.AsQueryable();

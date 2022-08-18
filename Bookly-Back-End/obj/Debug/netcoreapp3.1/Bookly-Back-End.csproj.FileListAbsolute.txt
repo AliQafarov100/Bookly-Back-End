@@ -369,7 +369,6 @@ C:\Users\M S I\Desktop\Bookly-Back-End\Bookly-Back-End\obj\Debug\netcoreapp3.1\R
 C:\Users\M S I\Desktop\Bookly-Back-End\Bookly-Back-End\obj\Debug\netcoreapp3.1\Razor\Areas\BooklyAdmin\Views\User\Users.cshtml.g.cs
 C:\Users\M S I\Desktop\Bookly-Back-End\Bookly-Back-End\obj\Debug\netcoreapp3.1\Razor\Areas\BooklyAdmin\Views\User\AppointRole.cshtml.g.cs
 C:\Users\M S I\Desktop\Bookly-Back-End\Bookly-Back-End\obj\Debug\netcoreapp3.1\Razor\Areas\BooklyAdmin\Views\User\Lockout.cshtml.g.cs
-C:\Users\M S I\Desktop\Bookly-Back-End\Bookly-Back-End\obj\Debug\netcoreapp3.1\Razor\Areas\BooklyAdmin\Views\User\UnLocked.cshtml.g.cs
 C:\Users\M S I\Desktop\Bookly-Back-End\Bookly-Back-End\obj\Debug\netcoreapp3.1\Razor\Views\Brand\Brands.cshtml.g.cs
 C:\Users\M S I\Desktop\Bookly-Back-End\Bookly-Back-End\obj\Debug\netcoreapp3.1\Razor\Areas\BooklyAdmin\Views\History\History.cshtml.g.cs
 C:\Users\M S I\Desktop\Bookly-Back-End\Bookly-Back-End\obj\Debug\netcoreapp3.1\Razor\Views\Best\Best.cshtml.g.cs
@@ -394,3 +393,14 @@ C:\Users\M S I\Desktop\Bookly-Back-End\Bookly-Back-End\obj\Debug\netcoreapp3.1\R
 C:\Users\M S I\Desktop\Bookly-Back-End\Bookly-Back-End\obj\Debug\netcoreapp3.1\Razor\Areas\BooklyAdmin\Views\Order\Edit.cshtml.g.cs
 C:\Users\M S I\Desktop\Bookly-Back-End\Bookly-Back-End\obj\Debug\netcoreapp3.1\Razor\Views\WishList\WishList.cshtml.g.cs
 C:\Users\M S I\Desktop\Bookly-Back-End\Bookly-Back-End\obj\Debug\netcoreapp3.1\Bookly-Back-End.csproj.AssemblyReference.cache
+C:\Users\M S I\Desktop\Bookly-Back-End\Bookly-Back-End\bin\Debug\netcoreapp3.1\Braintree.dll
+C:\Users\M S I\Desktop\Bookly-Back-End\Bookly-Back-End\bin\Debug\netcoreapp3.1\System.Xml.XPath.XmlDocument.dll
+C:\Users\M S I\Desktop\Bookly-Back-End\Bookly-Back-End\obj\Debug\netcoreapp3.1\Razor\Views\Book\Purchase.cshtml.g.cs
+C:\Users\M S I\Desktop\Bookly-Back-End\Bookly-Back-End\obj\Debug\netcoreapp3.1\Razor\Views\Detail\Purchase.cshtml.g.cs
+C:\Users\M S I\Desktop\Bookly-Back-End\Bookly-Back-End\obj\Debug\netcoreapp3.1\Razor\Views\Blog\Blogs.cshtml.g.cs
+C:\Users\M S I\Desktop\Bookly-Back-End\Bookly-Back-End\obj\Debug\netcoreapp3.1\Razor\Areas\BooklyAdmin\Views\Blogs\Create.cshtml.g.cs
+C:\Users\M S I\Desktop\Bookly-Back-End\Bookly-Back-End\obj\Debug\netcoreapp3.1\Razor\Areas\BooklyAdmin\Views\Blogs\Delete.cshtml.g.cs
+C:\Users\M S I\Desktop\Bookly-Back-End\Bookly-Back-End\obj\Debug\netcoreapp3.1\Razor\Areas\BooklyAdmin\Views\Blogs\Details.cshtml.g.cs
+C:\Users\M S I\Desktop\Bookly-Back-End\Bookly-Back-End\obj\Debug\netcoreapp3.1\Razor\Areas\BooklyAdmin\Views\Blogs\Edit.cshtml.g.cs
+C:\Users\M S I\Desktop\Bookly-Back-End\Bookly-Back-End\obj\Debug\netcoreapp3.1\Razor\Areas\BooklyAdmin\Views\Blogs\Index.cshtml.g.cs
+C:\Users\M S I\Desktop\Bookly-Back-End\Bookly-Back-End\obj\Debug\netcoreapp3.1\Razor\Views\FAQ\FAQ.cshtml.g.cs

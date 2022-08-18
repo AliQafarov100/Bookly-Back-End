@@ -109,7 +109,7 @@
                                                                                     $
                                                                                     @if (userBasket.Book.DiscountId != null)
                                                                                     {
-                                                                                        @(userBasket.Book.Price - ((userBasket.Book.Price * userBasket.Book.Discount.DiscountPercent) / 100))
+                                                                                        @((userBasket.Book.Price - ((userBasket.Book.Price * userBasket.Book.Discount.DiscountPercent) / 100)))
                                                                                     }
                                                                                     else
                                                                                     {

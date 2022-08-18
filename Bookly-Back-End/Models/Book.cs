@@ -10,6 +10,7 @@ namespace Bookly_Back_End.Models
 {
     public class Book
     {
+        [Key]
         public int Id { get; set; }
         [Required]
         public string Name { get; set; }
@@ -18,6 +19,7 @@ namespace Bookly_Back_End.Models
         [Required]
         [Column(TypeName = "decimal(6,2)")]
         public decimal Price { get; set; }
+        public int Stock { get; set; }
         public int? DiscountId { get; set; }
         public Discount Discount { get; set; }
         public bool IsBest { get; set; }
@@ -43,5 +45,9 @@ namespace Bookly_Back_End.Models
         public int MainId { get; set; }
         [NotMapped]
         public List<int> AuthorIds { get; set; }
+        [NotMapped]
+        public int Counter { get; set; }
+        [NotMapped]
+        public List<int> Counters { get; set; }
     }
 }

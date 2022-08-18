@@ -1,0 +1,86 @@
+﻿@model Bookly_Back_End.Models.Blog
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>Blog</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit" method="post" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <div class="form-group">
+                <div class="for-image">
+                    <strong style="position: relative; top: 15px; left: 140px;" class="removeable">Remove</strong>
+                    <img style="width: 200px; height:300px" src="~/assets/Image/Blog/@Model.Photo" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label asp-for="Date" class="control-label"></label>
+                <input asp-for="Date" class="form-control" />
+                <span asp-validation-for="Date" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Title" class="control-label"></label>
+                <input asp-for="Title" class="form-control" />
+                <span asp-validation-for="Title" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SubTitle" class="control-label"></label>
+                <input asp-for="SubTitle" class="form-control" />
+                <span asp-validation-for="SubTitle" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Image" class="control-label"></label>
+                <input asp-for="Image" class="form-control" />
+                <span asp-validation-for="Image" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index" class="btn btn-primary">Back to List</a>
+</div>
+
+@section Css
+{
+    <style>
+        .for-image:hover img {
+            transition: 0.7s;
+            opacity: 0.6;
+        }
+
+        .for-image img {
+            width: 200px;
+            height: 300px;
+        }
+
+        .for-image:hover .removeable {
+            transition: 0.7s;
+            opacity: 1;
+        }
+
+        .removeable {
+            z-index: 5;
+            color: black;
+            cursor: pointer;
+            opacity: 0;
+        }
+    </style>
+}
+@section Scripts
+{
+    <script>
+        $(".removeable").click(function () {
+            this.parentNode.remove();
+        })
+    </script>
+}

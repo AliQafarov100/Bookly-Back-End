@@ -32,5 +32,8 @@ namespace Bookly_Back_End.Interfaces
         public IQueryable<Author> Authors => _context.Authors.AsQueryable();
 
         public IQueryable<Blog> Blogs => _context.Blogs.AsQueryable();
+        public IQueryable<Format> Formats => _context.Formats.AsQueryable();
+        public IQueryable<Language> Languages => _context.Languages.AsQueryable();
+        public IQueryable<FilteringPrice> FilteringPrices => _context.FilteringPrices.AsQueryable();
     }
 }

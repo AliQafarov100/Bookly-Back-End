@@ -76,8 +76,8 @@
                                 <div class="site-pages">
                                     <ul>
                                         <li><a asp-controller="About" asp-action="About">About Us</a></li>
-                                        <li><a href="Blog.html">Blog</a></li>
-                                        <li><a href="FAQ.html">FAQ's</a></li>
+                                        <li><a asp-controller="Blog" asp-action="Blog">Blog</a></li>
+                                        <li><a asp-controller="FAQ" asp-action="FAQ">FAQ's</a></li>
                                         <li><a href="Contact.html">Contact us</a></li>
                                     </ul>
                                 </div>
@@ -99,9 +99,9 @@
                     </div>
                     <div class="offcanvas-body">
                         <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
-                            <li><a href="">Home</a></li>
+                            <li><a asp-controller="Home" asp-action="Index">Home</a></li>
                             <li class="fluid-controll">
-                                <a href="Collections.html" class="category"
+                                <a asp-controller="Book" asp-action="Index" class="category"
                                    style="color: black;">
                                     <span>Categories</span><span class="ms-3">
                                         <i class="fa-solid fa-sort-down"></i>
@@ -109,8 +109,8 @@
 
                                 </a>
                             </li>
-                            <li><a href="" style="color: black;">Brands</a></li>
-                            <li><a href="" style="color: black;">Best Sellers</a></li>
+                            <li><a asp-controller="Brand" asp-action="Brands" style="color: black;">Brands</a></li>
+                            <li><a asp-controller="Best" asp-action="Best" style="color: black;">Best Sellers</a></li>
                             <li>
                                 <a href="" style="color: black;">
                                     <span>Pages</span><span class="ms-3">
@@ -159,8 +159,8 @@
                 <div class="texts">
                     <h4 class="text-center">Product</h4>
                     <ul class="d-flex justify-content-around">
-                        <li><a href="Index.html">Home</a></li>
-                        <li><a href="">About us</a></li>
+                        <li><a asp-controller="Home" asp-action="Index">Home</a></li>
+                        <li><a asp-controller="About" asp-action="About">About us</a></li>
                     </ul>
                 </div>
             </div>

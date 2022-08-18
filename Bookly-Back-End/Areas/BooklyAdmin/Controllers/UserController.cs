@@ -83,37 +83,20 @@ namespace Bookly_Back_End.Areas.BooklyAdmin.Controllers
 
         public async Task<IActionResult> Lockout(AppUser appUser)
         {
-            var user = await _userManager.Users.FirstOrDefaultAsync(u => u.Id == appUser.Id);
+            AppUser user = await _userManager.Users.FirstOrDefaultAsync(u => u.Id == appUser.Id);
 
             if (user == null) return NotFound();
 
-            user.LockoutEnd = DateTime.Now.AddYears(100);
-
-
+            if (appUser.IsBlock)
+            {
+                user.LockoutEnd = DateTime.Now.AddYears(100);
+            }
+            else
+            {
+                user.LockoutEnd = null;
+            }
+            user.IsBlock = appUser.IsBlock;
             await _userManager.UpdateAsync(user);
-            return RedirectToAction(nameof(Users));
-        }
-        public async Task<IActionResult> UnLocked(string id)
-        {
-            var user = await _userManager.Users.FirstOrDefaultAsync(u => u.Id == id);
-
-            if (user == null) return NotFound();
-
-            return View(user);
-        }
-
-        [HttpPost]
-        [AutoValidateAntiforgeryToken]
-        public async Task<IActionResult> Unlocked(AppUser appUser)
-        {
-            var user = await _userManager.Users.FirstOrDefaultAsync(u => u.Id == appUser.Id);
-
-            if (user == null) return NotFound();
-
-            user.LockoutEnd = null;
-
-            await _userManager.UpdateAsync(user);
-
             return RedirectToAction(nameof(Users));
         }
     }

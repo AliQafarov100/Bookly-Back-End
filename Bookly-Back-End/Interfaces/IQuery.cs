@@ -17,5 +17,8 @@ namespace Bookly_Back_End.Interfaces
         IQueryable<Support> Supports { get; }
         IQueryable<Author> Authors { get; }
         IQueryable<Blog> Blogs { get; }
+        IQueryable<Language> Languages { get; }
+        IQueryable<Format> Formats { get; }
+        IQueryable<FilteringPrice> FilteringPrices { get;}
     }
 }

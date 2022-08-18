@@ -6,6 +6,7 @@ using Bookly_Back_End.DAL;
 using Bookly_Back_End.Interfaces;
 using Bookly_Back_End.Models;
 using Bookly_Back_End.ViewModels;
+using Braintree;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -18,18 +19,23 @@ namespace Bookly_Back_End.Controllers
         private readonly AppDbContext _context;
         private readonly UserManager<AppUser> _userManager;
         private readonly IBookOperation _repository;
+        private readonly IQuery _query;
+        private readonly IBraintreeService _braintreeService;
 
-        public BookController(AppDbContext context,UserManager<AppUser> userManager,IBookOperation repository)
+        public BookController(AppDbContext context,UserManager<AppUser> userManager,IBookOperation repository,IQuery query
+            ,IBraintreeService braintreeService)
         {
             _context = context;
             _userManager = userManager;
             _repository = repository;
+            _query = query;
+            _braintreeService = braintreeService;
         }
-        public async Task<IActionResult> Index(string category,string highToLow,
+        public async Task<IActionResult> Index(string category,string sortBy,
             string author,int? minimum,int? maximum, string language,string format,int page = 1)
         {
             ViewBag.Author = author;
-            var query = _repository.GetBookByFilter(category,author,highToLow,minimum,
+            var query = _repository.GetBookByFilter(category,author,sortBy,minimum,
                 maximum,language,format);
 
             ViewBag.CurrentMaximum = maximum;
@@ -39,44 +45,33 @@ namespace Bookly_Back_End.Controllers
             ViewBag.CurentFormat = format;
             ViewBag.TotalPage = Math.Ceiling(((decimal)await query.CountAsync()) / 12);
             ViewBag.CurrentPage = page;
-            ViewBag.High = highToLow;
-            List<Category> categories = await _context.Categories.ToListAsync();
-            List<Book> books = await _context.Books.Include(i => i.BookImages)
-                .Include(a => a.BookAuthors).ToListAsync();
-            List<Format> formats = await _context.Formats.ToListAsync();
-            List<Language> languages = await _context.Languages.ToListAsync();
-            List<Author> authors = await _context.Authors.Include(a => a.BookAuthors).ToListAsync();
-            List<Book> anotherBooks = await _context.Books.Include(i => i.BookImages).
-                Include(a => a.BookAuthors).ToListAsync();
-            List<BookAuthor> bookAuthors = await query.Skip((page - 1) * 12).ToListAsync();
-            List<Discount> discounts = await _context.Discounts.ToListAsync();
-            List<FilteringPrice> filteringPrices = await _context.FilteringPrices.ToListAsync();
-            
-            
+            ViewBag.High = sortBy;
+            ViewBag.Sort = sortBy;
+
+            List<BookAuthor> bookAuthors = await query.Skip((page - 1) * 12)
+                 .Include(b => b.Book).ThenInclude(b => b.BookImages).Include(b => b.Book.Discount)
+                 .Include(b => b.Author).ToListAsync();
+
             BookVM model = new BookVM
             {
-                Formats = formats,
-                Languages = languages,
-                Categories = categories,
-                Authors = authors,
+                Formats = await _query.Formats.ToListAsync(),
+                Languages = await _query.Languages.ToListAsync(),
+                Categories = await _query.Categories.ToListAsync(),
+                Authors = await _query.Authors.ToListAsync(),
                 BookAuthors = bookAuthors,
-                AllBooks = books,
-                AnotherBooks = anotherBooks,
-                Discounts = discounts,
-                FilteringPrices = filteringPrices
+                FilteringPrices = await _query.FilteringPrices.ToListAsync()
             };
             return View(model);
         }
 
-
-        public async Task<IActionResult> AddBasket(int? id)
+        public async Task<IActionResult> AddBasket(int count,Book books)
         {
-            if (id is null && id == 0)
-            {
-                return NotFound();
-            }
-            Book book = await _context.Books.FirstOrDefaultAsync(b => b.Id == id);
            
+            Book book = await _context.Books.FirstOrDefaultAsync(b => b.Id == books.Id);
+            TempData["Unavailable"] = null;
+            book.Counter = count;
+            books.Counter = count;
+            _context.SaveChanges();
             if (book == null) return NotFound();
             if (User.Identity.IsAuthenticated)
             {
@@ -89,7 +84,7 @@ namespace Bookly_Back_End.Controllers
                     {
                         Book = book,
                         AppUser = user,
-                        Count = 1,
+                        Count = book.Counter,
                         Price = book.Price
 
                     };
@@ -97,9 +92,9 @@ namespace Bookly_Back_End.Controllers
                 }
                 else
                 {
-                    existed.Count++;
+                    existed.Count += book.Counter;
                 }
-                
+
                 await _context.SaveChangesAsync();
             }
             else
@@ -113,7 +108,7 @@ namespace Bookly_Back_End.Controllers
                     BasketCookieItemVM cookie = new BasketCookieItemVM
                     {
                         Id = book.Id,
-                        Count = 1
+                        Count = book.Counter
                     };
                     basket.Add(cookie);
                     basketStr = JsonConvert.SerializeObject(basket);
@@ -123,19 +118,29 @@ namespace Bookly_Back_End.Controllers
                     basket = JsonConvert.DeserializeObject<List<BasketCookieItemVM>>(basketStr);
 
                     BasketCookieItemVM existedCookie = basket.FirstOrDefault(c => c.Id == book.Id);
-                    if(existedCookie == null)
+                    if (existedCookie == null)
                     {
                         BasketCookieItemVM cookie = new BasketCookieItemVM
                         {
                             Id = book.Id,
-                            Count = 1
+                            Count = book.Counter
                         };
 
                         basket.Add(cookie);
                     }
                     else
                     {
-                        existedCookie.Count++;
+
+                        existedCookie.Count += book.Counter;
+                        books.Stock -= books.Counter;
+                        _context.SaveChanges();
+                        book.Stock = books.Stock;
+                        
+                        if (book.Stock == 0)
+                        {
+                            TempData["Unavailable"] = true;
+                        }
+                        
                     }
                 }
                 basketStr = JsonConvert.SerializeObject(basket);
@@ -143,10 +148,9 @@ namespace Bookly_Back_End.Controllers
                 HttpContext.Response.Cookies.Append("Basket", basketStr);
 
             }
-           
-            return RedirectToAction("Index","Home");
-        }
 
+            return Json(new { status = 200 });
+        }
         public async Task<IActionResult> RemoveBasket(int? id)
         {
             if (id is null && id == 0) return NotFound();

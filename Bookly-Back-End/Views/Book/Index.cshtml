@@ -1,4 +1,5 @@
-﻿@model BookVM
+﻿@using Bookly_Back_End.Helpers
+@model BookVM
 @{
     ViewData["Title"] = "Index";
 
@@ -23,14 +24,14 @@
 
                                 <div class="container fluid">
                                     <div class="row">
-                                        @foreach (Book book in Model.AllBooks.Take(4))
+                                        @foreach (BookAuthor book in Model.BookAuthors.Take(4))
                                         {
                                             <div class="col-lg-3 col-md-12 col-sm-12 col-12">
                                                 <div class="book">
-                                                    <img src="/assets/Image/Library/@book.BookImages.FirstOrDefault(i => i.IsMain == true).ImagePath" alt="">
+                                                    <img src="/assets/Image/Library/@book.Book.BookImages.FirstOrDefault(i => i.IsMain == true).ImagePath" alt="">
                                                     <div class="book-info">
                                                         <a href="">
-                                                            <span>@book.Name</span><span class="ms-2">$@book.Price</span>
+                                                            <span>@book.Book.Name</span><span class="ms-2">$@book.Book.Price</span>
                                                         </a>
                                                     </div>
                                                 </div>
@@ -51,8 +52,8 @@
                                 <div class="site-pages">
                                     <ul>
                                         <li><a asp-controller="About" asp-action="About">About Us</a></li>
-                                        <li><a href="Blog.html">Blog</a></li>
-                                        <li><a href="FAQ.html">FAQ's</a></li>
+                                        <li><a asp-controller="Blog" asp-action="Blogs">Blog</a></li>
+                                        <li><a asp-controller="FAQ" asp-action="FAQ">FAQ's</a></li>
                                         <li><a href="Contact.html">Contact us</a></li>
                                     </ul>
                                 </div>
@@ -75,11 +76,24 @@
                     </div>
                     <div class="offcanvas-body">
                         <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
-                            <li class="nav-item">
-                                <a class="nav-link active" aria-current="page" href="#">Home</a>
+                            <li><a asp-controller="Home" asp-action="Index">Home</a></li>
+                            <li class="fluid-controll">
+                                <a asp-controller="Book" asp-action="Index" class="category"
+                                   style="color: black;">
+                                    <span>Categories</span><span class="ms-3">
+                                        <i class="fa-solid fa-sort-down"></i>
+                                    </span>
+
+                                </a>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link" style="color: black;" href="#">Link</a>
+                            <li><a asp-controller="Brand" asp-action="Brands" style="color: black;">Brands</a></li>
+                            <li><a asp-controller="Best" asp-action="Best" style="color: black;">Best Sellers</a></li>
+                            <li>
+                                <a href="" style="color: black;">
+                                    <span>Pages</span><span class="ms-3">
+                                        <i class="fa-solid fa-sort-down"></i>
+                                    </span>
+                                </a>
                             </li>
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" style="color: black;" href="#"
@@ -111,43 +125,6 @@
                                 Search
                             </button>
                         </form>
-                    </div>
-                    <div class="container fluid">
-                        <div class="row">
-                            <div class="col-lg-3 col-md-12 col-sm-12 col-12">
-                                <div class="book">
-                                    <img src="/assets/Image/Category Book/shop-new-100.webp" alt="">
-                                    <div class="book-info">
-                                        <a href=""><span>Endless Summer</span><span class="ms-2">$210</span></a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-3 col-md-12 col-sm-12 col-12">
-                                <div class="book">
-                                    <img src="/assets/Image/Category Book/shop-new-30.webp" alt="">
-                                    <div class="book-info">
-                                        <a href=""><span>Fresh Healthy Eat</span><span class="ms-2">$110</span></a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-3">
-                                <div class="book">
-                                    <img src="/assets/Image/Category Book/shop-new-4.webp" alt="">
-                                    <div class="book-info">
-                                        <a href=""><span>Book for a Cause</span><span class="ms-2">$110</span></a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-3 col-md-12 col-sm-12 col-12">
-                                <div class="book">
-                                    <img src="/assets/Image/Category Book/shop-new-95_b0b53360-a171-427b-9dc6-0bf965bcfdae.webp"
-                                         alt="">
-                                    <div class="book-info">
-                                        <a href=""><span>Adventurous Eating</span><span class="ms-2">$500</span></a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -245,7 +222,7 @@
                     <div class="bookSlider mt-5 col-lg-12">
                         <div class="sliderItem">
                             <div class="sliders d-flex">
-                                @foreach (Book book in Model.AnotherBooks.OrderByDescending(b => b.Id).Where(b => b.IsBest == true))
+                                @foreach (BookAuthor book in Model.BookAuthors.OrderByDescending(b => b.Id).Where(b => b.Book.IsBest == true))
                                 {
                                     <div class="slider">
                                         <div class="slider-book">
@@ -261,7 +238,7 @@
                                                         <a href=""><i class="fa-solid fa-magnifying-glass"></i></a>
                                                     </div>
                                                 </div>
-                                                <img src="/assets/Image/Library/@book.BookImages.FirstOrDefault(i => i.IsMain == true)?.ImagePath" alt="">
+                                                <img src="/assets/Image/Library/@book.Book.BookImages.FirstOrDefault(i => i.IsMain == true)?.ImagePath" alt="">
                                             </div>
                                             <div class="detail mt-3">
                                                 <p>
@@ -270,16 +247,16 @@
                                                         @author.Author.FullName.ToString();
                                                     }
                                                 </p>
-                                                <strong>@book.Name</strong>
+                                                <strong>@book.Book.Name</strong>
                                                 <p>
-                                                    @if (book.DiscountId != null)
+                                                    @if (book.Book.DiscountId != null)
                                                     {
-                                                        <span>$@(book.Price - ((book.Price * book.Discount?.DiscountPercent) / 100))</span>
-                                                        <span class="ms-2"><del>$@book.Price</del></span>
+                                                        <span>$@(book.Book.Price - ((book.Book.Price * book.Book.Discount?.DiscountPercent) / 100))</span>
+                                                        <span class="ms-2"><del>$@book.Book.Price</del></span>
                                                     }
                                                     else
                                                     {
-                                                        <span>$@book.Price</span>
+                                                        <span>$@book.Book.Price</span>
                                                     }
 
                                                 </p>
@@ -309,24 +286,14 @@
                             </div>
                             <div class="col-lg-4 mb-3">
                                 <small>Sort by</small>
-                                <form action="/Book" class="form" method="post">
-                                    @*<select onchange="this.form.submit()">
-                                            <option value="">Featured</option>
-                                            <option value="">Best selling</option>
-                                            <option value="">Alphabetcally,A-Z</option>
-                                            <option value="">Alphabetcally,Z-A</option>
-                                            <a asp-controller="Book" asp-action="Index" asp-route-highToLow="@ViewBag.High">
-                                               <option value="" class="decrease">Price,high to low</option>
-                                            </a>
-                                        </select>*@
-                                    <select onchange="this.form.submit()" aria-label="Default select example">
-                                        <option >Open this select menu</option>
-                                        <option value="1">One</option>
-                                        <option value="2">Two</option>
-                                        <option value="3">Three</option>
-                                    </select>
-                                </form>
-
+                                <select class="sortby-select select-form form-control">
+                                    <option selected>Select book by..</option>
+                                    <option value="@Url.Action("Index","Book",new { sortBy = Sorted.BestSelling})">Best selling</option>
+                                    <option value="@Url.Action("Index","Book",new { sortBy = Sorted.AtoZ})">Alphabetcally,A-Z</option>
+                                    <option value="@Url.Action("Index","Book",new { sortBy = Sorted.ZtoA})">Alphabetcally,Z-A</option>
+                                    <option value="@Url.Action("Index","Book",new { sortBy = Sorted.highTolow})">Price,high to low</option>
+                                    <option value="@Url.Action("Index","Book",new { sortBy = Sorted.lowTohigh})">Price,low to high</option>
+                                </select>
                             </div>
                         </div>
                         <div class="row booking mt-5">
@@ -388,6 +355,7 @@
                                                asp-route-category="@ViewBag.CurentCategory"
                                                asp-route-language="@ViewBag.CurentLanguage"
                                                asp-route-format="@ViewBag.CurentFormat"
+                                               asp-route-sortBy="@ViewBag.Sort"
                                                asp-route-page="@i">@i</a>
                                         </li>
                                     }
@@ -408,6 +376,11 @@
 
 @section Scripts{
     <script src="~/assets/Js/collection.js"></script>
-
+    <script>
+        $(".sortby-select").on("change", function () {
+            let url = $(this).val();
+            window.location.href = `${url}`;
+        })
+    </script>
 }
 

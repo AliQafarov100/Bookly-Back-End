@@ -1,23 +1,16 @@
-let messages = document.querySelector(".messages");
-let message = document.querySelector(".text-message");
-let loc = document.querySelector(".order-country");
-let order = document.querySelector(".location-order");
-let count = 0;
+let updates = document.querySelectorAll(".update");
 
-messages.addEventListener("click",function(){
-    message.style.display = "block";
-    this.style.display = "none";
-});
-
-loc.addEventListener("click",function(){
-    count++;
-    if(count % 2 == 0){
-        order.style.display = "block";
-    }
-    else{
-        order.style.display = "none";
-    }
-    
+updates.forEach(update => {
+    update.addEventListener("click", function (e) {
+        e.preventDefault();
+        var data = document.getElementById("stock").value;
+        let link = update.getAttribute("href") + "/?count=" + data
+        fetch(link).then(resp => resp.json()).then(datas => {
+            if (datas.status == 200) {
+                location.href = "https://localhost:44339/Basket/Cart";
+            }
+        })
+    })
 })
 
 $(document).ready(function () {

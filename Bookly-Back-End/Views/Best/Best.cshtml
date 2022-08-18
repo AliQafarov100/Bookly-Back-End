@@ -23,14 +23,14 @@
 
                                 <div class="container fluid">
                                     <div class="row">
-                                        @foreach (Book book in Model.AllBooks.Take(4))
+                                        @foreach (BookAuthor book in Model.BookAuthors.Take(4))
                                         {
                                             <div class="col-lg-3 col-md-12 col-sm-12 col-12">
                                                 <div class="book">
-                                                    <img src="/assets/Image/Library/@book.BookImages.FirstOrDefault(i => i.IsMain == true).ImagePath" alt="">
+                                                    <img src="/assets/Image/Library/@book.Book.BookImages.FirstOrDefault(i => i.IsMain == true).ImagePath" alt="">
                                                     <div class="book-info">
                                                         <a href="">
-                                                            <span>@book.Name</span><span class="ms-2">$@book.Price</span>
+                                                            <span>@book.Book.Name</span><span class="ms-2">$@book.Book.Price</span>
                                                         </a>
                                                     </div>
                                                 </div>
@@ -51,8 +51,8 @@
                                 <div class="site-pages">
                                     <ul>
                                         <li><a asp-controller="About" asp-action="About">About Us</a></li>
-                                        <li><a href="Blog.html">Blog</a></li>
-                                        <li><a href="FAQ.html">FAQ's</a></li>
+                                        <li><a asp-controller="Blog" asp-action="Blogs">Blog</a></li>
+                                        <li><a asp-controller="FAQ" asp-action="FAQ">FAQ's</a></li>
                                         <li><a href="Contact.html">Contact us</a></li>
                                     </ul>
                                 </div>
@@ -245,7 +245,7 @@
                     <div class="bookSlider mt-5 col-lg-12">
                         <div class="sliderItem">
                             <div class="sliders d-flex">
-                                @foreach (Book book in Model.AnotherBooks.OrderByDescending(b => b.Id).Where(b => b.IsBest == true))
+                                @foreach (BookAuthor book in Model.BookAuthors.OrderByDescending(b => b.Id).Where(b => b.Book.IsBest == true))
                                 {
                                     <div class="slider">
                                         <div class="slider-book">
@@ -261,7 +261,7 @@
                                                         <a href=""><i class="fa-solid fa-magnifying-glass"></i></a>
                                                     </div>
                                                 </div>
-                                                <img src="/assets/Image/Library/@book.BookImages.FirstOrDefault(i => i.IsMain == true)?.ImagePath" alt="">
+                                                <img src="/assets/Image/Library/@book.Book.BookImages.FirstOrDefault(i => i.IsMain == true)?.ImagePath" alt="">
                                             </div>
                                             <div class="detail mt-3">
                                                 <p>
@@ -270,16 +270,16 @@
                                                         @author.Author.FullName.ToString();
                                                     }
                                                 </p>
-                                                <strong>@book.Name</strong>
+                                                <strong>@book.Book.Name</strong>
                                                 <p>
-                                                    @if (book.DiscountId != null)
+                                                    @if (book.Book.DiscountId != null)
                                                     {
-                                                        <span>$@(book.Price - ((book.Price * book.Discount?.DiscountPercent) / 100))</span>
-                                                        <span class="ms-2"><del>$@book.Price</del></span>
+                                                        <span>$@(book.Book.Price - ((book.Book.Price * book.Book.Discount?.DiscountPercent) / 100))</span>
+                                                        <span class="ms-2"><del>$@book.Book.Price</del></span>
                                                     }
                                                     else
                                                     {
-                                                        <span>$@book.Price</span>
+                                                        <span>$@book.Book.Price</span>
                                                     }
 
                                                 </p>

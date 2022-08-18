@@ -2,6 +2,19 @@
   "version": 3,
   "targets": {
     ".NETCoreApp,Version=v3.1": {
+      "Braintree/5.13.0": {
+        "type": "package",
+        "dependencies": {
+          "Newtonsoft.Json": "9.0.1",
+          "System.Xml.XPath.XmlDocument": "4.3.0"
+        },
+        "compile": {
+          "lib/netstandard2.0/Braintree.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/Braintree.dll": {}
+        }
+      },
       "Chart.js/3.7.1": {
         "type": "package"
       },
@@ -2643,7 +2656,7 @@
           "System.Xml.ReaderWriter": "4.3.0"
         },
         "compile": {
-          "ref/netstandard1.3/_._": {}
+          "ref/netstandard1.3/System.Xml.XmlDocument.dll": {}
         },
         "runtime": {
           "lib/netstandard1.3/System.Xml.XmlDocument.dll": {}
@@ -2676,10 +2689,64 @@
         "runtime": {
           "lib/netstandard1.3/System.Xml.XmlSerializer.dll": {}
         }
+      },
+      "System.Xml.XPath/4.3.0": {
+        "type": "package",
+        "dependencies": {
+          "System.Collections": "4.3.0",
+          "System.Diagnostics.Debug": "4.3.0",
+          "System.Globalization": "4.3.0",
+          "System.IO": "4.3.0",
+          "System.Resources.ResourceManager": "4.3.0",
+          "System.Runtime": "4.3.0",
+          "System.Runtime.Extensions": "4.3.0",
+          "System.Threading": "4.3.0",
+          "System.Xml.ReaderWriter": "4.3.0"
+        },
+        "compile": {
+          "ref/netstandard1.3/System.Xml.XPath.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard1.3/System.Xml.XPath.dll": {}
+        }
+      },
+      "System.Xml.XPath.XmlDocument/4.3.0": {
+        "type": "package",
+        "dependencies": {
+          "System.Collections": "4.3.0",
+          "System.Globalization": "4.3.0",
+          "System.IO": "4.3.0",
+          "System.Resources.ResourceManager": "4.3.0",
+          "System.Runtime": "4.3.0",
+          "System.Runtime.Extensions": "4.3.0",
+          "System.Threading": "4.3.0",
+          "System.Xml.ReaderWriter": "4.3.0",
+          "System.Xml.XPath": "4.3.0",
+          "System.Xml.XmlDocument": "4.3.0"
+        },
+        "compile": {
+          "ref/netstandard1.3/System.Xml.XPath.XmlDocument.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard1.3/System.Xml.XPath.XmlDocument.dll": {}
+        }
       }
     }
   },
   "libraries": {
+    "Braintree/5.13.0": {
+      "sha512": "V1cxo5d2ewSXXqoz7CxRqVbMQDVj3cvsZ/BLqdMbKrsBO25YneWDfPQB1V16abQU3VOlE7t0BBvDUjIaO9cV7w==",
+      "type": "package",
+      "path": "braintree/5.13.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "braintree.5.13.0.nupkg.sha512",
+        "braintree.nuspec",
+        "lib/net452/Braintree.dll",
+        "lib/netstandard2.0/Braintree.dll"
+      ]
+    },
     "Chart.js/3.7.1": {
       "sha512": "gJunTMEueTNdA5Hp92J9sv363msSemW+GSy1VtbrwjxCaMrp+/mgB20EdVezbP34dbM+h+A8G5XbEuL6tOJoCw==",
       "type": "package",
@@ -8716,10 +8783,88 @@
         "system.xml.xmlserializer.4.3.0.nupkg.sha512",
         "system.xml.xmlserializer.nuspec"
       ]
+    },
+    "System.Xml.XPath/4.3.0": {
+      "sha512": "v1JQ5SETnQusqmS3RwStF7vwQ3L02imIzl++sewmt23VGygix04pEH+FCj1yWb+z4GDzKiljr1W7Wfvrx0YwgA==",
+      "type": "package",
+      "path": "system.xml.xpath/4.3.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "ThirdPartyNotices.txt",
+        "dotnet_library_license.txt",
+        "lib/MonoAndroid10/_._",
+        "lib/MonoTouch10/_._",
+        "lib/net46/System.Xml.XPath.dll",
+        "lib/netstandard1.3/System.Xml.XPath.dll",
+        "lib/xamarinios10/_._",
+        "lib/xamarinmac20/_._",
+        "lib/xamarintvos10/_._",
+        "lib/xamarinwatchos10/_._",
+        "ref/MonoAndroid10/_._",
+        "ref/MonoTouch10/_._",
+        "ref/net46/System.Xml.XPath.dll",
+        "ref/netstandard1.3/System.Xml.XPath.dll",
+        "ref/netstandard1.3/System.Xml.XPath.xml",
+        "ref/netstandard1.3/de/System.Xml.XPath.xml",
+        "ref/netstandard1.3/es/System.Xml.XPath.xml",
+        "ref/netstandard1.3/fr/System.Xml.XPath.xml",
+        "ref/netstandard1.3/it/System.Xml.XPath.xml",
+        "ref/netstandard1.3/ja/System.Xml.XPath.xml",
+        "ref/netstandard1.3/ko/System.Xml.XPath.xml",
+        "ref/netstandard1.3/ru/System.Xml.XPath.xml",
+        "ref/netstandard1.3/zh-hans/System.Xml.XPath.xml",
+        "ref/netstandard1.3/zh-hant/System.Xml.XPath.xml",
+        "ref/xamarinios10/_._",
+        "ref/xamarinmac20/_._",
+        "ref/xamarintvos10/_._",
+        "ref/xamarinwatchos10/_._",
+        "system.xml.xpath.4.3.0.nupkg.sha512",
+        "system.xml.xpath.nuspec"
+      ]
+    },
+    "System.Xml.XPath.XmlDocument/4.3.0": {
+      "sha512": "A/uxsWi/Ifzkmd4ArTLISMbfFs6XpRPsXZonrIqyTY70xi8t+mDtvSM5Os0RqyRDobjMBwIDHDL4NOIbkDwf7A==",
+      "type": "package",
+      "path": "system.xml.xpath.xmldocument/4.3.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "ThirdPartyNotices.txt",
+        "dotnet_library_license.txt",
+        "lib/MonoAndroid10/_._",
+        "lib/MonoTouch10/_._",
+        "lib/net46/System.Xml.XPath.XmlDocument.dll",
+        "lib/netstandard1.3/System.Xml.XPath.XmlDocument.dll",
+        "lib/xamarinios10/_._",
+        "lib/xamarinmac20/_._",
+        "lib/xamarintvos10/_._",
+        "lib/xamarinwatchos10/_._",
+        "ref/MonoAndroid10/_._",
+        "ref/MonoTouch10/_._",
+        "ref/netstandard1.3/System.Xml.XPath.XmlDocument.dll",
+        "ref/netstandard1.3/System.Xml.XPath.XmlDocument.xml",
+        "ref/netstandard1.3/de/System.Xml.XPath.XmlDocument.xml",
+        "ref/netstandard1.3/es/System.Xml.XPath.XmlDocument.xml",
+        "ref/netstandard1.3/fr/System.Xml.XPath.XmlDocument.xml",
+        "ref/netstandard1.3/it/System.Xml.XPath.XmlDocument.xml",
+        "ref/netstandard1.3/ja/System.Xml.XPath.XmlDocument.xml",
+        "ref/netstandard1.3/ko/System.Xml.XPath.XmlDocument.xml",
+        "ref/netstandard1.3/ru/System.Xml.XPath.XmlDocument.xml",
+        "ref/netstandard1.3/zh-hans/System.Xml.XPath.XmlDocument.xml",
+        "ref/netstandard1.3/zh-hant/System.Xml.XPath.XmlDocument.xml",
+        "ref/xamarinios10/_._",
+        "ref/xamarinmac20/_._",
+        "ref/xamarintvos10/_._",
+        "ref/xamarinwatchos10/_._",
+        "system.xml.xpath.xmldocument.4.3.0.nupkg.sha512",
+        "system.xml.xpath.xmldocument.nuspec"
+      ]
     }
   },
   "projectFileDependencyGroups": {
     ".NETCoreApp,Version=v3.1": [
+      "Braintree >= 5.13.0",
       "Chart.js >= 3.7.1",
       "Microsoft.AspNet.WebPages >= 3.2.9",
       "Microsoft.AspNetCore.Identity.EntityFrameworkCore >= 3.1.27",
@@ -8769,6 +8914,10 @@
       "netcoreapp3.1": {
         "targetAlias": "netcoreapp3.1",
         "dependencies": {
+          "Braintree": {
+            "target": "Package",
+            "version": "[5.13.0, )"
+          },
           "Chart.js": {
             "target": "Package",
             "version": "[3.7.1, )"

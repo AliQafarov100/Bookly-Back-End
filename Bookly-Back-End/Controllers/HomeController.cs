@@ -32,7 +32,7 @@ namespace Bookly_Back_End.Controllers
         {
             var query = _repository.GetBookByCategory(category);
             List<BookAuthor> bookAuthors = await query.Include(a => a.Author).Include(b => b.Book)
-                .ThenInclude(b => b.BookImages).ToListAsync();
+                .ThenInclude(b => b.BookImages).Include(b => b.Book.Discount).ToListAsync();
 
             HomeVM model = new HomeVM
             {

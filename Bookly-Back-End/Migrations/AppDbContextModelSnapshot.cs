@@ -71,6 +71,9 @@ namespace Bookly_Back_End.Migrations
                     b.Property<bool>("IsAdmin")
                         .HasColumnType("bit");
 
+                    b.Property<bool>("IsBlock")
+                        .HasColumnType("bit");
+
                     b.Property<bool>("IsMember")
                         .HasColumnType("bit");
 
@@ -300,6 +303,9 @@ namespace Bookly_Back_End.Migrations
                     b.Property<decimal>("Price")
                         .HasColumnType("decimal(6,2)");
 
+                    b.Property<int>("Stock")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
                     b.HasIndex("CategoryId");
@@ -447,6 +453,24 @@ namespace Bookly_Back_End.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Discounts");
+                });
+
+            modelBuilder.Entity("Bookly_Back_End.Models.FAQ", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Question")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Response")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("FAQs");
                 });
 
             modelBuilder.Entity("Bookly_Back_End.Models.Festival", b =>

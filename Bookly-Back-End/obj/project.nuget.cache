@@ -1,9 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "ekvI9SYSrPDwLtQfjZVau3bYuDCZDIAh98KCN4cdtiC7B+ZB3knH1FvubU/I8/1uotPOM4heTpwu+O780La7DA==",
+  "dgSpecHash": "lRWx5TAos/3LACvqwbBhvf1VKFtxqAxOYnZ7IwuykBH5M5j6BHns+e2oy7MnwrBwDfp/5IkvubsAefziWamYDA==",
   "success": true,
   "projectFilePath": "C:\\Users\\M S I\\Desktop\\Bookly-Back-End\\Bookly-Back-End\\Bookly-Back-End.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\M S I\\.nuget\\packages\\braintree\\5.13.0\\braintree.5.13.0.nupkg.sha512",
     "C:\\Users\\M S I\\.nuget\\packages\\chart.js\\3.7.1\\chart.js.3.7.1.nupkg.sha512",
     "C:\\Users\\M S I\\.nuget\\packages\\microsoft.aspnet.razor\\3.2.9\\microsoft.aspnet.razor.3.2.9.nupkg.sha512",
     "C:\\Users\\M S I\\.nuget\\packages\\microsoft.aspnet.webpages\\3.2.9\\microsoft.aspnet.webpages.3.2.9.nupkg.sha512",
@@ -171,7 +172,9 @@
     "C:\\Users\\M S I\\.nuget\\packages\\system.xml.readerwriter\\4.3.0\\system.xml.readerwriter.4.3.0.nupkg.sha512",
     "C:\\Users\\M S I\\.nuget\\packages\\system.xml.xdocument\\4.3.0\\system.xml.xdocument.4.3.0.nupkg.sha512",
     "C:\\Users\\M S I\\.nuget\\packages\\system.xml.xmldocument\\4.3.0\\system.xml.xmldocument.4.3.0.nupkg.sha512",
-    "C:\\Users\\M S I\\.nuget\\packages\\system.xml.xmlserializer\\4.3.0\\system.xml.xmlserializer.4.3.0.nupkg.sha512"
+    "C:\\Users\\M S I\\.nuget\\packages\\system.xml.xmlserializer\\4.3.0\\system.xml.xmlserializer.4.3.0.nupkg.sha512",
+    "C:\\Users\\M S I\\.nuget\\packages\\system.xml.xpath\\4.3.0\\system.xml.xpath.4.3.0.nupkg.sha512",
+    "C:\\Users\\M S I\\.nuget\\packages\\system.xml.xpath.xmldocument\\4.3.0\\system.xml.xpath.xmldocument.4.3.0.nupkg.sha512"
   ],
   "logs": [
     {

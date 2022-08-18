@@ -58,7 +58,7 @@ namespace Bookly_Back_End.Service
                 decimal total = default;
                 foreach(BasketItemVM itemVM in basketData.BasketItemVMs)
                 {
-                    total += itemVM.Book.Price * itemVM.Count;
+                    total += itemVM.Book.DiscountId == null ? itemVM.Book.Price * itemVM.Count : (itemVM.Book.Price - ((itemVM.Book.Price * itemVM.Book.Discount.DiscountPercent) / 100)) * itemVM.Count;
                 }
                 basketData.TotalPrice = total;
                 basketData.Count = basketData.BasketItemVMs.Count;

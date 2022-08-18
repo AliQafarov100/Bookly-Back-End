@@ -1,0 +1,275 @@
+﻿@model List<FAQ>
+@{
+    ViewData["Title"] = "FAQ";
+}
+
+<main>
+    <section id="navbars" class="">
+        <nav class="navbar d-flex " style="background-color: transparent;">
+            <div class="container">
+                <div class="row w-100">
+                    <div class="pages col-lg-8">
+                        <ul class="d-flex justify-content-around">
+                            <li><a href="Index.html">Home</a></li>
+                            <li class="controll">
+                                <a href="Collections.html" class="category">
+                                    <span>Categories</span><span class="ms-3">
+                                        <i class="fa-solid fa-sort-down"></i>
+                                    </span>
+
+                                </a>
+
+                                <div class="container fluid">
+                                    <div class="row">
+                                        <div class="col-lg-3 col-md-12 col-sm-12 col-12">
+                                            <div class="book">
+                                                <img src="/assets/Image/Category Book/shop-new-100.webp" alt="">
+                                                <div class="book-info">
+                                                    <a href="">
+                                                        <span>Endless Summer</span><span class="ms-2">$210</span>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-3 col-md-12 col-sm-12 col-12">
+                                            <div class="book">
+                                                <img src="/assets/Image/Category Book/shop-new-30.webp" alt="">
+                                                <div class="book-info">
+                                                    <a href="">
+                                                        <span>Fresh Healthy Eat</span><span class="ms-2">$110</span>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-3 col-md-12 col-sm-12 col-12">
+                                            <div class="book">
+                                                <img src="/assets/Image/Category Book/shop-new-4.webp" alt="">
+                                                <div class="book-info">
+                                                    <a href="">
+                                                        <span>Book for a Cause</span><span class="ms-2">$110</span>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-3 col-md-12 col-sm-12 col-12">
+                                            <div class="book">
+                                                <img src="/assets/Image/Category Book/shop-new-95_b0b53360-a171-427b-9dc6-0bf965bcfdae.webp"
+                                                     alt="">
+                                                <div class="book-info">
+                                                    <a href="">
+                                                        <span>Adventurous Eating</span><span class="ms-2">$500</span>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li><a href="Brands.html">Brands</a></li>
+                            <li><a href="BestSellers.html">Best Sellers</a></li>
+                            <li class="page-controller">
+                                <a href="">
+                                    <span>Pages</span><span class="ms-3">
+                                        <i class="fa-solid fa-sort-down"></i>
+                                    </span>
+                                </a>
+                                <div class="site-pages">
+                                    <ul>
+                                        <li><a href="About.html">About Us</a></li>
+                                        <li><a href="Blog.html">Blog</a></li>
+                                        <li><a href="FAQ.html">FAQ's</a></li>
+                                        <li><a href="Contact.html">Contact us</a></li>
+                                    </ul>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+
+                </div>
+                <button class="navbar-toggler bars" type="button" data-bs-toggle="offcanvas"
+                        data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
+                    <span class="navbar-toggler-icon"></span>
+                    <span>Menu</span>
+                </button>
+                <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar"
+                     aria-labelledby="offcanvasNavbarLabel">
+                    <div class="offcanvas-header">
+                        <h5 class="offcanvas-title" style="color: black;" id="offcanvasNavbarLabel">Offcanvas</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="offcanvas"
+                                aria-label="Close"></button>
+                    </div>
+                    <div class="offcanvas-body">
+                        <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+                            <li class="nav-item">
+                                <a class="nav-link active" aria-current="page" href="#">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" style="color: black;" href="#">Link</a>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" style="color: black;" href="#"
+                                   id="offcanvasNavbarDropdown" role="button" data-bs-toggle="dropdown"
+                                   aria-expanded="false">
+                                    Dropdown
+                                </a>
+                                <ul class="dropdown-menu" aria-labelledby="offcanvasNavbarDropdown">
+                                    <li><a class="dropdown-item" style="color: black;" href="#">Action</a></li>
+                                    <li>
+                                        <a class="dropdown-item" style="color: black;" href="#">Another action</a>
+                                    </li>
+                                    <li>
+                                        <hr class="dropdown-divider">
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" style="color: black;" href="#">
+                                            Something else
+                                            here
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                        <form class="d-flex" role="search">
+                            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                            <button class="btn btn-outline-success" style="color: black;"
+                                    type="submit">
+                                Search
+                            </button>
+                        </form>
+                    </div>
+                    <div class="container fluid">
+                        <div class="row">
+                            <div class="col-lg-3 col-md-12 col-sm-12 col-12">
+                                <div class="book">
+                                    <img src="/assets/Image/Category Book/shop-new-100.webp" alt="">
+                                    <div class="book-info">
+                                        <a href=""><span>Endless Summer</span><span class="ms-2">$210</span></a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-12 col-sm-12 col-12">
+                                <div class="book">
+                                    <img src="/assets/Image/Category Book/shop-new-30.webp" alt="">
+                                    <div class="book-info">
+                                        <a href=""><span>Fresh Healthy Eat</span><span class="ms-2">$110</span></a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
+                                <div class="book">
+                                    <img src="/assets/Image/Category Book/shop-new-4.webp" alt="">
+                                    <div class="book-info">
+                                        <a href=""><span>Book for a Cause</span><span class="ms-2">$110</span></a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-12 col-sm-12 col-12">
+                                <div class="book">
+                                    <img src="/assets/Image/Category Book/shop-new-95_b0b53360-a171-427b-9dc6-0bf965bcfdae.webp"
+                                         alt="">
+                                    <div class="book-info">
+                                        <a href=""><span>Adventurous Eating</span><span class="ms-2">$500</span></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </section>
+    <section id="intro">
+        <div class="container">
+            <div class="write  d-flex justify-content-center align-items-center">
+                <div class="texts">
+                    <h4 class="text-center">FAQ's</h4>
+                    <ul class="d-flex justify-content-around">
+                        <li><a href="Index.html">Home</a></li>
+                        <li><a href="">FAQ's</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="faq-section" class="py-5">
+        <div class="container">
+            <h4 class="text-center">FAQ</h4>
+            <div class="line"></div>
+            <div class="row mt-5">
+                @{
+                    int count = 0;
+                    foreach (FAQ fAQ in Model)
+                    {
+                        count++;
+                        string classfaq = "";
+                        string plus = "";
+                        string minus = "";
+                        if (count == 1)
+                        {
+                            classfaq = "col-lg-12 text text-one";
+                            plus = "hist-plus-one";
+                            minus = "hist-minus-one";
+                        }
+                        else if (count == 2)
+                        {
+                            classfaq = "col-lg-12 text text-second";
+                            plus = "hist-plus-second";
+                            minus = "hist-minus-second";
+                        }
+                        else if (count == 3)
+                        {
+                            classfaq = "col-lg-12 text text-three";
+                            plus = "hist-plus-three";
+                            minus = "hist-minus-three";
+                        }
+                        else if (count == 4)
+                        {
+                            classfaq = "col-lg-12 text text-four";
+                            plus = "hist-plus-four";
+                            minus = "hist-minus-four";
+                        }
+                        else if (count == 5)
+                        {
+                            classfaq = "col-lg-12 text text-five";
+                            plus = "hist-plus-five";
+                            minus = "hist-minus-five";
+                        }
+                        else if (count == 6)
+                        {
+                            classfaq = "col-lg-12 text text-six";
+                            plus = "hist-plus-six";
+                            minus = "hist-minus-six";
+                        }
+                        else if (count == 7)
+                        {
+                            classfaq = "col-lg-12 text text-seven";
+                            plus = "hist-plus-seven";
+                            minus = "hist-minus-seven";
+                        }
+                        <div class="col-lg-12 mt-3 questions bg-danger">
+                            <div class="quest row justify-content-between">
+                                <div class="minus-plus col-lg-1 col-md-2 col-sm-2 col-2">
+                                    <strong><i class="fa-solid fa-minus @minus btn"></i></strong>
+                                    <strong><i class="fa-solid fa-plus @plus btn"></i></strong>
+                                </div>
+                                <div class="question d-flex justify-content-start col-lg-11 col-md-10 col-sm-10 col-10">
+                                    <h5 class="text-light">@fAQ.Question</h5>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="@classfaq">
+                            <p>
+                                @fAQ.Response
+                            </p>
+                        </div>
+                    }
+                }
+
+            </div>
+        </div>
+    </section>
+</main>
+@section Scripts{
+    <script src="~/assets/Js/FAQ.js"></script>
+}
+

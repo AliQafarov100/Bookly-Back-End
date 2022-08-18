@@ -183,6 +183,11 @@ namespace Bookly_Back_End.Controllers
 
             string role = roles.FirstOrDefault(r => r.ToLower().Trim() == Roles.Member.ToString().ToLower().Trim());
 
+            if (user.IsBlock)
+            {
+                ModelState.AddModelError("", "This user is blocked!Please contact with admin!");
+                return View();
+            }
             if (login.RememberMe)
             {
                 Microsoft.AspNetCore.Identity.SignInResult signInResult = await _signIn
@@ -191,7 +196,7 @@ namespace Bookly_Back_End.Controllers
                 {
                     if (signInResult.IsLockedOut)
                     {
-                        ModelState.AddModelError("", "This user is blocked!");
+                        ModelState.AddModelError("", "You are is blocked for 5 minutes!");
                         return View();
                     }
                    

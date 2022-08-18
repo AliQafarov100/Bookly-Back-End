@@ -18,5 +18,6 @@ namespace Bookly_Back_End.ViewModels
         public List<Discount> Discounts { get; set; }
         public List<FilteringPrice> FilteringPrices { get; set; }
         public Book Book { get; set; }
+        public int Counter { get; set; }
     }
 }

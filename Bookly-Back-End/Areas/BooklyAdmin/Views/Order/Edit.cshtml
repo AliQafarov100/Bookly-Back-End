@@ -44,7 +44,7 @@
                 </strong> <br />
                 <strong>
                     Count:
-                    @(item.Book.DiscountId != null ? (Model.TotalPrice / (item.Book.Price - ((item.Book.Price * item.Book.Discount.DiscountPercent) / 100))) : (Model.TotalPrice / item.Book.Price))
+                    @(Math.Floor(item.Book.DiscountId != null ? (Model.TotalPrice / (item.Book.Price - ((item.Book.Price * item.Book.Discount.DiscountPercent) / 100))) : Model.TotalPrice / item.Book.Price))
                 </strong>
             </div>
         }
