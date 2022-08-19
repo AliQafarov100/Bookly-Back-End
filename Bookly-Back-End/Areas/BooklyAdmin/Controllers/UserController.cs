@@ -6,6 +6,7 @@ using Bookly_Back_End.DAL;
 using Bookly_Back_End.Models;
 using Bookly_Back_End.Utilities;
 using Bookly_Back_End.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -32,13 +33,14 @@ namespace Bookly_Back_End.Areas.BooklyAdmin.Controllers
             return View(users);
         }
        
+        
         public IActionResult Login()
         {
             return View();
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-
+        [Authorize] 
         public async Task<IActionResult> Login(LoginVM login)
         {
             if (!ModelState.IsValid) return View();

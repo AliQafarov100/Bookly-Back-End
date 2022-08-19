@@ -1,4 +1,7 @@
-﻿@model List<Book>
+﻿@using X.PagedList
+@using X.PagedList.Mvc.Core
+
+@model IPagedList<Book>
 
 @{
     ViewData["Title"] = "Index";
@@ -37,41 +40,41 @@
                     <tbody>
                         @foreach (Book book in Model)
                         {
-                        <tr>
-                            <td>
-                                <img src="~/assets/Image/Library/@book.BookImages.FirstOrDefault(i => i.IsMain == true)?.ImagePath" />
-                            </td>
-                            <td>
-                                @book.Name
-                            </td>
-                            <td>
-                                $ @book.Price
-                            </td>
-                            <td>
-                                @book.Stock
-                            </td>
-                            <td>
-                                @if (book.Description.Length > 30)
-                                {
-                                    @(book.Description.Substring(0, 30) + "...".ToString());
-                                }
-                                else
-                                {
-                                    @book.Description;
-                                }
-                            </td>
-                            <td class="d-flex">
-                                <div>
-                                    <a class="btn btn-success" asp-controller="Book" asp-action="Read" asp-route-id="@book.Id"><i class="mdi mdi-details"></i></a>
-                                </div>
-                                <div>
-                                    <a class="btn btn-warning" asp-controller="Book" asp-action="Edit" asp-route-id="@book.Id"><i class="mdi mdi-database-edit"></i></a>
-                                </div>
-                                <div>
-                                    <a class="btn btn-danger" asp-controller="Book" asp-action="Delete" asp-route-id="@book.Id"><i class="mdi mdi-delete"></i></a>
-                                </div>
-                            </td>
-                        </tr>
+                            <tr>
+                                <td>
+                                    <img src="~/assets/Image/Library/@book.BookImages.FirstOrDefault(i => i.IsMain == true)?.ImagePath" />
+                                </td>
+                                <td>
+                                    @book.Name
+                                </td>
+                                <td>
+                                    $ @book.Price
+                                </td>
+                                <td>
+                                    @book.Stock
+                                </td>
+                                <td>
+                                    @if (book.Description.Length > 30)
+                                    {
+                                        @(book.Description.Substring(0, 30) + "...".ToString());
+                                    }
+                                    else
+                                    {
+                                        @book.Description;
+                                    }
+                                </td>
+                                <td class="d-flex">
+                                    <div>
+                                        <a class="btn btn-success" asp-controller="Book" asp-action="Read" asp-route-id="@book.Id"><i class="mdi mdi-details"></i></a>
+                                    </div>
+                                    <div>
+                                        <a class="btn btn-warning" asp-controller="Book" asp-action="Edit" asp-route-id="@book.Id"><i class="mdi mdi-database-edit"></i></a>
+                                    </div>
+                                    <div>
+                                        <a class="btn btn-danger" asp-controller="Book" asp-action="Delete" asp-route-id="@book.Id"><i class="mdi mdi-delete"></i></a>
+                                    </div>
+                                </td>
+                            </tr>
                         }
 
                     </tbody>
@@ -80,4 +83,8 @@
         </div>
     </div>
 </div>
-
+@Html.PagedListPager((IPagedList)Model, page => Url.Action("Index", new { page }), new X.PagedList.Web.Common.PagedListRenderOptionsBase
+{
+    LiElementClasses = new[] { "page-item" },
+    PageClasses = new[] { "page-link" }
+})

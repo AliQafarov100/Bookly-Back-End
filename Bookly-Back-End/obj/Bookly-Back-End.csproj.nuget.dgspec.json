@@ -81,6 +81,10 @@
             "System.Linq.Expressions": {
               "target": "Package",
               "version": "[4.3.0, )"
+            },
+            "X.PagedList.Mvc.Core": {
+              "target": "Package",
+              "version": "[8.0.7, )"
             }
           },
           "imports": [

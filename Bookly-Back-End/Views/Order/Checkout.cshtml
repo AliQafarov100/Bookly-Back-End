@@ -16,16 +16,10 @@
 
     }
     decimal totalView = total;
-    int id = default;
-    foreach (var city in Model.Country.Cities)
-    {
-        id = city.Id;
-    }
-    ViewBag.CityId = id;
+    
 }
 
 <main>
-    @ViewBag.CityId
     <section id="data-payment" class="py-5">
         <div class="container">
             <div class="row">

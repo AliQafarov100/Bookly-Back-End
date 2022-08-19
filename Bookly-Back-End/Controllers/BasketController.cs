@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
+using Stripe;
 
 namespace Bookly_Back_End.Controllers
 {
@@ -30,7 +31,6 @@ namespace Bookly_Back_End.Controllers
         public async Task<IActionResult> UpdateCart(int id, int count)
         {
             Book book = await _context.Books.FirstOrDefaultAsync(b => b.Id == id);
-            TempData["Unavailable"] = null;
             book.Counter = count;
 
             _context.SaveChanges();
@@ -42,7 +42,7 @@ namespace Bookly_Back_End.Controllers
                 BasketItem existed = await _context.BasketItems.
                     FirstOrDefaultAsync(bi => bi.AppUserId == user.Id && bi.BookId == book.Id);
 
-                existed.Count += book.Counter;
+                existed.Count = book.Counter;
 
                 await _context.SaveChangesAsync();
             }
@@ -56,15 +56,6 @@ namespace Bookly_Back_End.Controllers
                 BasketCookieItemVM existedCookie = basket.FirstOrDefault(c => c.Id == book.Id);
 
                 existedCookie.Count = book.Counter;
-                //books.Stock -= books.Counter;
-                //_context.SaveChanges();
-                //book.Stock = books.Stock;
-
-                //if (book.Stock == 0)
-                //{
-                //    TempData["Unavailable"] = true;
-                //}
-
                 basketStr = JsonConvert.SerializeObject(basket);
 
                 HttpContext.Response.Cookies.Append("Basket", basketStr);
@@ -73,6 +64,57 @@ namespace Bookly_Back_End.Controllers
 
 
             return Json(new { status = 200 });
+        }
+
+        [TempData]
+        public string TotalAmount { get; set; }
+        public async Task<IActionResult> PayOperation(int id)
+        {
+            
+            Book book = await _context.Books.Include(b => b.Discount).FirstOrDefaultAsync(b => b.Id == id);
+           
+            ViewBag.Product = book;
+            ViewBag.DollarAmount = book.Price;
+            ViewBag.Total = Math.Round(ViewBag.DollarAmount, 2) * 100;
+            ViewBag.Total = Convert.ToInt64(ViewBag.Total);
+            long total = ViewBag.total;
+            TotalAmount = total.ToString();
+
+            return View();
+        }
+        [HttpPost]
+
+        public async Task<IActionResult> Proccesing(int id,string stripeToken, string stripeEmail)
+        {
+            AppUser user = await _userManager.FindByEmailAsync(stripeEmail);
+            var optionCust = new CustomerCreateOptions
+            {
+                Email = stripeEmail,
+                Name = user.FirstName,
+                Phone = "0706448906"
+            };
+            var serviceCust = new CustomerService();
+            Customer customer = serviceCust.Create(optionCust);
+            var optionCharge = new ChargeCreateOptions
+            {
+                Amount = Convert.ToInt64(TempData["TotalAmount"]),
+                Currency = "USD",
+                Description = "Book purchase",
+                Source = stripeToken,
+                ReceiptEmail = stripeEmail
+            };
+
+            var service = new ChargeService();
+            Charge charge = service.Create(optionCharge);
+            if(charge.Status == "succeeded")
+            {
+                string BalanceTransactionId = charge.BalanceTransactionId;
+                ViewBag.AmountPaid = Convert.ToDecimal(charge.Amount) % 100 / 100 + (charge.Amount) / 100;
+                ViewBag.BalanceTxId = BalanceTransactionId;
+                ViewBag.Customer = customer.Name;
+            }
+
+            return View();
         }
     }
 }

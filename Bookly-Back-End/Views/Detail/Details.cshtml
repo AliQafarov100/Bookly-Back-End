@@ -349,20 +349,32 @@
                                 <div class="col-lg-6">
                                     <strong>Quantity:</strong>
                                 </div>
-                                <div class="container col-lg-12 quantity-content">
-                                    <div class="d-flex justify-content-start">
-                                        <input min="1" max="@Model.Book.Stock" class="stock" type="number" style="border: none;" />
+                                @if (Model.Book.Stock == 0)
+                                {
+                                    <div class="container col-lg-12 quantity-content">
+                                        <div class="d-flex justify-content-start">
+                                            <input min="@Model.Book.Stock" max="@Model.Book.Stock" class="stock" type="number" style="border: none;" />
+                                        </div>
                                     </div>
-                                </div>
+                                }
+                                else
+                                {
+                                    <div class="container col-lg-12 quantity-content">
+                                        <div class="d-flex justify-content-start">
+                                            <input min="1" max="@Model.Book.Stock" class="stock" type="number" style="border: none;" />
+                                        </div>
+                                    </div>
+                                }
+
                             </div>
-                            @if (TempData["Unavailable"] != null)
+                            @if (Model.Book.Stock == 0)
                             {
-                                <div class="alert alert-dark">
+                                <div class="alert alert-dark mt-5">
                                     <div class="toast-body">
                                         <small class="text-danger" style="font-weight: bold;">Currently unavailable.</small> <br />
                                         <small>We don't know when or if this item will be back in stock.</small>
                                     </div>
-                                    <a asp-controller="Home" asp-action="Index" class="btn btn-secondary">Back To List</a>
+                                    <a asp-controller="Book" asp-action="Index" class="btn btn-secondary">Back To List</a>
                                 </div>
                             }
                             else
@@ -374,7 +386,7 @@
                                         </a>
                                     </div>
                                     <div class="col-lg-5 col-sm-12 mt-2">
-                                        <a asp-controller="Detail" asp-action="Pay" asp-route-id="@Model.Book.Id" class="text-light btn btn-danger customer">
+                                        <a asp-controller="Basket" asp-action="PayOperation" asp-route-id="@Model.Book.Id" class="text-light btn btn-danger customer buy-now">
                                             <small>Buy it now</small>
                                         </a>
                                     </div>
@@ -539,7 +551,7 @@
 
     <script src="~/assets/Js/product.js"></script>
     <script src="~/assets/Js/search.js"></script>
-    
+
     <script>
         $(document).ready(function () {
             $(".add-basket").click(function (e) {
@@ -553,6 +565,19 @@
                 })
             })
         })
+                //$(document).ready(function () {
+                //    $(".buy-now").click(function (e) {
+                //        e.preventDefault();
+                //        var value = $(".stock").val();
+                //        var link = $(this).attr("href") + "/?count=" + value
+                //        fetch(link).then(res => res.json()).then(datas => {
+                //            if (datas.status == 200) {
+                //                location.href = "https://localhost:44339/Basket/PayOperation";
+                //            }
+                //        })
+                //    })
+                //})
+
     </script>
 }
 

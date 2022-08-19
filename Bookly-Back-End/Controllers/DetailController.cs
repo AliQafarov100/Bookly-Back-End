@@ -19,13 +19,12 @@ namespace Bookly_Back_End.Controllers
     {
         private readonly AppDbContext _context;
         private readonly UserManager<AppUser> _userManager;
-        private readonly IBraintreeService _braintreeService;
+        
 
-        public DetailController(AppDbContext context,UserManager<AppUser> userManager,IBraintreeService braintreeService)
+        public DetailController(AppDbContext context,UserManager<AppUser> userManager)
         {
             _context = context;
             _userManager = userManager;
-            _braintreeService = braintreeService;
         }
         public async Task<ActionResult> Details(int id)
         {

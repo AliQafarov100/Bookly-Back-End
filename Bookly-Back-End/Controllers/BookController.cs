@@ -20,16 +20,14 @@ namespace Bookly_Back_End.Controllers
         private readonly UserManager<AppUser> _userManager;
         private readonly IBookOperation _repository;
         private readonly IQuery _query;
-        private readonly IBraintreeService _braintreeService;
+       
 
-        public BookController(AppDbContext context,UserManager<AppUser> userManager,IBookOperation repository,IQuery query
-            ,IBraintreeService braintreeService)
+        public BookController(AppDbContext context,UserManager<AppUser> userManager,IBookOperation repository,IQuery query)
         {
             _context = context;
             _userManager = userManager;
             _repository = repository;
             _query = query;
-            _braintreeService = braintreeService;
         }
         public async Task<IActionResult> Index(string category,string sortBy,
             string author,int? minimum,int? maximum, string language,string format,int page = 1)

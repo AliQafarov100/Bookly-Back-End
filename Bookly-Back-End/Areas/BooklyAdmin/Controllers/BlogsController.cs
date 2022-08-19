@@ -10,10 +10,12 @@ using Bookly_Back_End.Models;
 using Bookly_Back_End.Extensions;
 using Bookly_Back_End.Utilities;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Bookly_Back_End.Areas.BooklyAdmin.Controllers
 {
     [Area("BooklyAdmin")]
+    [Authorize(Roles = "Admin, SuperAdmin")]
     public class BlogsController : Controller
     {
         private readonly AppDbContext _context;

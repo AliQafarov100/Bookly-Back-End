@@ -6,13 +6,16 @@ using Bookly_Back_End.DAL;
 using Bookly_Back_End.Extensions;
 using Bookly_Back_End.Models;
 using Bookly_Back_End.Utilities;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using X.PagedList;
 
 namespace Bookly_Back_End.Areas.BooklyAdmin.Controllers
 {
     [Area("BooklyAdmin")]
+    [Authorize(Roles = "Admin, SuperAdmin")]
     public class BookController : Controller
     {
         private readonly AppDbContext _context;
@@ -23,10 +26,11 @@ namespace Bookly_Back_End.Areas.BooklyAdmin.Controllers
             _context = context;
             _env = env;
         }
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int page = 1)
         {
+
             List<Book> books = await _context.Books.Include(a => a.BookAuthors).Include(i => i.BookImages).ToListAsync();
-            return View(books);
+            return View(books.ToPagedList(page,5));
         }
 
         public async Task<IActionResult> Create()

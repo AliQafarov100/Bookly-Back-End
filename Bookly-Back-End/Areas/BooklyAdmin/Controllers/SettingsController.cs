@@ -7,10 +7,13 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Bookly_Back_End.DAL;
 using Bookly_Back_End.Models;
+using Bookly_Back_End.Utilities;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Bookly_Back_End.Areas.BooklyAdmin.Controllers
 {
     [Area("BooklyAdmin")]
+    [Authorize(Roles = "Admin, SuperAdmin")]
     public class SettingsController : Controller
     {
         private readonly AppDbContext _context;

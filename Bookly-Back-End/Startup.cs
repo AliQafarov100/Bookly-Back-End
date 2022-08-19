@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Bookly_Back_End.DAL;
+using Bookly_Back_End.Data;
 using Bookly_Back_End.Interfaces;
 using Bookly_Back_End.Models;
 using Bookly_Back_End.Service;
@@ -14,6 +15,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Stripe;
 
 namespace Bookly_Back_End
 {
@@ -35,7 +37,6 @@ namespace Bookly_Back_End
             services.AddScoped<ICrudOperation, CrudOperation>();
             services.AddScoped<IOrderConfirmation, OrderConfirmation>();
             services.AddScoped<IQuery, Query>();
-            services.AddTransient<IBraintreeService, BraintreeService>();
             services.AddControllersWithViews();
             services.AddDbContext<AppDbContext>(opt =>
             {
@@ -59,11 +60,13 @@ namespace Bookly_Back_End
                 
             }).AddDefaultTokenProviders().AddEntityFrameworkStores<AppDbContext>();
             services.AddHttpContextAccessor();
+            services.Configure<StripeSettings>(_configuration.GetSection("Stripe"));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            StripeConfiguration.ApiKey = "sk_test_51LYFKMEmelNugo2zhXQYyBbrt3VXwX4s8twljHcftTn7fmWQbVktG1gJEy4ZakXTVvZRx9CMmrNtJbMx2feNI1TY00TwsyYqtC";
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();

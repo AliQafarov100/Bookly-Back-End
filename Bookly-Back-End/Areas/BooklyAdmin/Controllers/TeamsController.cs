@@ -7,6 +7,7 @@ using Bookly_Back_End.Extensions;
 using Bookly_Back_End.Interfaces;
 using Bookly_Back_End.Models;
 using Bookly_Back_End.Utilities;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -14,6 +15,7 @@ using Microsoft.EntityFrameworkCore;
 namespace Bookly_Back_End.Areas.BooklyAdmin.Controllers
 {
     [Area("BooklyAdmin")]
+    [Authorize(Roles = "Admin, SuperAdmin")]
     public class TeamsController : Controller
     {
         private readonly AppDbContext _context;

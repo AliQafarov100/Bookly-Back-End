@@ -8,7 +8,9 @@ using Bookly_Back_End.DAL;
 using Bookly_Back_End.Extensions;
 using Bookly_Back_End.Interfaces;
 using Bookly_Back_End.Models;
+using Bookly_Back_End.Utilities;
 using Bookly_Back_End.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -16,6 +18,7 @@ using Microsoft.EntityFrameworkCore;
 namespace Bookly_Back_End.Areas.BooklyAdmin.Controllers
 {
     [Area("BooklyAdmin")]
+    [Authorize(Roles = "Admin, SuperAdmin")]
     public class OrderController : Controller
     {
         private readonly AppDbContext _context;

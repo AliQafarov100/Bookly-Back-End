@@ -407,3 +407,13 @@ C:\Users\M S I\Desktop\Bookly-Back-End\Bookly-Back-End\obj\Debug\netcoreapp3.1\R
 C:\Users\M S I\Desktop\Bookly-Back-End\Bookly-Back-End\obj\Debug\netcoreapp3.1\Razor\Views\Contact\Contact.cshtml.g.cs
 C:\Users\M S I\Desktop\Bookly-Back-End\Bookly-Back-End\obj\Debug\netcoreapp3.1\Razor\Areas\BooklyAdmin\Views\User\Login.cshtml.g.cs
 C:\Users\M S I\Desktop\Bookly-Back-End\Bookly-Back-End\bin\Debug\netcoreapp3.1\Stripe.net.dll
+C:\Users\M S I\Desktop\Bookly-Back-End\Bookly-Back-End\obj\Debug\netcoreapp3.1\Razor\Views\Basket\PayOperation.cshtml.g.cs
+C:\Users\M S I\Desktop\Bookly-Back-End\Bookly-Back-End\obj\Debug\netcoreapp3.1\Razor\Views\Basket\Proccesing.cshtml.g.cs
+C:\Users\M S I\Desktop\Bookly-Back-End\Bookly-Back-End\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.JsonPatch.dll
+C:\Users\M S I\Desktop\Bookly-Back-End\Bookly-Back-End\bin\Debug\netcoreapp3.1\Microsoft.DotNet.PlatformAbstractions.dll
+C:\Users\M S I\Desktop\Bookly-Back-End\Bookly-Back-End\bin\Debug\netcoreapp3.1\Microsoft.Extensions.DependencyModel.dll
+C:\Users\M S I\Desktop\Bookly-Back-End\Bookly-Back-End\bin\Debug\netcoreapp3.1\Newtonsoft.Json.Bson.dll
+C:\Users\M S I\Desktop\Bookly-Back-End\Bookly-Back-End\bin\Debug\netcoreapp3.1\X.PagedList.dll
+C:\Users\M S I\Desktop\Bookly-Back-End\Bookly-Back-End\bin\Debug\netcoreapp3.1\X.PagedList.Mvc.Core.dll
+C:\Users\M S I\Desktop\Bookly-Back-End\Bookly-Back-End\bin\Debug\netcoreapp3.1\X.PagedList.Web.Common.dll
+C:\Users\M S I\Desktop\Bookly-Back-End\Bookly-Back-End\obj\Debug\netcoreapp3.1\Bookly-Back-End.MvcApplicationPartsAssemblyInfo.cs

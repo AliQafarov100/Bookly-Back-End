@@ -3,22 +3,65 @@
     ViewData["Title"] = "Login";
 }
 
-<form class="forms-sample">
-    <div class="form-group">
-        <label asp-for="Username">Username</label>
-        <input type="text" class="form-control" asp-for="Username" placeholder="Username">
+<section class="">
+    <!-- Jumbotron -->
+    <div class="px-4 py-5 px-md-5 text-center text-lg-start" style="background-color: white;">
+        <div class="container">
+            <div class="row gx-lg-5 align-items-center justify-content-center">
+                <div class="col-lg-6 mb-5 mb-lg-0" style="background-color: whitesmoke;">
+                    <div class="alert alert-danger" asp-validation-summary="ModelOnly"></div>
+                    <div class="card" style="border: none">
+                        <div class="card-body py-5 px-md-5" style="background-color: whitesmoke;">
+                            <form method="post">
+                                <!-- 2 column grid layout with text inputs for the first and last names -->
+                                <!-- Email input -->
+                                <div class="form-outline mb-4">
+                                    <input asp-for="Username" id="form3Example3" class="form-control" />
+                                    <span class="form-label" asp-validation-for="Username">Username</span>
+                                </div>
+                                <div class="form-outline mb-4">
+                                    <input asp-for="Password" id="form3Example4" class="form-control" />
+                                    <span class="form-label" asp-validation-for="Password">Password</span>
+                                </div>
+                                <div class="d-flex justify-content-between">
+                                    <a asp-controller="Account" asp-action="Register" style="text-decoration: none;" class="text-dark">Create account</a>
+                                    <a asp-controller="Account" asp-action="ForgotPassword" style="text-decoration: none;" class="text-dark">Forgot Password?</a>
+                                </div>
+                                <div class="form-check d-flex justify-content-center mb-4">
+                                    <input class="form-check-input me-2" asp-for="RememberMe" id="form2Example33" checked />
+                                    <span asp-validation-for="RememberMe">Remember Me</span>
+                                </div>
+
+                                <button type="submit" class="btn btn-primary btn-block mb-4">
+                                    Log In
+                                </button>
+
+                                <!-- Register buttons -->
+                                <div class="text-center">
+                                    <p>or sign up with:</p>
+                                    <button type="button" class="btn btn-link btn-floating mx-1">
+                                        <i class="fab fa-facebook-f"></i>
+                                    </button>
+
+                                    <button type="button" class="btn btn-link btn-floating mx-1">
+                                        <i class="fab fa-google"></i>
+                                    </button>
+
+                                    <button type="button" class="btn btn-link btn-floating mx-1">
+                                        <i class="fab fa-twitter"></i>
+                                    </button>
+
+                                    <button type="button" class="btn btn-link btn-floating mx-1">
+                                        <i class="fab fa-github"></i>
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-    <div class="form-group">
-        <label asp-for="Password">Password</label>
-        <input type="password" class="form-control" asp-for="Password" placeholder="Password">
-    </div>
-    <div class="form-check form-check-flat form-check-primary">
-        <label class="form-check-label">
-            <input type="checkbox" class="form-check-input" asp-for="RememberMe">
-            Remember me
-        </label>
-    </div>
-    <button type="submit" class="btn btn-primary me-2">Submit</button>
-    <button class="btn btn-light">Cancel</button>
-</form>
+    <!-- Jumbotron -->
+</section>
 
