@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Bookly_Back_End.DAL;
 using Bookly_Back_End.Models;
 using Bookly_Back_End.Utilities;
+using Bookly_Back_End.ViewModels;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -16,11 +17,13 @@ namespace Bookly_Back_End.Areas.BooklyAdmin.Controllers
     {
         private readonly UserManager<AppUser> _userManager;
         private readonly AppDbContext _context;
+        private readonly SignInManager<AppUser> _signIn;
 
-        public UserController(UserManager<AppUser> userManager,AppDbContext context)
+        public UserController(UserManager<AppUser> userManager,AppDbContext context,SignInManager<AppUser> signIn)
         {
             _userManager = userManager;
             _context = context;
+            _signIn = signIn;
         }
         public async Task<IActionResult> Users()
         {
@@ -29,6 +32,35 @@ namespace Bookly_Back_End.Areas.BooklyAdmin.Controllers
             return View(users);
         }
        
+        public IActionResult Login()
+        {
+            return View();
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+
+        public async Task<IActionResult> Login(LoginVM login)
+        {
+            if (!ModelState.IsValid) return View();
+            AppUser user = await _userManager.FindByNameAsync(login.Username);
+
+            if (user == null) return NotFound();
+
+            if(!user.IsAdmin || !user.IsSuperAdmin)
+            {
+                ModelState.AddModelError("", "Only admin users can be sign in here!");
+                return View();
+            }
+            Microsoft.AspNetCore.Identity.SignInResult result = await _signIn.PasswordSignInAsync(user, login.Password, false, false);
+
+            if (!result.Succeeded)
+            {
+                ModelState.AddModelError("", "Incorrect password or username");
+                return View();
+            }
+
+            return RedirectToAction("Index", "Dashboard");
+        }
         public async Task<IActionResult> AppointRole(string id)
         {
             AppUser user = await _userManager.Users.FirstOrDefaultAsync(i => i.Id == id);

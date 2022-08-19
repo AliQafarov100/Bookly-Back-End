@@ -52,6 +52,7 @@
                         {
                             <div class="basket-product mt-3 row">
                                 <div class="col-lg-3 col-md-12">
+                                    <a asp-controller="Book" asp-action="RemoveBasket" asp-route-id="@userCart.Book.Id" style="position: relative; left: 10px;"><i class="fa-solid fa-rectangle-xmark text-light remove-basket"></i></a>
                                     <img src="~/assets/Image/Library/@userCart.Book.BookImages.FirstOrDefault(i => i.IsMain == true).ImagePath" alt="">
                                 </div>
                                 <div class="col-lg-3 col-md-12 d-flex align-items-center product-info">
@@ -89,6 +90,7 @@
                         {
                             <div class="basket-product row">
                                 <div class="col-lg-3 col-md-12">
+                                    <a asp-controller="Book" asp-action="RemoveBasket" asp-route-id="@userCart.Book.Id" style="position: relative; left: 5px; top: 25px;"><i class="fa-solid fa-rectangle-xmark remove-basket"></i></a>
                                     <img src="~/assets/Image/Library/@userCart.Book.BookImages.FirstOrDefault(i => i.IsMain == true).ImagePath" alt="">
                                 </div>
                                 <div class="col-lg-3 col-md-12 d-flex align-items-center product-info">
@@ -193,26 +195,5 @@
 @section Scripts{
 
     <script src="~/assets/Js/basket.js"></script>
-    <script>
-
-                    //$(document).ready(function () {
-
-
-                    //    $(".update").each(function (index) {
-                    //        $(this).on("click", function (e) {
-                    //            e.preventDefault();
-                    //            $(".stock").each(function () {
-                    //                var value = $(this).val();
-                    //                var link = $(index).attr("href") + "/?count=" + value
-                    //                fetch(link).then(resp => resp.json()).then(datas => {
-                    //                    if (datas.status == 200) {
-                    //                        location.href = "https://localhost:44339/Home";
-                    //                    }
-                    //                })
-                    //            })
-                    //        })
-                    //    })
-                    //})
-    </script>
 }
 

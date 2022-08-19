@@ -5,12 +5,14 @@ using System.Threading.Tasks;
 using Bookly_Back_End.DAL;
 using Bookly_Back_End.Models;
 using Bookly_Back_End.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace Bookly_Back_End.Controllers
 {
+    [Authorize]
     public class OrderController : Controller
     {
         private readonly AppDbContext _context;

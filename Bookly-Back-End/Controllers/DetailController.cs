@@ -48,56 +48,58 @@ namespace Bookly_Back_End.Controllers
             return View(model);
         }
 
-        public async Task<IActionResult> Purchase(int? id)
-        {
-            if (id is null && id == 0) return NotFound();
+        //public async Task<IActionResult> Purchase(int? id)
+        //{
+        //    if (id is null && id == 0) return NotFound();
 
-            Book book = await _context.Books.Include(b => b.BookAuthors).Include(b => b.BookImages)
-                .Include(b => b.Discount).FirstOrDefaultAsync(b => b.Id == id);
+        //    Book book = await _context.Books.Include(b => b.BookAuthors).Include(b => b.BookImages)
+        //        .Include(b => b.Discount).FirstOrDefaultAsync(b => b.Id == id);
 
 
-            var gateway = _braintreeService.GetGateway();
-            var clientToken = gateway.ClientToken.Generate();
-            ViewBag.ClientToken = clientToken;
+        //    var gateway = _braintreeService.GetGateway();
+        //    var clientToken = gateway.ClientToken.Generate();
+        //    ViewBag.ClientToken = clientToken;
 
-            var data = new BookPurchaseVM
-            {
-                Id = book.Id,
-                Description = book.Description,
-                BookImages = book.BookImages.Where(b => b.IsMain == true).ToList(),
-                BookAuthors = book.BookAuthors.Where(b => b.BookId == book.Id).ToList(),
-                Name = book.Name,
-                Price = book.DiscountId == null ? book.Price : book.Price - ((book.Price * book.Discount.DiscountPercent) / 100),
-                Nonce = ""
-            };
+        //    var data = new BookPurchaseVM
+        //    {
+        //        Id = book.Id,
+        //        Description = book.Description,
+        //        BookImages = book.BookImages.Where(b => b.IsMain == true).ToList(),
+        //        BookAuthors = book.BookAuthors.Where(b => b.BookId == book.Id).ToList(),
+        //        Name = book.Name,
+        //        Price = book.DiscountId == null ? book.Price : book.Price - ((book.Price * book.Discount.DiscountPercent) / 100),
+        //        Nonce = ""
+        //    };
 
-            return View(data);
-        }
+        //    return View(data);
+        //}
 
-        public IActionResult Create(BookPurchaseVM model)
-        {
-            var gateway = _braintreeService.GetGateway();
+        //public IActionResult Create(BookPurchaseVM model)
+        //{
+        //    var gateway = _braintreeService.GetGateway();
 
-            var request = new TransactionRequest
-            {
-                Amount = Convert.ToDecimal("250"),
-                PaymentMethodNonce = model.Nonce,
-                Options = new TransactionOptionsRequest
-                {
-                    SubmitForSettlement = true
-                }
-            };
+        //    var request = new TransactionRequest
+        //    {
+        //        Amount = Convert.ToDecimal("250"),
+        //        PaymentMethodNonce = model.Nonce,
+        //        Options = new TransactionOptionsRequest
+        //        {
+        //            SubmitForSettlement = true
+        //        }
+        //    };
 
-            Result<Transaction> result = gateway.Transaction.Sale(request);
+        //    Result<Transaction> result = gateway.Transaction.Sale(request);
 
-            if (result.IsSuccess())
-            {
-                return View("Success");
-            }
-            else
-            {
-                return View("Failure");
-            }
-        }
+        //    if (result.IsSuccess())
+        //    {
+        //        return View("Success");
+        //    }
+        //    else
+        //    {
+        //        return View("Failure");
+        //    }
+        //}
+
+       
     }
 }

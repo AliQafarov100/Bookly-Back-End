@@ -72,9 +72,9 @@
                                 <div class="site-pages">
                                     <ul>
                                         <li><a asp-controller="About" asp-action="About">About Us</a></li>
-                                        <li><a href="Blog.html">Blog</a></li>
-                                        <li><a href="FAQ.html">FAQ's</a></li>
-                                        <li><a href="Contact.html">Contact us</a></li>
+                                        <li><a asp-controller="Blog" asp-action="Blogs">Blog</a></li>
+                                        <li><a asp-controller="FAQ" asp-action="FAQ">FAQ's</a></li>
+                                        <li><a asp-controller="Contact" asp-action="Contact">Contact us</a></li>
                                     </ul>
                                 </div>
                             </li>
@@ -97,7 +97,7 @@
                     <div class="offcanvas-body">
                         <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
                             <li class="nav-item">
-                                <a class="nav-link active" aria-current="page" href="#">Home</a>
+                                <a class="nav-link active" aria-current="page" asp-controller="Home" asp-action="Index">Home</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" style="color: black;" href="#">Link</a>

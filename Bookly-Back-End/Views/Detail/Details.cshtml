@@ -82,7 +82,7 @@
                                         <li><a asp-controller="About" asp-action="About">About Us</a></li>
                                         <li><a asp-controller="Blog" asp-action="Blogs">Blog</a></li>
                                         <li><a asp-controller="FAQ" asp-action="FAQ">FAQ's</a></li>
-                                        <li><a href="Contact.html">Contact us</a></li>
+                                        <li><a asp-controller="Contact" asp-action="Contact">Contact us</a></li>
                                     </ul>
                                 </div>
                             </li>
@@ -374,7 +374,7 @@
                                         </a>
                                     </div>
                                     <div class="col-lg-5 col-sm-12 mt-2">
-                                        <a asp-controller="Detail" asp-action="Purchase" asp-route-id="@Model.Book.Id" class="text-light btn btn-danger customer">
+                                        <a asp-controller="Detail" asp-action="Pay" asp-route-id="@Model.Book.Id" class="text-light btn btn-danger customer">
                                             <small>Buy it now</small>
                                         </a>
                                     </div>
@@ -538,6 +538,8 @@
 @section Scripts{
 
     <script src="~/assets/Js/product.js"></script>
+    <script src="~/assets/Js/search.js"></script>
+    
     <script>
         $(document).ready(function () {
             $(".add-basket").click(function (e) {

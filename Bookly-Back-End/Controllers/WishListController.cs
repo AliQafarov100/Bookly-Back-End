@@ -4,11 +4,13 @@ using System.Linq;
 using System.Threading.Tasks;
 using Bookly_Back_End.DAL;
 using Bookly_Back_End.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace Bookly_Back_End.Controllers
 {
+    [Authorize]
     public class WishListController : Controller
     {
         private readonly AppDbContext _context;

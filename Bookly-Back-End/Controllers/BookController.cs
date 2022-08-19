@@ -70,7 +70,7 @@ namespace Bookly_Back_End.Controllers
             Book book = await _context.Books.FirstOrDefaultAsync(b => b.Id == books.Id);
             TempData["Unavailable"] = null;
             book.Counter = count;
-            books.Counter = count;
+       
             _context.SaveChanges();
             if (book == null) return NotFound();
             if (User.Identity.IsAuthenticated)
@@ -130,17 +130,7 @@ namespace Bookly_Back_End.Controllers
                     }
                     else
                     {
-
-                        existedCookie.Count += book.Counter;
-                        books.Stock -= books.Counter;
-                        _context.SaveChanges();
-                        book.Stock = books.Stock;
-                        
-                        if (book.Stock == 0)
-                        {
-                            TempData["Unavailable"] = true;
-                        }
-                        
+                        existedCookie.Count += book.Counter; 
                     }
                 }
                 basketStr = JsonConvert.SerializeObject(basket);
@@ -151,24 +141,20 @@ namespace Bookly_Back_End.Controllers
 
             return Json(new { status = 200 });
         }
-        public async Task<IActionResult> RemoveBasket(int? id)
+        public async Task<IActionResult> RemoveBasket(int id)
         {
-            if (id is null && id == 0) return NotFound();
+            
             Book book = await _context.Books.FirstOrDefaultAsync(b => b.Id == id);
             if (User.Identity.IsAuthenticated)
             {
                 AppUser existeUser = await _userManager.FindByNameAsync(User.Identity.Name);
                 BasketItem existedItem = await _context.BasketItems.FirstOrDefaultAsync(bi => bi.BookId == id);
 
-                if (existedItem != null && existedItem.Count > 1)
-                {
-                    existedItem.Count--;
-                }
-                else if (existedItem != null && existedItem.Count == 1)
+                if (existedItem != null)
                 {
                     _context.BasketItems.Remove(existedItem);
                 }
-
+                
                 await _context.SaveChangesAsync();
             }
             else
@@ -181,15 +167,11 @@ namespace Bookly_Back_End.Controllers
                     basket = JsonConvert.DeserializeObject<List<BasketCookieItemVM>>(basketStr);
                     BasketCookieItemVM existed = basket.FirstOrDefault(c => c.Id == book.Id);
 
-                    if (existed != null && existed.Count > 1)
-                    {
-                        existed.Count--;
-                    }
-                    else if (existed != null && existed.Count == 1)
+                    if (existed != null)
                     {
                         basket.Remove(existed);
                     }
-
+                 
                     basketStr = JsonConvert.SerializeObject(basket);
                 }
                 HttpContext.Response.Cookies.Append("Basket", basketStr);

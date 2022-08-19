@@ -53,5 +53,6 @@ namespace Bookly_Back_End.DAL
         public DbSet<OrderProduct> OrderProducts { get; set; }
         public DbSet<WishListItem> WishListItems { get; set; }
         public DbSet<FAQ> FAQs { get; set; }
+        public DbSet<ContactForm> ContactForms { get; set; }
     }
 }

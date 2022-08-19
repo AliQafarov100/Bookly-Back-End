@@ -10,9 +10,9 @@
                 <div class="row w-100">
                     <div class="pages col-lg-8">
                         <ul class="d-flex justify-content-around">
-                            <li><a href="Index.html">Home</a></li>
+                            <li><a asp-controller="Home" asp-action="Index">Home</a></li>
                             <li class="controll">
-                                <a href="Collections.html" class="category">
+                                <a asp-controller="Book" asp-action="Index" class="category">
                                     <span>Categories</span><span class="ms-3">
                                         <i class="fa-solid fa-sort-down"></i>
                                     </span>
@@ -65,8 +65,8 @@
                                     </div>
                                 </div>
                             </li>
-                            <li><a href="Brands.html">Brands</a></li>
-                            <li><a href="BestSellers.html">Best Sellers</a></li>
+                            <li><a asp-controller="Brand" asp-action="Brands">Brands</a></li>
+                            <li><a asp-controller="Best" asp-action="Best">Best Sellers</a></li>
                             <li class="page-controller">
                                 <a href="">
                                     <span>Pages</span><span class="ms-3">
@@ -75,10 +75,10 @@
                                 </a>
                                 <div class="site-pages">
                                     <ul>
-                                        <li><a href="About.html">About Us</a></li>
-                                        <li><a href="Blog.html">Blog</a></li>
-                                        <li><a href="FAQ.html">FAQ's</a></li>
-                                        <li><a href="Contact.html">Contact us</a></li>
+                                        <li><a asp-controller="About" asp-action="About">About Us</a></li>
+                                        <li><a asp-controller="Blog" asp-action="Blogs">Blog</a></li>
+                                        <li><a asp-controller="FAQ" asp-action="FAQ">FAQ's</a></li>
+                                        <li><a asp-controller="Contact" asp-action="Contact">Contact us</a></li>
                                     </ul>
                                 </div>
                             </li>
@@ -184,7 +184,7 @@
                 <div class="texts">
                     <h4 class="text-center">FAQ's</h4>
                     <ul class="d-flex justify-content-around">
-                        <li><a href="Index.html">Home</a></li>
+                        <li><a asp-controller="Home" asp-action="Index">Home</a></li>
                         <li><a href="">FAQ's</a></li>
                     </ul>
                 </div>
@@ -271,5 +271,7 @@
 </main>
 @section Scripts{
     <script src="~/assets/Js/FAQ.js"></script>
+    <script src="~/assets/Js/search.js"></script>
+   
 }
 
