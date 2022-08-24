@@ -4,12 +4,14 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
+using Bookly_Back_End.DAL;
 using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore;
 
 namespace Bookly_Back_End.Models
 {
     public class Book
-    {
+    {   
         [Key]
         public int Id { get; set; }
         [Required]

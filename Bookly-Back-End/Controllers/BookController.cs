@@ -20,21 +20,22 @@ namespace Bookly_Back_End.Controllers
         private readonly UserManager<AppUser> _userManager;
         private readonly IBookOperation _repository;
         private readonly IQuery _query;
-       
 
-        public BookController(AppDbContext context,UserManager<AppUser> userManager,IBookOperation repository,IQuery query)
+
+        public BookController(AppDbContext context, UserManager<AppUser> userManager, IBookOperation repository, IQuery query)
         {
             _context = context;
             _userManager = userManager;
             _repository = repository;
             _query = query;
         }
-        public async Task<IActionResult> Index(string category,string sortBy,
-            string author,int? minimum,int? maximum, string language,string format,int page = 1)
+        public async Task<IActionResult> Index(string category, string sortBy,
+            string author, int? minimum, int? maximum, string language, string format, int page = 1)
         {
+
             ViewBag.Author = author;
-            var query = _repository.GetBookByFilter(category,author,sortBy,minimum,
-                maximum,language,format);
+            var query = _repository.GetBookByFilter(category, author, sortBy, minimum,
+                maximum, language, format);
 
             ViewBag.CurrentMaximum = maximum;
             ViewBag.CurentMinimum = minimum;
@@ -45,6 +46,8 @@ namespace Bookly_Back_End.Controllers
             ViewBag.CurrentPage = page;
             ViewBag.High = sortBy;
             ViewBag.Sort = sortBy;
+
+            if (page <= 0) return RedirectToAction("Index", "Book");
 
             List<BookAuthor> bookAuthors = await query.Skip((page - 1) * 12)
                  .Include(b => b.Book).ThenInclude(b => b.BookImages).Include(b => b.Book.Discount)
@@ -62,13 +65,14 @@ namespace Bookly_Back_End.Controllers
             return View(model);
         }
 
-        public async Task<IActionResult> AddBasket(int count,Book books)
+        public async Task<IActionResult> AddBasket(int count, Book books)
         {
-           
+            
             Book book = await _context.Books.FirstOrDefaultAsync(b => b.Id == books.Id);
             TempData["Unavailable"] = null;
+            
             book.Counter = count;
-       
+
             _context.SaveChanges();
             if (book == null) return NotFound();
             if (User.Identity.IsAuthenticated)
@@ -80,6 +84,7 @@ namespace Bookly_Back_End.Controllers
                 {
                     BasketItem item = new BasketItem
                     {
+
                         Book = book,
                         AppUser = user,
                         Count = book.Counter,
@@ -98,7 +103,7 @@ namespace Bookly_Back_End.Controllers
             else
             {
                 string basketStr = HttpContext.Request.Cookies["Basket"];
-
+               
                 List<BasketCookieItemVM> basket;
                 if (string.IsNullOrEmpty(basketStr))
                 {
@@ -108,7 +113,9 @@ namespace Bookly_Back_End.Controllers
                         Id = book.Id,
                         Count = book.Counter
                     };
+                    
                     basket.Add(cookie);
+                   
                     basketStr = JsonConvert.SerializeObject(basket);
                 }
                 else
@@ -128,7 +135,7 @@ namespace Bookly_Back_End.Controllers
                     }
                     else
                     {
-                        existedCookie.Count += book.Counter; 
+                        existedCookie.Count += book.Counter;
                     }
                 }
                 basketStr = JsonConvert.SerializeObject(basket);
@@ -141,7 +148,7 @@ namespace Bookly_Back_End.Controllers
         }
         public async Task<IActionResult> RemoveBasket(int id)
         {
-            
+
             Book book = await _context.Books.FirstOrDefaultAsync(b => b.Id == id);
             if (User.Identity.IsAuthenticated)
             {
@@ -150,9 +157,9 @@ namespace Bookly_Back_End.Controllers
 
                 if (existedItem != null)
                 {
-                    _context.BasketItems.Remove(existedItem);
+                    _context.BasketItems.RemoveRange(existedItem);
                 }
-                
+
                 await _context.SaveChangesAsync();
             }
             else
@@ -169,7 +176,7 @@ namespace Bookly_Back_End.Controllers
                     {
                         basket.Remove(existed);
                     }
-                 
+
                     basketStr = JsonConvert.SerializeObject(basket);
                 }
                 HttpContext.Response.Cookies.Append("Basket", basketStr);
@@ -190,7 +197,7 @@ namespace Bookly_Back_End.Controllers
                 AppUser existedUser = await _userManager.FindByNameAsync(User.Identity.Name);
                 WishListItem existed = await _context.WishListItems
                     .FirstOrDefaultAsync(w => w.BookId == book.Id && w.AppUserId == existedUser.Id);
-                if(existed == null)
+                if (existed == null)
                 {
                     WishListItem item = new WishListItem
                     {
@@ -203,10 +210,10 @@ namespace Bookly_Back_End.Controllers
                 }
                 else
                 {
-                    
+
                 }
 
-                await _context.SaveChangesAsync();     
+                await _context.SaveChangesAsync();
             }
             return RedirectToAction("Index", "Home");
         }
@@ -222,7 +229,7 @@ namespace Bookly_Back_End.Controllers
                 AppUser existedUser = await _userManager.FindByNameAsync(User.Identity.Name);
                 WishListItem existedWishList = await _context.WishListItems
                     .FirstOrDefaultAsync(w => w.AppUserId == existedUser.Id && w.BookId == book.Id);
-                if(existedWishList != null)
+                if (existedWishList != null)
                 {
                     _context.WishListItems.Remove(existedWishList);
                 }
@@ -230,7 +237,7 @@ namespace Bookly_Back_End.Controllers
                 await _context.SaveChangesAsync();
             }
 
-            return RedirectToAction("Index","Home");
+            return RedirectToAction("Index", "Home");
         }
     }
 }

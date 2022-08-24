@@ -145,7 +145,7 @@
             </div>
         </nav>
     </section>
-    <section id="intro">
+    <section id="intro" style="background-image: url(/assets/Image/Bg-Image/about-10.webp);">
         <div class="container">
             <div class="write  d-flex justify-content-center align-items-center">
                 <div class="texts">
@@ -182,7 +182,7 @@
                                                         <a href=""><i class="fa-solid fa-magnifying-glass"></i></a>
                                                     </div>
                                                 </div>
-                                                <img src="~/assets/Image/Library/@advertisment.BookImages.FirstOrDefault(b => b.IsMain == true)?.ImagePath" alt="">
+                                                <a asp-controller="Detail" asp-action="Details" asp-route-id="@advertisment.Id"><img src="~/assets/Image/Library/@advertisment.BookImages.FirstOrDefault(i => i.IsMain == true)?.ImagePath"></a>
                                             </div>
                                             <div class="detail mt-3">
                                                 <p>
@@ -331,18 +331,18 @@
                                 <div class="col-lg-6">
                                     <strong>Vendor:</strong>
                                 </div>
-                                <div class="container col-lg-6">
-                                    <p>
+                                <div class="container d-flex">
+                                    <a style="border: 1px solid #e9e9e9;">
                                         @Model.BookAuthors.FirstOrDefault(a => a.BookId == Model.Book.Id).Author.FullName
-                                    </p>
+                                    </a>
                                 </div>
                             </div>
                             <div class="genre-details d-flex justify-content-between mt-2">
                                 <div class="col-lg-6">
                                     <strong>Genre:</strong>
                                 </div>
-                                <div class="container col-lg-6">
-                                    <p>@Model.Book.Category.Name</p>
+                                <div class="container d-flex">
+                                    <a style="border: 1px solid #e9e9e9;">@Model.Book.Category.Name</a>
                                 </div>
                             </div>
                             <div class="language-details d-flex justify-content-between mt-2">
@@ -475,7 +475,7 @@
                                         <a href=""><i class="fa-solid fa-magnifying-glass"></i></a>
                                     </div>
                                 </div>
-                                <img src="~/assets/Image/Library/@related.BookImages.FirstOrDefault(i => i.IsMain == true)?.ImagePath" style="height: 450px;" alt="">
+                                <a asp-controller="Detail" asp-action="Details" asp-route-id="@related.Id"><img src="~/assets/Image/Library/@related.BookImages.FirstOrDefault(i => i.IsMain == true)?.ImagePath"></a>
                             </div>
                             <div class="detail mt-3">
                                 <p>
@@ -517,7 +517,7 @@
                                         <a href=""><i class="fa-solid fa-magnifying-glass"></i></a>
                                     </div>
                                 </div>
-                                <img src="~/assets/Image/Library/@recently.BookImages.FirstOrDefault(i => i.IsMain == true)?.ImagePath" style="height: 450px;" alt="">
+                                <a asp-controller="Detail" asp-action="Details" asp-route-id="@recently.Id"><img src="~/assets/Image/Library/@recently.BookImages.FirstOrDefault(i => i.IsMain == true)?.ImagePath"></a>
                             </div>
                             <div class="detail mt-3">
                                 <p>
@@ -565,18 +565,18 @@
                 })
             })
         })
-                //$(document).ready(function () {
-                //    $(".buy-now").click(function (e) {
-                //        e.preventDefault();
-                //        var value = $(".stock").val();
-                //        var link = $(this).attr("href") + "/?count=" + value
-                //        fetch(link).then(res => res.json()).then(datas => {
-                //            if (datas.status == 200) {
-                //                location.href = "https://localhost:44339/Basket/PayOperation";
-                //            }
-                //        })
-                //    })
-                //})
+                                //$(document).ready(function () {
+                                //    $(".buy-now").click(function (e) {
+                                //        e.preventDefault();
+                                //        var value = $(".stock").val();
+                                //        var link = $(this).attr("href") + "/?count=" + value
+                                //        fetch(link).then(res => res.json()).then(datas => {
+                                //            if (datas.status == 200) {
+                                //                location.href = "https://localhost:44339/Basket/PayOperation";
+                                //            }
+                                //        })
+                                //    })
+                                //})
 
     </script>
 }

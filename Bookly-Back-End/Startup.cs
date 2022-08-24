@@ -34,7 +34,6 @@ namespace Bookly_Back_End
         {
             services.AddTransient<LayoutService>();
             services.AddScoped<IBookOperation, BookOperation>();
-            services.AddScoped<ICrudOperation, CrudOperation>();
             services.AddScoped<IOrderConfirmation, OrderConfirmation>();
             services.AddScoped<IQuery, Query>();
             services.AddControllersWithViews();

@@ -28,7 +28,7 @@ namespace Bookly_Back_End.Controllers
             _userManager = userManager;
             _query = query;
         }
-        public async Task<IActionResult> Index(string category)
+        public async Task<IActionResult> Index(string category,int count)
         {
             var query = _repository.GetBookByCategory(category);
             List<BookAuthor> bookAuthors = await query.Include(a => a.Author).Include(b => b.Book)
@@ -46,7 +46,9 @@ namespace Bookly_Back_End.Controllers
                 .Include(b => b.AuthorSocialMedias).ThenInclude(a => a.SocialMedia).FirstOrDefaultAsync(a => a.IsBest == true),
                 Categories = await _query.Categories.ToListAsync(),
                 BookAuthors = bookAuthors,
-                Blogs = await _query.Blogs.ToListAsync()
+                Blogs = await _query.Blogs.ToListAsync(),
+                AnotherBooks = await _context.Books.Include(b => b.BookImages).Include(b => b.BookAuthors)
+                .Include(b => b.Discount).ToListAsync()
             };
             return View(model);
         }

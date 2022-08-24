@@ -19,18 +19,16 @@ namespace Bookly_Back_End.Areas.BooklyAdmin.Controllers
     public class TeamsController : Controller
     {
         private readonly AppDbContext _context;
-        private readonly ICrudOperation _crud;
         private readonly IWebHostEnvironment _env;
 
-        public TeamsController(AppDbContext context,ICrudOperation crud,IWebHostEnvironment env)
+        public TeamsController(AppDbContext context,IWebHostEnvironment env)
         {
             _context = context;
-            _crud = crud;
             _env = env;
         }
         public async Task<IActionResult> Index()
         {
-            var team = _crud.Teams.AsQueryable();
+            var team = _context.Teams.AsQueryable();
             List<Team> teams = await team.Include(t => t.Profession).Include(t => t.TeamSocialMedias).ToListAsync();
             return View(teams);
         }
@@ -49,11 +47,27 @@ namespace Bookly_Back_End.Areas.BooklyAdmin.Controllers
             ViewBag.Profession = await _context.Professions.ToListAsync();
             if (!ModelState.IsValid) return View();
 
-            _crud.Create(team);
-            if (!team.Photo.IsOkay(1))
+            if (team.Photo != null)
             {
-                ModelState.AddModelError("", "Size of image mustn't more than 1mb");
+                if (team.Photo.IsOkay(1))
+                {
+                    team.Image = await team.Photo.FileCreate(_env.WebRootPath, @"assets\Image\Team");
+                }
+            }
+            else
+            {
+                ModelState.AddModelError("", "Please choose image!");
                 return View();
+            }
+
+            team.TeamSocialMedias = new List<TeamSocialMedia>();
+            foreach (var socialId in team.SocialMediaIds)
+            {
+                TeamSocialMedia media = new TeamSocialMedia
+                {
+                    SocialMediaId = socialId
+                };
+                team.TeamSocialMedias.Add(media);
             }
 
             await _context.Teams.AddAsync(team);
@@ -71,7 +85,8 @@ namespace Bookly_Back_End.Areas.BooklyAdmin.Controllers
         {
             ViewBag.SocialMedias = await _context.SocialMedias.ToListAsync();
             ViewBag.Profession = await _context.Professions.ToListAsync();
-            Team team = await _context.Teams.FirstOrDefaultAsync(i => i.Id == id);
+            Team team = await _context.Teams.Include(t => t.TeamSocialMedias)
+                .Include(t => t.Profession).FirstOrDefaultAsync(i => i.Id == id);
 
             if (team == null) return NotFound();
 
@@ -89,13 +104,37 @@ namespace Bookly_Back_End.Areas.BooklyAdmin.Controllers
             Team existedTeam = await _context.Teams.Include(t => t.Profession).Include(t => t.TeamSocialMedias)
                  .FirstOrDefaultAsync(t => t.Id == id);
 
-            _crud.Update(team,id);
-            if (!team.Photo.IsOkay(1))
+            if (team.Photo == null)
             {
-                ModelState.AddModelError("", "Size of image mustn't more than 1mb");
-                return View(existedTeam);
+                string fileName = existedTeam.Image;
+                _context.Entry(existedTeam).CurrentValues.SetValues(team);
+                existedTeam.Image = fileName;
             }
-            
+            else
+            {
+                if (!team.Photo.IsOkay(1))
+                {
+                    ModelState.AddModelError("Photo", "Image mustn't size of more than 1mb!");
+                    return View();    
+                }
+
+                FileExtesion.FileDelete(_env.WebRootPath, @"assets\Image\Team", existedTeam.Image);
+                _context.Entry(existedTeam).CurrentValues.SetValues(team);
+                existedTeam.Image = await team.Photo.FileCreate(_env.WebRootPath, @"assets\Image\Team");
+            }
+
+            List<TeamSocialMedia> removeable = existedTeam.TeamSocialMedias.Where(t => !team.SocialMediaIds.Contains(t.Id)).ToList();
+            existedTeam.TeamSocialMedias.RemoveAll(ri => removeable.Any(i => i.Id == ri.Id));
+            foreach (var mediaId in team.SocialMediaIds)
+            {
+                TeamSocialMedia media = new TeamSocialMedia
+                {
+                    TeamId = existedTeam.Id,
+                    SocialMediaId = mediaId
+                };
+                existedTeam.TeamSocialMedias.Add(media);
+            }
+
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }

@@ -28,7 +28,7 @@
                                         {
                                             <div class="col-lg-3 col-md-12 col-sm-12 col-12">
                                                 <div class="book">
-                                                    <img src="/assets/Image/Library/@book.Book.BookImages.FirstOrDefault(i => i.IsMain == true).ImagePath" alt="">
+                                                    <a asp-controller="Detail" asp-action="Details" asp-route-id="@book.Book.Id"><img src="~/assets/Image/Library/@book.Book.BookImages.FirstOrDefault(i => i.IsMain == true)?.ImagePath"></a>
                                                     <div class="book-info">
                                                         <a href="">
                                                             <span>@book.Book.Name</span><span class="ms-2">$@book.Book.Price</span>
@@ -130,7 +130,7 @@
             </div>
         </nav>
     </section>
-    <section id="intro">
+    <section id="intro" style="background-image: url(/assets/Image/Bg-Image/about-10.webp);">
         <div class="container">
             <div class="write  d-flex justify-content-center align-items-center">
                 <div class="texts">
@@ -238,7 +238,7 @@
                                                         <a href=""><i class="fa-solid fa-magnifying-glass"></i></a>
                                                     </div>
                                                 </div>
-                                                <img src="/assets/Image/Library/@book.Book.BookImages.FirstOrDefault(i => i.IsMain == true)?.ImagePath" alt="">
+                                                <a asp-controller="Detail" asp-action="Details" asp-route-id="@book.Book.Id"><img src="~/assets/Image/Library/@book.Book.BookImages.FirstOrDefault(i => i.IsMain == true)?.ImagePath"></a>
                                             </div>
                                             <div class="detail mt-3">
                                                 <p>
@@ -313,7 +313,7 @@
                                                     <a href=""><i class="fa-solid fa-magnifying-glass"></i></a>
                                                 </div>
                                             </div>
-                                            <img src="/assets/Image/Library/@sellBook.Book.BookImages.FirstOrDefault(i => i.IsMain == true).ImagePath" alt="">
+                                            <a asp-controller="Detail" asp-action="Details" asp-route-id="@sellBook.Book.Id"><img src="~/assets/Image/Library/@sellBook.Book.BookImages.FirstOrDefault(i => i.IsMain == true)?.ImagePath"></a>
                                         </div>
                                         <div class="detail mt-3">
                                             <p>

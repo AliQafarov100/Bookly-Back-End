@@ -18,52 +18,6 @@
                                     </span>
 
                                 </a>
-
-                                <div class="container fluid">
-                                    <div class="row">
-                                        <div class="col-lg-3 col-md-12 col-sm-12 col-12">
-                                            <div class="book">
-                                                <img src="/assets/Image/Category Book/shop-new-100.webp" alt="">
-                                                <div class="book-info">
-                                                    <a href="">
-                                                        <span>Endless Summer</span><span class="ms-2">$210</span>
-                                                    </a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-3 col-md-12 col-sm-12 col-12">
-                                            <div class="book">
-                                                <img src="/assets/Image/Category Book/shop-new-30.webp" alt="">
-                                                <div class="book-info">
-                                                    <a href="">
-                                                        <span>Fresh Healthy Eat</span><span class="ms-2">$110</span>
-                                                    </a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-3 col-md-12 col-sm-12 col-12">
-                                            <div class="book">
-                                                <img src="/assets/Image/Category Book/shop-new-4.webp" alt="">
-                                                <div class="book-info">
-                                                    <a href="">
-                                                        <span>Book for a Cause</span><span class="ms-2">$110</span>
-                                                    </a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-3 col-md-12 col-sm-12 col-12">
-                                            <div class="book">
-                                                <img src="/assets/Image/Category Book/shop-new-95_b0b53360-a171-427b-9dc6-0bf965bcfdae.webp"
-                                                     alt="">
-                                                <div class="book-info">
-                                                    <a href="">
-                                                        <span>Adventurous Eating</span><span class="ms-2">$500</span>
-                                                    </a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
                             </li>
                             <li><a asp-controller="Brand" asp-action="Brands">Brands</a></li>
                             <li><a asp-controller="Best" asp-action="Best">Best Sellers</a></li>
@@ -96,11 +50,24 @@
                     </div>
                     <div class="offcanvas-body">
                         <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
-                            <li class="nav-item">
-                                <a class="nav-link active" aria-current="page" asp-controller="Home" asp-action="Index">Home</a>
+                            <li><a asp-controller="Home" asp-action="Index">Home</a></li>
+                            <li class="fluid-controll">
+                                <a asp-controller="Book" asp-action="Index" class="category"
+                                   style="color: black;">
+                                    <span>Genres</span><span class="ms-3">
+                                        <i class="fa-solid fa-sort-down"></i>
+                                    </span>
+
+                                </a>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link" style="color: black;" href="#">Link</a>
+                            <li><a asp-controller="Brand" asp-action="Brands" style="color: black;">Brands</a></li>
+                            <li><a asp-controller="Best" asp-action="Best" style="color: black;">Best Sellers</a></li>
+                            <li>
+                                <a href="" style="color: black;">
+                                    <span>Pages</span><span class="ms-3">
+                                        <i class="fa-solid fa-sort-down"></i>
+                                    </span>
+                                </a>
                             </li>
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" style="color: black;" href="#"
@@ -133,48 +100,11 @@
                             </button>
                         </form>
                     </div>
-                    <div class="container fluid">
-                        <div class="row">
-                            <div class="col-lg-3 col-md-12 col-sm-12 col-12">
-                                <div class="book">
-                                    <img src="/assets/Image/Category Book/shop-new-100.webp" alt="">
-                                    <div class="book-info">
-                                        <a href=""><span>Endless Summer</span><span class="ms-2">$210</span></a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-3 col-md-12 col-sm-12 col-12">
-                                <div class="book">
-                                    <img src="/assets/Image/Category Book/shop-new-30.webp" alt="">
-                                    <div class="book-info">
-                                        <a href=""><span>Fresh Healthy Eat</span><span class="ms-2">$110</span></a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-3">
-                                <div class="book">
-                                    <img src="/assets/Image/Category Book/shop-new-4.webp" alt="">
-                                    <div class="book-info">
-                                        <a href=""><span>Book for a Cause</span><span class="ms-2">$110</span></a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-3 col-md-12 col-sm-12 col-12">
-                                <div class="book">
-                                    <img src="/assets/Image/Category Book/shop-new-95_b0b53360-a171-427b-9dc6-0bf965bcfdae.webp"
-                                         alt="">
-                                    <div class="book-info">
-                                        <a href=""><span>Adventurous Eating</span><span class="ms-2">$500</span></a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </div>
         </nav>
     </section>
-    <section id="intro">
+    <section id="intro" style="background-image: url(/assets/Image/Bg-Image/about-10.webp);">
         <div class="container">
             <div class="write  d-flex justify-content-center align-items-center">
                 <div class="texts">

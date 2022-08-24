@@ -11,7 +11,7 @@
     </div>
     <div>
         <label class="mb-3">Author Comments: </label><br />
-        <input asp-for="Comments" class="form-control"/><br />
+        <input asp-for="Comments" class="form-control" /><br />
         <span class="text-danger" asp-validation-for="Comments"></span>
     </div>
     <div class="form-check mb-4">
@@ -58,9 +58,9 @@
 
         <label class="mb-3">Author image:</label><br />
         <div class="d-flex">
-            <div class="col-lg-2" style="position:relative">
-                <i class="mdi mdi-close deleteBtn" style="position:absolute;top:10px;right:5px;color:red;font-size:20px"></i>
-                <img style="width: 100%; height:400px" src="~/assets/Image/AuthorImage/@Model.Image" />
+            <div class="for-image">
+                <strong class="removeable">Remove</strong>
+                <img style="width: 200px; height:300px" src="~/assets/Image/AuthorImage/@Model.Image" />
             </div>
         </div>
     </div>
@@ -74,6 +74,36 @@
     </div>
 </form>
 
+@section Css
+{
+    <style>
+        .for-image:hover img {
+            transition: 0.7s;
+            opacity: 0.6;
+        }
+
+        .for-image {
+            position: relative;
+            width: 200px;
+            height: 300px;
+        }
+
+            .for-image:hover .removeable {
+                transition: 0.7s;
+                opacity: 1;
+            }
+
+        .removeable {
+            z-index: 5;
+            color: black;
+            cursor: pointer;
+            opacity: 0;
+            position: absolute;
+            left: 70px;
+            top: 140px;
+        }
+    </style>
+}
 @section Scripts
 {
     <script>

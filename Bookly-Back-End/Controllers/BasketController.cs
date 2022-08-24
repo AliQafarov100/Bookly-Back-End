@@ -28,13 +28,10 @@ namespace Bookly_Back_End.Controllers
 
             return View();
         }
-        public async Task<IActionResult> UpdateCart(int id, int count)
+        public async Task<IActionResult> Increase(int id)
         {
             Book book = await _context.Books.FirstOrDefaultAsync(b => b.Id == id);
-            book.Counter = count;
-
-            _context.SaveChanges();
-
+           
             if (book == null) return NotFound();
             if (User.Identity.IsAuthenticated)
             {
@@ -42,8 +39,14 @@ namespace Bookly_Back_End.Controllers
                 BasketItem existed = await _context.BasketItems.
                     FirstOrDefaultAsync(bi => bi.AppUserId == user.Id && bi.BookId == book.Id);
 
-                existed.Count = book.Counter;
-
+                if (existed.Count == existed.Book.Stock)
+                {
+                    existed.Count = existed.Book.Stock;
+                }
+                else
+                {
+                    existed.Count++;
+                }
                 await _context.SaveChangesAsync();
             }
             else
@@ -55,15 +58,70 @@ namespace Bookly_Back_End.Controllers
 
                 BasketCookieItemVM existedCookie = basket.FirstOrDefault(c => c.Id == book.Id);
 
-                existedCookie.Count = book.Counter;
+                if (existedCookie.Count == book.Stock)
+                {
+                    existedCookie.Count = book.Stock;
+                }
+                else
+                {
+                    existedCookie.Count++;
+                }
                 basketStr = JsonConvert.SerializeObject(basket);
 
                 HttpContext.Response.Cookies.Append("Basket", basketStr);
 
             }
+            await _context.SaveChangesAsync();
 
+            return RedirectToAction("Cart","Basket");
+        }
 
-            return Json(new { status = 200 });
+        public async Task<IActionResult> Decrease(int id)
+        {
+            Book book = await _context.Books.FirstOrDefaultAsync(b => b.Id == id);
+
+            if (book == null) return NotFound();
+            if (User.Identity.IsAuthenticated)
+            {
+                AppUser user = await _userManager.FindByNameAsync(User.Identity.Name);
+                BasketItem existed = await _context.BasketItems.
+                    FirstOrDefaultAsync(bi => bi.AppUserId == user.Id && bi.BookId == book.Id);
+
+                if(existed.Count == 1)
+                {
+                    existed.Count = 1;
+                }
+                else
+                {
+                    existed.Count--;
+                }
+                await _context.SaveChangesAsync();
+            }
+            else
+            {
+                string basketStr = HttpContext.Request.Cookies["Basket"];
+
+                List<BasketCookieItemVM> basket;
+                basket = JsonConvert.DeserializeObject<List<BasketCookieItemVM>>(basketStr);
+
+                BasketCookieItemVM existedCookie = basket.FirstOrDefault(c => c.Id == book.Id);
+
+                if (existedCookie.Count == 1)
+                {
+                    existedCookie.Count = 1;
+                }
+                else
+                {
+                    existedCookie.Count--;
+                }
+                basketStr = JsonConvert.SerializeObject(basket);
+
+                HttpContext.Response.Cookies.Append("Basket", basketStr);
+
+            }
+            await _context.SaveChangesAsync();
+
+            return RedirectToAction("Cart", "Basket");
         }
 
         [TempData]
@@ -87,6 +145,7 @@ namespace Bookly_Back_End.Controllers
         public async Task<IActionResult> Proccesing(int id,string stripeToken, string stripeEmail)
         {
             AppUser user = await _userManager.FindByEmailAsync(stripeEmail);
+            Book book = await _context.Books.FirstOrDefaultAsync(b => b.Id == id);
             var optionCust = new CustomerCreateOptions
             {
                 Email = stripeEmail,
@@ -113,8 +172,8 @@ namespace Bookly_Back_End.Controllers
                 ViewBag.BalanceTxId = BalanceTransactionId;
                 ViewBag.Customer = customer.Name;
             }
-
-            return View();
+            TempData["Success Pay"] = true;
+            return RedirectToAction("Index","Home");
         }
     }
 }

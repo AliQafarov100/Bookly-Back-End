@@ -70,7 +70,6 @@ namespace Bookly_Back_End.Areas.BooklyAdmin.Controllers
             _context.SaveChanges();
 
             _confirmation.Send(id, message);
-
             return Json(new { status = 200 });
         }
     }

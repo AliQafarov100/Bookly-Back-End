@@ -1,0 +1,35 @@
+﻿
+@{
+    ViewData["Title"] = "ShipingDetails";
+}
+<section id="intro" style="background-image: url(/assets/Image/Bg-Image/about-10.webp);">
+    <div class="container">
+        <div class="write  d-flex justify-content-center align-items-center">
+            <div class="texts">
+                <h4 class="text-center">Product</h4>
+                <ul class="d-flex justify-content-around">
+                    <li><a asp-controller="Book" asp-action="Index">All</a></li>
+                    <li><a href="">Product</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+<section id="shiping-detail" class="py-5">
+    <div class="container">
+        <div>
+            <h5 class="mt-5">Returns Policy</h5><br />
+            <p class="mt-2 text-muted" style="font-weight: bold;">@service.GetData().Result.FirstOrDefault(i => i.Key == "Policy").Value</p><br />
+            <p class="mt-2 text-muted" style="font-weight: bold;">@service.GetData().Result.FirstOrDefault(i => i.Key == "PolicySecond").Value</p><br />
+            <p class="mt-2 text-muted" style="font-weight: bold;">@service.GetData().Result.FirstOrDefault(i => i.Key == "PolicyThree").Value</p><br />
+            <h5 class="mt-5">Shipping details</h5><br />
+            <p class="mt-2 text-muted" style="font-weight: bold;">@service.GetData().Result.FirstOrDefault(i => i.Key == "Shipping").Value</p><br />
+            <p class="mt-2 text-muted" style="font-weight: bold;">@service.GetData().Result.FirstOrDefault(i => i.Key == "ShippingSecond").Value</p><br />
+            <p class="mt-2 text-muted" style="font-weight: bold;">@service.GetData().Result.FirstOrDefault(i => i.Key == "ShippingThree").Value</p><br />
+        </div>
+    </div>
+</section>
+@section Scripts{
+    <script src="~/assets/Js/search.js"></script>
+}
+

@@ -1,10 +1,22 @@
 ﻿@model HomeVM
 @{
     ViewData["Title"] = "Bookly";
+
 }
 
 
 <main>
+    @if (TempData["Success Pay"] != null)
+    {
+        <div style="z-index: 1000; position: absolute; top: 50px; right: 20px;" class="toast align-items-center text-bg-success border-0" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="d-flex justify-content-end">
+                <div class="toast-body">
+                    Payment is successfully!
+                </div>
+                <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+        </div>
+    }
     @if (TempData["Success"] != null)
     {
         <div style="z-index: 1000; position: absolute; top: 50px; right: 20px; " class="toast align-items-center text-bg-success border-0" role="alert" aria-live="assertive" aria-atomic="true">
@@ -59,7 +71,7 @@
                                         {
                                             <div class="col-lg-3 col-md-12 col-sm-12 col-12">
                                                 <div class="book">
-                                                    <img src="/assets/Image/Library/@book.Book.BookImages.FirstOrDefault(i => i.IsMain == true).ImagePath" alt="">
+                                                    <a asp-controller="Detail" asp-action="Details" asp-route-id="@book.Book.Id"><img src="~/assets/Image/Library/@book.Book.BookImages.FirstOrDefault(i => i.IsMain == true)?.ImagePath"></a>
                                                     <div class="book-info">
                                                         <a href="">
                                                             <span>@book.Book.Name</span><span class="ms-2">$@book.Book.Price</span>
@@ -169,7 +181,7 @@
                     <small class="">
                         @Model.Slayd.Description
                     </small> <br>
-                    <a href="" class="btn btn-danger mt-4">Shop Now</a>
+                    <a asp-controller="Book" asp-action="Index" class="btn btn-danger mt-4">Shop Now</a>
                 </div>
             </div>
         </div>
@@ -197,12 +209,12 @@
         <h3 class="text-center">@service.GetData().Result.FirstOrDefault(a => a.Key == "Arrivals").Value</h3>
         <div class="line"></div>
         <div class="book-categories row w-50">
-            <div class="col-lg-2"><a class="w-100 btn btn-light" asp-controller="Home" asp-action="Index">All</a></div>
+            <div class="col-lg-2"><a class="w-100 btn btn-light category-books" asp-controller="Home" asp-action="Index">All</a></div>
             @{
 
                 foreach (Category category in Model.Categories)
                 {
-                    <div class="col-lg-2"><a class="w-100 btn btn-light" asp-controller="Home" asp-action="Index" asp-route-category="@category.Name">@category.Name</a></div>
+                    <div class="col-lg-2"><a class="w-100 btn btn-light category-books" asp-controller="Home" asp-action="Index" asp-route-category="@category.Name">@category.Name</a></div>
                 }
             }
         </div>
@@ -215,10 +227,10 @@
                             <div class="images">
                                 <div class="more-icon">
                                     <div class="more">
-                                        <a href=""><i class="fa-solid fa-link"></i></a>
+                                        <a asp-controller="Detail" asp-action="Details" asp-route-id="@book.Book.Id"><i class="fa-solid fa-link"></i></a>
                                     </div>
                                     <div class="more">
-                                        <a href=""><i class="fa-solid fa-heart"></i></a>
+                                        <a asp-controller="WishList" asp-action="WishList"><i class="fa-solid fa-heart"></i></a>
                                     </div>
                                     <div class="more">
                                         <a href=""><i class="fa-solid fa-magnifying-glass"></i></a>
@@ -268,7 +280,7 @@
                     <h4>@Model.Festival.Subtitle</h4>
                     <h2>@Model.Festival.Title</h2>
                     <p>@Model.Festival.Subtitle</p>
-                    <a href="" class="btn btn-danger">Shop Now</a>
+                    <a asp-controller="Book" asp-action="Index" class="btn btn-danger">Shop Now</a>
                 </div>
             </div>
         </div>
@@ -280,7 +292,7 @@
             <div class="row mt-5">
                 <div class="col-lg-5">
                     <div class="owl-one owl-carousel owl-theme">
-                        @foreach (BookAuthor bestBook in Model.BookAuthors.Where(b => b.Book.IsBest == true))
+                        @foreach (Book bestBook in Model.AnotherBooks.Where(b => b.IsBest == true))
                         {
                             <div class="col-md-6 col-sm-6 col-12">
                                 <div class="infos-book">
@@ -296,24 +308,24 @@
                                                 <a href=""><i class="fa-solid fa-magnifying-glass"></i></a>
                                             </div>
                                         </div>
-                                        <img src="~/assets/Image/Library/@bestBook.Book.BookImages.FirstOrDefault(i => i.IsMain == true).ImagePath" alt="">
+                                        <a asp-controller="Detail" asp-action="Details" asp-route-id="@bestBook.Id"><img src="~/assets/Image/Library/@bestBook.BookImages.FirstOrDefault(i => i.IsMain == true)?.ImagePath"></a>
                                     </div>
                                     <div class="detail mt-3">
                                         <p>
                                             @foreach (BookAuthor author in Model.BookAuthors.Where(b => b.BookId == bestBook.Id))
                                             {
-
+                                                @author.Author.FullName.ToString()
                                             }
                                         </p>
-                                        <strong>@bestBook.Book.Name</strong>
-                                        @if (bestBook.Book.DiscountId != null && bestBook.Book.DiscountId != 4)
+                                        <strong>@bestBook.Name</strong>
+                                        @if (bestBook.DiscountId != null && bestBook.DiscountId != 4)
                                         {
-                                            <span>$@(bestBook.Book.Price - ((bestBook.Book.Price * bestBook.Book.Discount?.DiscountPercent) / 100))</span>
-                                            <span class="ms-2"><del>$@bestBook.Book.Price</del></span>
+                                            <span>$@(bestBook.Price - ((bestBook.Price * bestBook.Discount?.DiscountPercent) / 100))</span>
+                                            <span class="ms-2"><del>$@bestBook.Price</del></span>
                                         }
                                         else
                                         {
-                                            <span>$@bestBook.Book.Price</span>
+                                            <span>$@bestBook.Price</span>
                                         }
                                     </div>
                                 </div>
@@ -369,7 +381,7 @@
                     <small>
                         @Model.Offer.Description
                     </small> <br>
-                    <a href="" class="btn btn-danger mt-4">Shop Now</a>
+                    <a asp-controller="Book" asp-action="Index" class="btn btn-danger mt-4">Shop Now</a>
                 </div>
             </div>
         </div>
@@ -379,7 +391,7 @@
             <h4 class="text-center">@service.GetData().Result.FirstOrDefault(i => i.Key == "Deals").Value</h4>
             <div class="line"></div>
             <div class="row">
-                @foreach (BookAuthor dealBook in Model.BookAuthors.Where(b => b.Book.IsDailyDeal == true))
+                @foreach (Book dealBook in Model.AnotherBooks.Where(b => b.IsDailyDeal == true))
                 {
                     <div class="col-lg-3 col-md-6 col-sm-6 col-12" data-aos="flip-down">
                         <div class="info-book">
@@ -395,7 +407,7 @@
                                         <a href=""><i class="fa-solid fa-magnifying-glass"></i></a>
                                     </div>
                                 </div>
-                                <img src="~/assets/Image/Library/@dealBook.Book.BookImages.FirstOrDefault(i => i.IsMain == true).ImagePath" alt="">
+                                <a asp-controller="Detail" asp-action="Details" asp-route-id="@dealBook.Id"><img src="~/assets/Image/Library/@dealBook.BookImages.FirstOrDefault(i => i.IsMain == true)?.ImagePath"></a>
                             </div>
                             <div class="detail mt-3">
                                 <p>
@@ -404,15 +416,15 @@
                                         @author.Author.FullName.ToString();
                                     }
                                 </p>
-                                <strong>@dealBook.Book.Name</strong> <br />
-                                @if (dealBook.Book.DiscountId != null && dealBook.Book.DiscountId != 4)
+                                <strong>@dealBook.Name</strong> <br />
+                                @if (dealBook.DiscountId != null && dealBook.DiscountId != 4)
                                 {
-                                    <span>$@(dealBook.Book.Price - ((dealBook.Book.Price * dealBook.Book.Discount?.DiscountPercent) / 100))</span>
-                                    <span class="ms-2"><del>$@dealBook.Book.Price</del></span>
+                                    <span>$@(dealBook.Price - ((dealBook.Price * dealBook.Discount?.DiscountPercent) / 100))</span>
+                                    <span class="ms-2"><del>$@dealBook.Price</del></span>
                                 }
                                 else
                                 {
-                                    <span>$@dealBook.Book.Price</span>
+                                    <span>$@dealBook.Price</span>
                                 }
                             </div>
                         </div>
@@ -428,7 +440,7 @@
                 <div class="gift-info text-center">
                     <h2>@Model.Gift.Name</h2>
                     <small>@Model.Gift.Description</small> <br>
-                    <a href="" class="btn btn-danger mt-4">Shop Now</a>
+                    <a asp-controller="Book" asp-action="Index" class="btn btn-danger mt-4">Shop Now</a>
                 </div>
             </div>
         </div>
@@ -525,7 +537,7 @@
                                 <small style="font-weight: normal; color:#676767;">
                                     @blog.SubTitle
                                 </small> <br>
-                                <a href="" class="btn btn-danger mt-4">Read More</a>
+                                <a asp-controller="Blog" asp-action="Blogs" class="btn btn-danger mt-4">Read More</a>
                             </div>
                         </div>
                     </div>
@@ -566,9 +578,4 @@
 </main>
 @section Scripts{
     <script src="~/assets/Js/script.js"></script>
-    <script>
-        $(document).ready(function () {
-            $(".toast").toast('show');
-        });
-    </script>
 }

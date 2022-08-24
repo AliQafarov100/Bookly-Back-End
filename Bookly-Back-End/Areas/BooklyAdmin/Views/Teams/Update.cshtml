@@ -17,7 +17,19 @@
     </div>
     <div>
         <label class="mb-3">Employee SocialMedia(-s):</label><br />
-        <select class="form-control" asp-for="SocialMediaIds" asp-items="@(new SelectList(ViewBag.SocialMedias,"Id","Name"))"></select>
+        <select class="form-control" asp-for="SocialMediaIds">
+            @foreach (SocialMedia media in ViewBag.SocialMedias)
+            {
+                if (Model.TeamSocialMedias.FirstOrDefault(a => a.SocialMediaId == media.Id) != null)
+                {
+                    <option value="@media.Id" selected>@media.Name</option>
+                }
+                else
+                {
+                    <option value="@media.Id">@media.Name</option>
+                }
+            }
+        </select>
         <span class="text-danger" asp-validation-for="SocialMediaIds"></span>
     </div>
     <div>
@@ -26,14 +38,14 @@
         <div class="d-flex">
             <div class="col-lg-2">
                 <div class="for-image">
-                    <strong style="position: relative; top: 50px; left: 140px;" class="removeable">Remove</strong>
-                    <img style="width: 100%; height:400px" src="~/assets/Image/Team/@Model.Image" />
+                    <strong class="removeable text-center">Remove</strong>
+                    <img style="width: 200px; height:300px" src="~/assets/Image/Team/@Model.Image" />
                 </div>
             </div>
         </div>
     </div>
     <div>
-        <label class="mb-3">Employee image:</label><br />
+        <label class="mb-3 mt-5">Employee image:</label><br />
         <input asp-for="Photo" class="form-control" accept="image/*" /><br />
         <span class="text-danger" asp-validation-for="Photo"></span>
     </div>
@@ -50,7 +62,8 @@
             opacity: 0.6;
         }
 
-        .for-image img {
+        .for-image{
+            position: relative;
             width: 200px;
             height: 300px;
         }
@@ -65,6 +78,9 @@
             color: black;
             cursor: pointer;
             opacity: 0;
+            position: absolute; 
+            left: 70px; 
+            top: 140px;
         }
     </style>
 }

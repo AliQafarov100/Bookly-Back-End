@@ -90,7 +90,7 @@
         <div class="d-flex">
             <div class="col-lg-2">
                 <div class="for-image">
-                    <strong style="position: relative; top: 15px; left: 140px;" class="removeable">Remove</strong>
+                    <strong class="removeable">Remove</strong>
                     <img style="width: 200px; height:300px" src="~/assets/Image/Library/@Model.BookImages.FirstOrDefault(i => i.IsMain == true)?.ImagePath" />
                     <input type="hidden" value="@Model.BookImages.FirstOrDefault(i=>i.IsMain == true)?.Id" name="ImageIds" />
                 </div>
@@ -104,7 +104,7 @@
             {
                 <div class="col-lg-2">
                     <div class="for-image">
-                        <strong style="position: relative; top: 15px; left: 140px;" class="removeable">Remove</strong>
+                        <strong class="removeable">Remove</strong>
                         <img style="width: 200px; height:300px" src="~/assets/Image/Library/@image.ImagePath" class="image-remove" />
                         <input type="hidden" value="@image.Id" name="ImageIds" />
                     </div>
@@ -128,9 +128,10 @@
             opacity: 0.6;
         }
 
-        .for-image img {
-            width: 200px;
-            height: 300px;
+        .for-image {
+           width: 200px;
+           height: 300px;
+           position: relative
         }
 
         .for-image:hover .removeable {
@@ -143,6 +144,9 @@
             color: black;
             cursor: pointer;
             opacity: 0;
+            position: absolute;
+            left: 70px;
+            top: 140px;
         }
     </style>
 }

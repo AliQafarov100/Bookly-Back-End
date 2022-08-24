@@ -28,6 +28,7 @@ namespace Bookly_Back_End.Controllers
         }
         public async Task<ActionResult> Details(int id)
         {
+            ViewBag.Categories = await _context.Categories.ToListAsync();
             Book book = await _context.Books.Include(b => b.BookImages).Include(b => b.BookAuthors).Include(c => c.Category).FirstOrDefaultAsync(b => b.Id == id);
             List<Discount> discounts = await _context.Discounts.ToListAsync();
             List<BookAuthor> bookAuthors = await _context.BookAuthors.ToListAsync();

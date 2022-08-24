@@ -29,5 +29,6 @@ namespace Bookly_Back_End.ViewModels
         public Book Book { get; set; }
         public AppUser AppUser { get; set; }
         public List<BasketItem> BasketItems { get; set; }
+        public int VisitorCount { get; set; }
     }
 }

@@ -82,7 +82,7 @@
                                         <i class="fa-solid fa-sort-down"></i>
                                     </span>
                                 </a>
-                                <div class="site-pages">
+                                <div class="site-pages" style="z-index: 100;">
                                     <ul>
                                         <li><a asp-controller="Home" asp-action="Index">About Us</a></li>
                                         <li><a asp-controller="Blog" asp-action="Blogs">Blog</a></li>
@@ -108,9 +108,9 @@
                     </div>
                     <div class="offcanvas-body">
                         <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
-                            <li><a href="">Home</a></li>
+                            <li><a asp-controller="Home" asp-action="Index">Home</a></li>
                             <li class="fluid-controll">
-                                <a href="Collections.html" class="category"
+                                <a asp-controller="Book" asp-action="Index" class="category"
                                    style="color: black;">
                                     <span>Categories</span><span class="ms-3">
                                         <i class="fa-solid fa-sort-down"></i>
@@ -118,8 +118,8 @@
 
                                 </a>
                             </li>
-                            <li><a href="" style="color: black;">Brands</a></li>
-                            <li><a href="" style="color: black;">Best Sellers</a></li>
+                            <li><a asp-controller="Brand" asp-action="Brands" style="color: black;">Brands</a></li>
+                            <li><a asp-controller="Best" asp-action="Best" style="color: black;">Best Sellers</a></li>
                             <li>
                                 <a href="" style="color: black;">
                                     <span>Pages</span><span class="ms-3">
@@ -162,13 +162,13 @@
             </div>
         </nav>
     </section>
-    <section id="intro">
+    <section id="intro" style="background-image: url(/assets/Image/Bg-Image/about-10.webp);">
         <div class="container">
             <div class="write  d-flex justify-content-center align-items-center">
                 <div class="texts">
-                    <h4 class="text-center">Product</h4>
+                    <h4 class="text-center text-dark">Product</h4>
                     <ul class="d-flex justify-content-around">
-                        <li><a href="Index.html">Home</a></li>
+                        <li><a asp-controller="Home" asp-action="Index">Home</a></li>
                         <li><a href="">Contact</a></li>
                     </ul>
                 </div>
@@ -225,7 +225,7 @@
                             <span class="text text-danger" asp-validation-for="Phone"></span> <br />
                             <textarea cols="30" rows="6" asp-for="Message" placeholder="Message"></textarea>
                             <span class="text text-danger" asp-validation-for="Message"></span>
-                            <button class="btn btn-danger mt-3 sent" asp-controller="Contact" asp-action="Form">Send Message</button>
+                            <button class="btn btn-danger mt-3 sent" type="submit">Send Message</button>
                         </form>
                     </div>
                 </div>

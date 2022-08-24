@@ -392,7 +392,6 @@ C:\Users\M S I\Desktop\Bookly-Back-End\Bookly-Back-End\obj\Debug\netcoreapp3.1\R
 C:\Users\M S I\Desktop\Bookly-Back-End\Bookly-Back-End\obj\Debug\netcoreapp3.1\Razor\Areas\BooklyAdmin\Views\Settings\Index.cshtml.g.cs
 C:\Users\M S I\Desktop\Bookly-Back-End\Bookly-Back-End\obj\Debug\netcoreapp3.1\Razor\Areas\BooklyAdmin\Views\Order\Edit.cshtml.g.cs
 C:\Users\M S I\Desktop\Bookly-Back-End\Bookly-Back-End\obj\Debug\netcoreapp3.1\Razor\Views\WishList\WishList.cshtml.g.cs
-C:\Users\M S I\Desktop\Bookly-Back-End\Bookly-Back-End\obj\Debug\netcoreapp3.1\Bookly-Back-End.csproj.AssemblyReference.cache
 C:\Users\M S I\Desktop\Bookly-Back-End\Bookly-Back-End\bin\Debug\netcoreapp3.1\Braintree.dll
 C:\Users\M S I\Desktop\Bookly-Back-End\Bookly-Back-End\bin\Debug\netcoreapp3.1\System.Xml.XPath.XmlDocument.dll
 C:\Users\M S I\Desktop\Bookly-Back-End\Bookly-Back-End\obj\Debug\netcoreapp3.1\Razor\Views\Book\Purchase.cshtml.g.cs
@@ -417,3 +416,6 @@ C:\Users\M S I\Desktop\Bookly-Back-End\Bookly-Back-End\bin\Debug\netcoreapp3.1\X
 C:\Users\M S I\Desktop\Bookly-Back-End\Bookly-Back-End\bin\Debug\netcoreapp3.1\X.PagedList.Mvc.Core.dll
 C:\Users\M S I\Desktop\Bookly-Back-End\Bookly-Back-End\bin\Debug\netcoreapp3.1\X.PagedList.Web.Common.dll
 C:\Users\M S I\Desktop\Bookly-Back-End\Bookly-Back-End\obj\Debug\netcoreapp3.1\Bookly-Back-End.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\M S I\Desktop\Bookly-Back-End\Bookly-Back-End\obj\Debug\netcoreapp3.1\Razor\Views\EmptyWishList\EmptyWishList.cshtml.g.cs
+C:\Users\M S I\Desktop\Bookly-Back-End\Bookly-Back-End\obj\Debug\netcoreapp3.1\Bookly-Back-End.csproj.AssemblyReference.cache
+C:\Users\M S I\Desktop\Bookly-Back-End\Bookly-Back-End\obj\Debug\netcoreapp3.1\Razor\Views\ShipingDetails\ShipingDetails.cshtml.g.cs

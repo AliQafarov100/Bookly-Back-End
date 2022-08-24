@@ -20,7 +20,9 @@ namespace Bookly_Back_End.Controllers
         {
             return View();
         }
-        public async Task<IActionResult> Form(ContactForm contact)
+        [HttpPost]
+        [AutoValidateAntiforgeryToken]
+        public async Task<IActionResult> Contact(ContactForm contact)
         {
             if (!ModelState.IsValid) return View(contact);
             if (contact == null) return View();

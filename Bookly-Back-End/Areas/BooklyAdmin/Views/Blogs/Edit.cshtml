@@ -15,7 +15,7 @@
             <input type="hidden" asp-for="Id" />
             <div class="form-group">
                 <div class="for-image">
-                    <strong style="position: relative; top: 15px; left: 140px;" class="removeable">Remove</strong>
+                    <strong class="removeable">Remove</strong>
                     <img style="width: 200px; height:300px" src="~/assets/Image/Blog/@Model.Photo" />
                 </div>
             </div>
@@ -58,21 +58,25 @@
             opacity: 0.6;
         }
 
-        .for-image img {
+        .for-image {
+            position: relative;
             width: 200px;
             height: 300px;
         }
 
-        .for-image:hover .removeable {
-            transition: 0.7s;
-            opacity: 1;
-        }
+            .for-image:hover .removeable {
+                transition: 0.7s;
+                opacity: 1;
+            }
 
         .removeable {
             z-index: 5;
             color: black;
             cursor: pointer;
             opacity: 0;
+            position: absolute;
+            left: 70px;
+            top: 140px;
         }
     </style>
 }
