@@ -15,28 +15,30 @@ namespace Bookly_Back_End.Controllers
     {
         private readonly AppDbContext _context;
         private readonly IBookOperation _repository;
+        private readonly IQuery _query;
 
-        public SearchController(AppDbContext context,IBookOperation repository)
+        public SearchController(AppDbContext context,IBookOperation repository,IQuery query)
         {
             _context = context;
             _repository = repository;
+            _query = query;
         }
         public async Task<IActionResult> Search(string searching)
         {
             ViewBag.Search = searching;
             var query = _repository.GetBookBySearch(searching);
-            List<Book> books = await _context.Books.Include(i => i.BookImages)
-               .Include(a => a.BookAuthors).ToListAsync();
+            //List<Book> books = await _context.Books.Include(i => i.BookImages)
+            //   .Include(a => a.BookAuthors).ToListAsync();
             List<BookAuthor> bookAuthors = await query.ToListAsync();
-            List<Author> authors = await _context.Authors.Include(a => a.BookAuthors).ToListAsync();
-            List<Discount> discounts = await _context.Discounts.ToListAsync();
+            //List<Author> authors = await _context.Authors.Include(a => a.BookAuthors).ToListAsync();
+            //List<Discount> discounts = await _context.Discounts.ToListAsync();
 
             BookVM model = new BookVM
             {
                 BookAuthors = bookAuthors,
-                AllBooks = books,
-                Discounts = discounts,
-                Authors = authors
+                AllBooks = _query.Books,
+                Discounts = _context.Discounts.AsQueryable(),
+                Authors = _query.Authors
             };
             return View(model);
         }

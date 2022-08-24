@@ -18,12 +18,14 @@ namespace Bookly_Back_End.Controllers
     public class DetailController : Controller
     {
         private readonly AppDbContext _context;
+        private readonly IQuery _query;
         private readonly UserManager<AppUser> _userManager;
         
 
-        public DetailController(AppDbContext context,UserManager<AppUser> userManager)
+        public DetailController(AppDbContext context,UserManager<AppUser> userManager,IQuery query)
         {
             _context = context;
+            _query = query;
             _userManager = userManager;
         }
         public async Task<ActionResult> Details(int id)
@@ -40,10 +42,10 @@ namespace Bookly_Back_End.Controllers
             BookVM model = new BookVM
             {
                 Book = book,
-                Discounts = discounts,
+                Discounts = _context.Discounts.AsQueryable(),
                 BookAuthors = bookAuthors,
-                Authors = authors,
-                AnotherBooks = books
+                Authors = _query.Authors,
+                AnotherBooks = _query.Books
             };
             return View(model);
         }

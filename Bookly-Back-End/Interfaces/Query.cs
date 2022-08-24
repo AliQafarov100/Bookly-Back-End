@@ -35,5 +35,6 @@ namespace Bookly_Back_End.Interfaces
         public IQueryable<Format> Formats => _context.Formats.AsQueryable();
         public IQueryable<Language> Languages => _context.Languages.AsQueryable();
         public IQueryable<FilteringPrice> FilteringPrices => _context.FilteringPrices.AsQueryable();
+        public IQueryable<Book> Books => _context.Books.AsQueryable();
     }
 }

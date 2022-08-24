@@ -14,12 +14,7 @@
             (total += userBasket.Price * userBasket.Count).ToString();
         }
     }
-    //int bookId = default;
-    //foreach (BasketItemVM basketItem in basket.BasketItemVMs)
-    //{
-    //    bookId = basketItem.Book.Id;
-    //}
-    //int ViewBookId = bookId;
+    
     decimal ViewTotal = total;
 
 }
@@ -31,7 +26,7 @@
             <div class="texts">
                 <h4 class="text-center text-dark">Product</h4>
                 <ul class="d-flex justify-content-around">
-                    <li><a asp-controller="Book" asp-action="Index">All</a></li>
+                    <li><a asp-controller="Home" asp-action="Index">Home</a></li>
                     <li><a asp-controller="Basket" asp-action="Cart">Shopping Cart</a></li>
                 </ul>
             </div>
@@ -92,7 +87,9 @@
                         {
                             <div class="basket-product row">
                                 <div class="col-lg-3 col-md-12">
-                                    <a asp-controller="Book" asp-action="RemoveBasket" asp-route-id="@userCart.Book.Id" style="position: relative; left: 5px; top: 25px;"><i class="fa-solid fa-rectangle-xmark remove-basket"></i></a>
+                                    <a asp-controller="Book" asp-action="RemoveBasket" asp-route-id="@userCart.Book.Id" class="bg-danger cart-basket-remove">
+                                        <i class="fa-solid fa-xmark text-light"></i>
+                                    </a>
                                     <img src="~/assets/Image/Library/@userCart.Book.BookImages.FirstOrDefault(i => i.IsMain == true).ImagePath" alt="">
                                 </div>
                                 <div class="col-lg-3 col-md-12 d-flex align-items-center product-info">

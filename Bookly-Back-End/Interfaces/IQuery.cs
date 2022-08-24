@@ -20,5 +20,6 @@ namespace Bookly_Back_End.Interfaces
         IQueryable<Language> Languages { get; }
         IQueryable<Format> Formats { get; }
         IQueryable<FilteringPrice> FilteringPrices { get;}
+        IQueryable<Book> Books { get; }
     }
 }

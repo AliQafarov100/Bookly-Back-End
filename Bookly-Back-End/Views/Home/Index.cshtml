@@ -67,14 +67,14 @@
 
                                 <div class="container fluid">
                                     <div class="row">
-                                        @foreach (BookAuthor book in Model.BookAuthors.Take(4))
+                                        @foreach (Book book in Model.AnotherBooks.Take(4))
                                         {
                                             <div class="col-lg-3 col-md-12 col-sm-12 col-12">
                                                 <div class="book">
-                                                    <a asp-controller="Detail" asp-action="Details" asp-route-id="@book.Book.Id"><img src="~/assets/Image/Library/@book.Book.BookImages.FirstOrDefault(i => i.IsMain == true)?.ImagePath"></a>
+                                                    <a asp-controller="Detail" asp-action="Details" asp-route-id="@book.Id"><img src="~/assets/Image/Library/@book.BookImages.FirstOrDefault(i => i.IsMain == true)?.ImagePath"></a>
                                                     <div class="book-info">
                                                         <a href="">
-                                                            <span>@book.Book.Name</span><span class="ms-2">$@book.Book.Price</span>
+                                                            <span>@book.Name</span><span class="ms-2">$@book.Price</span>
                                                         </a>
                                                     </div>
                                                 </div>
@@ -247,7 +247,7 @@
                             </div>
                             <div class="detail mt-3">
                                 <p>
-                                    @book.Author.FullName.ToString()
+                                    @book.Author?.FullName.ToString()
                                 </p>
                                 <strong>@book.Book.Name.ToString()</strong>
                                 <p>

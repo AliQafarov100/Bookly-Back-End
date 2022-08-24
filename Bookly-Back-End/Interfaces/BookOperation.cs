@@ -70,7 +70,8 @@ namespace Bookly_Back_End.Interfaces
 
         public IQueryable<BookAuthor> GetBookByCategory(string category)
         {
-            var books = _context.BookAuthors.AsQueryable();
+            var books = _context.BookAuthors.Include(a => a.Author).Include(b => b.Book)
+                .ThenInclude(b => b.BookImages).Include(b => b.Book.Discount).AsQueryable();
 
             if(category != null)
             {

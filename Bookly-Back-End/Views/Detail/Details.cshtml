@@ -361,7 +361,7 @@
                                 {
                                     <div class="container col-lg-12 quantity-content">
                                         <div class="d-flex justify-content-start">
-                                            <input min="1" max="@Model.Book.Stock" class="stock" type="number" style="border: none;" />
+                                            <input min="1" max="@Model.Book.Stock" class="stock" type="number"/>
                                         </div>
                                     </div>
                                 }
@@ -475,7 +475,7 @@
                                         <a href=""><i class="fa-solid fa-magnifying-glass"></i></a>
                                     </div>
                                 </div>
-                                <a asp-controller="Detail" asp-action="Details" asp-route-id="@related.Id"><img src="~/assets/Image/Library/@related.BookImages.FirstOrDefault(i => i.IsMain == true)?.ImagePath"></a>
+                                <a asp-controller="Detail" asp-action="Details" asp-route-id="@related.Id"><img src="~/assets/Image/Library/@related.BookImages.FirstOrDefault(i => i.IsMain == true)?.ImagePath" style="height: 450px;"></a>
                             </div>
                             <div class="detail mt-3">
                                 <p>
@@ -517,7 +517,7 @@
                                         <a href=""><i class="fa-solid fa-magnifying-glass"></i></a>
                                     </div>
                                 </div>
-                                <a asp-controller="Detail" asp-action="Details" asp-route-id="@recently.Id"><img src="~/assets/Image/Library/@recently.BookImages.FirstOrDefault(i => i.IsMain == true)?.ImagePath"></a>
+                                <a asp-controller="Detail" asp-action="Details" asp-route-id="@recently.Id"><img src="~/assets/Image/Library/@recently.BookImages.FirstOrDefault(i => i.IsMain == true)?.ImagePath" style="height: 450px;"></a>
                             </div>
                             <div class="detail mt-3">
                                 <p>

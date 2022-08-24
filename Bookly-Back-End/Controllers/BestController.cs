@@ -45,12 +45,12 @@ namespace Bookly_Back_End.Controllers
 
             BookVM model = new BookVM
             {
-                Formats = await _query.Formats.ToListAsync(),
-                Languages = await _query.Languages.ToListAsync(),
-                Categories = await _query.Categories.ToListAsync(),
-                Authors = await _query.Authors.ToListAsync(),
+                Formats = _query.Formats,
+                Languages = _query.Languages,
+                Categories =  _query.Categories,
+                Authors = _query.Authors,
                 BookAuthors = bookAuthors,
-                FilteringPrices = await _query.FilteringPrices.ToListAsync()
+                FilteringPrices = _query.FilteringPrices
             };
             return View(model);
         }

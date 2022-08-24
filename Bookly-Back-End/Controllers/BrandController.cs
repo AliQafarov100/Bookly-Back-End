@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Bookly_Back_End.DAL;
+using Bookly_Back_End.Interfaces;
 using Bookly_Back_End.Models;
 using Bookly_Back_End.ViewModels;
 using Microsoft.AspNetCore.Mvc;
@@ -13,10 +14,12 @@ namespace Bookly_Back_End.Controllers
     public class BrandController : Controller
     {
         private readonly AppDbContext _context;
+        private readonly IQuery _query;
 
-        public BrandController(AppDbContext context)
+        public BrandController(AppDbContext context,IQuery query)
         {
             _context = context;
+            _query = query;
         }
         public async Task<IActionResult> Brands()
         {
@@ -25,8 +28,8 @@ namespace Bookly_Back_End.Controllers
 
             BookVM model = new BookVM
             {
-                Categories = categories,
-                AllBooks = books
+                Categories = _query.Categories,
+                AllBooks = _query.Books
             };
             return View(model);
         }

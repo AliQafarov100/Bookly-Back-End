@@ -21,7 +21,7 @@
             <th>
                 @Html.DisplayNameFor(model => model.Url)
             </th>
-            <th></th>
+            <th>Setting</th>
         </tr>
     </thead>
     <tbody>
@@ -31,15 +31,22 @@
                 @Html.DisplayFor(modelItem => item.Key)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Value)
+                @if (item.Value.Length > 25)
+                {
+                    @(item.Value.Substring(0,25) + "...".ToString())
+                }
+                else
+                {
+                    @item.Value
+                }
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Url)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                <a class="btn btn-success" asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a class="btn btn-primary" asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
             </td>
         </tr>
 }

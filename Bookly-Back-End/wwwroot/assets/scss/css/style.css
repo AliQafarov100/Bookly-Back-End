@@ -1936,11 +1936,27 @@ div[style*="margin: 16px 0;"] {
     margin: 0 !important;
 }
 
-.remove-basket {
-    font-size: 22px;
-    color: red;
+.remove-basket-cart {
+    
+    position: relative;
+    top: 5px;
+    left: 20px;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
-
+.cart-basket-remove {
+    position: relative;
+    top: 25px;
+    left: 10px;
+    width: 25px;
+    height: 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 .sale {
     width: 70px;
     height: 50px;

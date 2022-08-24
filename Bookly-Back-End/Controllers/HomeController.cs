@@ -37,18 +37,18 @@ namespace Bookly_Back_End.Controllers
             HomeVM model = new HomeVM
             {
                 Slayd = await _query.Slayds.FirstOrDefaultAsync(),
-                Supports = await _query.Supports.ToListAsync(),
+                Supports = _query.Supports,
                 Festival = await _query.Festivals.FirstOrDefaultAsync(),
                 Offer = await _query.Offers.FirstOrDefaultAsync(),
                 Gift = await _query.Gifts.FirstOrDefaultAsync(),
-                Sponsors = await _query.Sponsors.ToListAsync(),
+                Sponsors = _query.Sponsors,
                 Author = await _query.Authors.Include(b => b.AuthorAwards).ThenInclude(b => b.Award)
                 .Include(b => b.AuthorSocialMedias).ThenInclude(a => a.SocialMedia).FirstOrDefaultAsync(a => a.IsBest == true),
-                Categories = await _query.Categories.ToListAsync(),
-                BookAuthors = bookAuthors,
-                Blogs = await _query.Blogs.ToListAsync(),
-                AnotherBooks = await _context.Books.Include(b => b.BookImages).Include(b => b.BookAuthors)
-                .Include(b => b.Discount).ToListAsync()
+                Categories = _query.Categories,
+                BookAuthors = await query.ToListAsync(),
+                Blogs = _query.Blogs,
+                AnotherBooks = _context.Books.Include(b => b.BookImages).Include(b => b.BookAuthors)
+                .Include(b => b.Discount).AsQueryable()
             };
             return View(model);
         }

@@ -9,26 +9,26 @@ namespace Bookly_Back_End.ViewModels
     public class HomeVM
     {
         public Slayd Slayd { get; set; }
-        public List<Support> Supports { get; set; }
+        public IQueryable<Support> Supports { get; set; }
         public Festival Festival { get; set; }
         public Offer Offer { get; set; }
         public Gift Gift { get; set; }
-        public List<Sponsor> Sponsors { get; set; }
+        public IQueryable<Sponsor> Sponsors { get; set; }
         public Author Author { get; set; }
-        public List<Book> AllBooks { get; set; }
-        public List<Book> AnotherBooks { get; set; }
-        public List<Category> Categories { get; set; }
+        public IQueryable<Book> AllBooks { get; set; }
+        public IQueryable<Book> AnotherBooks { get; set; }
+        public IQueryable<Category> Categories { get; set; }
         public List<BookAuthor> BookAuthors { get; set; }
-        public List<Award> Awards { get; set; }
-        public List<SocialMedia> SocialMedias { get; set; }
-        public List<AuthorAward> AuthorAwards { get; set; }
-        public List<AuthorSocialMedia> AuthorSocialMedias { get; set; }
-        public List<Discount> Discounts { get; set; }
-        public List<Blog> Blogs { get; set; }
-        public List<Format> Formats { get; set; }
+        public IQueryable<Award> Awards { get; set; }
+        public IQueryable<SocialMedia> SocialMedias { get; set; }
+        public IQueryable<AuthorAward> AuthorAwards { get; set; }
+        public IQueryable<AuthorSocialMedia> AuthorSocialMedias { get; set; }
+        public IQueryable<Discount> Discounts { get; set; }
+        public IQueryable<Blog> Blogs { get; set; }
+        public IQueryable<Format> Formats { get; set; }
         public Book Book { get; set; }
         public AppUser AppUser { get; set; }
-        public List<BasketItem> BasketItems { get; set; }
-        public int VisitorCount { get; set; }
+        public IQueryable<BasketItem> BasketItems { get; set; }
+       
     }
 }

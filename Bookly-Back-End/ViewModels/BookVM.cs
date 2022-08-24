@@ -8,15 +8,15 @@ namespace Bookly_Back_End.ViewModels
 {
     public class BookVM
     {
-        public List<Format> Formats { get; set; }
-        public List<Language> Languages { get; set; }
-        public List<Author> Authors { get; set; }
-        public List<Category> Categories { get; set; }
-        public List<Book> AllBooks { get; set; }
-        public List<Book> AnotherBooks { get; set; }
+        public IQueryable<Format> Formats { get; set; }
+        public IQueryable<Language> Languages { get; set; }
+        public IQueryable<Author> Authors { get; set; }
+        public IQueryable<Category> Categories { get; set; }
+        public IQueryable<Book> AllBooks { get; set; }
+        public IQueryable<Book> AnotherBooks { get; set; }
         public List<BookAuthor> BookAuthors { get; set; }
-        public List<Discount> Discounts { get; set; }
-        public List<FilteringPrice> FilteringPrices { get; set; }
+        public IQueryable<Discount> Discounts { get; set; }
+        public IQueryable<FilteringPrice> FilteringPrices { get; set; }
         public Book Book { get; set; }
         public int Counter { get; set; }
     }
