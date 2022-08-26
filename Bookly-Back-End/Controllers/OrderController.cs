@@ -103,7 +103,7 @@ namespace Bookly_Back_End.Controllers
                 }
             }
            
-            //_context.BasketItems.RemoveRange(model.BasketItems);
+            _context.BasketItems.RemoveRange(model.BasketItems);
             await _context.Orders.AddAsync(order);
             await _context.SaveChangesAsync();
             TempData["Success"] = true;

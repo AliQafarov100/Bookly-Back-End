@@ -14,6 +14,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using X.PagedList;
 
 namespace Bookly_Back_End.Areas.BooklyAdmin.Controllers
 {
@@ -33,9 +34,8 @@ namespace Bookly_Back_End.Areas.BooklyAdmin.Controllers
         }
         public async Task<IActionResult> Orders()
         {
-
+          
             List<Order> orders = await _context.Orders.Include(o => o.City).Include(o => o.AppUser).ToListAsync();
-
             return View(orders);
         }
         public async Task<IActionResult> Edit(int id,string username)
@@ -48,7 +48,7 @@ namespace Bookly_Back_End.Areas.BooklyAdmin.Controllers
             return View(order);
         }
 
-        public async Task<IActionResult> Accept(string message, int id)
+        public async Task<IActionResult> Accept(int id,string message)
         {
             Order order = await _context.Orders.Include(o => o.AppUser).FirstOrDefaultAsync(o => o.Id == id);
             AppUser user = await _userManager.FindByEmailAsync(order.AppUser.Email);
@@ -56,14 +56,27 @@ namespace Bookly_Back_End.Areas.BooklyAdmin.Controllers
             if (order == null) return NotFound();
             order.Status = true;
             order.AdminMessage = message;
+           _context.SaveChanges();
 
-            _context.SaveChanges();
 
-            _confirmation.Send(id, message);
+            MailMessage mail = new MailMessage();
+            mail.From = new MailAddress("tu8cvbxnx@code.edu.az", "Bookly");
+            mail.To.Add(new MailAddress(user.Email));
+
+            mail.Subject = "Order";
+            mail.Body = $"{message}";
+            mail.IsBodyHtml = true;
+
+            SmtpClient smtp = new SmtpClient();
+            smtp.Host = "smtp.gmail.com";
+            smtp.Port = 587;
+            smtp.EnableSsl = true;
+            smtp.Credentials = new NetworkCredential("tu8cvbxnx@code.edu.az", "zkgawykhucvuahin");
+            smtp.Send(mail);
 
             return Json(new { status = 200 });
         }
-        public async Task<IActionResult> Reject(string message, int id)
+        public async Task<IActionResult> Reject(int id, string message)
         {
             Order order = await _context.Orders.Include(o => o.AppUser).FirstOrDefaultAsync(o => o.Id == id);
             AppUser user = await _userManager.FindByEmailAsync(order.AppUser.Email);
@@ -73,7 +86,21 @@ namespace Bookly_Back_End.Areas.BooklyAdmin.Controllers
             order.AdminMessage = message;
             _context.SaveChanges();
 
-            _confirmation.Send(id, message);
+            MailMessage mail = new MailMessage();
+            mail.From = new MailAddress("tu8cvbxnx@code.edu.az", "Bookly");
+            mail.To.Add(new MailAddress(user.Email));
+
+            mail.Subject = "Order";
+            mail.Body = $"{message}";
+            mail.IsBodyHtml = true;
+
+            SmtpClient smtp = new SmtpClient();
+            smtp.Host = "smtp.gmail.com";
+            smtp.Port = 587;
+            smtp.EnableSsl = true;
+            smtp.Credentials = new NetworkCredential("tu8cvbxnx@code.edu.az", "zkgawykhucvuahin");
+            smtp.Send(mail);
+
             return Json(new { status = 200 });
         }
     }

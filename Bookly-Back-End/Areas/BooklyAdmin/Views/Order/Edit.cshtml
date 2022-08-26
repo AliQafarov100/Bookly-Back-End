@@ -48,8 +48,9 @@
     </div>
     <div>
         <h4 class="mt-5">Message</h4>
+       
         <form>
-            <input class="message" cols="60" rows="10" />
+            <input class="Message" cols="60" rows="10" />
         </form>
 
         <div class="mt-5">
@@ -67,23 +68,31 @@
 @section Scripts{
     <script>
         $(document).ready(function () {
+
             $(".accept").click(function (e) {
                 e.preventDefault();
-                var message = $(".message").val();
+                var message = $(".Message").val();
                 var link = $(this).attr("href") + "/?message=" + message
                 fetch(link).then(res => res.json()).then(data => {
                     if (data.status == 200) {
                         location.href = "https://localhost:44339/BooklyAdmin/Order/Orders"
+                    } else {
+
                     }
                 })
             })
+        })
+        $(document).ready(function () {
+
             $(".reject").click(function (e) {
                 e.preventDefault();
-                var message = $(".message").val();
+                var message = $(".Message").val();
                 var link = $(this).attr("href") + "/?message=" + message
                 fetch(link).then(res => res.json()).then(data => {
                     if (data.status == 200) {
                         location.href = "https://localhost:44339/BooklyAdmin/Order/Orders"
+                    } else {
+
                     }
                 })
             })

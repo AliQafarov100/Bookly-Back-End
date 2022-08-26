@@ -87,7 +87,7 @@
                             <li><a asp-controller="Brand" asp-action="Brands">Brands</a></li>
                             <li><a asp-controller="Best" asp-action="Best">Best Sellers</a></li>
                             <li class="page-controller">
-                                <a href="">
+                                <a asp-controller="About" asp-action="About">
                                     <span>Pages</span><span class="ms-3">
                                         <i class="fa-solid fa-sort-down"></i>
                                     </span>
@@ -128,36 +128,14 @@
 
                                 </a>
                             </li>
-                            <li><a href="" style="color: black;">Brands</a></li>
-                            <li><a href="" style="color: black;">Best Sellers</a></li>
+                            <li><a asp-controller="Brand" asp-action="Brands" style="color: black;">Brands</a></li>
+                            <li><a asp-controller="Best" asp-action="Best" style="color: black;">Best Sellers</a></li>
                             <li>
-                                <a href="" style="color: black;">
+                                <a asp-controller="About" asp-action="About" style="color: black;">
                                     <span>Pages</span><span class="ms-3">
                                         <i class="fa-solid fa-sort-down"></i>
                                     </span>
                                 </a>
-                            </li>
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" style="color: black;" href="#"
-                                   id="offcanvasNavbarDropdown" role="button" data-bs-toggle="dropdown"
-                                   aria-expanded="false">
-                                    Dropdown
-                                </a>
-                                <ul class="dropdown-menu" aria-labelledby="offcanvasNavbarDropdown">
-                                    <li><a class="dropdown-item" style="color: black;" href="#">Action</a></li>
-                                    <li>
-                                        <a class="dropdown-item" style="color: black;" href="#">Another action</a>
-                                    </li>
-                                    <li>
-                                        <hr class="dropdown-divider">
-                                    </li>
-                                    <li>
-                                        <a class="dropdown-item" style="color: black;" href="#">
-                                            Something else
-                                            here
-                                        </a>
-                                    </li>
-                                </ul>
                             </li>
                         </ul>
                         <form class="d-flex" role="search">
@@ -222,7 +200,7 @@
             <div class="row all">
                 @foreach (BookAuthor book in Model.BookAuthors.Take(10).OrderByDescending(p => p.Book.Id))
                 {
-                    <div class="col-lg-3 col-md-6 col-sm-6 col-12" data-aos="flip-down">
+                    <div class="col-lg-3 col-md-6 col-sm-6 col-12">
                         <div class="info-book">
                             <div class="images">
                                 <div class="more-icon">
@@ -411,7 +389,7 @@
             <div class="row">
                 @foreach (Book dealBook in Model.AnotherBooks.Where(b => b.IsDailyDeal == true))
                 {
-                    <div class="col-lg-3 col-md-6 col-sm-6 col-12" data-aos="flip-down">
+                    <div class="col-lg-3 col-md-6 col-sm-6 col-12">
                         <div class="info-book">
                             <div class="images">
                                 <div class="more-icon">

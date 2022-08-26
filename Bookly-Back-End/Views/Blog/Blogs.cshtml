@@ -18,57 +18,11 @@
                                     </span>
 
                                 </a>
-
-                                <div class="container fluid">
-                                    <div class="row">
-                                        <div class="col-lg-3 col-md-12 col-sm-12 col-12">
-                                            <div class="book">
-                                                <img src="/assets/Image/Category Book/shop-new-100.webp" alt="">
-                                                <div class="book-info">
-                                                    <a href="">
-                                                        <span>Endless Summer</span><span class="ms-2">$210</span>
-                                                    </a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-3 col-md-12 col-sm-12 col-12">
-                                            <div class="book">
-                                                <img src="/assets/Image/Category Book/shop-new-30.webp" alt="">
-                                                <div class="book-info">
-                                                    <a href="">
-                                                        <span>Fresh Healthy Eat</span><span class="ms-2">$110</span>
-                                                    </a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-3 col-md-12 col-sm-12 col-12">
-                                            <div class="book">
-                                                <img src="/assets/Image/Category Book/shop-new-4.webp" alt="">
-                                                <div class="book-info">
-                                                    <a href="">
-                                                        <span>Book for a Cause</span><span class="ms-2">$110</span>
-                                                    </a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-3 col-md-12 col-sm-12 col-12">
-                                            <div class="book">
-                                                <img src="/assets/Image/Category Book/shop-new-95_b0b53360-a171-427b-9dc6-0bf965bcfdae.webp"
-                                                     alt="">
-                                                <div class="book-info">
-                                                    <a href="">
-                                                        <span>Adventurous Eating</span><span class="ms-2">$500</span>
-                                                    </a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
                             </li>
                             <li><a asp-controller="Brand" asp-action="Brands">Brands</a></li>
                             <li><a asp-controller="Best" asp-action="Best">Best Sellers</a></li>
                             <li class="page-controller">
-                                <a href="">
+                                <a asp-controller="About" asp-action="About">
                                     <span>Pages</span><span class="ms-3">
                                         <i class="fa-solid fa-sort-down"></i>
                                     </span>
@@ -267,16 +221,6 @@
     </section>
 </main>
 
-<script>
-    $(document).ready(function () {
-        $(".search-section").hide();
-
-        $(".show").click(function (event) {
-            event.preventDefault();
-            $(".search-section").slideDown();
-        })
-        $(".remove").click(function () {
-            $(".search-section").slideUp();
-        })
-    })
-</script>
+@section Scripts{
+    <script src="~/assets/Js/search.js"></script>
+}

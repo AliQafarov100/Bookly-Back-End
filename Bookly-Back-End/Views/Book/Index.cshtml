@@ -44,7 +44,7 @@
                             <li><a asp-controller="Brand" asp-action="Brands">Brands</a></li>
                             <li><a asp-controller="Best" asp-action="Best">Best Sellers</a></li>
                             <li class="page-controller">
-                                <a href="">
+                                <a asp-controller="About" asp-action="About">
                                     <span>Pages</span><span class="ms-3">
                                         <i class="fa-solid fa-sort-down"></i>
                                     </span>
@@ -342,43 +342,42 @@
                                     </div>
                                 </div>
                             }
-
-                            <nav aria-label="Page navigation example" class="pagination">
-                                <ul class="pagination">
-
-                                    @{
-                                        int page = !string.IsNullOrEmpty(Context.Request.Query["page"]) ? int.Parse(Context.Request.Query["page"]) : 0;
-                                    }
-                                    <li class="page-item">
-                                        <a class="page-link text-light @((page - 1) <= 0 ? "disabled" : "")" asp-route-page="@(page-1)" aria-label="Previous">
-                                            <span aria-hidden="true">&laquo;</span>
-                                        </a>
-                                    </li>
-                                    @for (int i = 1; i <= ViewBag.TotalPage; i++)
-                                    {
-                                        <li class="page-item ">
-                                            <a class="page-link counter text-light @( page == i ? "bg-dark" : "")"
-                                               asp-controller="Book" asp-action="Index"
-                                               asp-route-minimum="@ViewBag.CurentMinimum"
-                                               asp-route-maximum="@ViewBag.CurrentMaximum"
-                                               asp-route-category="@ViewBag.CurentCategory"
-                                               asp-route-language="@ViewBag.CurentLanguage"
-                                               asp-route-format="@ViewBag.CurentFormat"
-                                               asp-route-sortBy="@ViewBag.Sort"
-                                               asp-route-page="@i">@i</a>
-                                        </li>
-                                    }
-                                    <li class="page-item">
-                                        <a class="page-link text-light @(page == ViewBag.TotalPage ? "disabled" : "")" asp-route-page="@(page+1)" aria-label="Next">
-                                            <span aria-hidden="true">&raquo;</span>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </nav>
                         </div>
                     </div>
                 </div>
             </div>
+            <nav aria-label="Page navigation example" class="pagination" style="background-color: white;">
+                <ul class="pagination">
+
+                    @{
+                        int page = !string.IsNullOrEmpty(Context.Request.Query["page"]) ? int.Parse(Context.Request.Query["page"]) : 0;
+                    }
+                    <li class="page-item">
+                        <a class="page-link text-light @((page - 1) <= 0 ? "disabled" : "")" asp-route-page="@(page-1)" aria-label="Previous">
+                            <span aria-hidden="true">&laquo;</span>
+                        </a>
+                    </li>
+                    @for (int i = 1; i <= ViewBag.TotalPage; i++)
+                    {
+                        <li class="page-item ">
+                            <a class="page-link counter text-light @( page == i ? "bg-dark" : "")"
+                               asp-controller="Book" asp-action="Index"
+                               asp-route-minimum="@ViewBag.CurentMinimum"
+                               asp-route-maximum="@ViewBag.CurrentMaximum"
+                               asp-route-category="@ViewBag.CurentCategory"
+                               asp-route-language="@ViewBag.CurentLanguage"
+                               asp-route-format="@ViewBag.CurentFormat"
+                               asp-route-sortBy="@ViewBag.Sort"
+                               asp-route-page="@i">@i</a>
+                        </li>
+                    }
+                    <li class="page-item">
+                        <a class="page-link text-light @(page == ViewBag.TotalPage ? "disabled" : "")" asp-route-page="@(page+1)" aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
         </div>
     </section>
 </main>

@@ -9,6 +9,7 @@ using Bookly_Back_End.DAL;
 using Bookly_Back_End.Models;
 using Bookly_Back_End.Utilities;
 using Microsoft.AspNetCore.Authorization;
+using X.PagedList;
 
 namespace Bookly_Back_End.Areas.BooklyAdmin.Controllers
 {
@@ -24,9 +25,11 @@ namespace Bookly_Back_End.Areas.BooklyAdmin.Controllers
         }
 
         // GET: BooklyAdmin/Formats
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int page = 1)
         {
-            return View(await _context.Formats.ToListAsync());
+            if (page <= 0) return RedirectToAction("Index", "Formats");
+            List<Format> formats = await _context.Formats.ToListAsync();
+            return View(formats.ToPagedList(page, 5));
         }
 
         // GET: BooklyAdmin/Formats/Details/5

@@ -44,7 +44,7 @@ namespace Bookly_Back_End
             services.AddIdentity<AppUser, IdentityRole>(opt =>
             {
 
-                //opt.User.RequireUniqueEmail = true;
+                opt.User.RequireUniqueEmail = true;
 
                 opt.Password.RequireDigit = true;
                 opt.Password.RequireLowercase = true;
@@ -54,7 +54,7 @@ namespace Bookly_Back_End
 
                 opt.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(5);
                 opt.Lockout.MaxFailedAccessAttempts = 3;
-                //opt.SignIn.RequireConfirmedEmail = true;
+                opt.SignIn.RequireConfirmedEmail = true;
                 opt.User.AllowedUserNameCharacters = "qwertyuiopasdfghjklzxcvbnm_1234567890";
                 
             }).AddDefaultTokenProviders().AddEntityFrameworkStores<AppDbContext>();

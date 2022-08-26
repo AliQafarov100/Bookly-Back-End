@@ -20,30 +20,11 @@
                                     </span>
 
                                 </a>
-
-                                <div class="container fluid">
-                                    <div class="row">
-                                        @foreach (BookAuthor book in Model.BookAuthors.Take(4))
-                                        {
-                                            <div class="col-lg-3 col-md-12 col-sm-12 col-12">
-                                                <div class="book">
-                                                    <img src="/assets/Image/Library/@book.Book.BookImages.FirstOrDefault(i => i.IsMain == true).ImagePath" alt="">
-                                                    <div class="book-info">
-                                                        <a href="">
-                                                            <span>@book.Book.Name</span><span class="ms-2">$@book.Book.Price</span>
-                                                        </a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        }
-
-                                    </div>
-                                </div>
                             </li>
                             <li><a asp-controller="Brand" asp-action="Brands">Brands</a></li>
                             <li><a asp-controller="Best" asp-action="Best">Best Sellers</a></li>
                             <li class="page-controller">
-                                <a href="">
+                                <a asp-controller="About" asp-action="About">
                                     <span>Pages</span><span class="ms-3">
                                         <i class="fa-solid fa-sort-down"></i>
                                     </span>
