@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using X.PagedList;
 
 namespace Bookly_Back_End.Areas.BooklyAdmin.Controllers
 {
@@ -25,10 +26,11 @@ namespace Bookly_Back_End.Areas.BooklyAdmin.Controllers
             _context = context;
             _env = env;
         }
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int page = 1)
         {
+            if (page <= 0) return RedirectToAction("Index", "Author");
             List<Author> authors = await _context.Authors.Include(a => a.AuthorAwards).Include(s => s.AuthorSocialMedias).ToListAsync();
-            return View(authors);
+            return View(authors.ToPagedList(page, 5));
         }
 
         public async Task<IActionResult> Create()

@@ -29,7 +29,8 @@ namespace Bookly_Back_End.Controllers
             var query = _repository.GetBookBySearch(searching);
             //List<Book> books = await _context.Books.Include(i => i.BookImages)
             //   .Include(a => a.BookAuthors).ToListAsync();
-            List<BookAuthor> bookAuthors = await query.ToListAsync();
+            List<BookAuthor> bookAuthors = await query.Include(a => a.Author).Include(b => b.Book)
+                .ThenInclude(b => b.BookImages).Include(b => b.Book.Discount).ToListAsync();
             //List<Author> authors = await _context.Authors.Include(a => a.BookAuthors).ToListAsync();
             //List<Discount> discounts = await _context.Discounts.ToListAsync();
 

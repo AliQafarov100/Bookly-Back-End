@@ -33,27 +33,21 @@
     </div>
     <h4>Order Product Item:</h4>
     <div class="row">
-        @foreach (OrderProduct item in Model.OrderProducts)
+        @foreach (OrderProduct product in Model.OrderProducts)
         {
             <div class="col-lg-4 mt-2">
-                <img class="" style="height: 650px; width: 90%;" src="~/assets/Image/Library/@item.Book.BookImages.FirstOrDefault(i => i.IsMain == true)?.ImagePath" /> <br />
-                <strong>@item.Book.Name</strong> <br />
+                <img class="" style="height: 650px; width: 90%;" src="~/assets/Image/Library/@product.Book.BookImages.FirstOrDefault(i => i.IsMain == true)?.ImagePath" /> <br />
+                <strong>@product.Name</strong> <br />
                 <strong>
                     $
-                    @(item.Book.DiscountId != null ? (item.Book.Price - ((item.Book.Price * item.Book.Discount.DiscountPercent) / 100)) : (item.Book.Price))
+                    @(product.Book.DiscountId != null ? (product.Book.Price - ((product.Book.Price * product.Book.Discount.DiscountPercent) / 100)) : (product.Book.Price))
                 </strong> <br />
-                <strong>
-                    Count:
-                    @(Math.Floor(item.Book.DiscountId != null ? (Model.TotalPrice / (item.Book.Price - ((item.Book.Price * item.Book.Discount.DiscountPercent) / 100))) : Model.TotalPrice / item.Book.Price))
-                </strong>
             </div>
         }
+
     </div>
-
     <div>
-        <strong>@ViewBag.Message</strong>
-
-        <h4>Message</h4>
+        <h4 class="mt-5">Message</h4>
         <form>
             <input class="message" cols="60" rows="10" />
         </form>

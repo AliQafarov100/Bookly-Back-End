@@ -29,6 +29,7 @@ namespace Bookly_Back_End.Controllers
             ViewBag.Cities = await _context.Cities.ToListAsync();
             Country country = await _context.Countries.Include(c => c.Cities).FirstOrDefaultAsync();
             AppUser user = await _manager.FindByNameAsync(User.Identity.Name);
+            Delivery delivery = await _context.Deliveries.FirstOrDefaultAsync();
             OrderVM model = new OrderVM
             {
                 FirstName = user.FirstName,
@@ -38,7 +39,7 @@ namespace Bookly_Back_End.Controllers
                 BasketItems = _context.BasketItems.Include(b => b.Book).ThenInclude(b => b.BookImages).Include(b => b.Book.Discount)
                 .Where(b => b.AppUserId == user.Id).ToList(),
                 Country = country,
-               
+                Delivery = delivery
             };
             return View(model);
         }
@@ -50,6 +51,8 @@ namespace Bookly_Back_End.Controllers
             ViewBag.Cities = await _context.Cities.ToListAsync();
             AppUser user = await _manager.FindByNameAsync(User.Identity.Name);
             Country country = await _context.Countries.Include(c => c.Cities).FirstOrDefaultAsync();
+            Delivery delivery = await _context.Deliveries.FirstOrDefaultAsync();
+            List<BasketItem> basketItems = await _context.BasketItems.ToListAsync();
             OrderVM model = new OrderVM
             {
                 FirstName = orderVM.FirstName,
@@ -59,7 +62,7 @@ namespace Bookly_Back_End.Controllers
                 BasketItems = _context.BasketItems.Include(b => b.Book).ThenInclude(b => b.BookImages).Include(b => b.Book.Discount)
                 .Where(b => b.AppUserId == user.Id).ToList(),
                 Country = country,
-                
+                Delivery = orderVM.Delivery
             };
             if (!ModelState.IsValid) return View(model);
 
@@ -74,7 +77,9 @@ namespace Bookly_Back_End.Controllers
                 CityId = orderVM.Country.CityId,
                 AppUserId = user.Id,
                 OrderDate = DateTime.Now,
-                Message = orderVM.Message
+                Message = orderVM.Message,
+                Delivery = orderVM.Delivery,
+                DeliveryId = delivery.Id
             };
 
            
@@ -90,9 +95,15 @@ namespace Bookly_Back_End.Controllers
                     Order = order
                 };
                 item.Book.Stock -= item.Count;
+                
                 _context.OrderProducts.Add(product);
+                if (item.Book.Stock == 0)
+                {
+                    _context.BasketItems.RemoveRange(basketItems.Where(b => b.BookId == item.Book.Id));
+                }
             }
-            _context.BasketItems.RemoveRange(model.BasketItems);
+           
+            //_context.BasketItems.RemoveRange(model.BasketItems);
             await _context.Orders.AddAsync(order);
             await _context.SaveChangesAsync();
             TempData["Success"] = true;

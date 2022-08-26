@@ -24,5 +24,7 @@ namespace Bookly_Back_End.Models
         public string Message { get; set; }
         public string AdminMessage { get; set; }
         public List<OrderProduct> OrderProducts { get; set; }
+        public int? DeliveryId { get; set; }
+        public Delivery Delivery { get; set; }
     }
 }

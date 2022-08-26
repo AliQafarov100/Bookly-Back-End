@@ -1,4 +1,6 @@
-﻿@model List<Order>
+﻿@using X.PagedList
+@using X.PagedList.Mvc.Core
+@model List<Order>
 
 @{
     ViewData["Title"] = "Orders";
@@ -79,7 +81,7 @@
                                 }
                                 <td class="d-flex">
                                     <div>
-                                        <a class="btn btn-success" asp-controller="Order" asp-action="Edit" asp-route-id="@order.Id"><i class="mdi mdi-tooltip-edit"></i></a>
+                                        <a class="btn btn-success" asp-controller="Order" asp-action="Edit" asp-route-id="@order.Id" asp-route-username="@order.AppUser.UserName"><i class="mdi mdi-tooltip-edit"></i></a>
                                     </div>
                                 </td>
                             </tr>
@@ -90,3 +92,8 @@
         </div>
     </div>
 </div>
+@Html.PagedListPager((IPagedList)Model, page => Url.Action("Index", new { page }), new X.PagedList.Web.Common.PagedListRenderOptionsBase
+{
+    LiElementClasses = new[] { "page-item" },
+    PageClasses = new[] { "page-link" }
+})

@@ -252,13 +252,22 @@
                                             <div class="images">
                                                 <div class="more-icon">
                                                     <div class="more">
-                                                        <a href=""><i class="fa-solid fa-link"></i></a>
+                                                        <a asp-controller="Detail" asp-action="Details" asp-route-id="@book.Book.Id"><i class="fa-solid fa-link"></i></a>
                                                     </div>
+                                                    @if (User.Identity.IsAuthenticated)
+                                                    {
+                                                        <div class="more">
+                                                            <a asp-controller="Book" asp-action="AddToWishList" asp-route-id="@book.Book.Id"><i class="fa-solid fa-heart"></i></a>
+                                                        </div>
+                                                    }
+                                                    else
+                                                    {
+                                                        <div class="more">
+                                                            <a asp-controller="Account" asp-action="Login"><i class="fa-solid fa-heart"></i></a>
+                                                        </div>
+                                                    }
                                                     <div class="more">
-                                                        <a href=""><i class="fa-solid fa-heart"></i></a>
-                                                    </div>
-                                                    <div class="more">
-                                                        <a href=""><i class="fa-solid fa-magnifying-glass"></i></a>
+                                                        <a asp-controller="Search" asp-action="Search"><i class="fa-solid fa-magnifying-glass"></i></a>
                                                     </div>
                                                 </div>
                                                 <a asp-controller="Detail" asp-action="Details" asp-route-id="@book.Book.Id"><img src="~/assets/Image/Library/@book.Book.BookImages.FirstOrDefault(i => i.IsMain == true)?.ImagePath"></a>
@@ -337,13 +346,22 @@
                                         <div class="images">
                                             <div class="more-icon">
                                                 <div class="more">
-                                                    <a href=""><i class="fa-solid fa-link"></i></a>
+                                                    <a asp-controller="Detail" asp-action="Details" asp-route-id="@sellBook.Book.Id"><i class="fa-solid fa-link"></i></a>
                                                 </div>
+                                                @if (User.Identity.IsAuthenticated)
+                                                {
+                                                    <div class="more">
+                                                        <a asp-controller="Book" asp-action="AddToWishList" asp-route-id="@sellBook.Book.Id"><i class="fa-solid fa-heart"></i></a>
+                                                    </div>
+                                                }
+                                                else
+                                                {
+                                                    <div class="more">
+                                                        <a asp-controller="Account" asp-action="Login"><i class="fa-solid fa-heart"></i></a>
+                                                    </div>
+                                                }
                                                 <div class="more">
-                                                    <a href=""><i class="fa-solid fa-heart"></i></a>
-                                                </div>
-                                                <div class="more">
-                                                    <a href=""><i class="fa-solid fa-magnifying-glass"></i></a>
+                                                    <a asp-controller="Search" asp-action="Search"><i class="fa-solid fa-magnifying-glass"></i></a>
                                                 </div>
                                             </div>
                                             <a asp-controller="Detail" asp-action="Details" asp-route-id="@sellBook.Book.Id"><img src="~/assets/Image/Library/@sellBook.Book.BookImages.FirstOrDefault(i => i.IsMain == true)?.ImagePath"></a>

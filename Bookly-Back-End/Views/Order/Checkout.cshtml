@@ -16,7 +16,7 @@
 
     }
     decimal totalView = total;
-    
+
 }
 
 <main>
@@ -122,20 +122,14 @@
                                 <span>Special instructions for seller</span>
                                 <textarea asp-for="Message" type="text" cols="83" rows="7" class="mt-2" autofocus></textarea>
                             </div>
-                            @*<div class="col-12">
-
-                                    @foreach (Delivery delivery in Model.Deliveries)
-                                    {
-                                        <div class="d-flex justify-content-between">
-                                            <div class="d-flex">
-                                                <input type="checkbox" style="width: 20px; height: 20px; border-radius: 50%;">
-                                                <h6 class="ms-2">@delivery.Name</h6>
-                                            </div>
-                                            <h5 class="">+@delivery.Price $</h5>
-                                        </div>
-                                    }
-                                </div>*@
-
+                            <div class="col-12">
+                                <div class="d-flex justify-content-between">
+                                    <div class="d-flex">
+                                        <h6 class="ms-2">@Model.Delivery.Name</h6>
+                                    </div>
+                                    <h5 class="">+@Model.Delivery.Price $</h5>
+                                </div>
+                            </div>
                             <div class="col-12 row mt-4">
                                 <div class="col-lg-6 col-md-12  d-flex align-items-center">
                                     <span>
@@ -182,14 +176,13 @@
                             <div class="shipping d-flex justify-content-between">
                                 <small>Shipping</small>
                                 <p>
-                                    $
-
+                                    $@Model.Delivery.Price
                                 </p>
                             </div>
                         </div>
                         <div class="total-price d-flex justify-content-between">
                             <p>Total</p>
-                            <span><small>USD</small> $@totalView</span>
+                            <span><small>USD</small> $@(totalView + Model.Delivery.Price)</span>
                         </div>
                     </div>
                 </div>
@@ -199,6 +192,6 @@
 </main>
 @section Checkout{
     <script src="~/assets/Js/transaction.js"></script>
-    
+
 }
 

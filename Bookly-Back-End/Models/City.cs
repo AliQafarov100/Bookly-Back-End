@@ -11,8 +11,6 @@ namespace Bookly_Back_End.Models
         public string Name { get; set; }
         public int CountryId { get; set; }
         public Country Country { get; set; }
-        public int DeliveryId { get; set; }
-        public Delivery Delivery { get; set; }
         public List<Order> Orders { get; set; }
     }
 }

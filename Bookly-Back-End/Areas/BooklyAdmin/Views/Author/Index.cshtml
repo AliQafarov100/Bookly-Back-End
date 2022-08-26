@@ -1,4 +1,6 @@
-﻿@model List<Author>
+﻿@using X.PagedList
+@using X.PagedList.Mvc.Core
+@model IPagedList<Author>
 
 @{
     ViewData["Title"] = "Index";
@@ -74,4 +76,8 @@
         </div>
     </div>
 </div>
-
+@Html.PagedListPager((IPagedList)Model, page => Url.Action("Index", new { page }), new X.PagedList.Web.Common.PagedListRenderOptionsBase
+{
+    LiElementClasses = new[] { "page-item" },
+    PageClasses = new[] { "page-link" }
+})

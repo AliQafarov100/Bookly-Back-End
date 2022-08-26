@@ -25,7 +25,7 @@ namespace Bookly_Back_End.Areas.BooklyAdmin.Controllers
         private readonly UserManager<AppUser> _userManager;
         private readonly IOrderConfirmation _confirmation;
 
-        public OrderController(AppDbContext context,UserManager<AppUser> userManager,IOrderConfirmation confirmation)
+        public OrderController(AppDbContext context, UserManager<AppUser> userManager, IOrderConfirmation confirmation)
         {
             _context = context;
             _userManager = userManager;
@@ -33,14 +33,18 @@ namespace Bookly_Back_End.Areas.BooklyAdmin.Controllers
         }
         public async Task<IActionResult> Orders()
         {
+
             List<Order> orders = await _context.Orders.Include(o => o.City).Include(o => o.AppUser).ToListAsync();
+
             return View(orders);
         }
-        public async Task<IActionResult> Edit(int id)
+        public async Task<IActionResult> Edit(int id,string username)
         {
+            
             Order order = await _context.Orders.Include(o => o.OrderProducts).ThenInclude(o => o.Book.BookImages)
                 .ThenInclude(o => o.Book.Discount)
-                .Include(o => o.AppUser).Include(o => o.City).FirstOrDefaultAsync(o => o.Id == id);
+                .Include(o => o.AppUser).Include(o => o.City).FirstOrDefaultAsync(o => o.Id == id && o.AppUser.UserName == username);
+            
             return View(order);
         }
 
@@ -52,14 +56,14 @@ namespace Bookly_Back_End.Areas.BooklyAdmin.Controllers
             if (order == null) return NotFound();
             order.Status = true;
             order.AdminMessage = message;
-            
+
             _context.SaveChanges();
 
             _confirmation.Send(id, message);
 
-            return Json(new { status = 200});
+            return Json(new { status = 200 });
         }
-        public async Task<IActionResult> Reject(string message,int id)
+        public async Task<IActionResult> Reject(string message, int id)
         {
             Order order = await _context.Orders.Include(o => o.AppUser).FirstOrDefaultAsync(o => o.Id == id);
             AppUser user = await _userManager.FindByEmailAsync(order.AppUser.Email);

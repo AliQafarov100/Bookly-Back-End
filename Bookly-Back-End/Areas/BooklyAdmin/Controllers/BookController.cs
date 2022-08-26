@@ -28,7 +28,7 @@ namespace Bookly_Back_End.Areas.BooklyAdmin.Controllers
         }
         public async Task<IActionResult> Index(int page = 1)
         {
-
+            if (page <= 0) return RedirectToAction("Book","Index");
             List<Book> books = await _context.Books.Include(a => a.BookAuthors).Include(i => i.BookImages).ToListAsync();
             return View(books.ToPagedList(page,5));
         }

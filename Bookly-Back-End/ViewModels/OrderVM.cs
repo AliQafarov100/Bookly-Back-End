@@ -26,6 +26,8 @@ namespace Bookly_Back_End.ViewModels
         public string Address { get; set; }     
         public string Message { get; set; }
         public Country Country { get; set; }
+        public int DeliveryId { get; set; }
+        public Delivery Delivery { get; set; }
         public List<BasketItem> BasketItems { get; set; }
     }
 }

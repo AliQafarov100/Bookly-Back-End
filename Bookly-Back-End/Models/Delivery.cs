@@ -12,6 +12,6 @@ namespace Bookly_Back_End.Models
         public string Name { get; set; }
         [Column(TypeName = "decimal(6,2)")]
         public decimal Price { get; set; }
-        public List<City> Cities { get; set; }
+        public List<Order> Orders { get; set; }
     }
 }

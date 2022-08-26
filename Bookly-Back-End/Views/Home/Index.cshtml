@@ -220,7 +220,7 @@
         </div>
         <div class="container mt-5">
             <div class="row all">
-                @foreach (BookAuthor book in Model.BookAuthors)
+                @foreach (BookAuthor book in Model.BookAuthors.Take(10).OrderByDescending(p => p.Book.Id))
                 {
                     <div class="col-lg-3 col-md-6 col-sm-6 col-12" data-aos="flip-down">
                         <div class="info-book">
@@ -229,11 +229,20 @@
                                     <div class="more">
                                         <a asp-controller="Detail" asp-action="Details" asp-route-id="@book.Book.Id"><i class="fa-solid fa-link"></i></a>
                                     </div>
+                                    @if (User.Identity.IsAuthenticated)
+                                    {
+                                        <div class="more">
+                                            <a asp-controller="Book" asp-action="AddToWishList" asp-route-id="@book.Book.Id"><i class="fa-solid fa-heart"></i></a>
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                        <div class="more">
+                                            <a asp-controller="Account" asp-action="Login"><i class="fa-solid fa-heart"></i></a>
+                                        </div>
+                                    }
                                     <div class="more">
-                                        <a asp-controller="WishList" asp-action="WishList"><i class="fa-solid fa-heart"></i></a>
-                                    </div>
-                                    <div class="more">
-                                        <a href=""><i class="fa-solid fa-magnifying-glass"></i></a>
+                                        <a asp-controller="Search" asp-action="Search"><i class="fa-solid fa-magnifying-glass"></i></a>
                                     </div>
                                 </div>
                                 @if (book.Book.DiscountId != null && book.Book.DiscountId != 4)
@@ -299,13 +308,22 @@
                                     <div class="images">
                                         <div class="more-icon">
                                             <div class="more">
-                                                <a href=""><i class="fa-solid fa-link"></i></a>
+                                                <a asp-controller="Detail" asp-action="Details" asp-route-id="@bestBook.Id"><i class="fa-solid fa-link"></i></a>
                                             </div>
+                                            @if (User.Identity.IsAuthenticated)
+                                            {
+                                                <div class="more">
+                                                    <a asp-controller="Book" asp-action="AddToWishList" asp-route-id="@bestBook.Id"><i class="fa-solid fa-heart"></i></a>
+                                                </div>
+                                            }
+                                            else
+                                            {
+                                                <div class="more">
+                                                    <a asp-controller="Account" asp-action="Login"><i class="fa-solid fa-heart"></i></a>
+                                                </div>
+                                            }
                                             <div class="more">
-                                                <a href=""><i class="fa-solid fa-heart"></i></a>
-                                            </div>
-                                            <div class="more">
-                                                <a href=""><i class="fa-solid fa-magnifying-glass"></i></a>
+                                                <a asp-controller="Search" asp-action="Search"><i class="fa-solid fa-magnifying-glass"></i></a>
                                             </div>
                                         </div>
                                         <a asp-controller="Detail" asp-action="Details" asp-route-id="@bestBook.Id"><img src="~/assets/Image/Library/@bestBook.BookImages.FirstOrDefault(i => i.IsMain == true)?.ImagePath"></a>
@@ -398,13 +416,22 @@
                             <div class="images">
                                 <div class="more-icon">
                                     <div class="more">
-                                        <a href=""><i class="fa-solid fa-link"></i></a>
+                                        <a asp-controller="Detail" asp-action="Details" asp-route-id="@dealBook.Id"><i class="fa-solid fa-link"></i></a>
                                     </div>
+                                    @if (User.Identity.IsAuthenticated)
+                                    {
+                                        <div class="more">
+                                            <a asp-controller="Book" asp-action="AddToWishList" asp-route-id="@dealBook.Id"><i class="fa-solid fa-heart"></i></a>
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                        <div class="more">
+                                            <a asp-controller="Account" asp-action="Login"><i class="fa-solid fa-heart"></i></a>
+                                        </div>
+                                    }
                                     <div class="more">
-                                        <a href=""><i class="fa-solid fa-heart"></i></a>
-                                    </div>
-                                    <div class="more">
-                                        <a href=""><i class="fa-solid fa-magnifying-glass"></i></a>
+                                        <a asp-controller="Search" asp-action="Search"><i class="fa-solid fa-magnifying-glass"></i></a>
                                     </div>
                                 </div>
                                 <a asp-controller="Detail" asp-action="Details" asp-route-id="@dealBook.Id"><img src="~/assets/Image/Library/@dealBook.BookImages.FirstOrDefault(i => i.IsMain == true)?.ImagePath"></a>
@@ -578,4 +605,9 @@
 </main>
 @section Scripts{
     <script src="~/assets/Js/script.js"></script>
+    <script>
+        $(document).ready(function () {
+            $(".toast").toast('show');
+        });
+    </script>
 }
